@@ -42,7 +42,7 @@ router.get('/:id/profile', async (req: Request, res: Response) => {
       }
     })
 
-    const stats = progressStats.reduce((acc, stat) => {
+    const stats = progressStats.reduce((acc: Record<string, number>, stat: any) => {
       acc[stat.status] = stat._count.status
       return acc
     }, {} as Record<string, number>)
@@ -105,7 +105,7 @@ router.get('/:id/progress', authenticateToken, async (req: Request, res: Respons
       orderBy: { lastAttempt: 'desc' }
     })
 
-    const transformedProgress = progress.map(p => ({
+    const transformedProgress = progress.map((p: any) => ({
       problemId: p.problemId,
       status: p.status,
       lastAttempt: p.lastAttempt,
@@ -116,7 +116,7 @@ router.get('/:id/progress', authenticateToken, async (req: Request, res: Respons
         source: p.problem.source,
         year: p.problem.year,
         difficulty: p.problem.difficulty,
-        tags: p.problem.tags.map(pt => pt.tag.name)
+        tags: p.problem.tags.map((pt: any) => pt.tag.name)
       }
     }))
 

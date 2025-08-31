@@ -151,7 +151,7 @@ router.get('/', optionalAuth, async (req: Request, res: Response) => {
     ])
 
     // Transform data
-    const transformedProblems = problems.map(problem => ({
+    const transformedProblems = problems.map((problem: any) => ({
       id: problem.id,
       number: problem.number,
       title: problem.title,
@@ -160,7 +160,7 @@ router.get('/', optionalAuth, async (req: Request, res: Response) => {
       difficulty: problem.difficulty,
       rating: problem.rating,
       solveCount: problem._count.progress,
-      tags: problem.tags.map(pt => pt.tag.name),
+      tags: problem.tags.map((pt: any) => pt.tag.name),
       userStatus: req.user && problem.progress.length > 0 ? problem.progress[0].status : 'unsolved'
     }))
 
@@ -221,7 +221,7 @@ router.get('/:id', optionalAuth, async (req: Request, res: Response) => {
       rating: problem.rating,
       content: problem.content,
       officialSolution: problem.officialSolution,
-      tags: problem.tags.map(pt => pt.tag.name),
+      tags: problem.tags.map((pt: any) => pt.tag.name),
       stats: {
         solveCount: problem._count.progress,
         solutionCount: problem._count.solutions,
@@ -261,7 +261,7 @@ router.get('/stats/overview', async (req: Request, res: Response) => {
       totalProblems,
       totalSolutions,
       totalUsers,
-      sourceBreakdown: sourceStats.reduce((acc, stat) => {
+      sourceBreakdown: sourceStats.reduce((acc: Record<string, number>, stat: any) => {
         acc[stat.source] = stat._count.id
         return acc
       }, {} as Record<string, number>)
