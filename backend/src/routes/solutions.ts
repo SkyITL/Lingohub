@@ -3,15 +3,6 @@ import { z } from 'zod'
 import { PrismaClient } from '@prisma/client'
 import { authenticateToken, optionalAuth } from '../middleware/auth'
 
-interface AuthRequest extends Request {
-  user?: {
-    id: string
-    username: string
-    email: string
-    rating: number
-  }
-}
-
 const router = express.Router()
 const prisma = new PrismaClient()
 
@@ -26,7 +17,7 @@ const voteSchema = z.object({
 })
 
 // Get solutions for a problem
-router.get('/problem/:problemId', optionalAuth, async (req: AuthRequest, res: Response) => {
+router.get('/problem/:problemId', optionalAuth, async (req: Request, res: Response) => {
   try {
     const { problemId } = req.params
     const { sortBy = 'votes' } = req.query
@@ -85,7 +76,7 @@ router.get('/problem/:problemId', optionalAuth, async (req: AuthRequest, res: Re
 })
 
 // Submit a solution
-router.post('/', authenticateToken, async (req: AuthRequest, res: Response) => {
+router.post('/', authenticateToken, async (req: Request, res: Response) => {
   try {
     const { problemId, content } = solutionSchema.parse(req.body)
 
@@ -167,7 +158,7 @@ router.post('/', authenticateToken, async (req: AuthRequest, res: Response) => {
 })
 
 // Vote on a solution
-router.post('/:id/vote', authenticateToken, async (req: AuthRequest, res: Response) => {
+router.post('/:id/vote', authenticateToken, async (req: Request, res: Response) => {
   try {
     const { id } = req.params
     const { vote } = voteSchema.parse(req.body)
@@ -239,7 +230,7 @@ router.post('/:id/vote', authenticateToken, async (req: AuthRequest, res: Respon
 })
 
 // Delete a solution
-router.delete('/:id', authenticateToken, async (req: AuthRequest, res: Response) => {
+router.delete('/:id', authenticateToken, async (req: Request, res: Response) => {
   try {
     const { id } = req.params
 
