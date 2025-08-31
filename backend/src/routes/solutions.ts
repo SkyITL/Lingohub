@@ -78,6 +78,10 @@ router.get('/problem/:problemId', optionalAuth, async (req: Request, res: Respon
 // Submit a solution
 router.post('/', authenticateToken, async (req: Request, res: Response) => {
   try {
+    if (!req.user) {
+      return res.status(401).json({ error: 'Authentication required' })
+    }
+
     const { problemId, content } = solutionSchema.parse(req.body)
 
     // Check if problem exists
@@ -160,6 +164,10 @@ router.post('/', authenticateToken, async (req: Request, res: Response) => {
 // Vote on a solution
 router.post('/:id/vote', authenticateToken, async (req: Request, res: Response) => {
   try {
+    if (!req.user) {
+      return res.status(401).json({ error: 'Authentication required' })
+    }
+
     const { id } = req.params
     const { vote } = voteSchema.parse(req.body)
 
@@ -232,6 +240,10 @@ router.post('/:id/vote', authenticateToken, async (req: Request, res: Response) 
 // Delete a solution
 router.delete('/:id', authenticateToken, async (req: Request, res: Response) => {
   try {
+    if (!req.user) {
+      return res.status(401).json({ error: 'Authentication required' })
+    }
+
     const { id } = req.params
 
     const solution = await prisma.solution.findUnique({
