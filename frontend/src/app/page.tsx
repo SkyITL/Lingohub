@@ -118,7 +118,7 @@ export default function Home() {
                 <div>
                   <div className="flex items-center space-x-3 mb-2">
                     <span className="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">
-                      Today's Pick
+                      Today&apos;s Pick
                     </span>
                     <span className="text-gray-500">IOL 2015 #4</span>
                   </div>
