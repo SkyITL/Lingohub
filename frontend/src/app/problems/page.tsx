@@ -1,7 +1,7 @@
 'use client'
 
 import { useSearchParams, useRouter } from 'next/navigation'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import Header from "@/components/Header"
 import ProblemCard from "@/components/ProblemCard"
 import SearchBar from "@/components/SearchBar"
@@ -72,7 +72,7 @@ const mockProblems = [
   }
 ]
 
-export default function ProblemsPage() {
+function ProblemsPageContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const [filters, setFilters] = useState({
@@ -469,5 +469,13 @@ export default function ProblemsPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function ProblemsPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ProblemsPageContent />
+    </Suspense>
   )
 }
