@@ -70,6 +70,10 @@ router.get('/:id/profile', async (req: Request, res: Response) => {
 // Get user progress
 router.get('/:id/progress', authenticateToken, async (req: Request, res: Response) => {
   try {
+    if (!req.user) {
+      return res.status(401).json({ error: 'Authentication required' })
+    }
+
     const { id } = req.params
 
     // Only allow users to see their own progress or make it public later
@@ -126,6 +130,10 @@ router.get('/:id/progress', authenticateToken, async (req: Request, res: Respons
 // Update problem status
 router.patch('/:id/progress/:problemId', authenticateToken, async (req: Request, res: Response) => {
   try {
+    if (!req.user) {
+      return res.status(401).json({ error: 'Authentication required' })
+    }
+
     const { id, problemId } = req.params
     const { status } = req.body
 
