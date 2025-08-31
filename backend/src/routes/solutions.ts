@@ -58,7 +58,7 @@ router.get('/problem/:problemId', optionalAuth, async (req: Request, res: Respon
       orderBy
     })
 
-    const transformedSolutions = solutions.map(solution => ({
+    const transformedSolutions = solutions.map((solution: any) => ({
       id: solution.id,
       content: solution.content,
       voteScore: solution.voteScore,
