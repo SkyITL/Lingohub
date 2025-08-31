@@ -1,7 +1,16 @@
-import express from 'express'
+import express, { Request, Response } from 'express'
 import { z } from 'zod'
 import { PrismaClient } from '@prisma/client'
 import { optionalAuth } from '../middleware/auth'
+
+interface AuthRequest extends Request {
+  user?: {
+    id: string
+    username: string
+    email: string
+    rating: number
+  }
+}
 
 const router = express.Router()
 const prisma = new PrismaClient()
@@ -20,7 +29,7 @@ const problemFiltersSchema = z.object({
 })
 
 // Get all problems with filtering
-router.get('/', optionalAuth, async (req: any, res) => {
+router.get('/', optionalAuth, async (req: AuthRequest, res: Response) => {
   try {
     const {
       source,
@@ -180,7 +189,7 @@ router.get('/', optionalAuth, async (req: any, res) => {
 })
 
 // Get single problem
-router.get('/:id', optionalAuth, async (req: any, res) => {
+router.get('/:id', optionalAuth, async (req: AuthRequest, res: Response) => {
   try {
     const { id } = req.params
 
@@ -238,7 +247,7 @@ router.get('/:id', optionalAuth, async (req: any, res) => {
 })
 
 // Get problem statistics
-router.get('/stats/overview', async (req, res) => {
+router.get('/stats/overview', async (req: Request, res: Response) => {
   try {
     const [
       totalProblems,
