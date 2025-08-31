@@ -1,0 +1,448 @@
+@import "tailwindcss";
+
+/* IPA Font Support */
+@import url('https://fonts.googleapis.com/css2?family=Charis+SIL:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+:root {
+  --background: #ffffff;
+  --foreground: #000000;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Ensure proper text contrast */
+* {
+  color: inherit;
+}
+
+/* Force dark text on light backgrounds */
+.bg-white, .bg-gray-50 {
+  color: #111827 !important;
+}
+
+/* Input and form styling */
+input, textarea, select {
+  color: #111827 !important;
+}
+
+/* Button text visibility fixes */
+button {
+  font-weight: 500;
+}
+
+/* Specific button color fixes - more comprehensive */
+button:not([class*="border"]):not([class*="outline"]):not([class*="ghost"]):not([class*="secondary"]) {
+  color: white !important;
+}
+
+button[class*="outline"], button[class*="border"], button[class*="ghost"], button[class*="secondary"] {
+  color: #111827 !important;
+}
+
+/* Force pagination button visibility */
+button[class*="bg-primary"], .bg-primary button {
+  color: white !important;
+}
+
+/* Ensure all dark buttons have white text */
+.bg-gray-900, .bg-black, .bg-blue-600, .bg-blue-500 {
+  color: white !important;
+}
+
+/* Override any conflicting styles for buttons */
+button * {
+  color: inherit !important;
+}
+
+/* Ultra-specific fixes for button text visibility */
+button.inline-flex {
+  color: white !important;
+}
+
+button.inline-flex[class*="outline"], 
+button.inline-flex[class*="ghost"],
+button.inline-flex[class*="border"],
+button.inline-flex[class*="secondary"] {
+  color: #111827 !important;
+}
+
+/* Force visibility on all interactive elements */
+[role="button"], 
+.cursor-pointer,
+button:not([disabled]) {
+  text-rendering: optimizeLegibility;
+}
+
+/* Simple pagination text fix - just the text color */
+button.w-8[class*="outline"] {
+  color: #111827 !important;
+  -webkit-text-fill-color: #111827 !important;
+}
+
+/* Nuclear option for button text visibility */
+button, 
+[role="button"], 
+.btn {
+  color: white !important;
+  text-shadow: none !important;
+  -webkit-text-fill-color: white !important;
+}
+
+button[class*="outline"],
+button[class*="ghost"], 
+button[class*="secondary"],
+button[class*="border"],
+.btn-outline,
+.btn-ghost,
+.btn-secondary {
+  color: #111827 !important;
+  -webkit-text-fill-color: #111827 !important;
+}
+
+/* Force text to be visible on all buttons */
+button * {
+  color: inherit !important;
+  -webkit-text-fill-color: inherit !important;
+}
+
+/* Ensure buttons have proper contrast */
+button:not([class*="outline"]):not([class*="ghost"]):not([class*="secondary"]) {
+  background-color: #1f2937 !important;
+  color: white !important;
+}
+
+/* Ultimate button text fix - target every possible button element */
+html button,
+html [role="button"],
+html .btn,
+html input[type="button"],
+html input[type="submit"] {
+  color: white !important;
+  -webkit-text-fill-color: white !important;
+  text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased !important;
+}
+
+html button[class*="outline"],
+html button[class*="ghost"], 
+html button[class*="secondary"],
+html button[class*="border"],
+html [role="button"][class*="outline"],
+html [role="button"][class*="ghost"],
+html [role="button"][class*="secondary"],
+html [role="button"][class*="border"] {
+  color: #111827 !important;
+  -webkit-text-fill-color: #111827 !important;
+}
+
+/* Target Tailwind-specific classes */
+html .bg-primary,
+html .bg-blue-600,
+html .bg-gray-900,
+html .text-primary-foreground {
+  color: white !important;
+  -webkit-text-fill-color: white !important;
+}
+
+/* Force override for all button children */
+html button > *,
+html [role="button"] > * {
+  color: inherit !important;
+  -webkit-text-fill-color: inherit !important;
+}
+
+/* Emergency button text fix - target specific elements */
+button span,
+button div,
+.inline-flex span,
+.inline-flex div {
+  color: inherit !important;
+  -webkit-text-fill-color: inherit !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: inline !important;
+}
+
+/* Force font family and rendering */
+button, [role="button"] {
+  font-family: system-ui, -apple-system, sans-serif !important;
+  font-size: 14px !important;
+  line-height: 1.4 !important;
+  letter-spacing: 0 !important;
+}
+
+/* Nuclear option - force all button text nodes to be visible */
+button::before,
+button::after {
+  content: '' !important;
+}
+
+/* Specific targeting for button content - only when needed */
+
+.inline-flex.items-center.justify-center[class*="outline"],
+.inline-flex.items-center.justify-center[class*="ghost"],
+.inline-flex.items-center.justify-center[class*="secondary"] {
+  color: #111827 !important;
+  -webkit-text-fill-color: #111827 !important;
+}
+
+/* Override any possible text hiding */
+* {
+  text-indent: 0 !important;
+}
+
+button * {
+  text-indent: 0 !important;
+  overflow: visible !important;
+}
+
+
+/* Ensure pagination buttons are visible */
+.bg-gray-300 {
+  color: #111827 !important;
+}
+
+/* Linguistic Content Styling */
+.linguistic-content {
+  font-family: 'Charis SIL', 'Doulos SIL', 'Times New Roman', serif;
+  font-feature-settings: 'liga' 1, 'clig' 1;
+  line-height: 1.6;
+}
+
+/* IPA Symbol Tooltips */
+.ipa-symbol {
+  position: relative;
+  cursor: help;
+}
+
+.ipa-symbol:hover::after {
+  content: attr(data-description);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 10;
+  margin-bottom: 4px;
+}
+
+.ipa-symbol:hover::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 4px solid transparent;
+  border-top-color: #333;
+  z-index: 10;
+}
+
+/* Line Clamp Utility */
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+/* Fix password visibility icon black background */
+button[type="button"] {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* Specific fix for password toggle buttons */
+.absolute.inset-y-0.right-0 button,
+button.absolute.inset-y-0.right-0,
+input[type="password"] + button,
+input[type="text"] + button {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+/* Force transparency on hover for password icons */
+button[class*="hover:bg-transparent"] {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+button[class*="hover:bg-transparent"]:hover {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* Fix Radix UI Tab triggers text visibility */
+[data-radix-tabs-trigger] {
+  color: #374151 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+[data-radix-tabs-trigger][data-state="active"] {
+  color: #2563eb !important;
+}
+
+/* Fix tab triggers with specific class names */
+.px-6.py-4.font-medium.text-gray-600 {
+  color: #374151 !important;
+}
+
+.px-6.py-4.font-medium.text-gray-600[data-state="active"] {
+  color: #2563eb !important;
+}
+
+/* More specific targeting for Radix UI tabs */
+button[role="tab"] {
+  color: #374151 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+button[role="tab"][data-state="active"] {
+  color: #2563eb !important;
+}
+
+button[role="tab"][data-state="inactive"] {
+  color: #374151 !important;
+}
+
+/* Target the exact Radix tab structure */
+button[data-radix-collection-item] {
+  color: #374151 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+button[data-radix-collection-item][data-state="active"] {
+  color: #2563eb !important;
+}
+
+/* Override any conflicting button styles for tabs specifically */
+button[role="tab"]:not([class*="outline"]):not([class*="ghost"]):not([class*="secondary"]) {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: #374151 !important;
+}
+
+button[role="tab"]:not([class*="outline"]):not([class*="ghost"]):not([class*="secondary"])[data-state="active"] {
+  color: #2563eb !important;
+}
+
+/* Fix difficulty stars display issues */
+.text-yellow-400.fill-current {
+  color: #fbbf24 !important;
+  fill: #fbbf24 !important;
+}
+
+.text-gray-300 {
+  color: #d1d5db !important;
+  fill: none !important;
+}
+
+/* Fix delete bookmark button on saved page */
+.absolute.top-2.right-2 {
+  background: white !important;
+  background-color: white !important;
+  border-radius: 50% !important;
+}
+
+.absolute.top-2.right-2:hover {
+  background: #fef2f2 !important;
+  background-color: #fef2f2 !important;
+}
+
+/* Ensure star icons are properly displayed */
+svg.text-yellow-400 {
+  color: #fbbf24 !important;
+}
+
+svg.text-gray-300 {
+  color: #d1d5db !important;
+}
+
+/* Fix any button interference with non-button elements */
+button:not(.absolute):not([role="tab"]):not([class*="outline"]):not([class*="ghost"]):not([class*="secondary"]) {
+  background-color: #1f2937 !important;
+  color: white !important;
+}
+
+/* Fix text-black class to ensure it works properly */
+.text-black {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+/* Add missing Tailwind-style text color utilities */
+.text-white {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+.text-gray-900 {
+  color: #111827 !important;
+  -webkit-text-fill-color: #111827 !important;
+}
+
+.text-yellow-400 {
+  color: #fbbf24 !important;
+}
+
+.text-gray-300 {
+  color: #d1d5db !important;
+}
+
+.text-blue-600 {
+  color: #2563eb !important;
+}
+
+.text-orange-600 {
+  color: #ea580c !important;
+}
+
+/* Simple fix for pagination button text only */
+button.w-8:not([class*="outline"]):not([class*="ghost"]):not([class*="secondary"]) {
+  color: white !important;
+  -webkit-text-fill-color: white !important;
+}
+
+/* Ensure all text with text-black class is visible */
+h1.text-black,
+h2.text-black,
+h3.text-black,
+h4.text-black,
+h5.text-black,
+h6.text-black,
+p.text-black,
+span.text-black,
+div.text-black,
+a.text-black {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  text-rendering: optimizeLegibility !important;
+}
