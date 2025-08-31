@@ -60,8 +60,8 @@ router.post('/register', async (req, res) => {
     // Generate JWT
     const token = jwt.sign(
       { userId: user.id },
-      process.env.JWT_SECRET!,
-      { expiresIn: process.env.JWT_EXPIRES_IN || '7d' }
+      process.env.JWT_SECRET || 'fallback-secret-key',
+      { expiresIn: '7d' }
     )
 
     res.status(201).json({
@@ -102,8 +102,8 @@ router.post('/login', async (req, res) => {
     // Generate JWT
     const token = jwt.sign(
       { userId: user.id },
-      process.env.JWT_SECRET!,
-      { expiresIn: process.env.JWT_EXPIRES_IN || '7d' }
+      process.env.JWT_SECRET || 'fallback-secret-key',
+      { expiresIn: '7d' }
     )
 
     res.json({
