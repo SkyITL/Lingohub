@@ -1,0 +1,133 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  username  String   @unique @db.VarChar(50)
+  email     String   @unique @db.VarChar(255)
+  password  String
+  rating    Int      @default(1200)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  solutions   Solution[]
+  discussions Discussion[]
+  progress    UserProgress[]
+  votes       SolutionVote[]
+
+  @@map("users")
+}
+
+model Problem {
+  id               String   @id @default(cuid())
+  number           String   @unique @db.VarChar(20) // LH-001 format
+  title            String   @db.VarChar(255)
+  source           String   @db.VarChar(100) // IOL, APLO, etc.
+  year             Int
+  difficulty       Int      @default(1) // 1-5 stars
+  rating           Int      @default(1200) // 1000-2400 complexity
+  content          String   @db.Text // Problem statement
+  officialSolution String?  @db.Text
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  // Relations
+  tags        ProblemTag[]
+  solutions   Solution[]
+  discussions Discussion[]
+  progress    UserProgress[]
+
+  @@map("problems")
+}
+
+model Tag {
+  id       String @id @default(cuid())
+  name     String @unique @db.VarChar(100)
+  category String @db.VarChar(50) // subfield, difficulty, etc.
+
+  // Relations
+  problems ProblemTag[]
+
+  @@map("tags")
+}
+
+model ProblemTag {
+  problemId String
+  tagId     String
+
+  problem Problem @relation(fields: [problemId], references: [id], onDelete: Cascade)
+  tag     Tag     @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([problemId, tagId])
+  @@map("problem_tags")
+}
+
+model Solution {
+  id        String   @id @default(cuid())
+  problemId String
+  userId    String
+  content   String   @db.Text
+  voteScore Int      @default(0)
+  status    String   @default("submitted") // draft, submitted, approved
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  problem Problem        @relation(fields: [problemId], references: [id], onDelete: Cascade)
+  user    User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  votes   SolutionVote[]
+
+  @@map("solutions")
+}
+
+model SolutionVote {
+  userId     String
+  solutionId String
+  vote       Int // -1, 0, 1
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  solution Solution @relation(fields: [solutionId], references: [id], onDelete: Cascade)
+
+  @@id([userId, solutionId])
+  @@map("solution_votes")
+}
+
+model Discussion {
+  id          String   @id @default(cuid())
+  problemId   String
+  userId      String
+  title       String   @db.VarChar(255)
+  content     String   @db.Text
+  replyCount  Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  problem Problem @relation(fields: [problemId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("discussions")
+}
+
+model UserProgress {
+  userId      String
+  problemId   String
+  status      String   @default("unsolved") // unsolved, solved, bookmarked
+  lastAttempt DateTime @default(now())
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  problem Problem @relation(fields: [problemId], references: [id], onDelete: Cascade)
+
+  @@id([userId, problemId])
+  @@map("user_progress")
+}
