@@ -22,7 +22,7 @@ export const authenticateToken = async (req: AuthRequest, res: Response, next: N
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as any
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'fallback-secret-key') as any
     
     const user = await prisma.user.findUnique({
       where: { id: decoded.userId },
@@ -49,7 +49,7 @@ export const optionalAuth = async (req: AuthRequest, res: Response, next: NextFu
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as any
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'fallback-secret-key') as any
     
     const user = await prisma.user.findUnique({
       where: { id: decoded.userId },
