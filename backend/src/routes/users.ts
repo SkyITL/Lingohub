@@ -2,15 +2,6 @@ import express, { Request, Response } from 'express'
 import { PrismaClient } from '@prisma/client'
 import { authenticateToken } from '../middleware/auth'
 
-interface AuthRequest extends Request {
-  user?: {
-    id: string
-    username: string
-    email: string
-    rating: number
-  }
-}
-
 const router = express.Router()
 const prisma = new PrismaClient()
 
@@ -77,7 +68,7 @@ router.get('/:id/profile', async (req: Request, res: Response) => {
 })
 
 // Get user progress
-router.get('/:id/progress', authenticateToken, async (req: AuthRequest, res: Response) => {
+router.get('/:id/progress', authenticateToken, async (req: Request, res: Response) => {
   try {
     const { id } = req.params
 
@@ -133,7 +124,7 @@ router.get('/:id/progress', authenticateToken, async (req: AuthRequest, res: Res
 })
 
 // Update problem status
-router.patch('/:id/progress/:problemId', authenticateToken, async (req: AuthRequest, res: Response) => {
+router.patch('/:id/progress/:problemId', authenticateToken, async (req: Request, res: Response) => {
   try {
     const { id, problemId } = req.params
     const { status } = req.body
