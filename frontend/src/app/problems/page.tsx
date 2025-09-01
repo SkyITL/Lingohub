@@ -109,6 +109,7 @@ function ProblemsPageContent() {
   console.log('Current filters:', filters)
   console.log('API filters:', cleanFilters)
   console.log('Problems received:', problems.length)
+  console.log('API URL:', process.env.NEXT_PUBLIC_API_URL)
 
   useEffect(() => {
     const search = searchParams.get('search')
