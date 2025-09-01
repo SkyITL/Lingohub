@@ -8,6 +8,7 @@ import authRoutes from './routes/auth'
 import problemRoutes from './routes/problems'
 import userRoutes from './routes/users'
 import solutionRoutes from './routes/solutions'
+import seedRoutes from './routes/seed'
 
 const app = express()
 const prisma = new PrismaClient()
@@ -36,6 +37,7 @@ app.use('/api/auth', authRoutes)
 app.use('/api/problems', problemRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/solutions', solutionRoutes)
+app.use('/api/seed', seedRoutes)
 
 // Health check
 app.get('/api/health', (req, res) => {
