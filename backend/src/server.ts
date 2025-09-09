@@ -32,6 +32,22 @@ app.use(limiter)
 app.use(express.json({ limit: '10mb' }))
 app.use(express.urlencoded({ extended: true }))
 
+// Root route
+app.get('/', (req, res) => {
+  res.json({
+    name: 'LingoHub API',
+    version: '1.0.0',
+    status: 'Ready',
+    endpoints: {
+      health: '/api/health',
+      auth: '/api/auth',
+      problems: '/api/problems',
+      users: '/api/users',
+      solutions: '/api/solutions'
+    }
+  })
+})
+
 // API Routes
 app.use('/api/auth', authRoutes)
 app.use('/api/problems', problemRoutes)
@@ -40,8 +56,22 @@ app.use('/api/solutions', solutionRoutes)
 app.use('/api/seed', seedRoutes)
 
 // Health check
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', timestamp: new Date().toISOString() })
+app.get('/api/health', async (req, res) => {
+  try {
+    // Check database connection
+    await prisma.$queryRaw`SELECT 1`
+    res.json({ 
+      status: 'ok', 
+      database: 'connected',
+      timestamp: new Date().toISOString() 
+    })
+  } catch (error) {
+    res.status(503).json({ 
+      status: 'error', 
+      database: 'disconnected',
+      timestamp: new Date().toISOString() 
+    })
+  }
 })
 
 // Error handling middleware
