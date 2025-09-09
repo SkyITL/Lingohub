@@ -4,10 +4,19 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL
   ? `${process.env.NEXT_PUBLIC_API_URL}/api`
   : 'http://localhost:4000/api'
 
+// Debug logging (remove in production)
+if (typeof window !== 'undefined') {
+  console.log('API Base URL:', API_BASE_URL)
+  console.log('ENV Variable:', process.env.NEXT_PUBLIC_API_URL)
+}
+
 // Create axios instance
 const api = axios.create({
   baseURL: API_BASE_URL,
   timeout: 10000,
+  headers: {
+    'Content-Type': 'application/json'
+  }
 })
 
 // Request interceptor to add auth token
