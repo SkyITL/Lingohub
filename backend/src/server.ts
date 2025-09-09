@@ -85,34 +85,40 @@ app.use('*', (req, res) => {
   res.status(404).json({ error: 'Route not found' })
 })
 
-const PORT = process.env.PORT || 4000
+// Export for Vercel
+export default app
 
-const startServer = async () => {
-  try {
-    await prisma.$connect()
-    console.log('Connected to database')
-    
-    app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`)
-      console.log(`Environment: ${process.env.NODE_ENV || 'development'}`)
-    })
-  } catch (error) {
-    console.error('Failed to start server:', error)
-    process.exit(1)
+// For local development
+if (process.env.NODE_ENV !== 'production') {
+  const PORT = process.env.PORT || 4000
+
+  const startServer = async () => {
+    try {
+      await prisma.$connect()
+      console.log('Connected to database')
+      
+      app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`)
+        console.log(`Environment: ${process.env.NODE_ENV || 'development'}`)
+      })
+    } catch (error) {
+      console.error('Failed to start server:', error)
+      process.exit(1)
+    }
   }
+
+  // Graceful shutdown
+  process.on('SIGTERM', async () => {
+    console.log('SIGTERM received, shutting down gracefully')
+    await prisma.$disconnect()
+    process.exit(0)
+  })
+
+  process.on('SIGINT', async () => {
+    console.log('SIGINT received, shutting down gracefully')
+    await prisma.$disconnect()
+    process.exit(0)
+  })
+
+  startServer()
 }
-
-// Graceful shutdown
-process.on('SIGTERM', async () => {
-  console.log('SIGTERM received, shutting down gracefully')
-  await prisma.$disconnect()
-  process.exit(0)
-})
-
-process.on('SIGINT', async () => {
-  console.log('SIGINT received, shutting down gracefully')
-  await prisma.$disconnect()
-  process.exit(0)
-})
-
-startServer()
