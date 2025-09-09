@@ -13,11 +13,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run build` - Build all packages (shared, frontend, backend)
 - `npm test` - Run all tests
 - `npm run lint` - Lint frontend code (in frontend directory)
+- `npm run type-check` - Check TypeScript types (in frontend directory)
 
 ### Database Operations
 - `cd backend && npm run migrate` - Run Prisma migrations
+- `cd backend && npm run migrate:dev` - Create new migration from schema changes
 - `cd backend && npm run db:generate` - Generate Prisma client
 - `cd backend && npm run db:seed` - Seed database with sample data
+- `cd backend && npm run db:push` - Push schema changes without migration (dev only)
 
 ## Architecture Overview
 
@@ -55,6 +58,7 @@ Next.js App Router with:
 - API client in `src/lib/api.ts`
 - Auth context in `src/contexts/AuthContext.tsx`
 - React Query for server state management
+- Static export configuration in `next.config.mjs`
 
 ## Key Features
 
@@ -97,3 +101,7 @@ Problems have a specific format:
 - Frontend expects API at http://localhost:4000
 - Shared types in `shared/types.ts` must be kept in sync between frontend/backend
 - IPA content requires proper font loading for correct rendering
+- Environment variables needed in backend/.env:
+  - DATABASE_URL="postgresql://user:password@localhost:5432/lingohub"
+  - JWT_SECRET and JWT_REFRESH_SECRET for authentication
+- CORS is configured to allow credentials from localhost:3000
