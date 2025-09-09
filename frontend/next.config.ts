@@ -7,9 +7,11 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  output: 'export',
-  trailingSlash: true,
+  // Remove static export for Vercel deployment
+  // output: 'export',
+  // trailingSlash: true,
   images: {
+    // Keep unoptimized for now, can be removed later for better performance
     unoptimized: true
   }
 };
