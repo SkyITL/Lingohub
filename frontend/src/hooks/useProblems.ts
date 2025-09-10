@@ -6,7 +6,8 @@ export function useProblems(filters?: Record<string, any>) {
     queryKey: ['problems', filters],
     queryFn: async () => {
       const response = await problemsApi.getAll(filters)
-      return response.data.problems || []
+      // The API returns { success: true, data: [...], pagination: {...} }
+      return response.data.data || response.data.problems || response.data || []
     }
   })
 }
