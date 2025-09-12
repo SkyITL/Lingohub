@@ -164,7 +164,7 @@ function ProblemsPageContent() {
   const ProblemListItem = ({ problem }: { problem: any }) => (
     <div 
       className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer"
-      onClick={() => router.push(`/problems/${problem.id}`)}
+      onClick={() => router.push(`/problems/${problem.number}`)}
     >
       <div className="flex items-center justify-between">
         <div className="flex-1">

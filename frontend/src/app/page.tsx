@@ -154,7 +154,7 @@ export default function Home() {
                 </div>
                 <Button 
                   className="bg-orange-600 hover:bg-orange-700"
-                  onClick={() => router.push('/problems/1')}
+                  onClick={() => router.push('/problems/LH-100')}
                 >
                   Try Now <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
