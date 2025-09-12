@@ -1,0 +1,108 @@
+{
+  "problems": [
+    {
+      "id": "LH-100",
+      "number": "LH-100",
+      "title": "Introduction to Phonetics",
+      "content": "What is the difference between [p] and [b] sounds? Both are bilabial stops, but one is voiced and one is voiceless.",
+      "officialSolution": "[p] is voiceless (no vocal cord vibration), [b] is voiced (vocal cords vibrate).",
+      "difficulty": 1,
+      "rating": 1000,
+      "source": "Tutorial",
+      "year": 2024,
+      "solveCount": 145,
+      "tags": ["phonetics", "phonology", "tutorial"]
+    },
+    {
+      "id": "LH-101",
+      "number": "LH-101",
+      "title": "Basic Morphology",
+      "content": "In English, we add -s for plurals: cat→cats, dog→dogs. But some words are irregular: child→children, mouse→mice. Why?",
+      "officialSolution": "Irregular plurals often come from older forms of English or other Germanic languages.",
+      "difficulty": 1,
+      "rating": 1100,
+      "source": "Tutorial",
+      "year": 2024,
+      "solveCount": 234,
+      "tags": ["morphology", "english", "plurals"]
+    },
+    {
+      "id": "LH-102",
+      "number": "LH-102",
+      "title": "Simple Syntax Trees",
+      "content": "Draw a syntax tree for: \"The cat sat on the mat\"",
+      "officialSolution": "[S [NP The cat] [VP sat [PP on [NP the mat]]]]",
+      "difficulty": 2,
+      "rating": 1200,
+      "source": "Practice",
+      "year": 2024,
+      "solveCount": 312,
+      "tags": ["syntax", "trees", "grammar"]
+    },
+    {
+      "id": "LH-103",
+      "number": "LH-103",
+      "title": "Language Families",
+      "content": "Which languages belong to the Romance family? Name at least 5.",
+      "officialSolution": "Spanish, French, Italian, Portuguese, Romanian (all descended from Latin)",
+      "difficulty": 1,
+      "rating": 1000,
+      "source": "Quiz",
+      "year": 2024,
+      "solveCount": 467,
+      "tags": ["historical", "language-families", "romance"]
+    },
+    {
+      "id": "LH-104",
+      "number": "LH-104",
+      "title": "IPA Practice",
+      "content": "Transcribe \"Hello\" in IPA.",
+      "officialSolution": "/həˈloʊ/ (American) or /həˈləʊ/ (British)",
+      "difficulty": 2,
+      "rating": 1150,
+      "source": "Practice",
+      "year": 2024,
+      "solveCount": 289,
+      "tags": ["phonetics", "ipa", "transcription"]
+    },
+    {
+      "id": "LH-105",
+      "number": "LH-105",
+      "title": "Semantic Shift",
+      "content": "The English word \"silly\" used to mean \"blessed\" or \"innocent\" in Middle English. How do words change meaning over time?",
+      "officialSolution": "Semantic shift occurs through metaphor, metonymy, specialization, generalization, and social factors. \"Silly\" shifted from blessed → innocent → naive → foolish.",
+      "difficulty": 2,
+      "rating": 1250,
+      "source": "Tutorial",
+      "year": 2024,
+      "solveCount": 198,
+      "tags": ["semantics", "historical-linguistics", "english"]
+    },
+    {
+      "id": "LH-106",
+      "number": "LH-106",
+      "title": "Swahili Noun Classes",
+      "content": "Swahili nouns are grouped into classes. Given: mtoto/watoto (child/children), mtu/watu (person/people), kikapu/vikapu (basket/baskets). What are the plural forms of: mkulima (farmer), kikombe (cup)?",
+      "officialSolution": "wakulima (farmers), vikombe (cups). Swahili uses noun class prefixes: m-/wa- for people, ki-/vi- for objects.",
+      "difficulty": 2,
+      "rating": 1200,
+      "source": "IOL",
+      "year": 2020,
+      "solveCount": 234,
+      "tags": ["morphology", "african-languages", "noun-classes"]
+    },
+    {
+      "id": "LH-110",
+      "number": "LH-110",
+      "title": "Greek Alphabet Origins",
+      "content": "The Greek alphabet was adapted from the Phoenician script. What major innovation did the Greeks introduce to the writing system?",
+      "officialSolution": "The Greeks added vowel letters. Phoenician only had consonants. Greek converted some Phoenician consonant letters (like aleph→alpha for A) into vowels, creating the first true alphabet.",
+      "difficulty": 2,
+      "rating": 1150,
+      "source": "Quiz",
+      "year": 2024,
+      "solveCount": 342,
+      "tags": ["writing-systems", "historical", "greek"]
+    }
+  ]
+}
