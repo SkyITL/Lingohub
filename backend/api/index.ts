@@ -151,6 +151,63 @@ app.get('/api/statistics', async (req, res) => {
   }
 })
 
+// Solutions endpoints
+app.post('/api/solutions', async (req, res) => {
+  try {
+    const { problemNumber, content, userId = 'anonymous' } = req.body
+    
+    if (!problemNumber || !content) {
+      return res.status(400).json({ 
+        success: false, 
+        error: 'Problem number and content are required' 
+      })
+    }
+
+    // In production, this would save to database
+    // For now, just return success
+    const solution = {
+      id: Date.now().toString(),
+      problemNumber,
+      content,
+      userId,
+      createdAt: new Date().toISOString(),
+      upvotes: 0,
+      downvotes: 0
+    }
+
+    res.json({ success: true, data: solution })
+  } catch (error) {
+    console.error('Error submitting solution:', error)
+    res.status(500).json({ success: false, error: 'Failed to submit solution' })
+  }
+})
+
+app.get('/api/solutions/problem/:problemNumber', async (req, res) => {
+  try {
+    const { problemNumber } = req.params
+    
+    // In production, fetch from database
+    // For now, return mock data
+    const solutions = [
+      {
+        id: '1',
+        problemNumber,
+        content: 'The key pattern here is the voicing distinction. Notice how the vocal cords vibrate for [b] but not for [p].',
+        userId: 'user123',
+        username: 'linguist1',
+        createdAt: new Date(Date.now() - 86400000).toISOString(),
+        upvotes: 5,
+        downvotes: 1
+      }
+    ]
+    
+    res.json({ success: true, data: solutions })
+  } catch (error) {
+    console.error('Error fetching solutions:', error)
+    res.status(500).json({ success: false, error: 'Failed to fetch solutions' })
+  }
+})
+
 // 404 handler
 app.use('*', (req, res) => {
   res.status(404).json({ error: 'Route not found' })
