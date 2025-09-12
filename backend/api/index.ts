@@ -6,88 +6,74 @@ const app = express()
 const prisma = new PrismaClient()
 
 // Middleware
-app.use(cors())
+app.use(cors({
+  origin: true,
+  credentials: true
+}))
 app.use(express.json())
 
 // Root route
-app.get('/', (req, res) => {
-  res.json({
-    name: 'LingoHub API',
-    version: '1.0.0',
-    status: 'Ready',
+app.get('/api', (req, res) => {
+  res.json({ 
+    message: 'LingoHub API is running',
     endpoints: {
-      health: '/api/health',
       problems: '/api/problems',
-      auth: '/api/auth'
+      stats: '/api/problems/stats'
     }
   })
 })
 
-// Health check
-app.get('/api/health', async (req, res) => {
-  try {
-    await prisma.$queryRaw`SELECT 1`
-    res.json({ 
-      status: 'ok', 
-      database: 'connected',
-      timestamp: new Date().toISOString() 
-    })
-  } catch (error) {
-    res.status(503).json({ 
-      status: 'error', 
-      database: 'disconnected',
-      timestamp: new Date().toISOString() 
-    })
-  }
-})
-
-// Get all problems with filtering
+// Problems endpoints
 app.get('/api/problems', async (req, res) => {
   try {
-    const { source, difficulty, year, tags, search, limit = 20, offset = 0 } = req.query
-    
+    const { 
+      search, 
+      source, 
+      difficulty, 
+      tags,
+      year,
+      page = '1',
+      limit = '50',
+      sortBy = 'number'
+    } = req.query
+
+    // Build where clause
     const where: any = {}
     
-    if (source) where.source = source
-    if (difficulty) where.difficulty = Number(difficulty)
-    if (year) where.year = Number(year)
     if (search) {
       where.OR = [
-        { title: { contains: String(search), mode: 'insensitive' } },
-        { number: { contains: String(search), mode: 'insensitive' } }
+        { title: { contains: search as string, mode: 'insensitive' } },
+        { content: { contains: search as string, mode: 'insensitive' } },
+        { number: { contains: search as string, mode: 'insensitive' } }
       ]
     }
-    if (tags) {
-      where.tags = {
-        some: {
-          name: { in: String(tags).split(',') }
-        }
-      }
+    
+    if (source) {
+      where.source = { in: (source as string).split(',') }
     }
     
-    const [problems, total] = await Promise.all([
-      prisma.problem.findMany({
-        where,
-        include: {
-          tags: true,
-          _count: {
-            select: { solutions: true }
-          }
-        },
-        take: Number(limit),
-        skip: Number(offset),
-        orderBy: { createdAt: 'desc' }
-      }),
-      prisma.problem.count({ where })
-    ])
-    
-    res.json({ 
-      success: true, 
-      data: problems,
-      pagination: {
+    if (difficulty) {
+      where.difficulty = { in: (difficulty as string).split(',').map(Number) }
+    }
+
+    // Get problems with optional filtering
+    const problems = await prisma.problem.findMany({
+      where,
+      orderBy: sortBy === 'year-desc' ? { year: 'desc' } : { number: 'asc' },
+      skip: (parseInt(page as string) - 1) * parseInt(limit as string),
+      take: parseInt(limit as string)
+    })
+
+    // Get total count for pagination
+    const total = await prisma.problem.count({ where })
+
+    res.json({
+      success: true,
+      data: {
+        problems,
         total,
-        limit: Number(limit),
-        offset: Number(offset)
+        page: parseInt(page as string),
+        limit: parseInt(limit as string)
       }
     })
   } catch (error) {
@@ -96,57 +82,40 @@ app.get('/api/problems', async (req, res) => {
   }
 })
 
-// Get single problem by ID
-app.get('/api/problems/:id', async (req, res) => {
+app.get('/api/problems/stats', async (req, res) => {
   try {
-    const problem = await prisma.problem.findUnique({
-      where: { id: req.params.id },
-      include: {
-        tags: true,
-        solutions: {
-          include: {
-            user: {
-              select: { id: true, username: true }
-            }
-          },
-          orderBy: { createdAt: 'desc' }
-        },
-        _count: {
-          select: { solutions: true }
-        }
-      }
-    })
-    
-    if (!problem) {
-      return res.status(404).json({ success: false, error: 'Problem not found' })
-    }
-    
-    res.json({ success: true, data: problem })
-  } catch (error) {
-    console.error('Error fetching problem:', error)
-    res.status(500).json({ success: false, error: 'Failed to fetch problem' })
-  }
-})
-
-// Get statistics
-app.get('/api/statistics', async (req, res) => {
-  try {
-    const [totalProblems, totalUsers, totalSolutions] = await Promise.all([
+    const [totalProblems, totalUsers, problems, solutions] = await Promise.all([
       prisma.problem.count(),
       prisma.user.count(),
+      prisma.problem.findMany({
+        select: { source: true, difficulty: true }
+      }),
       prisma.solution.count()
     ])
-    
+
+    // Calculate statistics
+    const sourceBreakdown = problems.reduce((acc: any, p) => {
+      acc[p.source] = (acc[p.source] || 0) + 1
+      return acc
+    }, {})
+
+    const difficultyBreakdown = problems.reduce((acc: any, p) => {
+      acc[p.difficulty] = (acc[p.difficulty] || 0) + 1
+      return acc
+    }, {})
+
     res.json({
       success: true,
       data: {
         totalProblems,
+        totalSolutions: solutions,
         totalUsers,
-        totalSolutions,
-        activeChallenges: 0
+        sourceBreakdown,
+        difficultyBreakdown
       }
     })
   } catch (error) {
+    console.error('Error fetching statistics:', error)
     res.status(500).json({ success: false, error: 'Failed to fetch statistics' })
   }
 })
@@ -154,7 +123,7 @@ app.get('/api/statistics', async (req, res) => {
 // Solutions endpoints
 app.post('/api/solutions', async (req, res) => {
   try {
-    const { problemNumber, content, userId = 'anonymous' } = req.body
+    const { problemNumber, content, userId } = req.body
     
     if (!problemNumber || !content) {
       return res.status(400).json({ 
@@ -163,19 +132,78 @@ app.post('/api/solutions', async (req, res) => {
       })
     }
 
-    // In production, this would save to database
-    // For now, just return success
-    const solution = {
-      id: Date.now().toString(),
-      problemNumber,
-      content,
-      userId,
-      createdAt: new Date().toISOString(),
-      upvotes: 0,
-      downvotes: 0
+    // Find the problem by number
+    const problem = await prisma.problem.findFirst({
+      where: { number: problemNumber }
+    })
+
+    if (!problem) {
+      return res.status(404).json({
+        success: false,
+        error: 'Problem not found'
+      })
     }
 
-    res.json({ success: true, data: solution })
+    // Get or create anonymous user if no userId provided
+    let user
+    if (!userId) {
+      user = await prisma.user.findFirst({
+        where: { email: 'anonymous@lingohub.com' }
+      })
+      
+      if (!user) {
+        user = await prisma.user.create({
+          data: {
+            email: 'anonymous@lingohub.com',
+            username: 'Anonymous',
+            password: 'not-used',
+            rating: 1000
+          }
+        })
+      }
+    } else {
+      user = await prisma.user.findUnique({
+        where: { id: userId }
+      })
+      
+      if (!user) {
+        return res.status(404).json({
+          success: false,
+          error: 'User not found'
+        })
+      }
+    }
+
+    // Create the solution
+    const solution = await prisma.solution.create({
+      data: {
+        problemId: problem.id,
+        userId: user.id,
+        content,
+        status: 'submitted'
+      },
+      include: {
+        user: {
+          select: {
+            username: true
+          }
+        }
+      }
+    })
+
+    res.json({ 
+      success: true, 
+      data: {
+        id: solution.id,
+        problemNumber,
+        content: solution.content,
+        userId: solution.userId,
+        username: solution.user.username,
+        createdAt: solution.createdAt.toISOString(),
+        upvotes: 0,
+        downvotes: 0
+      }
+    })
   } catch (error) {
     console.error('Error submitting solution:', error)
     res.status(500).json({ success: false, error: 'Failed to submit solution' })
@@ -186,25 +214,148 @@ app.get('/api/solutions/problem/:problemNumber', async (req, res) => {
   try {
     const { problemNumber } = req.params
     
-    // In production, fetch from database
-    // For now, return mock data
-    const solutions = [
-      {
-        id: '1',
-        problemNumber,
-        content: 'The key pattern here is the voicing distinction. Notice how the vocal cords vibrate for [b] but not for [p].',
-        userId: 'user123',
-        username: 'linguist1',
-        createdAt: new Date(Date.now() - 86400000).toISOString(),
-        upvotes: 5,
-        downvotes: 1
+    // Find the problem by number
+    const problem = await prisma.problem.findFirst({
+      where: { number: problemNumber }
+    })
+
+    if (!problem) {
+      return res.json({ success: true, data: [] })
+    }
+
+    // Fetch solutions for this problem
+    const solutions = await prisma.solution.findMany({
+      where: { 
+        problemId: problem.id,
+        status: 'submitted'
+      },
+      include: {
+        user: {
+          select: {
+            username: true
+          }
+        },
+        votes: true
+      },
+      orderBy: {
+        createdAt: 'desc'
       }
-    ]
+    })
     
-    res.json({ success: true, data: solutions })
+    // Calculate vote scores
+    const solutionsWithVotes = solutions.map(solution => {
+      const upvotes = solution.votes.filter(v => v.vote === 1).length
+      const downvotes = solution.votes.filter(v => v.vote === -1).length
+      
+      return {
+        id: solution.id,
+        problemNumber,
+        content: solution.content,
+        userId: solution.userId,
+        username: solution.user.username,
+        createdAt: solution.createdAt.toISOString(),
+        upvotes,
+        downvotes
+      }
+    })
+    
+    res.json({ success: true, data: solutionsWithVotes })
   } catch (error) {
     console.error('Error fetching solutions:', error)
     res.status(500).json({ success: false, error: 'Failed to fetch solutions' })
+  }
+})
+
+// Vote on a solution
+app.post('/api/solutions/:solutionId/vote', async (req, res) => {
+  try {
+    const { solutionId } = req.params
+    const { userId, vote } = req.body // vote should be -1, 0, or 1
+    
+    if (!userId || vote === undefined) {
+      return res.status(400).json({
+        success: false,
+        error: 'User ID and vote are required'
+      })
+    }
+
+    if (vote !== -1 && vote !== 0 && vote !== 1) {
+      return res.status(400).json({
+        success: false,
+        error: 'Vote must be -1, 0, or 1'
+      })
+    }
+
+    // Check if solution exists
+    const solution = await prisma.solution.findUnique({
+      where: { id: solutionId }
+    })
+
+    if (!solution) {
+      return res.status(404).json({
+        success: false,
+        error: 'Solution not found'
+      })
+    }
+
+    // Check if user exists
+    const user = await prisma.user.findUnique({
+      where: { id: userId }
+    })
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        error: 'User not found'
+      })
+    }
+
+    if (vote === 0) {
+      // Remove vote
+      await prisma.solutionVote.deleteMany({
+        where: {
+          userId,
+          solutionId
+        }
+      })
+    } else {
+      // Upsert vote
+      await prisma.solutionVote.upsert({
+        where: {
+          userId_solutionId: {
+            userId,
+            solutionId
+          }
+        },
+        update: {
+          vote
+        },
+        create: {
+          userId,
+          solutionId,
+          vote
+        }
+      })
+    }
+
+    // Get updated vote counts
+    const votes = await prisma.solutionVote.findMany({
+      where: { solutionId }
+    })
+
+    const upvotes = votes.filter(v => v.vote === 1).length
+    const downvotes = votes.filter(v => v.vote === -1).length
+
+    res.json({
+      success: true,
+      data: {
+        upvotes,
+        downvotes
+      }
+    })
+  } catch (error) {
+    console.error('Error voting on solution:', error)
+    res.status(500).json({ success: false, error: 'Failed to vote on solution' })
   }
 })
 
