@@ -35,7 +35,7 @@ export default function ProblemCard({
   }
 
   return (
-    <Link href={`/problems/${id}`}>
+    <Link href={`/problems/${number}`}>
       <div className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer">
         <div className="flex items-start justify-between mb-2">
           <div className="flex items-center space-x-2">
