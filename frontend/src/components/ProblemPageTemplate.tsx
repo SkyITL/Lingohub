@@ -5,7 +5,7 @@ import Link from "next/link"
 import Header from "@/components/Header"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft, Bookmark, Share2, Download, Star, Eye, Copy, Twitter, Link2, FileText, FileDown, Send, X, Facebook, Mail, ThumbsUp, ThumbsDown, FileCode } from "lucide-react"
-import { api } from '@/lib/api'
+import { jsPDF } from 'jspdf'
 
 interface ProblemData {
   id: string
@@ -57,12 +57,16 @@ export default function ProblemPageTemplate({ problem }: ProblemPageTemplateProp
 
   const fetchSolutions = async () => {
     try {
-      const response = await api.get(`/solutions/problem/${problem.number}`)
-      if (response.data.success) {
-        setCommunitySolutions(response.data.data)
+      // Using fetch instead of axios for now
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://lingohub-backend.vercel.app'}/api/solutions/problem/${problem.number}`)
+      const data = await response.json()
+      if (data.success) {
+        setCommunitySolutions(data.data)
       }
     } catch (error) {
       console.error('Error fetching solutions:', error)
+      // Set some mock data for demonstration
+      setCommunitySolutions([])
     } finally {
       setLoadingSolutions(false)
     }
@@ -158,53 +162,85 @@ Downloaded from: ${window.location.href}
   }
 
   const handleDownloadPDF = () => {
-    // Create a printable version
-    const printWindow = window.open('', '_blank')
-    if (printWindow) {
-      printWindow.document.write(`
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <title>${problem.number} - ${problem.title}</title>
-          <style>
-            body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; max-width: 800px; margin: 0 auto; }
-            h1 { color: #333; border-bottom: 2px solid #333; padding-bottom: 10px; }
-            h2 { color: #666; margin-top: 30px; }
-            .meta { color: #666; margin: 10px 0; }
-            .tags { margin: 20px 0; }
-            .tag { display: inline-block; background: #f0f0f0; padding: 5px 10px; margin: 5px; border-radius: 15px; font-size: 14px; }
-            .problem { background: #f9f9f9; padding: 20px; border-left: 4px solid #4CAF50; margin: 20px 0; }
-            .solution { background: #fff3cd; padding: 20px; border-left: 4px solid #ffc107; margin: 20px 0; }
-            @media print { .no-print { display: none; } }
-          </style>
-        </head>
-        <body>
-          <h1>${problem.number}: ${problem.title}</h1>
-          <div class="meta">
-            <strong>Source:</strong> ${problem.source} ${problem.year} | 
-            <strong>Difficulty:</strong> ${'★'.repeat(problem.difficulty)}${'☆'.repeat(5 - problem.difficulty)} | 
-            <strong>Rating:</strong> ${problem.rating}
-          </div>
-          
-          <h2>Problem</h2>
-          <div class="problem">${problem.content}</div>
-          
-          <h2>Solution</h2>
-          <div class="solution">${problem.officialSolution}</div>
-          
-          <div class="tags">
-            <strong>Tags:</strong> ${problem.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-          </div>
-          
-          <div class="no-print" style="margin-top: 40px; text-align: center;">
-            <button onclick="window.print()" style="padding: 10px 20px; font-size: 16px; cursor: pointer;">Save as PDF</button>
-            <button onclick="window.close()" style="padding: 10px 20px; font-size: 16px; cursor: pointer; margin-left: 10px;">Close</button>
-          </div>
-        </body>
-        </html>
-      `)
-      printWindow.document.close()
+    // Create a new jsPDF instance
+    const doc = new jsPDF()
+    
+    // Set font and sizes
+    const pageWidth = doc.internal.pageSize.getWidth()
+    const pageHeight = doc.internal.pageSize.getHeight()
+    const margin = 20
+    const lineHeight = 7
+    let yPosition = margin
+    
+    // Title
+    doc.setFontSize(20)
+    doc.setFont('helvetica', 'bold')
+    doc.text(`${problem.number}: ${problem.title}`, margin, yPosition)
+    yPosition += lineHeight * 2
+    
+    // Metadata
+    doc.setFontSize(12)
+    doc.setFont('helvetica', 'normal')
+    doc.text(`Source: ${problem.source} ${problem.year}`, margin, yPosition)
+    yPosition += lineHeight
+    doc.text(`Difficulty: ${'★'.repeat(problem.difficulty)}${'☆'.repeat(5 - problem.difficulty)}`, margin, yPosition)
+    yPosition += lineHeight
+    doc.text(`Rating: ${problem.rating}`, margin, yPosition)
+    yPosition += lineHeight * 2
+    
+    // Problem section
+    doc.setFont('helvetica', 'bold')
+    doc.text('PROBLEM:', margin, yPosition)
+    yPosition += lineHeight
+    
+    doc.setFont('helvetica', 'normal')
+    const problemLines = doc.splitTextToSize(problem.content, pageWidth - margin * 2)
+    problemLines.forEach((line: string) => {
+      if (yPosition > pageHeight - margin) {
+        doc.addPage()
+        yPosition = margin
+      }
+      doc.text(line, margin, yPosition)
+      yPosition += lineHeight
+    })
+    
+    yPosition += lineHeight
+    
+    // Solution section
+    doc.setFont('helvetica', 'bold')
+    doc.text('SOLUTION:', margin, yPosition)
+    yPosition += lineHeight
+    
+    doc.setFont('helvetica', 'normal')
+    const solutionLines = doc.splitTextToSize(problem.officialSolution, pageWidth - margin * 2)
+    solutionLines.forEach((line: string) => {
+      if (yPosition > pageHeight - margin) {
+        doc.addPage()
+        yPosition = margin
+      }
+      doc.text(line, margin, yPosition)
+      yPosition += lineHeight
+    })
+    
+    yPosition += lineHeight
+    
+    // Tags
+    if (yPosition > pageHeight - margin * 2) {
+      doc.addPage()
+      yPosition = margin
     }
+    doc.setFont('helvetica', 'bold')
+    doc.text('Tags: ', margin, yPosition)
+    doc.setFont('helvetica', 'normal')
+    doc.text(problem.tags.join(', '), margin + 15, yPosition)
+    
+    // Footer
+    doc.setFontSize(10)
+    doc.text(`Downloaded from LingoHub`, margin, pageHeight - margin)
+    doc.text(new Date().toLocaleDateString(), pageWidth - margin - 30, pageHeight - margin)
+    
+    // Save the PDF
+    doc.save(`${problem.number}_${problem.title.replace(/\s+/g, '_')}.pdf`)
     setShowDownloadMenu(false)
   }
 
@@ -213,15 +249,24 @@ Downloaded from: ${window.location.href}
     
     setIsSubmitting(true)
     try {
-      const response = await api.post('/solutions', {
-        problemNumber: problem.number,
-        content: solutionText
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://lingohub-backend.vercel.app'
+      const response = await fetch(`${apiUrl}/api/solutions`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          problemNumber: problem.number,
+          content: solutionText
+        })
       })
       
-      if (response.data.success) {
+      const data = await response.json()
+      
+      if (data.success) {
         // Add the new solution to the list
         const newSolution: Solution = {
-          ...response.data.data,
+          ...data.data,
           username: 'You'
         }
         setCommunitySolutions([newSolution, ...communitySolutions])
@@ -230,12 +275,14 @@ Downloaded from: ${window.location.href}
         setShowSubmitModal(false)
         setSolutionText('')
         
-        // Show success message
+        // Show success message (using a better notification would be ideal)
         alert('Solution submitted successfully!')
+      } else {
+        throw new Error(data.error || 'Failed to submit')
       }
     } catch (error) {
       console.error('Error submitting solution:', error)
-      alert('Failed to submit solution. Please try again.')
+      alert('Failed to submit solution. The backend API may not be running. Please try again later.')
     } finally {
       setIsSubmitting(false)
     }
