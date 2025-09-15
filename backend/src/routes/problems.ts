@@ -184,7 +184,8 @@ router.get('/:id', optionalAuth, async (req: Request, res: Response) => {
   try {
     const { id } = req.params
 
-    const problem = await prisma.problem.findUnique({
+    // Try to find by ID first, then by number
+    let problem = await prisma.problem.findUnique({
       where: { id },
       include: {
         tags: {
@@ -206,6 +207,32 @@ router.get('/:id', optionalAuth, async (req: Request, res: Response) => {
         }
       }
     })
+
+    // If not found by ID, try to find by number (e.g., "LH-001")
+    if (!problem) {
+      problem = await prisma.problem.findUnique({
+        where: { number: id },
+        include: {
+          tags: {
+            include: {
+              tag: true
+            }
+          },
+          progress: req.user ? {
+            where: { userId: req.user.id }
+          } : false,
+          _count: {
+            select: {
+              progress: {
+                where: { status: 'solved' }
+              },
+              solutions: true,
+              discussions: true
+            }
+          }
+        }
+      })
+    }
 
     if (!problem) {
       return res.status(404).json({ error: 'Problem not found' })

@@ -22,8 +22,23 @@ router.get('/problem/:problemId', optionalAuth, async (req: Request, res: Respon
     const { problemId } = req.params
     const { sortBy = 'votes' } = req.query
 
+    // Find problem by ID or number
+    let problem = await prisma.problem.findUnique({
+      where: { id: problemId }
+    })
+
+    if (!problem) {
+      problem = await prisma.problem.findUnique({
+        where: { number: problemId }
+      })
+    }
+
+    if (!problem) {
+      return res.status(404).json({ error: 'Problem not found' })
+    }
+
     let orderBy: any = { voteScore: 'desc' }
-    
+
     switch (sortBy) {
       case 'newest':
         orderBy = { createdAt: 'desc' }
@@ -35,7 +50,7 @@ router.get('/problem/:problemId', optionalAuth, async (req: Request, res: Respon
 
     const solutions = await prisma.solution.findMany({
       where: {
-        problemId,
+        problemId: problem.id,
         status: 'submitted' // Only show approved/submitted solutions
       },
       include: {
@@ -84,10 +99,17 @@ router.post('/', authenticateToken, async (req: Request, res: Response) => {
 
     const { problemId, content } = solutionSchema.parse(req.body)
 
-    // Check if problem exists
-    const problem = await prisma.problem.findUnique({
+    // Check if problem exists (try by ID first, then by number)
+    let problem = await prisma.problem.findUnique({
       where: { id: problemId }
     })
+
+    // If not found by ID, try to find by number (e.g., "LH-001")
+    if (!problem) {
+      problem = await prisma.problem.findUnique({
+        where: { number: problemId }
+      })
+    }
 
     if (!problem) {
       return res.status(404).json({ error: 'Problem not found' })
@@ -96,7 +118,7 @@ router.post('/', authenticateToken, async (req: Request, res: Response) => {
     // Check if user already submitted a solution for this problem
     const existingSolution = await prisma.solution.findFirst({
       where: {
-        problemId,
+        problemId: problem.id,
         userId: req.user.id
       }
     })
@@ -107,7 +129,7 @@ router.post('/', authenticateToken, async (req: Request, res: Response) => {
 
     const solution = await prisma.solution.create({
       data: {
-        problemId,
+        problemId: problem.id,
         userId: req.user.id,
         content,
         status: 'submitted'
@@ -128,7 +150,7 @@ router.post('/', authenticateToken, async (req: Request, res: Response) => {
       where: {
         userId_problemId: {
           userId: req.user.id,
-          problemId
+          problemId: problem.id
         }
       },
       update: {
@@ -137,7 +159,7 @@ router.post('/', authenticateToken, async (req: Request, res: Response) => {
       },
       create: {
         userId: req.user.id,
-        problemId,
+        problemId: problem.id,
         status: 'solved'
       }
     })
