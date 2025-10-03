@@ -1,29 +1,32 @@
 import axios from 'axios'
+import { logger } from './logger'
 
 // Determine API URL with proper fallback for production
 const getApiBaseUrl = () => {
   // If environment variable is set, use it
   if (process.env.NEXT_PUBLIC_API_URL) {
-    return `${process.env.NEXT_PUBLIC_API_URL}/api`
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/api`
+    logger.info('Using API URL from environment variable', { url })
+    return url
   }
 
   // If we're in production (deployed), use production backend
   if (typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
-    return 'https://lingohub-backend.vercel.app/api'
+    const url = 'https://lingohub-backend.vercel.app/api'
+    logger.info('Detected production environment, using production backend', {
+      url,
+      hostname: window.location.hostname
+    })
+    return url
   }
 
   // Development fallback
-  return 'http://localhost:4000/api'
+  const url = 'http://localhost:4000/api'
+  logger.info('Using development backend', { url })
+  return url
 }
 
 const API_BASE_URL = getApiBaseUrl()
-
-// Debug logging
-if (typeof window !== 'undefined') {
-  console.log('API Base URL:', API_BASE_URL)
-  console.log('ENV Variable:', process.env.NEXT_PUBLIC_API_URL)
-  console.log('Hostname:', window.location.hostname)
-}
 
 // Create axios instance
 export const api = axios.create({
@@ -34,24 +37,61 @@ export const api = axios.create({
   }
 })
 
-// Request interceptor to add auth token
+// Request interceptor to add auth token and log requests
 api.interceptors.request.use((config) => {
   if (typeof window !== 'undefined') {
     const token = localStorage.getItem('lingohub_token')
     if (token) {
       config.headers.Authorization = `Bearer ${token}`
+      logger.debug('Added auth token to request', {
+        url: config.url,
+        method: config.method,
+        hasToken: true
+      })
+    } else {
+      logger.debug('No auth token available', {
+        url: config.url,
+        method: config.method
+      })
     }
+
+    // Log the request
+    logger.apiRequest(
+      config.method?.toUpperCase() || 'UNKNOWN',
+      `${config.baseURL}${config.url}`,
+      config.data
+    )
   }
   return config
+}, (error) => {
+  logger.apiError('REQUEST', 'INTERCEPTOR', error)
+  return Promise.reject(error)
 })
 
-// Response interceptor for error handling
+// Response interceptor for error handling and logging
 api.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    // Log successful responses
+    logger.apiResponse(
+      response.config.method?.toUpperCase() || 'UNKNOWN',
+      `${response.config.baseURL}${response.config.url}`,
+      response.status,
+      response.data
+    )
+    return response
+  },
   (error) => {
+    // Log errors
+    logger.apiError(
+      error.config?.method?.toUpperCase() || 'UNKNOWN',
+      `${error.config?.baseURL}${error.config?.url}` || 'UNKNOWN',
+      error
+    )
+
     if (error.response?.status === 401) {
       // Token expired or invalid
       if (typeof window !== 'undefined') {
+        logger.warn('Authentication failed, clearing tokens and redirecting to login')
         localStorage.removeItem('lingohub_token')
         localStorage.removeItem('lingohub_user')
         // Redirect to login or show login modal
