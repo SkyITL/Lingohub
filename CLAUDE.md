@@ -135,14 +135,34 @@ Problems have a specific format:
   - Error handling is in `frontend/src/components/ProblemPageTemplate.tsx:284` and `frontend/src/app/problems/[id]/page.tsx:220`
 
 ### Vercel Configuration Requirements
-- **Frontend**: Deployed as a Next.js app on Vercel
-- **Backend**: Needs separate deployment (Vercel Functions or separate service)
-- **Environment Variables** (must be set in Vercel dashboard):
-  - `NEXT_PUBLIC_API_URL`: Backend API URL (e.g., `https://your-backend-url.vercel.app`)
-  - `DATABASE_URL`: PostgreSQL connection string (Vercel Postgres or external DB)
-  - `JWT_SECRET` and `JWT_REFRESH_SECRET`: Authentication secrets
+
+#### Frontend Deployment
+- **Platform**: Vercel (Next.js app)
+- **Root Directory**: `frontend`
+- **Build Command**: `npm run build`
+- **Output Directory**: `.next`
+- **Environment Variables** (set in Vercel dashboard):
+  - `NEXT_PUBLIC_API_URL=https://lingohub-backend.vercel.app`
+
+#### Backend Deployment
+- **Platform**: Vercel (Serverless Functions)
+- **Root Directory**: `backend`
+- **Entry Point**: `api/index.ts` (imports `src/server.ts`)
+- **Environment Variables** (set in Vercel dashboard):
+  - `DATABASE_URL`: PostgreSQL connection string
+  - `JWT_SECRET`: Secret for access tokens
+  - `JWT_REFRESH_SECRET`: Secret for refresh tokens
+
+#### Local Development Setup
+For local development against production backend:
+1. Create `frontend/.env.local`:
+   ```
+   NEXT_PUBLIC_API_URL=https://lingohub-backend.vercel.app
+   ```
+2. Create `backend/.env` with database credentials and JWT secrets
 
 ### Debugging Production Issues
-- Check browser console for API URL being used (debug logging in `frontend/src/lib/api.ts:8-10`)
-- Verify backend is deployed and accessible at the configured URL
-- Ensure CORS settings allow requests from production frontend domain
+- **Login/API Errors**: Check browser console for API URL (debug logging in `frontend/src/lib/api.ts:8-10`)
+- **"localhost:4000" errors**: Frontend is missing `NEXT_PUBLIC_API_URL` environment variable
+- **404 errors**: Backend routes may not be deployed (check `backend/api/index.ts` imports full server)
+- **CORS errors**: Verify CORS settings allow requests from frontend domain
