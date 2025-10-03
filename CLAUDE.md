@@ -64,6 +64,7 @@ RESTful API with routes organized by feature:
 - `/api/users/*` - User profiles and progress tracking
 - `/api/solutions/*` - Solution submissions and voting
 - `/api/seed` - Database seeding endpoint
+- `/api/admin/*` - Admin operations (delete all solutions, etc.)
 
 ### Frontend Architecture
 Next.js App Router with:
@@ -112,6 +113,50 @@ Problems have a specific format:
 - Use `npm run migrate` for development migrations
 - Use `npm run migrate:deploy` for production deployments
 - Seed data available via `npm run db:seed` script
+
+## Admin Operations
+
+### Delete All Solutions
+To delete all solutions from the production database:
+```bash
+# You need to be logged in and have a valid token
+curl -X DELETE https://lingohub-backend.vercel.app/api/admin/solutions/all \
+  -H "Authorization: Bearer YOUR_TOKEN_HERE"
+```
+
+### Reseed Production Database
+The seed endpoint is **idempotent** - safe to run multiple times. It will:
+- Create new problems that don't exist
+- Update existing problems with latest data
+- Never create duplicates
+
+**When to run:**
+- After adding new problems to `backend/src/data/problems.ts`
+- When problems are missing from production (like LH-006)
+- To update problem content or metadata
+
+**How to run:**
+```bash
+# Using curl
+curl -X POST https://lingohub-backend.vercel.app/api/seed/run
+
+# Response will show:
+# {
+#   "success": true,
+#   "message": "Database seeded successfully!",
+#   "problems": {
+#     "total": 10,
+#     "created": 2,    # newly added problems
+#     "updated": 8     # existing problems updated
+#   }
+# }
+```
+
+**Important:** All problem data is centralized in `backend/src/data/problems.ts`. When you add a new problem:
+1. Add it to this file
+2. Run the seed endpoint
+3. Update `frontend/src/data/problems.json` (if using static pages)
+4. Regenerate problem pages with `npm run generate-problems` (if needed)
 
 ## Important Notes
 

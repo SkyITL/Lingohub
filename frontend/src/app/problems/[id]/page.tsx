@@ -95,24 +95,30 @@ export default function ProblemDetailPage({ params }: { params: Promise<{ id: st
       setIsLoadingSolutions(true)
       const sortMapping = {
         'most-upvoted': 'votes',
-        'newest': 'newest', 
+        'newest': 'newest',
         'oldest': 'oldest'
       }
-      
+
       // Use the problem ID from the loaded problem data, fall back to URL id for initial load
       const problemId = problem?.id || id
       const response = await solutionsApi.getByProblem(problemId, sortMapping[sortBy])
       const { solutions: loadedSolutions } = response.data
-      
+
+      // Transform solutions to ensure votes field exists
+      const transformedSolutions = loadedSolutions.map((sol: any) => ({
+        ...sol,
+        votes: sol.voteScore || 0
+      }))
+
       if (user) {
         // Separate user's own solution from others
-        const userSol = loadedSolutions.find(sol => sol.user.id === user.id)
-        const otherSolutions = loadedSolutions.filter(sol => sol.user.id !== user.id)
-        
+        const userSol = transformedSolutions.find(sol => sol.user.id === user.id)
+        const otherSolutions = transformedSolutions.filter(sol => sol.user.id !== user.id)
+
         setUserSolution(userSol || null)
         setSolutions(otherSolutions)
       } else {
-        setSolutions(loadedSolutions)
+        setSolutions(transformedSolutions)
         setUserSolution(null)
       }
     } catch (error) {
@@ -202,20 +208,16 @@ export default function ProblemDetailPage({ params }: { params: Promise<{ id: st
       console.log('Submitting solution with data:', { problemId: problem.id, content: newSolution })
       const response = await solutionsApi.submit(problem.id, newSolution)
       const newSol = response.data.solution
-      
-      // Add user vote properties for consistency
-      const solutionWithVoteData = {
-        ...newSol,
-        userVote: 0,
-        voteCount: 0,
-        votes: newSol.voteScore || 0
-      }
-      
-      setUserSolution(solutionWithVoteData)
+
+      console.log('Solution submitted successfully:', newSol)
+
+      // Reload solutions from backend to ensure consistency
+      await loadSolutions()
+
+      // Clear form
       setNewSolution('')
       setShowSolutionForm(false)
       setIsEditingUserSolution(false)
-      console.log('Solution submitted:', solutionWithVoteData)
     } catch (error) {
       console.error('Failed to submit solution:', error)
       console.error('Error details:', error.response?.data)
@@ -739,22 +741,22 @@ export default function ProblemDetailPage({ params }: { params: Promise<{ id: st
                       <div className="flex items-center space-x-4">
                         {/* Voting buttons */}
                         <div className="flex items-center space-x-2">
-                          <Button 
-                            variant="ghost" 
+                          <Button
+                            variant="ghost"
                             size="sm"
                             onClick={() => handleVote(solution.id, 1)}
-                            className={solution.userVote === 1 ? 'text-green-600 bg-green-50' : ''}
+                            className={solution.userVote === 1 ? 'text-green-600 bg-green-50 hover:bg-green-100' : 'hover:bg-gray-100'}
                           >
                             <ThumbsUp className="h-4 w-4" />
                           </Button>
                           <span className="text-sm font-medium min-w-[2rem] text-center">
-                            {solution.votes}
+                            {solution.votes || 0}
                           </span>
-                          <Button 
-                            variant="ghost" 
+                          <Button
+                            variant="ghost"
                             size="sm"
                             onClick={() => handleVote(solution.id, -1)}
-                            className={solution.userVote === -1 ? 'text-red-600 bg-red-50' : ''}
+                            className={solution.userVote === -1 ? 'text-red-600 bg-red-50 hover:bg-red-100' : 'hover:bg-gray-100'}
                           >
                             <ThumbsDown className="h-4 w-4" />
                           </Button>
