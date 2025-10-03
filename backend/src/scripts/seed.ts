@@ -10,7 +10,6 @@ async function main() {
   console.log('🧹 Clearing existing data...')
   await prisma.solutionVote.deleteMany()
   await prisma.solution.deleteMany()
-  await prisma.discussionReply.deleteMany()
   await prisma.discussion.deleteMany()
   await prisma.userProgress.deleteMany()
   await prisma.problemTag.deleteMany()
