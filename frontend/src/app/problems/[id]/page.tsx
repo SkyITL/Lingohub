@@ -72,11 +72,15 @@ export default function ProblemDetailPage({ params }: { params: Promise<{ id: st
   useEffect(() => {
     const savedProblems = JSON.parse(localStorage.getItem('savedProblems') || '[]')
     setIsSaved(savedProblems.includes(id))
-    
+
     // Load problem and solutions
     loadProblem()
+  }, [id])
+
+  // Separate effect for loading solutions - depends on user state
+  useEffect(() => {
     loadSolutions()
-  }, [id, sortBy])
+  }, [id, sortBy, user])
   
   const loadProblem = async () => {
     try {
@@ -101,8 +105,11 @@ export default function ProblemDetailPage({ params }: { params: Promise<{ id: st
 
       // Use the problem ID from the loaded problem data, fall back to URL id for initial load
       const problemId = problem?.id || id
+      console.log('🔍 Loading solutions for problem:', problemId, 'User:', user?.username || 'Not logged in')
+
       const response = await solutionsApi.getByProblem(problemId, sortMapping[sortBy])
       const { solutions: loadedSolutions } = response.data
+      console.log('📦 Loaded solutions:', loadedSolutions.length, 'solutions')
 
       // Transform solutions to ensure votes field exists
       const transformedSolutions = loadedSolutions.map((sol: any) => ({
@@ -115,14 +122,18 @@ export default function ProblemDetailPage({ params }: { params: Promise<{ id: st
         const userSol = transformedSolutions.find(sol => sol.user.id === user.id)
         const otherSolutions = transformedSolutions.filter(sol => sol.user.id !== user.id)
 
+        console.log('👤 User solution:', userSol ? 'Found' : 'Not found', 'Other solutions:', otherSolutions.length)
+        console.log('👤 User ID:', user.id, 'Solution user IDs:', transformedSolutions.map(s => s.user.id))
+
         setUserSolution(userSol || null)
         setSolutions(otherSolutions)
       } else {
+        console.log('❌ No user logged in, showing all solutions')
         setSolutions(transformedSolutions)
         setUserSolution(null)
       }
     } catch (error) {
-      console.error('Failed to load solutions:', error)
+      console.error('❌ Failed to load solutions:', error)
     } finally {
       setIsLoadingSolutions(false)
     }
