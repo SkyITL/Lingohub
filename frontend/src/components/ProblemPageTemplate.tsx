@@ -6,6 +6,8 @@ import Header from "@/components/Header"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft, Bookmark, Share2, Download, Star, Eye, Copy, Twitter, Link2, FileText, FileDown, Send, X, Facebook, Mail, ThumbsUp, ThumbsDown, FileCode } from "lucide-react"
 import { jsPDF } from 'jspdf'
+import { useAuth } from '@/contexts/AuthContext'
+import { solutionsApi } from '@/lib/api'
 
 // Markdown content component
 function MarkdownContent({ content }: { content: string }) {
@@ -62,6 +64,7 @@ interface ProblemPageTemplateProps {
 }
 
 export default function ProblemPageTemplate({ problem }: ProblemPageTemplateProps) {
+  const { user } = useAuth()
   const [showSolution, setShowSolution] = useState(false)
   const [isSaved, setIsSaved] = useState(false)
   const [showShareMenu, setShowShareMenu] = useState(false)
@@ -273,43 +276,43 @@ Downloaded from: ${window.location.href}
 
   const handleSubmitSolution = async () => {
     if (!solutionText.trim()) return
-    
+
+    if (solutionText.trim().length < 10) {
+      alert('Solution must be at least 10 characters long.')
+      return
+    }
+
+    if (!user) {
+      alert('You must be logged in to submit a solution.')
+      return
+    }
+
     setIsSubmitting(true)
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://lingohub-backend.vercel.app'
-      const response = await fetch(`${apiUrl}/api/solutions`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          problemNumber: problem.number,
-          content: solutionText
-        })
-      })
-      
-      const data = await response.json()
-      
-      if (data.success) {
-        // Add the new solution to the list
-        const newSolution: Solution = {
-          ...data.data,
-          username: 'You'
-        }
-        setCommunitySolutions([newSolution, ...communitySolutions])
-        
-        // Reset form
-        setShowSubmitModal(false)
-        setSolutionText('')
-        
-        // Show success message (using a better notification would be ideal)
-        alert('Solution submitted successfully!')
-      } else {
-        throw new Error(data.error || 'Failed to submit')
+      const response = await solutionsApi.submit(problem.id, solutionText)
+      const newSol = response.data.solution
+
+      // Add the new solution to the list
+      const newSolution: Solution = {
+        id: newSol.id,
+        content: newSol.content,
+        username: user.username || 'You',
+        createdAt: newSol.createdAt,
+        upvotes: newSol.voteScore || 0,
+        downvotes: 0
       }
-    } catch (error) {
+      setCommunitySolutions([newSolution, ...communitySolutions])
+
+      // Reset form
+      setShowSubmitModal(false)
+      setSolutionText('')
+
+      // Show success message
+      alert('Solution submitted successfully!')
+    } catch (error: any) {
       console.error('Error submitting solution:', error)
-      alert('Failed to submit solution. The backend API may not be running. Please try again later.')
+      const errorMessage = error.response?.data?.error || error.message || 'Failed to submit solution'
+      alert(`Error: ${errorMessage}`)
     } finally {
       setIsSubmitting(false)
     }
