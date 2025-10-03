@@ -1,18 +1,20 @@
 import express, { Request, Response } from 'express'
 import { PrismaClient } from '@prisma/client'
 import bcrypt from 'bcryptjs'
+import { problems as realProblems } from '../data/problems'
 
 const router = express.Router()
 const prisma = new PrismaClient()
 
-// Simple seed endpoint - call once to populate database
+// Simple seed endpoint - safe to run multiple times (idempotent)
+// Upserts problems so existing data isn't duplicated
 router.post('/run', async (req: Request, res: Response) => {
   try {
-    console.log('Starting database seed...')
+    console.log('🌱 Starting database seed...')
 
     // Create sample users
     const hashedPassword = await bcrypt.hash('password123', 10)
-    
+
     const user1 = await prisma.user.upsert({
       where: { email: 'alice@example.com' },
       update: {},
@@ -24,41 +26,33 @@ router.post('/run', async (req: Request, res: Response) => {
       }
     })
 
-    // Create problems
-    const problems = [
-      {
-        number: 'LH-001',
-        title: 'Ubykh Verb Morphology',
-        content: `# Ubykh Verb Morphology\n\nGiven the following Ubykh verb forms:\n\n| Ubykh | English |\n|-------|---------|\n| sə-q'ʷa | I go |\n| wə-q'ʷa | you go |\n\n**Question**: What would be the Ubykh forms for "they go"?`,
-        source: 'IOL',
-        year: 2007,
-        difficulty: 4,
-        rating: 1800,
-        officialSolution: 'Based on the patterns: ra-q\'ʷa (they go)',
-        tags: ['morphology', 'verbs', 'caucasian']
-      },
-      {
-        number: 'LH-002',
-        title: 'Pirahã Number System',
-        content: `# Pirahã Number System\n\nPirahã expressions:\n\n| Pirahã | Context |\n|--------|---------|\n| hói | one stick |\n\n**Question**: What can you conclude about the Pirahã number system?`,
-        source: 'APLO',
-        year: 2008,
-        difficulty: 2,
-        rating: 1200,
-        officialSolution: 'The data suggests Pirahã may have approximate quantity words.',
-        tags: ['numbers', 'counting', 'amazonian']
-      }
-    ]
+    console.log('✅ Created/verified sample users')
+
+    // Use real problems from problems.ts
+    const problems = realProblems
+    let createdCount = 0
+    let updatedCount = 0
 
     // Create problems with tags
     for (const problemData of problems) {
       const { tags, ...problemInfo } = problemData
-      
+
+      // Check if problem already exists
+      const existing = await prisma.problem.findUnique({
+        where: { number: problemData.number }
+      })
+
       const problem = await prisma.problem.upsert({
         where: { number: problemData.number },
         update: problemInfo,
         create: problemInfo
       })
+
+      if (existing) {
+        updatedCount++
+      } else {
+        createdCount++
+      }
 
       // Create tags
       for (const tagName of tags) {
@@ -84,13 +78,17 @@ router.post('/run', async (req: Request, res: Response) => {
       }
     }
 
-    res.json({ 
-      success: true, 
+    console.log(`✅ Seeded ${problems.length} problems (${createdCount} new, ${updatedCount} updated)`)
+
+    res.json({
+      success: true,
       message: 'Database seeded successfully!',
-      created: {
-        problems: problems.length,
-        users: 1
-      }
+      problems: {
+        total: problems.length,
+        created: createdCount,
+        updated: updatedCount
+      },
+      users: 1
     })
   } catch (error) {
     console.error('Seed error:', error)
