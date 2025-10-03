@@ -7,6 +7,33 @@ import { Button } from "@/components/ui/button"
 import { ArrowLeft, Bookmark, Share2, Download, Star, Eye, Copy, Twitter, Link2, FileText, FileDown, Send, X, Facebook, Mail, ThumbsUp, ThumbsDown, FileCode } from "lucide-react"
 import { jsPDF } from 'jspdf'
 
+// Markdown content component
+function MarkdownContent({ content }: { content: string }) {
+  const [htmlContent, setHtmlContent] = useState('')
+
+  useEffect(() => {
+    const processMarkdown = async () => {
+      try {
+        const { marked } = await import('marked')
+        const html = await marked(content)
+        setHtmlContent(html)
+      } catch (error) {
+        console.error('Failed to process markdown:', error)
+        setHtmlContent(content.replace(/\n/g, '<br>'))
+      }
+    }
+
+    processMarkdown()
+  }, [content])
+
+  return (
+    <div
+      className="text-gray-700 linguistic-content prose max-w-none"
+      dangerouslySetInnerHTML={{ __html: htmlContent }}
+    />
+  )
+}
+
 interface ProblemData {
   id: string
   number: string
@@ -478,9 +505,7 @@ Downloaded from: ${window.location.href}
         {/* Problem Content */}
         <div className="bg-white rounded-lg shadow-sm border p-6 mb-6">
           <h2 className="text-xl font-semibold mb-4">Problem</h2>
-          <div className="prose max-w-none">
-            <p className="text-gray-700 text-lg leading-relaxed whitespace-pre-line">{problem.content}</p>
-          </div>
+          <MarkdownContent content={problem.content} />
         </div>
 
         {/* Solution Section */}
@@ -496,9 +521,7 @@ Downloaded from: ${window.location.href}
           </div>
           
           {showSolution ? (
-            <div className="prose max-w-none">
-              <p className="text-gray-700 leading-relaxed whitespace-pre-line">{problem.officialSolution}</p>
-            </div>
+            <MarkdownContent content={problem.officialSolution} />
           ) : (
             <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
               <p className="text-yellow-800">
