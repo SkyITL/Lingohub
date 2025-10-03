@@ -1,13 +1,28 @@
 import axios from 'axios'
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL 
-  ? `${process.env.NEXT_PUBLIC_API_URL}/api`
-  : 'http://localhost:4000/api'
+// Determine API URL with proper fallback for production
+const getApiBaseUrl = () => {
+  // If environment variable is set, use it
+  if (process.env.NEXT_PUBLIC_API_URL) {
+    return `${process.env.NEXT_PUBLIC_API_URL}/api`
+  }
 
-// Debug logging (remove in production)
+  // If we're in production (deployed), use production backend
+  if (typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
+    return 'https://lingohub-backend.vercel.app/api'
+  }
+
+  // Development fallback
+  return 'http://localhost:4000/api'
+}
+
+const API_BASE_URL = getApiBaseUrl()
+
+// Debug logging
 if (typeof window !== 'undefined') {
   console.log('API Base URL:', API_BASE_URL)
   console.log('ENV Variable:', process.env.NEXT_PUBLIC_API_URL)
+  console.log('Hostname:', window.location.hostname)
 }
 
 // Create axios instance
