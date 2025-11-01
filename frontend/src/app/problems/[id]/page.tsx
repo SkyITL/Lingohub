@@ -33,6 +33,14 @@ function MarkdownContent({ content }: { content: string }) {
     const processMarkdown = async () => {
       try {
         const { marked } = await import('marked')
+
+        // Configure marked to use GFM (GitHub Flavored Markdown) for tables
+        marked.setOptions({
+          gfm: true,
+          breaks: true,
+          tables: true
+        })
+
         const html = marked(content)
         setHtmlContent(html)
       } catch (error) {
@@ -40,7 +48,7 @@ function MarkdownContent({ content }: { content: string }) {
         setHtmlContent(content.replace(/\n/g, '<br>'))
       }
     }
-    
+
     processMarkdown()
   }, [content])
   
