@@ -121,6 +121,8 @@ router.get('/', optionalAuth, async (req: Request, res: Response) => {
           year: true,
           difficulty: true,
           rating: true,
+          pdfUrl: true,
+          solutionUrl: true,
           createdAt: true,
           tags: {
             select: {
@@ -159,6 +161,8 @@ router.get('/', optionalAuth, async (req: Request, res: Response) => {
       year: problem.year,
       difficulty: problem.difficulty,
       rating: problem.rating,
+      pdfUrl: problem.pdfUrl,
+      solutionUrl: problem.solutionUrl,
       solveCount: problem._count.progress,
       tags: problem.tags.map((pt: any) => pt.tag.name),
       userStatus: req.user && problem.progress.length > 0 ? problem.progress[0].status : 'unsolved'
