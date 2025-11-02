@@ -332,6 +332,20 @@ export default function ProblemDetailPage({ params }: { params: Promise<{ id: st
       return
     }
 
+    // If original PDF is available, download that instead of generating one
+    if (problem.pdfUrl) {
+      const filename = `${problem.number}-${problem.title.replace(/[^a-zA-Z0-9]/g, '-')}.pdf`
+      const link = document.createElement('a')
+      link.href = problem.pdfUrl
+      link.download = filename
+      link.target = '_blank'
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      return
+    }
+
+    // Fall back to generating PDF from markdown if no original PDF available
     setIsGeneratingPDF(true)
     try {
       // Dynamic import to avoid SSR issues
