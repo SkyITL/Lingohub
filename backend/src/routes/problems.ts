@@ -238,8 +238,10 @@ router.get('/:id', optionalAuth, async (req: Request, res: Response) => {
       return res.status(404).json({ error: 'Problem not found' })
     }
 
-    // Compute PDF URL based on problem source and number
+    // Compute PDF URL and solution PDF URL based on problem source and number
     let pdfUrl = null
+    let solutionPdfUrl = null
+
     if (problem.number.startsWith('LH-IOL-')) {
       const year = problem.year
       const problemNum = problem.number.replace('LH-IOL-', '').split('-')[1] // Get just the problem number (e.g., "1" from "LH-IOL-2003-1")
@@ -255,16 +257,32 @@ router.get('/:id', optionalAuth, async (req: Request, res: Response) => {
     } else if (problem.number.startsWith('LH-UK-')) {
       // UKLO PDFs use a different naming scheme - manual mapping
       const year = problem.year
-      const ukloMapping: Record<string, string> = {
-        'LH-UK-2010-cucum': `uklo-2010-french-problem-only.pdf`,
-        'LH-UK-2010-Gelbe': `uklo-2010-restaurant-problem-only.pdf`,
-        'LH-UK-2010-Abma': `uklo-2010-abma-problem-only.pdf`,
-        'LH-UK-2010-ths': `uklo-2010-texting-problem-only.pdf`,
-        'LH-UK-2010-Uzzle': `uklo-2010-minangkabau-problem-only.pdf`
+      const ukloMapping: Record<string, {problem: string, solution: string}> = {
+        'LH-UK-2010-cucum': {
+          problem: 'uklo-2010-french-problem-only.pdf',
+          solution: 'uklo-2010-french-solution.pdf'
+        },
+        'LH-UK-2010-Gelbe': {
+          problem: 'uklo-2010-restaurant-problem-only.pdf',
+          solution: 'uklo-2010-restaurant-solution.pdf'
+        },
+        'LH-UK-2010-Abma': {
+          problem: 'uklo-2010-abma-problem-only.pdf',
+          solution: 'uklo-2010-abma-solution.pdf'
+        },
+        'LH-UK-2010-ths': {
+          problem: 'uklo-2010-texting-problem-only.pdf',
+          solution: 'uklo-2010-texting-solution.pdf'
+        },
+        'LH-UK-2010-Uzzle': {
+          problem: 'uklo-2010-minangkabau-problem-only.pdf',
+          solution: 'uklo-2010-minangkabau-solution.pdf'
+        }
       }
-      const filename = ukloMapping[problem.number]
-      if (filename) {
-        pdfUrl = `/olympiad-problems/UKLO/by-year/${year}/${filename}`
+      const mapping = ukloMapping[problem.number]
+      if (mapping) {
+        pdfUrl = `/olympiad-problems/UKLO/by-year/${year}/${mapping.problem}`
+        solutionPdfUrl = `/olympiad-problems/UKLO/by-year/${year}/${mapping.solution}`
       }
     }
 
@@ -279,6 +297,7 @@ router.get('/:id', optionalAuth, async (req: Request, res: Response) => {
       content: problem.content,
       officialSolution: problem.officialSolution,
       pdfUrl: pdfUrl,
+      solutionPdfUrl: solutionPdfUrl,
       tags: problem.tags.map((pt: any) => pt.tag.name),
       stats: {
         solveCount: problem._count.progress,

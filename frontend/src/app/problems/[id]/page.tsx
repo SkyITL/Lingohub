@@ -615,7 +615,6 @@ export default function ProblemDetailPage({ params }: { params: Promise<{ id: st
               {/* PDF Viewer - if pdfUrl exists */}
               {problem.pdfUrl ? (
                 <div>
-                  <h3 className="text-xl font-semibold mb-4">📄 Problem</h3>
                   <div className="border rounded-lg overflow-hidden bg-gray-100" style={{ height: '800px' }}>
                     <iframe
                       src={problem.pdfUrl}
@@ -650,16 +649,34 @@ export default function ProblemDetailPage({ params }: { params: Promise<{ id: st
                   ⚠️ Official solutions contain spoilers. Make sure you've attempted the problem first!
                 </p>
               </div>
-              
-              <Button 
-                variant="outline" 
-                className="mb-6"
-                onClick={() => {
-                  // Toggle solution visibility
-                }}
-              >
-                Show Official Solution
-              </Button>
+
+              {problem.solutionPdfUrl ? (
+                <div>
+                  <div className="border rounded-lg overflow-hidden bg-gray-100" style={{ height: '800px' }}>
+                    <iframe
+                      src={problem.solutionPdfUrl}
+                      className="w-full h-full"
+                      title="Official Solution PDF"
+                    />
+                  </div>
+                  <div className="mt-2 text-sm text-gray-600">
+                    <a
+                      href={problem.solutionPdfUrl}
+                      download
+                      className="text-blue-600 hover:underline inline-flex items-center gap-1"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Download className="h-4 w-4" />
+                      Download Solution PDF
+                    </a>
+                  </div>
+                </div>
+              ) : (
+                <div className="prose prose-lg max-w-none">
+                  <MarkdownContent content={problem.officialSolution || 'Official solution not yet available.'} />
+                </div>
+              )}
             </Tabs.Content>
 
             {/* User Solutions Tab */}

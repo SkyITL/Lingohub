@@ -37,6 +37,8 @@ export interface Problem {
 export interface ProblemDetail extends Problem {
   content: string
   officialSolution?: string
+  pdfUrl?: string | null
+  solutionPdfUrl?: string | null
   stats: {
     solveCount: number
     solutionCount: number
