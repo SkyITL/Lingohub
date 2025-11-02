@@ -175,6 +175,32 @@ router.post('/batch-import', async (req: Request, res: Response) => {
 });
 
 // GET /api/olympiad/stats - Get statistics about olympiad problems
+// Update problem content
+router.put('/update-content', async (req: Request, res: Response) => {
+  try {
+    const { number, content } = req.body;
+
+    if (!number || !content) {
+      return res.status(400).json({ error: 'Missing number or content' });
+    }
+
+    const updated = await prisma.problem.update({
+      where: { number },
+      data: { content }
+    });
+
+    res.json({
+      success: true,
+      problem: {
+        number: updated.number,
+        title: updated.title
+      }
+    });
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 router.get('/stats', async (req: Request, res: Response) => {
   try {
     const total = await prisma.problem.count();

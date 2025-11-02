@@ -253,10 +253,19 @@ router.get('/:id', optionalAuth, async (req: Request, res: Response) => {
       const letter = problem.number.split('-').pop()
       pdfUrl = `/olympiad-problems/NACLO/by-year/${year}/naclo-${year}-${letter}-problem.pdf`
     } else if (problem.number.startsWith('LH-UK-')) {
-      // UKLO PDFs use a different naming scheme
+      // UKLO PDFs use a different naming scheme - manual mapping
       const year = problem.year
-      // Would need metadata to construct proper path
-      pdfUrl = null // TODO: Add metadata field for PDF path
+      const ukloMapping: Record<string, string> = {
+        'LH-UK-2010-cucum': `uklo-2010-french-French-syntax.pdf`,
+        'LH-UK-2010-Gelbe': `uklo-2010-eng-restaurant-English-general.pdf`,
+        'LH-UK-2010-Abma': `uklo-2010-abma-Abma-general.pdf`,
+        'LH-UK-2010-ths': `uklo-2010-eng-texting-English-code.pdf`,
+        'LH-UK-2010-Uzzle': `uklo-2010-minangkabau-Minangkabau-general.pdf`
+      }
+      const filename = ukloMapping[problem.number]
+      if (filename) {
+        pdfUrl = `/olympiad-problems/UKLO/by-year/${year}/${filename}`
+      }
     }
 
     const transformedProblem = {
