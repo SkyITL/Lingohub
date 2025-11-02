@@ -612,14 +612,10 @@ export default function ProblemDetailPage({ params }: { params: Promise<{ id: st
 
             {/* Problem Tab */}
             <Tabs.Content value="problem" className="p-6">
-              <div className="prose prose-lg max-w-none mb-8">
-                <MarkdownContent content={problem.content || 'Problem content not available.'} />
-              </div>
-
               {/* PDF Viewer - if pdfUrl exists */}
-              {problem.pdfUrl && (
-                <div className="mt-8">
-                  <h3 className="text-xl font-semibold mb-4">📄 Problem PDF</h3>
+              {problem.pdfUrl ? (
+                <div>
+                  <h3 className="text-xl font-semibold mb-4">📄 Problem</h3>
                   <div className="border rounded-lg overflow-hidden bg-gray-100" style={{ height: '800px' }}>
                     <iframe
                       src={problem.pdfUrl}
@@ -639,6 +635,10 @@ export default function ProblemDetailPage({ params }: { params: Promise<{ id: st
                       Download Original PDF
                     </a>
                   </div>
+                </div>
+              ) : (
+                <div className="prose prose-lg max-w-none">
+                  <MarkdownContent content={problem.content || 'Problem content not available.'} />
                 </div>
               )}
             </Tabs.Content>
