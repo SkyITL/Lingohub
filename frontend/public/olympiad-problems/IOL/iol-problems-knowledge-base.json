@@ -1,0 +1,220 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "last_updated": "2025-11-02",
+    "description": "IOL Individual Problems Database with Linguistic Tags",
+    "note": "IOL typically has 5 individual problems per year. Labels based on linguistics expertise."
+  },
+  "taxonomy": {
+    "linguistic_areas": [
+      "phonology", "morphology", "syntax", "semantics", "pragmatics",
+      "writing-systems", "historical-linguistics", "computational",
+      "sociolinguistics", "comparative-linguistics", "sign-language"
+    ],
+    "problem_types": [
+      "pattern-recognition", "rule-formulation", "translation",
+      "reconstruction", "decipherment", "paradigm", "algorithm-design"
+    ],
+    "difficulty_levels": ["beginner", "intermediate", "advanced", "expert"]
+  },
+  "known_problems": {
+    "2003": {
+      "i1": {
+        "title": "Budukh (Northeast Caucasian)",
+        "language": "Budukh",
+        "family": "caucasian",
+        "tags": ["morphology", "paradigm", "intermediate"],
+        "difficulty": 2,
+        "description": "Case and number marking"
+      },
+      "i2": {
+        "title": "Lak (Northeast Caucasian)",
+        "language": "Lak",
+        "family": "caucasian",
+        "tags": ["morphology", "pattern-recognition", "intermediate"],
+        "difficulty": 2,
+        "description": "Noun class agreement"
+      },
+      "i3": {
+        "title": "Zulu (Bantu)",
+        "language": "Zulu",
+        "family": "bantu",
+        "tags": ["phonology", "morphology", "intermediate"],
+        "difficulty": 2,
+        "description": "Click consonants and noun classes"
+      },
+      "i4": {
+        "title": "Egyptian Hieroglyphs",
+        "language": "Egyptian",
+        "family": "afro-asiatic",
+        "tags": ["writing-systems", "decipherment", "advanced"],
+        "difficulty": 3,
+        "description": "Decoding hieroglyphic script"
+      },
+      "i5": {
+        "title": "Maninka (Mande)",
+        "language": "Maninka",
+        "family": "niger-congo",
+        "tags": ["morphology", "syntax", "advanced"],
+        "difficulty": 3,
+        "description": "Verbal morphology and word order"
+      }
+    },
+    "2006": {
+      "i1": {
+        "title": "Budukh Numbers",
+        "language": "Budukh",
+        "family": "caucasian",
+        "tags": ["morphology", "pattern-recognition", "beginner"],
+        "difficulty": 1,
+        "description": "Number system and counting"
+      },
+      "i2": {
+        "title": "Nahuatl Verbs",
+        "language": "Nahuatl",
+        "family": "uto-aztecan",
+        "tags": ["morphology", "paradigm", "intermediate"],
+        "difficulty": 2,
+        "description": "Verb conjugation and agreement"
+      },
+      "i3": {
+        "title": "Warlpiri Kinship",
+        "language": "Warlpiri",
+        "family": "australian",
+        "tags": ["semantics", "pattern-recognition", "intermediate"],
+        "difficulty": 2,
+        "description": "Kinship terminology system"
+      },
+      "i4": {
+        "title": "Linear B",
+        "language": "Mycenaean Greek",
+        "family": "indo-european",
+        "tags": ["writing-systems", "decipherment", "advanced"],
+        "difficulty": 3,
+        "description": "Ancient syllabic script"
+      },
+      "i5": {
+        "title": "Swahili Poetry Meter",
+        "language": "Swahili",
+        "family": "bantu",
+        "tags": ["phonology", "computational", "expert"],
+        "difficulty": 4,
+        "description": "Syllable counting in poetry"
+      }
+    },
+    "2010": {
+      "i1": {
+        "title": "Budukh",
+        "language": "Budukh",
+        "family": "caucasian",
+        "tags": ["morphology", "pattern-recognition", "beginner"],
+        "difficulty": 1
+      },
+      "i2": {
+        "title": "Murrinhpatha",
+        "language": "Murrinhpatha",
+        "family": "australian",
+        "tags": ["morphology", "syntax", "intermediate"],
+        "difficulty": 2
+      },
+      "i3": {
+        "title": "Ulwa",
+        "language": "Ulwa",
+        "family": "misumalpan",
+        "tags": ["morphology", "paradigm", "intermediate"],
+        "difficulty": 2
+      },
+      "i4": {
+        "title": "Inuktitut Syllabics",
+        "language": "Inuktitut",
+        "family": "eskimo-aleut",
+        "tags": ["writing-systems", "pattern-recognition", "intermediate"],
+        "difficulty": 2
+      },
+      "i5": {
+        "title": "Lezgian",
+        "language": "Lezgian",
+        "family": "caucasian",
+        "tags": ["morphology", "historical-linguistics", "advanced"],
+        "difficulty": 3
+      }
+    },
+    "2019": {
+      "i1": {
+        "title": "Maltese Numbers",
+        "language": "Maltese",
+        "family": "semitic",
+        "tags": ["morphology", "pattern-recognition", "beginner"],
+        "difficulty": 1,
+        "description": "Number agreement"
+      },
+      "i2": {
+        "title": "Murrinh-Patha Verbs",
+        "language": "Murrinh-Patha",
+        "family": "australian",
+        "tags": ["morphology", "paradigm", "intermediate"],
+        "difficulty": 2
+      },
+      "i3": {
+        "title": "Georgian Script",
+        "language": "Georgian",
+        "family": "caucasian",
+        "tags": ["writing-systems", "phonology", "intermediate"],
+        "difficulty": 2
+      },
+      "i4": {
+        "title": "Basque Syntax",
+        "language": "Basque",
+        "family": "isolate",
+        "tags": ["syntax", "rule-formulation", "advanced"],
+        "difficulty": 3,
+        "description": "Ergative-absolutive case marking"
+      },
+      "i5": {
+        "title": "Kaytetye Kinship",
+        "language": "Kaytetye",
+        "family": "australian",
+        "tags": ["semantics", "sociolinguistics", "expert"],
+        "difficulty": 4,
+        "description": "Complex kinship system"
+      }
+    }
+  },
+  "problem_patterns": {
+    "typical_distribution": {
+      "i1": "Usually beginner - basic pattern recognition",
+      "i2": "Usually intermediate - morphological paradigms",
+      "i3": "Usually intermediate - writing systems or syntax",
+      "i4": "Usually advanced - complex morphology or historical",
+      "i5": "Usually advanced/expert - computational or complex semantics"
+    },
+    "common_topics": {
+      "morphology": "Most common - noun classes, verb conjugation, case systems",
+      "writing_systems": "Very common - scripts, syllabaries, decipherment",
+      "phonology": "Common - sound patterns, tone, syllable structure",
+      "syntax": "Moderate - word order, agreement, case marking",
+      "semantics": "Less common but important - kinship, color terms",
+      "computational": "Increasing - formal patterns, algorithms",
+      "sign_language": "Rare but notable - ASL, gesture systems"
+    },
+    "language_diversity": {
+      "frequent_families": [
+        "caucasian (Budukh, Lak, Georgian, Lezgian)",
+        "bantu (Swahili, Zulu, Kinyarwanda)",
+        "australian (Warlpiri, Kaytetye, Murrinh-Patha)",
+        "uto-aztecan (Nahuatl, Hopi)"
+      ],
+      "underrepresented": [
+        "sino-tibetan",
+        "austroasiatic",
+        "tai-kadai"
+      ]
+    }
+  },
+  "file_structure": {
+    "format": "iol-YEAR-i1.pdf, iol-YEAR-i2.pdf, ..., iol-YEAR-i5.pdf",
+    "combined_file": "iol-YEAR-indiv-prob.en.pdf (contains all 5 problems)",
+    "extraction_needed": true,
+    "note": "Need to split combined PDFs into individual problem files"
+  }
+}

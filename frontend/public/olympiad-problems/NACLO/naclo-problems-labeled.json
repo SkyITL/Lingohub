@@ -1,0 +1,4769 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "last_updated": "2025-11-02",
+    "total_problems": 292,
+    "years": "2007-2025 (excluding 2024)",
+    "description": "Comprehensive database of NACLO problems with linguistic tags",
+    "status": "Auto-generated with heuristics - requires manual verification",
+    "note": "Difficulty mapped to 1-5 scale: beginner(1-2), intermediate(3), advanced(4), expert(5)"
+  },
+  "taxonomy": {
+    "linguistic_areas": [
+      "phonology",
+      "morphology",
+      "syntax",
+      "semantics",
+      "pragmatics",
+      "writing-systems",
+      "historical-linguistics",
+      "computational",
+      "sociolinguistics",
+      "comparative-linguistics"
+    ],
+    "problem_types": [
+      "pattern-recognition",
+      "rule-formulation",
+      "translation",
+      "reconstruction",
+      "decipherment",
+      "algorithm-design",
+      "paradigm"
+    ],
+    "difficulty_levels": [
+      "beginner",
+      "intermediate",
+      "advanced",
+      "expert"
+    ],
+    "language_families": [
+      "germanic",
+      "romance",
+      "slavic",
+      "indo-iranian",
+      "celtic",
+      "semitic",
+      "bantu",
+      "chinese",
+      "austronesian",
+      "turkic",
+      "finno-ugric",
+      "algonquian",
+      "uto-aztecan",
+      "dravidian",
+      "japonic",
+      "koreanic",
+      "isolates",
+      "constructed"
+    ]
+  },
+  "problems": [
+    {
+      "id": "N2007-A",
+      "year": 2007,
+      "number": "A",
+      "title": "Problem A",
+      "file": "by-year/2007/naclo-2007-A-problem.pdf",
+      "solution_file": "by-year/2007/naclo-2007-A-solution.pdf",
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2007-B",
+      "year": 2007,
+      "number": "B",
+      "title": "Problem B",
+      "file": "by-year/2007/naclo-2007-B-problem.pdf",
+      "solution_file": "by-year/2007/naclo-2007-B-solution.pdf",
+      "tags": [
+        "phonology",
+        "translation",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2007-C",
+      "year": 2007,
+      "number": "C",
+      "title": "Problem C",
+      "file": "by-year/2007/naclo-2007-C-problem.pdf",
+      "solution_file": "by-year/2007/naclo-2007-C-solution.pdf",
+      "tags": [
+        "syntax",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2007-D",
+      "year": 2007,
+      "number": "D",
+      "title": "Problem D",
+      "file": "by-year/2007/naclo-2007-D-problem.pdf",
+      "solution_file": "by-year/2007/naclo-2007-D-solution.pdf",
+      "tags": [
+        "morphology",
+        "translation",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2007-E",
+      "year": 2007,
+      "number": "E",
+      "title": "Problem E",
+      "file": "by-year/2007/naclo-2007-E-problem.pdf",
+      "solution_file": "by-year/2007/naclo-2007-E-solution.pdf",
+      "tags": [
+        "semantics",
+        "pattern-recognition",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2007-F",
+      "year": 2007,
+      "number": "F",
+      "title": "Problem F",
+      "file": "by-year/2007/naclo-2007-F-problem.pdf",
+      "solution_file": "by-year/2007/naclo-2007-F-solution.pdf",
+      "tags": [
+        "morphology",
+        "rule-formulation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2007-G",
+      "year": 2007,
+      "number": "G",
+      "title": "Problem G",
+      "file": "by-year/2007/naclo-2007-G-problem.pdf",
+      "solution_file": "by-year/2007/naclo-2007-G-solution.pdf",
+      "tags": [
+        "phonology",
+        "translation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2007-H",
+      "year": 2007,
+      "number": "H",
+      "title": "Problem H",
+      "file": "by-year/2007/naclo-2007-H-problem.pdf",
+      "solution_file": "by-year/2007/naclo-2007-H-solution.pdf",
+      "tags": [
+        "syntax",
+        "paradigm",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2008-A",
+      "year": 2008,
+      "number": "A",
+      "title": "Problem A",
+      "file": "by-year/2008/naclo-2008-A-problem.pdf",
+      "solution_file": "by-year/2008/naclo-2008-A-solution.pdf",
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2008-B",
+      "year": 2008,
+      "number": "B",
+      "title": "Problem B",
+      "file": "by-year/2008/naclo-2008-B-problem.pdf",
+      "solution_file": "by-year/2008/naclo-2008-B-solution.pdf",
+      "tags": [
+        "phonology",
+        "translation",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2008-C",
+      "year": 2008,
+      "number": "C",
+      "title": "Problem C",
+      "file": "by-year/2008/naclo-2008-C-problem.pdf",
+      "solution_file": "by-year/2008/naclo-2008-C-solution.pdf",
+      "tags": [
+        "syntax",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2008-D",
+      "year": 2008,
+      "number": "D",
+      "title": "Problem D",
+      "file": "by-year/2008/naclo-2008-D-problem.pdf",
+      "solution_file": "by-year/2008/naclo-2008-D-solution.pdf",
+      "tags": [
+        "morphology",
+        "translation",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2008-E",
+      "year": 2008,
+      "number": "E",
+      "title": "Problem E",
+      "file": "by-year/2008/naclo-2008-E-problem.pdf",
+      "solution_file": "by-year/2008/naclo-2008-E-solution.pdf",
+      "tags": [
+        "semantics",
+        "pattern-recognition",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2008-F",
+      "year": 2008,
+      "number": "F",
+      "title": "Problem F",
+      "file": "by-year/2008/naclo-2008-F-problem.pdf",
+      "solution_file": "by-year/2008/naclo-2008-F-solution.pdf",
+      "tags": [
+        "morphology",
+        "rule-formulation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2008-G",
+      "year": 2008,
+      "number": "G",
+      "title": "Problem G",
+      "file": "by-year/2008/naclo-2008-G-problem.pdf",
+      "solution_file": "by-year/2008/naclo-2008-G-solution.pdf",
+      "tags": [
+        "phonology",
+        "translation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2008-H",
+      "year": 2008,
+      "number": "H",
+      "title": "Problem H",
+      "file": "by-year/2008/naclo-2008-H-problem.pdf",
+      "solution_file": "by-year/2008/naclo-2008-H-solution.pdf",
+      "tags": [
+        "syntax",
+        "paradigm",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2008-I",
+      "year": 2008,
+      "number": "I",
+      "title": "Problem I",
+      "file": "by-year/2008/naclo-2008-I-problem.pdf",
+      "solution_file": "by-year/2008/naclo-2008-I-solution.pdf",
+      "tags": [
+        "writing-systems",
+        "pattern-recognition",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2008-J",
+      "year": 2008,
+      "number": "J",
+      "title": "Problem J",
+      "file": "by-year/2008/naclo-2008-J-problem.pdf",
+      "solution_file": "by-year/2008/naclo-2008-J-solution.pdf",
+      "tags": [
+        "semantics",
+        "rule-formulation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2008-K",
+      "year": 2008,
+      "number": "K",
+      "title": "Problem K",
+      "file": "by-year/2008/naclo-2008-K-problem.pdf",
+      "solution_file": "by-year/2008/naclo-2008-K-solution.pdf",
+      "tags": [
+        "morphology",
+        "translation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2008-L",
+      "year": 2008,
+      "number": "L",
+      "title": "Problem L",
+      "file": "by-year/2008/naclo-2008-L-problem.pdf",
+      "solution_file": "by-year/2008/naclo-2008-L-solution.pdf",
+      "tags": [
+        "phonology",
+        "paradigm",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2009-A",
+      "year": 2009,
+      "number": "A",
+      "title": "Problem A",
+      "file": "by-year/2009/naclo-2009-A-problem.pdf",
+      "solution_file": "by-year/2009/naclo-2009-A-solution.pdf",
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2009-B",
+      "year": 2009,
+      "number": "B",
+      "title": "Problem B",
+      "file": "by-year/2009/naclo-2009-B-problem.pdf",
+      "solution_file": "by-year/2009/naclo-2009-B-solution.pdf",
+      "tags": [
+        "phonology",
+        "translation",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2009-C",
+      "year": 2009,
+      "number": "C",
+      "title": "Problem C",
+      "file": "by-year/2009/naclo-2009-C-problem.pdf",
+      "solution_file": "by-year/2009/naclo-2009-C-solution.pdf",
+      "tags": [
+        "syntax",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2009-D",
+      "year": 2009,
+      "number": "D",
+      "title": "Problem D",
+      "file": "by-year/2009/naclo-2009-D-problem.pdf",
+      "solution_file": "by-year/2009/naclo-2009-D-solution.pdf",
+      "tags": [
+        "morphology",
+        "translation",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2009-E",
+      "year": 2009,
+      "number": "E",
+      "title": "Problem E",
+      "file": "by-year/2009/naclo-2009-E-problem.pdf",
+      "solution_file": "by-year/2009/naclo-2009-E-solution.pdf",
+      "tags": [
+        "semantics",
+        "pattern-recognition",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2009-F",
+      "year": 2009,
+      "number": "F",
+      "title": "Problem F",
+      "file": "by-year/2009/naclo-2009-F-problem.pdf",
+      "solution_file": "by-year/2009/naclo-2009-F-solution.pdf",
+      "tags": [
+        "morphology",
+        "rule-formulation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2009-G",
+      "year": 2009,
+      "number": "G",
+      "title": "Problem G",
+      "file": "by-year/2009/naclo-2009-G-problem.pdf",
+      "solution_file": "by-year/2009/naclo-2009-G-solution.pdf",
+      "tags": [
+        "phonology",
+        "translation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2009-H",
+      "year": 2009,
+      "number": "H",
+      "title": "Problem H",
+      "file": "by-year/2009/naclo-2009-H-problem.pdf",
+      "solution_file": "by-year/2009/naclo-2009-H-solution.pdf",
+      "tags": [
+        "syntax",
+        "paradigm",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2009-I",
+      "year": 2009,
+      "number": "I",
+      "title": "Problem I",
+      "file": "by-year/2009/naclo-2009-I-problem.pdf",
+      "solution_file": "by-year/2009/naclo-2009-I-solution.pdf",
+      "tags": [
+        "writing-systems",
+        "pattern-recognition",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2009-J",
+      "year": 2009,
+      "number": "J",
+      "title": "Problem J",
+      "file": "by-year/2009/naclo-2009-J-problem.pdf",
+      "solution_file": "by-year/2009/naclo-2009-J-solution.pdf",
+      "tags": [
+        "semantics",
+        "rule-formulation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2009-K",
+      "year": 2009,
+      "number": "K",
+      "title": "Problem K",
+      "file": "by-year/2009/naclo-2009-K-problem.pdf",
+      "solution_file": "by-year/2009/naclo-2009-K-solution.pdf",
+      "tags": [
+        "morphology",
+        "translation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2009-L",
+      "year": 2009,
+      "number": "L",
+      "title": "Problem L",
+      "file": "by-year/2009/naclo-2009-L-problem.pdf",
+      "solution_file": "by-year/2009/naclo-2009-L-solution.pdf",
+      "tags": [
+        "phonology",
+        "paradigm",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2009-M",
+      "year": 2009,
+      "number": "M",
+      "title": "Problem M",
+      "file": "by-year/2009/naclo-2009-M-problem.pdf",
+      "solution_file": "by-year/2009/naclo-2009-M-solution.pdf",
+      "tags": [
+        "historical-linguistics",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2010-A",
+      "year": 2010,
+      "number": "A",
+      "title": "Problem A",
+      "file": "by-year/2010/naclo-2010-A-problem.pdf",
+      "solution_file": "by-year/2010/naclo-2010-A-solution.pdf",
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2010-B",
+      "year": 2010,
+      "number": "B",
+      "title": "Problem B",
+      "file": "by-year/2010/naclo-2010-B-problem.pdf",
+      "solution_file": "by-year/2010/naclo-2010-B-solution.pdf",
+      "tags": [
+        "phonology",
+        "translation",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2010-C",
+      "year": 2010,
+      "number": "C",
+      "title": "Problem C",
+      "file": "by-year/2010/naclo-2010-C-problem.pdf",
+      "solution_file": "by-year/2010/naclo-2010-C-solution.pdf",
+      "tags": [
+        "syntax",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2010-D",
+      "year": 2010,
+      "number": "D",
+      "title": "Problem D",
+      "file": "by-year/2010/naclo-2010-D-problem.pdf",
+      "solution_file": "by-year/2010/naclo-2010-D-solution.pdf",
+      "tags": [
+        "morphology",
+        "translation",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2010-E",
+      "year": 2010,
+      "number": "E",
+      "title": "Problem E",
+      "file": "by-year/2010/naclo-2010-E-problem.pdf",
+      "solution_file": "by-year/2010/naclo-2010-E-solution.pdf",
+      "tags": [
+        "semantics",
+        "pattern-recognition",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2010-F",
+      "year": 2010,
+      "number": "F",
+      "title": "Problem F",
+      "file": "by-year/2010/naclo-2010-F-problem.pdf",
+      "solution_file": "by-year/2010/naclo-2010-F-solution.pdf",
+      "tags": [
+        "morphology",
+        "rule-formulation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2010-G",
+      "year": 2010,
+      "number": "G",
+      "title": "Problem G",
+      "file": "by-year/2010/naclo-2010-G-problem.pdf",
+      "solution_file": "by-year/2010/naclo-2010-G-solution.pdf",
+      "tags": [
+        "phonology",
+        "translation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2010-H",
+      "year": 2010,
+      "number": "H",
+      "title": "Problem H",
+      "file": "by-year/2010/naclo-2010-H-problem.pdf",
+      "solution_file": "by-year/2010/naclo-2010-H-solution.pdf",
+      "tags": [
+        "syntax",
+        "paradigm",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2010-I",
+      "year": 2010,
+      "number": "I",
+      "title": "Problem I",
+      "file": "by-year/2010/naclo-2010-I-problem.pdf",
+      "solution_file": "by-year/2010/naclo-2010-I-solution.pdf",
+      "tags": [
+        "writing-systems",
+        "pattern-recognition",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2010-J",
+      "year": 2010,
+      "number": "J",
+      "title": "Problem J",
+      "file": "by-year/2010/naclo-2010-J-problem.pdf",
+      "solution_file": "by-year/2010/naclo-2010-J-solution.pdf",
+      "tags": [
+        "semantics",
+        "rule-formulation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2010-K",
+      "year": 2010,
+      "number": "K",
+      "title": "Problem K",
+      "file": "by-year/2010/naclo-2010-K-problem.pdf",
+      "solution_file": "by-year/2010/naclo-2010-K-solution.pdf",
+      "tags": [
+        "morphology",
+        "translation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2010-L",
+      "year": 2010,
+      "number": "L",
+      "title": "Problem L",
+      "file": "by-year/2010/naclo-2010-L-problem.pdf",
+      "solution_file": "by-year/2010/naclo-2010-L-solution.pdf",
+      "tags": [
+        "phonology",
+        "paradigm",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2010-M",
+      "year": 2010,
+      "number": "M",
+      "title": "Problem M",
+      "file": "by-year/2010/naclo-2010-M-problem.pdf",
+      "solution_file": "by-year/2010/naclo-2010-M-solution.pdf",
+      "tags": [
+        "historical-linguistics",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2010-N",
+      "year": 2010,
+      "number": "N",
+      "title": "Problem N",
+      "file": "by-year/2010/naclo-2010-N-problem.pdf",
+      "solution_file": "by-year/2010/naclo-2010-N-solution.pdf",
+      "tags": [
+        "computational",
+        "reconstruction",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2010-O",
+      "year": 2010,
+      "number": "O",
+      "title": "Problem O",
+      "file": "by-year/2010/naclo-2010-O-problem.pdf",
+      "solution_file": "by-year/2010/naclo-2010-O-solution.pdf",
+      "tags": [
+        "comparative-linguistics",
+        "algorithm-design",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2010-P",
+      "year": 2010,
+      "number": "P",
+      "title": "Problem P",
+      "file": "by-year/2010/naclo-2010-P-problem.pdf",
+      "solution_file": "by-year/2010/naclo-2010-P-solution.pdf",
+      "tags": [
+        "morphology",
+        "decipherment",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2011-A",
+      "year": 2011,
+      "number": "A",
+      "title": "Problem A",
+      "file": "by-year/2011/naclo-2011-A-problem.pdf",
+      "solution_file": "by-year/2011/naclo-2011-A-solution.pdf",
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2011-B",
+      "year": 2011,
+      "number": "B",
+      "title": "Problem B",
+      "file": "by-year/2011/naclo-2011-B-problem.pdf",
+      "solution_file": "by-year/2011/naclo-2011-B-solution.pdf",
+      "tags": [
+        "phonology",
+        "translation",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2011-C",
+      "year": 2011,
+      "number": "C",
+      "title": "Problem C",
+      "file": "by-year/2011/naclo-2011-C-problem.pdf",
+      "solution_file": "by-year/2011/naclo-2011-C-solution.pdf",
+      "tags": [
+        "syntax",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2011-D",
+      "year": 2011,
+      "number": "D",
+      "title": "Problem D",
+      "file": "by-year/2011/naclo-2011-D-problem.pdf",
+      "solution_file": "by-year/2011/naclo-2011-D-solution.pdf",
+      "tags": [
+        "morphology",
+        "translation",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2011-E",
+      "year": 2011,
+      "number": "E",
+      "title": "Problem E",
+      "file": "by-year/2011/naclo-2011-E-problem.pdf",
+      "solution_file": "by-year/2011/naclo-2011-E-solution.pdf",
+      "tags": [
+        "semantics",
+        "pattern-recognition",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2011-F",
+      "year": 2011,
+      "number": "F",
+      "title": "Problem F",
+      "file": "by-year/2011/naclo-2011-F-problem.pdf",
+      "solution_file": "by-year/2011/naclo-2011-F-solution.pdf",
+      "tags": [
+        "morphology",
+        "rule-formulation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2011-G",
+      "year": 2011,
+      "number": "G",
+      "title": "Problem G",
+      "file": "by-year/2011/naclo-2011-G-problem.pdf",
+      "solution_file": "by-year/2011/naclo-2011-G-solution.pdf",
+      "tags": [
+        "phonology",
+        "translation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2011-H",
+      "year": 2011,
+      "number": "H",
+      "title": "Problem H",
+      "file": "by-year/2011/naclo-2011-H-problem.pdf",
+      "solution_file": "by-year/2011/naclo-2011-H-solution.pdf",
+      "tags": [
+        "syntax",
+        "paradigm",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2011-I",
+      "year": 2011,
+      "number": "I",
+      "title": "Problem I",
+      "file": "by-year/2011/naclo-2011-I-problem.pdf",
+      "solution_file": "by-year/2011/naclo-2011-I-solution.pdf",
+      "tags": [
+        "writing-systems",
+        "pattern-recognition",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2011-J",
+      "year": 2011,
+      "number": "J",
+      "title": "Problem J",
+      "file": "by-year/2011/naclo-2011-J-problem.pdf",
+      "solution_file": "by-year/2011/naclo-2011-J-solution.pdf",
+      "tags": [
+        "semantics",
+        "rule-formulation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2011-K",
+      "year": 2011,
+      "number": "K",
+      "title": "Problem K",
+      "file": "by-year/2011/naclo-2011-K-problem.pdf",
+      "solution_file": "by-year/2011/naclo-2011-K-solution.pdf",
+      "tags": [
+        "morphology",
+        "translation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2011-L",
+      "year": 2011,
+      "number": "L",
+      "title": "Problem L",
+      "file": "by-year/2011/naclo-2011-L-problem.pdf",
+      "solution_file": "by-year/2011/naclo-2011-L-solution.pdf",
+      "tags": [
+        "phonology",
+        "paradigm",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2011-M",
+      "year": 2011,
+      "number": "M",
+      "title": "Problem M",
+      "file": "by-year/2011/naclo-2011-M-problem.pdf",
+      "solution_file": "by-year/2011/naclo-2011-M-solution.pdf",
+      "tags": [
+        "historical-linguistics",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2011-N",
+      "year": 2011,
+      "number": "N",
+      "title": "Problem N",
+      "file": "by-year/2011/naclo-2011-N-problem.pdf",
+      "solution_file": "by-year/2011/naclo-2011-N-solution.pdf",
+      "tags": [
+        "computational",
+        "reconstruction",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2012-A",
+      "year": 2012,
+      "number": "A",
+      "title": "Problem A",
+      "file": "by-year/2012/naclo-2012-A-problem.pdf",
+      "solution_file": "by-year/2012/naclo-2012-A-solution.pdf",
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2012-B",
+      "year": 2012,
+      "number": "B",
+      "title": "Problem B",
+      "file": "by-year/2012/naclo-2012-B-problem.pdf",
+      "solution_file": "by-year/2012/naclo-2012-B-solution.pdf",
+      "tags": [
+        "phonology",
+        "translation",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2012-C",
+      "year": 2012,
+      "number": "C",
+      "title": "Problem C",
+      "file": "by-year/2012/naclo-2012-C-problem.pdf",
+      "solution_file": "by-year/2012/naclo-2012-C-solution.pdf",
+      "tags": [
+        "syntax",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2012-D",
+      "year": 2012,
+      "number": "D",
+      "title": "Problem D",
+      "file": "by-year/2012/naclo-2012-D-problem.pdf",
+      "solution_file": "by-year/2012/naclo-2012-D-solution.pdf",
+      "tags": [
+        "morphology",
+        "translation",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2012-E",
+      "year": 2012,
+      "number": "E",
+      "title": "Problem E",
+      "file": "by-year/2012/naclo-2012-E-problem.pdf",
+      "solution_file": "by-year/2012/naclo-2012-E-solution.pdf",
+      "tags": [
+        "semantics",
+        "pattern-recognition",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2012-F",
+      "year": 2012,
+      "number": "F",
+      "title": "Problem F",
+      "file": "by-year/2012/naclo-2012-F-problem.pdf",
+      "solution_file": "by-year/2012/naclo-2012-F-solution.pdf",
+      "tags": [
+        "morphology",
+        "rule-formulation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2012-G",
+      "year": 2012,
+      "number": "G",
+      "title": "Problem G",
+      "file": "by-year/2012/naclo-2012-G-problem.pdf",
+      "solution_file": "by-year/2012/naclo-2012-G-solution.pdf",
+      "tags": [
+        "phonology",
+        "translation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2012-H",
+      "year": 2012,
+      "number": "H",
+      "title": "Problem H",
+      "file": "by-year/2012/naclo-2012-H-problem.pdf",
+      "solution_file": "by-year/2012/naclo-2012-H-solution.pdf",
+      "tags": [
+        "syntax",
+        "paradigm",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2012-I",
+      "year": 2012,
+      "number": "I",
+      "title": "Problem I",
+      "file": "by-year/2012/naclo-2012-I-problem.pdf",
+      "solution_file": "by-year/2012/naclo-2012-I-solution.pdf",
+      "tags": [
+        "writing-systems",
+        "pattern-recognition",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2012-J",
+      "year": 2012,
+      "number": "J",
+      "title": "Problem J",
+      "file": "by-year/2012/naclo-2012-J-problem.pdf",
+      "solution_file": "by-year/2012/naclo-2012-J-solution.pdf",
+      "tags": [
+        "semantics",
+        "rule-formulation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2012-K",
+      "year": 2012,
+      "number": "K",
+      "title": "Problem K",
+      "file": "by-year/2012/naclo-2012-K-problem.pdf",
+      "solution_file": "by-year/2012/naclo-2012-K-solution.pdf",
+      "tags": [
+        "morphology",
+        "translation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2012-L",
+      "year": 2012,
+      "number": "L",
+      "title": "Problem L",
+      "file": "by-year/2012/naclo-2012-L-problem.pdf",
+      "solution_file": "by-year/2012/naclo-2012-L-solution.pdf",
+      "tags": [
+        "phonology",
+        "paradigm",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2012-M",
+      "year": 2012,
+      "number": "M",
+      "title": "Problem M",
+      "file": "by-year/2012/naclo-2012-M-problem.pdf",
+      "solution_file": "by-year/2012/naclo-2012-M-solution.pdf",
+      "tags": [
+        "historical-linguistics",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2012-N",
+      "year": 2012,
+      "number": "N",
+      "title": "Problem N",
+      "file": "by-year/2012/naclo-2012-N-problem.pdf",
+      "solution_file": "by-year/2012/naclo-2012-N-solution.pdf",
+      "tags": [
+        "computational",
+        "reconstruction",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2012-O",
+      "year": 2012,
+      "number": "O",
+      "title": "Problem O",
+      "file": "by-year/2012/naclo-2012-O-problem.pdf",
+      "solution_file": "by-year/2012/naclo-2012-O-solution.pdf",
+      "tags": [
+        "comparative-linguistics",
+        "algorithm-design",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2012-P",
+      "year": 2012,
+      "number": "P",
+      "title": "Problem P",
+      "file": "by-year/2012/naclo-2012-P-problem.pdf",
+      "solution_file": "by-year/2012/naclo-2012-P-solution.pdf",
+      "tags": [
+        "morphology",
+        "decipherment",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2012-Q",
+      "year": 2012,
+      "number": "Q",
+      "title": "Problem Q",
+      "file": "by-year/2012/naclo-2012-Q-problem.pdf",
+      "solution_file": "by-year/2012/naclo-2012-Q-solution.pdf",
+      "tags": [
+        "syntax",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2012-R",
+      "year": 2012,
+      "number": "R",
+      "title": "Problem R",
+      "file": "by-year/2012/naclo-2012-R-problem.pdf",
+      "solution_file": "by-year/2012/naclo-2012-R-solution.pdf",
+      "tags": [
+        "historical-linguistics",
+        "reconstruction",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2013-A",
+      "year": 2013,
+      "number": "A",
+      "title": "Problem A",
+      "file": "by-year/2013/naclo-2013-A-problem.pdf",
+      "solution_file": "by-year/2013/naclo-2013-A-solution.pdf",
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2013-B",
+      "year": 2013,
+      "number": "B",
+      "title": "Problem B",
+      "file": "by-year/2013/naclo-2013-B-problem.pdf",
+      "solution_file": "by-year/2013/naclo-2013-B-solution.pdf",
+      "tags": [
+        "phonology",
+        "translation",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2013-C",
+      "year": 2013,
+      "number": "C",
+      "title": "Problem C",
+      "file": "by-year/2013/naclo-2013-C-problem.pdf",
+      "solution_file": "by-year/2013/naclo-2013-C-solution.pdf",
+      "tags": [
+        "syntax",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2013-D",
+      "year": 2013,
+      "number": "D",
+      "title": "Problem D",
+      "file": "by-year/2013/naclo-2013-D-problem.pdf",
+      "solution_file": "by-year/2013/naclo-2013-D-solution.pdf",
+      "tags": [
+        "morphology",
+        "translation",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2013-E",
+      "year": 2013,
+      "number": "E",
+      "title": "Problem E",
+      "file": "by-year/2013/naclo-2013-E-problem.pdf",
+      "solution_file": "by-year/2013/naclo-2013-E-solution.pdf",
+      "tags": [
+        "semantics",
+        "pattern-recognition",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2013-F",
+      "year": 2013,
+      "number": "F",
+      "title": "Problem F",
+      "file": "by-year/2013/naclo-2013-F-problem.pdf",
+      "solution_file": "by-year/2013/naclo-2013-F-solution.pdf",
+      "tags": [
+        "morphology",
+        "rule-formulation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2013-G",
+      "year": 2013,
+      "number": "G",
+      "title": "Problem G",
+      "file": "by-year/2013/naclo-2013-G-problem.pdf",
+      "solution_file": "by-year/2013/naclo-2013-G-solution.pdf",
+      "tags": [
+        "phonology",
+        "translation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2013-H",
+      "year": 2013,
+      "number": "H",
+      "title": "Problem H",
+      "file": "by-year/2013/naclo-2013-H-problem.pdf",
+      "solution_file": "by-year/2013/naclo-2013-H-solution.pdf",
+      "tags": [
+        "syntax",
+        "paradigm",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2013-I",
+      "year": 2013,
+      "number": "I",
+      "title": "Problem I",
+      "file": "by-year/2013/naclo-2013-I-problem.pdf",
+      "solution_file": "by-year/2013/naclo-2013-I-solution.pdf",
+      "tags": [
+        "writing-systems",
+        "pattern-recognition",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2013-J",
+      "year": 2013,
+      "number": "J",
+      "title": "Problem J",
+      "file": "by-year/2013/naclo-2013-J-problem.pdf",
+      "solution_file": "by-year/2013/naclo-2013-J-solution.pdf",
+      "tags": [
+        "semantics",
+        "rule-formulation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2013-K",
+      "year": 2013,
+      "number": "K",
+      "title": "Problem K",
+      "file": "by-year/2013/naclo-2013-K-problem.pdf",
+      "solution_file": "by-year/2013/naclo-2013-K-solution.pdf",
+      "tags": [
+        "morphology",
+        "translation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2013-L",
+      "year": 2013,
+      "number": "L",
+      "title": "Problem L",
+      "file": "by-year/2013/naclo-2013-L-problem.pdf",
+      "solution_file": "by-year/2013/naclo-2013-L-solution.pdf",
+      "tags": [
+        "phonology",
+        "paradigm",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2013-M",
+      "year": 2013,
+      "number": "M",
+      "title": "Problem M",
+      "file": "by-year/2013/naclo-2013-M-problem.pdf",
+      "solution_file": "by-year/2013/naclo-2013-M-solution.pdf",
+      "tags": [
+        "historical-linguistics",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2013-N",
+      "year": 2013,
+      "number": "N",
+      "title": "Problem N",
+      "file": "by-year/2013/naclo-2013-N-problem.pdf",
+      "solution_file": "by-year/2013/naclo-2013-N-solution.pdf",
+      "tags": [
+        "computational",
+        "reconstruction",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2013-O",
+      "year": 2013,
+      "number": "O",
+      "title": "Problem O",
+      "file": "by-year/2013/naclo-2013-O-problem.pdf",
+      "solution_file": "by-year/2013/naclo-2013-O-solution.pdf",
+      "tags": [
+        "comparative-linguistics",
+        "algorithm-design",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2013-P",
+      "year": 2013,
+      "number": "P",
+      "title": "Problem P",
+      "file": "by-year/2013/naclo-2013-P-problem.pdf",
+      "solution_file": "by-year/2013/naclo-2013-P-solution.pdf",
+      "tags": [
+        "morphology",
+        "decipherment",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2013-Q",
+      "year": 2013,
+      "number": "Q",
+      "title": "Problem Q",
+      "file": "by-year/2013/naclo-2013-Q-problem.pdf",
+      "solution_file": "by-year/2013/naclo-2013-Q-solution.pdf",
+      "tags": [
+        "syntax",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2013-R",
+      "year": 2013,
+      "number": "R",
+      "title": "Problem R",
+      "file": "by-year/2013/naclo-2013-R-problem.pdf",
+      "solution_file": "by-year/2013/naclo-2013-R-solution.pdf",
+      "tags": [
+        "historical-linguistics",
+        "reconstruction",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2014-A",
+      "year": 2014,
+      "number": "A",
+      "title": "Problem A",
+      "file": "by-year/2014/naclo-2014-A-problem.pdf",
+      "solution_file": "by-year/2014/naclo-2014-A-solution.pdf",
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2014-B",
+      "year": 2014,
+      "number": "B",
+      "title": "Problem B",
+      "file": "by-year/2014/naclo-2014-B-problem.pdf",
+      "solution_file": "by-year/2014/naclo-2014-B-solution.pdf",
+      "tags": [
+        "phonology",
+        "translation",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2014-C",
+      "year": 2014,
+      "number": "C",
+      "title": "Problem C",
+      "file": "by-year/2014/naclo-2014-C-problem.pdf",
+      "solution_file": "by-year/2014/naclo-2014-C-solution.pdf",
+      "tags": [
+        "syntax",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2014-D",
+      "year": 2014,
+      "number": "D",
+      "title": "Problem D",
+      "file": "by-year/2014/naclo-2014-D-problem.pdf",
+      "solution_file": "by-year/2014/naclo-2014-D-solution.pdf",
+      "tags": [
+        "morphology",
+        "translation",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2014-E",
+      "year": 2014,
+      "number": "E",
+      "title": "Problem E",
+      "file": "by-year/2014/naclo-2014-E-problem.pdf",
+      "solution_file": "by-year/2014/naclo-2014-E-solution.pdf",
+      "tags": [
+        "semantics",
+        "pattern-recognition",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2014-F",
+      "year": 2014,
+      "number": "F",
+      "title": "Problem F",
+      "file": "by-year/2014/naclo-2014-F-problem.pdf",
+      "solution_file": "by-year/2014/naclo-2014-F-solution.pdf",
+      "tags": [
+        "morphology",
+        "rule-formulation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2014-G",
+      "year": 2014,
+      "number": "G",
+      "title": "Problem G",
+      "file": "by-year/2014/naclo-2014-G-problem.pdf",
+      "solution_file": "by-year/2014/naclo-2014-G-solution.pdf",
+      "tags": [
+        "phonology",
+        "translation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2014-H",
+      "year": 2014,
+      "number": "H",
+      "title": "Problem H",
+      "file": "by-year/2014/naclo-2014-H-problem.pdf",
+      "solution_file": "by-year/2014/naclo-2014-H-solution.pdf",
+      "tags": [
+        "syntax",
+        "paradigm",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2014-I",
+      "year": 2014,
+      "number": "I",
+      "title": "Problem I",
+      "file": "by-year/2014/naclo-2014-I-problem.pdf",
+      "solution_file": "by-year/2014/naclo-2014-I-solution.pdf",
+      "tags": [
+        "writing-systems",
+        "pattern-recognition",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2014-J",
+      "year": 2014,
+      "number": "J",
+      "title": "Problem J",
+      "file": "by-year/2014/naclo-2014-J-problem.pdf",
+      "solution_file": "by-year/2014/naclo-2014-J-solution.pdf",
+      "tags": [
+        "semantics",
+        "rule-formulation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2014-K",
+      "year": 2014,
+      "number": "K",
+      "title": "Problem K",
+      "file": "by-year/2014/naclo-2014-K-problem.pdf",
+      "solution_file": "by-year/2014/naclo-2014-K-solution.pdf",
+      "tags": [
+        "morphology",
+        "translation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2014-L",
+      "year": 2014,
+      "number": "L",
+      "title": "Problem L",
+      "file": "by-year/2014/naclo-2014-L-problem.pdf",
+      "solution_file": "by-year/2014/naclo-2014-L-solution.pdf",
+      "tags": [
+        "phonology",
+        "paradigm",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2014-M",
+      "year": 2014,
+      "number": "M",
+      "title": "Problem M",
+      "file": "by-year/2014/naclo-2014-M-problem.pdf",
+      "solution_file": "by-year/2014/naclo-2014-M-solution.pdf",
+      "tags": [
+        "historical-linguistics",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2014-N",
+      "year": 2014,
+      "number": "N",
+      "title": "Problem N",
+      "file": "by-year/2014/naclo-2014-N-problem.pdf",
+      "solution_file": "by-year/2014/naclo-2014-N-solution.pdf",
+      "tags": [
+        "computational",
+        "reconstruction",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2014-O",
+      "year": 2014,
+      "number": "O",
+      "title": "Problem O",
+      "file": "by-year/2014/naclo-2014-O-problem.pdf",
+      "solution_file": "by-year/2014/naclo-2014-O-solution.pdf",
+      "tags": [
+        "comparative-linguistics",
+        "algorithm-design",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2014-P",
+      "year": 2014,
+      "number": "P",
+      "title": "Problem P",
+      "file": "by-year/2014/naclo-2014-P-problem.pdf",
+      "solution_file": "by-year/2014/naclo-2014-P-solution.pdf",
+      "tags": [
+        "morphology",
+        "decipherment",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2014-Q",
+      "year": 2014,
+      "number": "Q",
+      "title": "Problem Q",
+      "file": "by-year/2014/naclo-2014-Q-problem.pdf",
+      "solution_file": "by-year/2014/naclo-2014-Q-solution.pdf",
+      "tags": [
+        "syntax",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2015-A",
+      "year": 2015,
+      "number": "A",
+      "title": "Problem A",
+      "file": "by-year/2015/naclo-2015-A-problem.pdf",
+      "solution_file": "by-year/2015/naclo-2015-A-solution.pdf",
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2015-B",
+      "year": 2015,
+      "number": "B",
+      "title": "Problem B",
+      "file": "by-year/2015/naclo-2015-B-problem.pdf",
+      "solution_file": "by-year/2015/naclo-2015-B-solution.pdf",
+      "tags": [
+        "phonology",
+        "translation",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2015-C",
+      "year": 2015,
+      "number": "C",
+      "title": "Problem C",
+      "file": "by-year/2015/naclo-2015-C-problem.pdf",
+      "solution_file": "by-year/2015/naclo-2015-C-solution.pdf",
+      "tags": [
+        "syntax",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2015-D",
+      "year": 2015,
+      "number": "D",
+      "title": "Problem D",
+      "file": "by-year/2015/naclo-2015-D-problem.pdf",
+      "solution_file": "by-year/2015/naclo-2015-D-solution.pdf",
+      "tags": [
+        "morphology",
+        "translation",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2015-E",
+      "year": 2015,
+      "number": "E",
+      "title": "Problem E",
+      "file": "by-year/2015/naclo-2015-E-problem.pdf",
+      "solution_file": "by-year/2015/naclo-2015-E-solution.pdf",
+      "tags": [
+        "semantics",
+        "pattern-recognition",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2015-F",
+      "year": 2015,
+      "number": "F",
+      "title": "Problem F",
+      "file": "by-year/2015/naclo-2015-F-problem.pdf",
+      "solution_file": "by-year/2015/naclo-2015-F-solution.pdf",
+      "tags": [
+        "morphology",
+        "rule-formulation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2015-G",
+      "year": 2015,
+      "number": "G",
+      "title": "Problem G",
+      "file": "by-year/2015/naclo-2015-G-problem.pdf",
+      "solution_file": "by-year/2015/naclo-2015-G-solution.pdf",
+      "tags": [
+        "phonology",
+        "translation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2015-H",
+      "year": 2015,
+      "number": "H",
+      "title": "Problem H",
+      "file": "by-year/2015/naclo-2015-H-problem.pdf",
+      "solution_file": "by-year/2015/naclo-2015-H-solution.pdf",
+      "tags": [
+        "syntax",
+        "paradigm",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2015-I",
+      "year": 2015,
+      "number": "I",
+      "title": "Problem I",
+      "file": "by-year/2015/naclo-2015-I-problem.pdf",
+      "solution_file": "by-year/2015/naclo-2015-I-solution.pdf",
+      "tags": [
+        "writing-systems",
+        "pattern-recognition",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2015-J",
+      "year": 2015,
+      "number": "J",
+      "title": "Problem J",
+      "file": "by-year/2015/naclo-2015-J-problem.pdf",
+      "solution_file": "by-year/2015/naclo-2015-J-solution.pdf",
+      "tags": [
+        "semantics",
+        "rule-formulation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2015-K",
+      "year": 2015,
+      "number": "K",
+      "title": "Problem K",
+      "file": "by-year/2015/naclo-2015-K-problem.pdf",
+      "solution_file": "by-year/2015/naclo-2015-K-solution.pdf",
+      "tags": [
+        "morphology",
+        "translation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2015-L",
+      "year": 2015,
+      "number": "L",
+      "title": "Problem L",
+      "file": "by-year/2015/naclo-2015-L-problem.pdf",
+      "solution_file": "by-year/2015/naclo-2015-L-solution.pdf",
+      "tags": [
+        "phonology",
+        "paradigm",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2015-M",
+      "year": 2015,
+      "number": "M",
+      "title": "Problem M",
+      "file": "by-year/2015/naclo-2015-M-problem.pdf",
+      "solution_file": "by-year/2015/naclo-2015-M-solution.pdf",
+      "tags": [
+        "historical-linguistics",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2015-N",
+      "year": 2015,
+      "number": "N",
+      "title": "Problem N",
+      "file": "by-year/2015/naclo-2015-N-problem.pdf",
+      "solution_file": "by-year/2015/naclo-2015-N-solution.pdf",
+      "tags": [
+        "computational",
+        "reconstruction",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2015-O",
+      "year": 2015,
+      "number": "O",
+      "title": "Problem O",
+      "file": "by-year/2015/naclo-2015-O-problem.pdf",
+      "solution_file": "by-year/2015/naclo-2015-O-solution.pdf",
+      "tags": [
+        "comparative-linguistics",
+        "algorithm-design",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2015-P",
+      "year": 2015,
+      "number": "P",
+      "title": "Problem P",
+      "file": "by-year/2015/naclo-2015-P-problem.pdf",
+      "solution_file": "by-year/2015/naclo-2015-P-solution.pdf",
+      "tags": [
+        "morphology",
+        "decipherment",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2016-A",
+      "year": 2016,
+      "number": "A",
+      "title": "Problem A",
+      "file": "by-year/2016/naclo-2016-A-problem.pdf",
+      "solution_file": "by-year/2016/naclo-2016-A-solution.pdf",
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2016-B",
+      "year": 2016,
+      "number": "B",
+      "title": "Problem B",
+      "file": "by-year/2016/naclo-2016-B-problem.pdf",
+      "solution_file": "by-year/2016/naclo-2016-B-solution.pdf",
+      "tags": [
+        "phonology",
+        "translation",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2016-C",
+      "year": 2016,
+      "number": "C",
+      "title": "Problem C",
+      "file": "by-year/2016/naclo-2016-C-problem.pdf",
+      "solution_file": "by-year/2016/naclo-2016-C-solution.pdf",
+      "tags": [
+        "syntax",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2016-D",
+      "year": 2016,
+      "number": "D",
+      "title": "Problem D",
+      "file": "by-year/2016/naclo-2016-D-problem.pdf",
+      "solution_file": "by-year/2016/naclo-2016-D-solution.pdf",
+      "tags": [
+        "morphology",
+        "translation",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2016-E",
+      "year": 2016,
+      "number": "E",
+      "title": "Problem E",
+      "file": "by-year/2016/naclo-2016-E-problem.pdf",
+      "solution_file": "by-year/2016/naclo-2016-E-solution.pdf",
+      "tags": [
+        "semantics",
+        "pattern-recognition",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2016-F",
+      "year": 2016,
+      "number": "F",
+      "title": "Problem F",
+      "file": "by-year/2016/naclo-2016-F-problem.pdf",
+      "solution_file": "by-year/2016/naclo-2016-F-solution.pdf",
+      "tags": [
+        "morphology",
+        "rule-formulation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2016-G",
+      "year": 2016,
+      "number": "G",
+      "title": "Problem G",
+      "file": "by-year/2016/naclo-2016-G-problem.pdf",
+      "solution_file": "by-year/2016/naclo-2016-G-solution.pdf",
+      "tags": [
+        "phonology",
+        "translation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2016-H",
+      "year": 2016,
+      "number": "H",
+      "title": "Problem H",
+      "file": "by-year/2016/naclo-2016-H-problem.pdf",
+      "solution_file": "by-year/2016/naclo-2016-H-solution.pdf",
+      "tags": [
+        "syntax",
+        "paradigm",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2016-I",
+      "year": 2016,
+      "number": "I",
+      "title": "Problem I",
+      "file": "by-year/2016/naclo-2016-I-problem.pdf",
+      "solution_file": "by-year/2016/naclo-2016-I-solution.pdf",
+      "tags": [
+        "writing-systems",
+        "pattern-recognition",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2016-J",
+      "year": 2016,
+      "number": "J",
+      "title": "Problem J",
+      "file": "by-year/2016/naclo-2016-J-problem.pdf",
+      "solution_file": "by-year/2016/naclo-2016-J-solution.pdf",
+      "tags": [
+        "semantics",
+        "rule-formulation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2016-K",
+      "year": 2016,
+      "number": "K",
+      "title": "Problem K",
+      "file": "by-year/2016/naclo-2016-K-problem.pdf",
+      "solution_file": "by-year/2016/naclo-2016-K-solution.pdf",
+      "tags": [
+        "morphology",
+        "translation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2016-L",
+      "year": 2016,
+      "number": "L",
+      "title": "Problem L",
+      "file": "by-year/2016/naclo-2016-L-problem.pdf",
+      "solution_file": "by-year/2016/naclo-2016-L-solution.pdf",
+      "tags": [
+        "phonology",
+        "paradigm",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2016-M",
+      "year": 2016,
+      "number": "M",
+      "title": "Problem M",
+      "file": "by-year/2016/naclo-2016-M-problem.pdf",
+      "solution_file": "by-year/2016/naclo-2016-M-solution.pdf",
+      "tags": [
+        "historical-linguistics",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2016-N",
+      "year": 2016,
+      "number": "N",
+      "title": "Problem N",
+      "file": "by-year/2016/naclo-2016-N-problem.pdf",
+      "solution_file": "by-year/2016/naclo-2016-N-solution.pdf",
+      "tags": [
+        "computational",
+        "reconstruction",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2016-O",
+      "year": 2016,
+      "number": "O",
+      "title": "Problem O",
+      "file": "by-year/2016/naclo-2016-O-problem.pdf",
+      "solution_file": "by-year/2016/naclo-2016-O-solution.pdf",
+      "tags": [
+        "comparative-linguistics",
+        "algorithm-design",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2016-P",
+      "year": 2016,
+      "number": "P",
+      "title": "Problem P",
+      "file": "by-year/2016/naclo-2016-P-problem.pdf",
+      "solution_file": "by-year/2016/naclo-2016-P-solution.pdf",
+      "tags": [
+        "morphology",
+        "decipherment",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2016-Q",
+      "year": 2016,
+      "number": "Q",
+      "title": "Problem Q",
+      "file": "by-year/2016/naclo-2016-Q-problem.pdf",
+      "solution_file": "by-year/2016/naclo-2016-Q-solution.pdf",
+      "tags": [
+        "syntax",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2016-R",
+      "year": 2016,
+      "number": "R",
+      "title": "Problem R",
+      "file": "by-year/2016/naclo-2016-R-problem.pdf",
+      "solution_file": "by-year/2016/naclo-2016-R-solution.pdf",
+      "tags": [
+        "historical-linguistics",
+        "reconstruction",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2017-A",
+      "year": 2017,
+      "number": "A",
+      "title": "Problem A",
+      "file": "by-year/2017/naclo-2017-A-problem.pdf",
+      "solution_file": "by-year/2017/naclo-2017-A-solution.pdf",
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2017-B",
+      "year": 2017,
+      "number": "B",
+      "title": "Problem B",
+      "file": "by-year/2017/naclo-2017-B-problem.pdf",
+      "solution_file": "by-year/2017/naclo-2017-B-solution.pdf",
+      "tags": [
+        "phonology",
+        "translation",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2017-C",
+      "year": 2017,
+      "number": "C",
+      "title": "Problem C",
+      "file": "by-year/2017/naclo-2017-C-problem.pdf",
+      "solution_file": "by-year/2017/naclo-2017-C-solution.pdf",
+      "tags": [
+        "syntax",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2017-D",
+      "year": 2017,
+      "number": "D",
+      "title": "Problem D",
+      "file": "by-year/2017/naclo-2017-D-problem.pdf",
+      "solution_file": "by-year/2017/naclo-2017-D-solution.pdf",
+      "tags": [
+        "morphology",
+        "translation",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2017-E",
+      "year": 2017,
+      "number": "E",
+      "title": "Problem E",
+      "file": "by-year/2017/naclo-2017-E-problem.pdf",
+      "solution_file": "by-year/2017/naclo-2017-E-solution.pdf",
+      "tags": [
+        "semantics",
+        "pattern-recognition",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2017-F",
+      "year": 2017,
+      "number": "F",
+      "title": "Problem F",
+      "file": "by-year/2017/naclo-2017-F-problem.pdf",
+      "solution_file": "by-year/2017/naclo-2017-F-solution.pdf",
+      "tags": [
+        "morphology",
+        "rule-formulation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2017-G",
+      "year": 2017,
+      "number": "G",
+      "title": "Problem G",
+      "file": "by-year/2017/naclo-2017-G-problem.pdf",
+      "solution_file": "by-year/2017/naclo-2017-G-solution.pdf",
+      "tags": [
+        "phonology",
+        "translation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2017-H",
+      "year": 2017,
+      "number": "H",
+      "title": "Problem H",
+      "file": "by-year/2017/naclo-2017-H-problem.pdf",
+      "solution_file": "by-year/2017/naclo-2017-H-solution.pdf",
+      "tags": [
+        "syntax",
+        "paradigm",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2017-I",
+      "year": 2017,
+      "number": "I",
+      "title": "Problem I",
+      "file": "by-year/2017/naclo-2017-I-problem.pdf",
+      "solution_file": "by-year/2017/naclo-2017-I-solution.pdf",
+      "tags": [
+        "writing-systems",
+        "pattern-recognition",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2017-J",
+      "year": 2017,
+      "number": "J",
+      "title": "Problem J",
+      "file": "by-year/2017/naclo-2017-J-problem.pdf",
+      "solution_file": "by-year/2017/naclo-2017-J-solution.pdf",
+      "tags": [
+        "semantics",
+        "rule-formulation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2017-K",
+      "year": 2017,
+      "number": "K",
+      "title": "Problem K",
+      "file": "by-year/2017/naclo-2017-K-problem.pdf",
+      "solution_file": "by-year/2017/naclo-2017-K-solution.pdf",
+      "tags": [
+        "morphology",
+        "translation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2017-L",
+      "year": 2017,
+      "number": "L",
+      "title": "Problem L",
+      "file": "by-year/2017/naclo-2017-L-problem.pdf",
+      "solution_file": "by-year/2017/naclo-2017-L-solution.pdf",
+      "tags": [
+        "phonology",
+        "paradigm",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2017-M",
+      "year": 2017,
+      "number": "M",
+      "title": "Problem M",
+      "file": "by-year/2017/naclo-2017-M-problem.pdf",
+      "solution_file": "by-year/2017/naclo-2017-M-solution.pdf",
+      "tags": [
+        "historical-linguistics",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2017-N",
+      "year": 2017,
+      "number": "N",
+      "title": "Problem N",
+      "file": "by-year/2017/naclo-2017-N-problem.pdf",
+      "solution_file": "by-year/2017/naclo-2017-N-solution.pdf",
+      "tags": [
+        "computational",
+        "reconstruction",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2017-O",
+      "year": 2017,
+      "number": "O",
+      "title": "Problem O",
+      "file": "by-year/2017/naclo-2017-O-problem.pdf",
+      "solution_file": "by-year/2017/naclo-2017-O-solution.pdf",
+      "tags": [
+        "comparative-linguistics",
+        "algorithm-design",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2017-P",
+      "year": 2017,
+      "number": "P",
+      "title": "Problem P",
+      "file": "by-year/2017/naclo-2017-P-problem.pdf",
+      "solution_file": "by-year/2017/naclo-2017-P-solution.pdf",
+      "tags": [
+        "morphology",
+        "decipherment",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2017-Q",
+      "year": 2017,
+      "number": "Q",
+      "title": "Problem Q",
+      "file": "by-year/2017/naclo-2017-Q-problem.pdf",
+      "solution_file": "by-year/2017/naclo-2017-Q-solution.pdf",
+      "tags": [
+        "syntax",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2017-R",
+      "year": 2017,
+      "number": "R",
+      "title": "Problem R",
+      "file": "by-year/2017/naclo-2017-R-problem.pdf",
+      "solution_file": "by-year/2017/naclo-2017-R-solution.pdf",
+      "tags": [
+        "historical-linguistics",
+        "reconstruction",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2018-A",
+      "year": 2018,
+      "number": "A",
+      "title": "Problem A",
+      "file": "by-year/2018/naclo-2018-A-problem.pdf",
+      "solution_file": "by-year/2018/naclo-2018-A-solution.pdf",
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2018-B",
+      "year": 2018,
+      "number": "B",
+      "title": "Problem B",
+      "file": "by-year/2018/naclo-2018-B-problem.pdf",
+      "solution_file": "by-year/2018/naclo-2018-B-solution.pdf",
+      "tags": [
+        "phonology",
+        "translation",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2018-C",
+      "year": 2018,
+      "number": "C",
+      "title": "Problem C",
+      "file": "by-year/2018/naclo-2018-C-problem.pdf",
+      "solution_file": "by-year/2018/naclo-2018-C-solution.pdf",
+      "tags": [
+        "syntax",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2018-D",
+      "year": 2018,
+      "number": "D",
+      "title": "Problem D",
+      "file": "by-year/2018/naclo-2018-D-problem.pdf",
+      "solution_file": "by-year/2018/naclo-2018-D-solution.pdf",
+      "tags": [
+        "morphology",
+        "translation",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2018-E",
+      "year": 2018,
+      "number": "E",
+      "title": "Problem E",
+      "file": "by-year/2018/naclo-2018-E-problem.pdf",
+      "solution_file": "by-year/2018/naclo-2018-E-solution.pdf",
+      "tags": [
+        "semantics",
+        "pattern-recognition",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2018-F",
+      "year": 2018,
+      "number": "F",
+      "title": "Problem F",
+      "file": "by-year/2018/naclo-2018-F-problem.pdf",
+      "solution_file": "by-year/2018/naclo-2018-F-solution.pdf",
+      "tags": [
+        "morphology",
+        "rule-formulation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2018-G",
+      "year": 2018,
+      "number": "G",
+      "title": "Problem G",
+      "file": "by-year/2018/naclo-2018-G-problem.pdf",
+      "solution_file": "by-year/2018/naclo-2018-G-solution.pdf",
+      "tags": [
+        "phonology",
+        "translation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2018-H",
+      "year": 2018,
+      "number": "H",
+      "title": "Problem H",
+      "file": "by-year/2018/naclo-2018-H-problem.pdf",
+      "solution_file": "by-year/2018/naclo-2018-H-solution.pdf",
+      "tags": [
+        "syntax",
+        "paradigm",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2018-I",
+      "year": 2018,
+      "number": "I",
+      "title": "Problem I",
+      "file": "by-year/2018/naclo-2018-I-problem.pdf",
+      "solution_file": "by-year/2018/naclo-2018-I-solution.pdf",
+      "tags": [
+        "writing-systems",
+        "pattern-recognition",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2018-J",
+      "year": 2018,
+      "number": "J",
+      "title": "Problem J",
+      "file": "by-year/2018/naclo-2018-J-problem.pdf",
+      "solution_file": "by-year/2018/naclo-2018-J-solution.pdf",
+      "tags": [
+        "semantics",
+        "rule-formulation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2018-K",
+      "year": 2018,
+      "number": "K",
+      "title": "Problem K",
+      "file": "by-year/2018/naclo-2018-K-problem.pdf",
+      "solution_file": "by-year/2018/naclo-2018-K-solution.pdf",
+      "tags": [
+        "morphology",
+        "translation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2018-L",
+      "year": 2018,
+      "number": "L",
+      "title": "Problem L",
+      "file": "by-year/2018/naclo-2018-L-problem.pdf",
+      "solution_file": "by-year/2018/naclo-2018-L-solution.pdf",
+      "tags": [
+        "phonology",
+        "paradigm",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2018-M",
+      "year": 2018,
+      "number": "M",
+      "title": "Problem M",
+      "file": "by-year/2018/naclo-2018-M-problem.pdf",
+      "solution_file": "by-year/2018/naclo-2018-M-solution.pdf",
+      "tags": [
+        "historical-linguistics",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2018-N",
+      "year": 2018,
+      "number": "N",
+      "title": "Problem N",
+      "file": "by-year/2018/naclo-2018-N-problem.pdf",
+      "solution_file": "by-year/2018/naclo-2018-N-solution.pdf",
+      "tags": [
+        "computational",
+        "reconstruction",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2018-O",
+      "year": 2018,
+      "number": "O",
+      "title": "Problem O",
+      "file": "by-year/2018/naclo-2018-O-problem.pdf",
+      "solution_file": "by-year/2018/naclo-2018-O-solution.pdf",
+      "tags": [
+        "comparative-linguistics",
+        "algorithm-design",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2018-P",
+      "year": 2018,
+      "number": "P",
+      "title": "Problem P",
+      "file": "by-year/2018/naclo-2018-P-problem.pdf",
+      "solution_file": "by-year/2018/naclo-2018-P-solution.pdf",
+      "tags": [
+        "morphology",
+        "decipherment",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2018-Q",
+      "year": 2018,
+      "number": "Q",
+      "title": "Problem Q",
+      "file": "by-year/2018/naclo-2018-Q-problem.pdf",
+      "solution_file": "by-year/2018/naclo-2018-Q-solution.pdf",
+      "tags": [
+        "syntax",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2018-R",
+      "year": 2018,
+      "number": "R",
+      "title": "Problem R",
+      "file": "by-year/2018/naclo-2018-R-problem.pdf",
+      "solution_file": "by-year/2018/naclo-2018-R-solution.pdf",
+      "tags": [
+        "historical-linguistics",
+        "reconstruction",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2019-A",
+      "year": 2019,
+      "number": "A",
+      "title": "Problem A",
+      "file": "by-year/2019/naclo-2019-A-problem.pdf",
+      "solution_file": "by-year/2019/naclo-2019-A-solution.pdf",
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2019-B",
+      "year": 2019,
+      "number": "B",
+      "title": "Problem B",
+      "file": "by-year/2019/naclo-2019-B-problem.pdf",
+      "solution_file": "by-year/2019/naclo-2019-B-solution.pdf",
+      "tags": [
+        "phonology",
+        "translation",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2019-C",
+      "year": 2019,
+      "number": "C",
+      "title": "Problem C",
+      "file": "by-year/2019/naclo-2019-C-problem.pdf",
+      "solution_file": "by-year/2019/naclo-2019-C-solution.pdf",
+      "tags": [
+        "syntax",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2019-D",
+      "year": 2019,
+      "number": "D",
+      "title": "Problem D",
+      "file": "by-year/2019/naclo-2019-D-problem.pdf",
+      "solution_file": "by-year/2019/naclo-2019-D-solution.pdf",
+      "tags": [
+        "morphology",
+        "translation",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2019-E",
+      "year": 2019,
+      "number": "E",
+      "title": "Problem E",
+      "file": "by-year/2019/naclo-2019-E-problem.pdf",
+      "solution_file": "by-year/2019/naclo-2019-E-solution.pdf",
+      "tags": [
+        "semantics",
+        "pattern-recognition",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2019-F",
+      "year": 2019,
+      "number": "F",
+      "title": "Problem F",
+      "file": "by-year/2019/naclo-2019-F-problem.pdf",
+      "solution_file": "by-year/2019/naclo-2019-F-solution.pdf",
+      "tags": [
+        "morphology",
+        "rule-formulation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2019-G",
+      "year": 2019,
+      "number": "G",
+      "title": "Problem G",
+      "file": "by-year/2019/naclo-2019-G-problem.pdf",
+      "solution_file": "by-year/2019/naclo-2019-G-solution.pdf",
+      "tags": [
+        "phonology",
+        "translation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2019-H",
+      "year": 2019,
+      "number": "H",
+      "title": "Problem H",
+      "file": "by-year/2019/naclo-2019-H-problem.pdf",
+      "solution_file": "by-year/2019/naclo-2019-H-solution.pdf",
+      "tags": [
+        "syntax",
+        "paradigm",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2019-I",
+      "year": 2019,
+      "number": "I",
+      "title": "Problem I",
+      "file": "by-year/2019/naclo-2019-I-problem.pdf",
+      "solution_file": "by-year/2019/naclo-2019-I-solution.pdf",
+      "tags": [
+        "writing-systems",
+        "pattern-recognition",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2019-J",
+      "year": 2019,
+      "number": "J",
+      "title": "Problem J",
+      "file": "by-year/2019/naclo-2019-J-problem.pdf",
+      "solution_file": "by-year/2019/naclo-2019-J-solution.pdf",
+      "tags": [
+        "semantics",
+        "rule-formulation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2019-K",
+      "year": 2019,
+      "number": "K",
+      "title": "Problem K",
+      "file": "by-year/2019/naclo-2019-K-problem.pdf",
+      "solution_file": "by-year/2019/naclo-2019-K-solution.pdf",
+      "tags": [
+        "morphology",
+        "translation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2019-L",
+      "year": 2019,
+      "number": "L",
+      "title": "Problem L",
+      "file": "by-year/2019/naclo-2019-L-problem.pdf",
+      "solution_file": "by-year/2019/naclo-2019-L-solution.pdf",
+      "tags": [
+        "phonology",
+        "paradigm",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2019-M",
+      "year": 2019,
+      "number": "M",
+      "title": "Problem M",
+      "file": "by-year/2019/naclo-2019-M-problem.pdf",
+      "solution_file": "by-year/2019/naclo-2019-M-solution.pdf",
+      "tags": [
+        "historical-linguistics",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2019-N",
+      "year": 2019,
+      "number": "N",
+      "title": "Problem N",
+      "file": "by-year/2019/naclo-2019-N-problem.pdf",
+      "solution_file": "by-year/2019/naclo-2019-N-solution.pdf",
+      "tags": [
+        "computational",
+        "reconstruction",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2019-O",
+      "year": 2019,
+      "number": "O",
+      "title": "Problem O",
+      "file": "by-year/2019/naclo-2019-O-problem.pdf",
+      "solution_file": "by-year/2019/naclo-2019-O-solution.pdf",
+      "tags": [
+        "comparative-linguistics",
+        "algorithm-design",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2019-P",
+      "year": 2019,
+      "number": "P",
+      "title": "Problem P",
+      "file": "by-year/2019/naclo-2019-P-problem.pdf",
+      "solution_file": "by-year/2019/naclo-2019-P-solution.pdf",
+      "tags": [
+        "morphology",
+        "decipherment",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2019-Q",
+      "year": 2019,
+      "number": "Q",
+      "title": "Problem Q",
+      "file": "by-year/2019/naclo-2019-Q-problem.pdf",
+      "solution_file": "by-year/2019/naclo-2019-Q-solution.pdf",
+      "tags": [
+        "syntax",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2019-R",
+      "year": 2019,
+      "number": "R",
+      "title": "Problem R",
+      "file": "by-year/2019/naclo-2019-R-problem.pdf",
+      "solution_file": "by-year/2019/naclo-2019-R-solution.pdf",
+      "tags": [
+        "historical-linguistics",
+        "reconstruction",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2020-A",
+      "year": 2020,
+      "number": "A",
+      "title": "Problem A",
+      "file": "by-year/2020/naclo-2020-A-problem.pdf",
+      "solution_file": "by-year/2020/naclo-2020-A-solution.pdf",
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2020-B",
+      "year": 2020,
+      "number": "B",
+      "title": "Problem B",
+      "file": "by-year/2020/naclo-2020-B-problem.pdf",
+      "solution_file": "by-year/2020/naclo-2020-B-solution.pdf",
+      "tags": [
+        "phonology",
+        "translation",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2020-C",
+      "year": 2020,
+      "number": "C",
+      "title": "Problem C",
+      "file": "by-year/2020/naclo-2020-C-problem.pdf",
+      "solution_file": "by-year/2020/naclo-2020-C-solution.pdf",
+      "tags": [
+        "syntax",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2020-D",
+      "year": 2020,
+      "number": "D",
+      "title": "Problem D",
+      "file": "by-year/2020/naclo-2020-D-problem.pdf",
+      "solution_file": "by-year/2020/naclo-2020-D-solution.pdf",
+      "tags": [
+        "morphology",
+        "translation",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2020-E",
+      "year": 2020,
+      "number": "E",
+      "title": "Problem E",
+      "file": "by-year/2020/naclo-2020-E-problem.pdf",
+      "solution_file": "by-year/2020/naclo-2020-E-solution.pdf",
+      "tags": [
+        "semantics",
+        "pattern-recognition",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2020-F",
+      "year": 2020,
+      "number": "F",
+      "title": "Problem F",
+      "file": "by-year/2020/naclo-2020-F-problem.pdf",
+      "solution_file": "by-year/2020/naclo-2020-F-solution.pdf",
+      "tags": [
+        "morphology",
+        "rule-formulation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2020-G",
+      "year": 2020,
+      "number": "G",
+      "title": "Problem G",
+      "file": "by-year/2020/naclo-2020-G-problem.pdf",
+      "solution_file": "by-year/2020/naclo-2020-G-solution.pdf",
+      "tags": [
+        "phonology",
+        "translation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2020-H",
+      "year": 2020,
+      "number": "H",
+      "title": "Problem H",
+      "file": "by-year/2020/naclo-2020-H-problem.pdf",
+      "solution_file": "by-year/2020/naclo-2020-H-solution.pdf",
+      "tags": [
+        "syntax",
+        "paradigm",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2020-I",
+      "year": 2020,
+      "number": "I",
+      "title": "Problem I",
+      "file": "by-year/2020/naclo-2020-I-problem.pdf",
+      "solution_file": "by-year/2020/naclo-2020-I-solution.pdf",
+      "tags": [
+        "writing-systems",
+        "pattern-recognition",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2020-J",
+      "year": 2020,
+      "number": "J",
+      "title": "Problem J",
+      "file": "by-year/2020/naclo-2020-J-problem.pdf",
+      "solution_file": "by-year/2020/naclo-2020-J-solution.pdf",
+      "tags": [
+        "semantics",
+        "rule-formulation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2020-K",
+      "year": 2020,
+      "number": "K",
+      "title": "Problem K",
+      "file": "by-year/2020/naclo-2020-K-problem.pdf",
+      "solution_file": "by-year/2020/naclo-2020-K-solution.pdf",
+      "tags": [
+        "morphology",
+        "translation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2020-L",
+      "year": 2020,
+      "number": "L",
+      "title": "Problem L",
+      "file": "by-year/2020/naclo-2020-L-problem.pdf",
+      "solution_file": "by-year/2020/naclo-2020-L-solution.pdf",
+      "tags": [
+        "phonology",
+        "paradigm",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2020-M",
+      "year": 2020,
+      "number": "M",
+      "title": "Problem M",
+      "file": "by-year/2020/naclo-2020-M-problem.pdf",
+      "solution_file": "by-year/2020/naclo-2020-M-solution.pdf",
+      "tags": [
+        "historical-linguistics",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2020-N",
+      "year": 2020,
+      "number": "N",
+      "title": "Problem N",
+      "file": "by-year/2020/naclo-2020-N-problem.pdf",
+      "solution_file": "by-year/2020/naclo-2020-N-solution.pdf",
+      "tags": [
+        "computational",
+        "reconstruction",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2020-O",
+      "year": 2020,
+      "number": "O",
+      "title": "Problem O",
+      "file": "by-year/2020/naclo-2020-O-problem.pdf",
+      "solution_file": "by-year/2020/naclo-2020-O-solution.pdf",
+      "tags": [
+        "comparative-linguistics",
+        "algorithm-design",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2020-P",
+      "year": 2020,
+      "number": "P",
+      "title": "Problem P",
+      "file": "by-year/2020/naclo-2020-P-problem.pdf",
+      "solution_file": "by-year/2020/naclo-2020-P-solution.pdf",
+      "tags": [
+        "morphology",
+        "decipherment",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2020-Q",
+      "year": 2020,
+      "number": "Q",
+      "title": "Problem Q",
+      "file": "by-year/2020/naclo-2020-Q-problem.pdf",
+      "solution_file": "by-year/2020/naclo-2020-Q-solution.pdf",
+      "tags": [
+        "syntax",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2020-R",
+      "year": 2020,
+      "number": "R",
+      "title": "Problem R",
+      "file": "by-year/2020/naclo-2020-R-problem.pdf",
+      "solution_file": "by-year/2020/naclo-2020-R-solution.pdf",
+      "tags": [
+        "historical-linguistics",
+        "reconstruction",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2021-A",
+      "year": 2021,
+      "number": "A",
+      "title": "Problem A",
+      "file": "by-year/2021/naclo-2021-A-problem.pdf",
+      "solution_file": "by-year/2021/naclo-2021-A-solution.pdf",
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2021-B",
+      "year": 2021,
+      "number": "B",
+      "title": "Problem B",
+      "file": "by-year/2021/naclo-2021-B-problem.pdf",
+      "solution_file": "by-year/2021/naclo-2021-B-solution.pdf",
+      "tags": [
+        "phonology",
+        "translation",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2021-C",
+      "year": 2021,
+      "number": "C",
+      "title": "Problem C",
+      "file": "by-year/2021/naclo-2021-C-problem.pdf",
+      "solution_file": "by-year/2021/naclo-2021-C-solution.pdf",
+      "tags": [
+        "syntax",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2021-D",
+      "year": 2021,
+      "number": "D",
+      "title": "Problem D",
+      "file": "by-year/2021/naclo-2021-D-problem.pdf",
+      "solution_file": "by-year/2021/naclo-2021-D-solution.pdf",
+      "tags": [
+        "morphology",
+        "translation",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2021-E",
+      "year": 2021,
+      "number": "E",
+      "title": "Problem E",
+      "file": "by-year/2021/naclo-2021-E-problem.pdf",
+      "solution_file": "by-year/2021/naclo-2021-E-solution.pdf",
+      "tags": [
+        "semantics",
+        "pattern-recognition",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2021-F",
+      "year": 2021,
+      "number": "F",
+      "title": "Problem F",
+      "file": "by-year/2021/naclo-2021-F-problem.pdf",
+      "solution_file": "by-year/2021/naclo-2021-F-solution.pdf",
+      "tags": [
+        "morphology",
+        "rule-formulation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2021-G",
+      "year": 2021,
+      "number": "G",
+      "title": "Problem G",
+      "file": "by-year/2021/naclo-2021-G-problem.pdf",
+      "solution_file": "by-year/2021/naclo-2021-G-solution.pdf",
+      "tags": [
+        "phonology",
+        "translation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2021-H",
+      "year": 2021,
+      "number": "H",
+      "title": "Problem H",
+      "file": "by-year/2021/naclo-2021-H-problem.pdf",
+      "solution_file": "by-year/2021/naclo-2021-H-solution.pdf",
+      "tags": [
+        "syntax",
+        "paradigm",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2021-I",
+      "year": 2021,
+      "number": "I",
+      "title": "Problem I",
+      "file": "by-year/2021/naclo-2021-I-problem.pdf",
+      "solution_file": "by-year/2021/naclo-2021-I-solution.pdf",
+      "tags": [
+        "writing-systems",
+        "pattern-recognition",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2021-J",
+      "year": 2021,
+      "number": "J",
+      "title": "Problem J",
+      "file": "by-year/2021/naclo-2021-J-problem.pdf",
+      "solution_file": "by-year/2021/naclo-2021-J-solution.pdf",
+      "tags": [
+        "semantics",
+        "rule-formulation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2021-K",
+      "year": 2021,
+      "number": "K",
+      "title": "Problem K",
+      "file": "by-year/2021/naclo-2021-K-problem.pdf",
+      "solution_file": "by-year/2021/naclo-2021-K-solution.pdf",
+      "tags": [
+        "morphology",
+        "translation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2021-L",
+      "year": 2021,
+      "number": "L",
+      "title": "Problem L",
+      "file": "by-year/2021/naclo-2021-L-problem.pdf",
+      "solution_file": "by-year/2021/naclo-2021-L-solution.pdf",
+      "tags": [
+        "phonology",
+        "paradigm",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2021-M",
+      "year": 2021,
+      "number": "M",
+      "title": "Problem M",
+      "file": "by-year/2021/naclo-2021-M-problem.pdf",
+      "solution_file": "by-year/2021/naclo-2021-M-solution.pdf",
+      "tags": [
+        "historical-linguistics",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2021-N",
+      "year": 2021,
+      "number": "N",
+      "title": "Problem N",
+      "file": "by-year/2021/naclo-2021-N-problem.pdf",
+      "solution_file": "by-year/2021/naclo-2021-N-solution.pdf",
+      "tags": [
+        "computational",
+        "reconstruction",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2021-O",
+      "year": 2021,
+      "number": "O",
+      "title": "Problem O",
+      "file": "by-year/2021/naclo-2021-O-problem.pdf",
+      "solution_file": "by-year/2021/naclo-2021-O-solution.pdf",
+      "tags": [
+        "comparative-linguistics",
+        "algorithm-design",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2021-P",
+      "year": 2021,
+      "number": "P",
+      "title": "Problem P",
+      "file": "by-year/2021/naclo-2021-P-problem.pdf",
+      "solution_file": "by-year/2021/naclo-2021-P-solution.pdf",
+      "tags": [
+        "morphology",
+        "decipherment",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2021-Q",
+      "year": 2021,
+      "number": "Q",
+      "title": "Problem Q",
+      "file": "by-year/2021/naclo-2021-Q-problem.pdf",
+      "solution_file": "by-year/2021/naclo-2021-Q-solution.pdf",
+      "tags": [
+        "syntax",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2021-R",
+      "year": 2021,
+      "number": "R",
+      "title": "Problem R",
+      "file": "by-year/2021/naclo-2021-R-problem.pdf",
+      "solution_file": "by-year/2021/naclo-2021-R-solution.pdf",
+      "tags": [
+        "historical-linguistics",
+        "reconstruction",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2021-S",
+      "year": 2021,
+      "number": "S",
+      "title": "Problem S",
+      "file": "by-year/2021/naclo-2021-S-problem.pdf",
+      "solution_file": "by-year/2021/naclo-2021-S-solution.pdf",
+      "tags": [
+        "computational",
+        "algorithm-design",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2022-A",
+      "year": 2022,
+      "number": "A",
+      "title": "Problem A",
+      "file": "by-year/2022/naclo-2022-A-problem.pdf",
+      "solution_file": "by-year/2022/naclo-2022-A-solution.pdf",
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2022-B",
+      "year": 2022,
+      "number": "B",
+      "title": "Problem B",
+      "file": "by-year/2022/naclo-2022-B-problem.pdf",
+      "solution_file": "by-year/2022/naclo-2022-B-solution.pdf",
+      "tags": [
+        "phonology",
+        "translation",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2022-C",
+      "year": 2022,
+      "number": "C",
+      "title": "Problem C",
+      "file": "by-year/2022/naclo-2022-C-problem.pdf",
+      "solution_file": "by-year/2022/naclo-2022-C-solution.pdf",
+      "tags": [
+        "syntax",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2022-D",
+      "year": 2022,
+      "number": "D",
+      "title": "Problem D",
+      "file": "by-year/2022/naclo-2022-D-problem.pdf",
+      "solution_file": "by-year/2022/naclo-2022-D-solution.pdf",
+      "tags": [
+        "morphology",
+        "translation",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2022-E",
+      "year": 2022,
+      "number": "E",
+      "title": "Problem E",
+      "file": "by-year/2022/naclo-2022-E-problem.pdf",
+      "solution_file": "by-year/2022/naclo-2022-E-solution.pdf",
+      "tags": [
+        "semantics",
+        "pattern-recognition",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2022-F",
+      "year": 2022,
+      "number": "F",
+      "title": "Problem F",
+      "file": "by-year/2022/naclo-2022-F-problem.pdf",
+      "solution_file": "by-year/2022/naclo-2022-F-solution.pdf",
+      "tags": [
+        "morphology",
+        "rule-formulation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2022-G",
+      "year": 2022,
+      "number": "G",
+      "title": "Problem G",
+      "file": "by-year/2022/naclo-2022-G-problem.pdf",
+      "solution_file": "by-year/2022/naclo-2022-G-solution.pdf",
+      "tags": [
+        "phonology",
+        "translation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2022-H",
+      "year": 2022,
+      "number": "H",
+      "title": "Problem H",
+      "file": "by-year/2022/naclo-2022-H-problem.pdf",
+      "solution_file": "by-year/2022/naclo-2022-H-solution.pdf",
+      "tags": [
+        "syntax",
+        "paradigm",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2022-I",
+      "year": 2022,
+      "number": "I",
+      "title": "Problem I",
+      "file": "by-year/2022/naclo-2022-I-problem.pdf",
+      "solution_file": "by-year/2022/naclo-2022-I-solution.pdf",
+      "tags": [
+        "writing-systems",
+        "pattern-recognition",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2022-J",
+      "year": 2022,
+      "number": "J",
+      "title": "Problem J",
+      "file": "by-year/2022/naclo-2022-J-problem.pdf",
+      "solution_file": "by-year/2022/naclo-2022-J-solution.pdf",
+      "tags": [
+        "semantics",
+        "rule-formulation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2022-K",
+      "year": 2022,
+      "number": "K",
+      "title": "Problem K",
+      "file": "by-year/2022/naclo-2022-K-problem.pdf",
+      "solution_file": "by-year/2022/naclo-2022-K-solution.pdf",
+      "tags": [
+        "morphology",
+        "translation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2022-L",
+      "year": 2022,
+      "number": "L",
+      "title": "Problem L",
+      "file": "by-year/2022/naclo-2022-L-problem.pdf",
+      "solution_file": "by-year/2022/naclo-2022-L-solution.pdf",
+      "tags": [
+        "phonology",
+        "paradigm",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2022-M",
+      "year": 2022,
+      "number": "M",
+      "title": "Problem M",
+      "file": "by-year/2022/naclo-2022-M-problem.pdf",
+      "solution_file": "by-year/2022/naclo-2022-M-solution.pdf",
+      "tags": [
+        "historical-linguistics",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2022-N",
+      "year": 2022,
+      "number": "N",
+      "title": "Problem N",
+      "file": "by-year/2022/naclo-2022-N-problem.pdf",
+      "solution_file": "by-year/2022/naclo-2022-N-solution.pdf",
+      "tags": [
+        "computational",
+        "reconstruction",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2022-O",
+      "year": 2022,
+      "number": "O",
+      "title": "Problem O",
+      "file": "by-year/2022/naclo-2022-O-problem.pdf",
+      "solution_file": "by-year/2022/naclo-2022-O-solution.pdf",
+      "tags": [
+        "comparative-linguistics",
+        "algorithm-design",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2022-P",
+      "year": 2022,
+      "number": "P",
+      "title": "Problem P",
+      "file": "by-year/2022/naclo-2022-P-problem.pdf",
+      "solution_file": "by-year/2022/naclo-2022-P-solution.pdf",
+      "tags": [
+        "morphology",
+        "decipherment",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2022-Q",
+      "year": 2022,
+      "number": "Q",
+      "title": "Problem Q",
+      "file": "by-year/2022/naclo-2022-Q-problem.pdf",
+      "solution_file": "by-year/2022/naclo-2022-Q-solution.pdf",
+      "tags": [
+        "syntax",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2022-R",
+      "year": 2022,
+      "number": "R",
+      "title": "Problem R",
+      "file": "by-year/2022/naclo-2022-R-problem.pdf",
+      "solution_file": "by-year/2022/naclo-2022-R-solution.pdf",
+      "tags": [
+        "historical-linguistics",
+        "reconstruction",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2023-A",
+      "year": 2023,
+      "number": "A",
+      "title": "Problem A",
+      "file": "by-year/2023/naclo-2023-A-problem.pdf",
+      "solution_file": "by-year/2023/naclo-2023-A-solution.pdf",
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2023-B",
+      "year": 2023,
+      "number": "B",
+      "title": "Problem B",
+      "file": "by-year/2023/naclo-2023-B-problem.pdf",
+      "solution_file": "by-year/2023/naclo-2023-B-solution.pdf",
+      "tags": [
+        "phonology",
+        "translation",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2023-C",
+      "year": 2023,
+      "number": "C",
+      "title": "Problem C",
+      "file": "by-year/2023/naclo-2023-C-problem.pdf",
+      "solution_file": "by-year/2023/naclo-2023-C-solution.pdf",
+      "tags": [
+        "syntax",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2023-D",
+      "year": 2023,
+      "number": "D",
+      "title": "Problem D",
+      "file": "by-year/2023/naclo-2023-D-problem.pdf",
+      "solution_file": "by-year/2023/naclo-2023-D-solution.pdf",
+      "tags": [
+        "morphology",
+        "translation",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2023-E",
+      "year": 2023,
+      "number": "E",
+      "title": "Problem E",
+      "file": "by-year/2023/naclo-2023-E-problem.pdf",
+      "solution_file": "by-year/2023/naclo-2023-E-solution.pdf",
+      "tags": [
+        "semantics",
+        "pattern-recognition",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2023-F",
+      "year": 2023,
+      "number": "F",
+      "title": "Problem F",
+      "file": "by-year/2023/naclo-2023-F-problem.pdf",
+      "solution_file": "by-year/2023/naclo-2023-F-solution.pdf",
+      "tags": [
+        "morphology",
+        "rule-formulation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2023-G",
+      "year": 2023,
+      "number": "G",
+      "title": "Problem G",
+      "file": "by-year/2023/naclo-2023-G-problem.pdf",
+      "solution_file": "by-year/2023/naclo-2023-G-solution.pdf",
+      "tags": [
+        "phonology",
+        "translation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2023-H",
+      "year": 2023,
+      "number": "H",
+      "title": "Problem H",
+      "file": "by-year/2023/naclo-2023-H-problem.pdf",
+      "solution_file": "by-year/2023/naclo-2023-H-solution.pdf",
+      "tags": [
+        "syntax",
+        "paradigm",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2023-I",
+      "year": 2023,
+      "number": "I",
+      "title": "Problem I",
+      "file": "by-year/2023/naclo-2023-I-problem.pdf",
+      "solution_file": "by-year/2023/naclo-2023-I-solution.pdf",
+      "tags": [
+        "writing-systems",
+        "pattern-recognition",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2023-J",
+      "year": 2023,
+      "number": "J",
+      "title": "Problem J",
+      "file": "by-year/2023/naclo-2023-J-problem.pdf",
+      "solution_file": "by-year/2023/naclo-2023-J-solution.pdf",
+      "tags": [
+        "semantics",
+        "rule-formulation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2023-K",
+      "year": 2023,
+      "number": "K",
+      "title": "Problem K",
+      "file": "by-year/2023/naclo-2023-K-problem.pdf",
+      "solution_file": "by-year/2023/naclo-2023-K-solution.pdf",
+      "tags": [
+        "morphology",
+        "translation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2023-L",
+      "year": 2023,
+      "number": "L",
+      "title": "Problem L",
+      "file": "by-year/2023/naclo-2023-L-problem.pdf",
+      "solution_file": "by-year/2023/naclo-2023-L-solution.pdf",
+      "tags": [
+        "phonology",
+        "paradigm",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2023-M",
+      "year": 2023,
+      "number": "M",
+      "title": "Problem M",
+      "file": "by-year/2023/naclo-2023-M-problem.pdf",
+      "solution_file": "by-year/2023/naclo-2023-M-solution.pdf",
+      "tags": [
+        "historical-linguistics",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2023-N",
+      "year": 2023,
+      "number": "N",
+      "title": "Problem N",
+      "file": "by-year/2023/naclo-2023-N-problem.pdf",
+      "solution_file": "by-year/2023/naclo-2023-N-solution.pdf",
+      "tags": [
+        "computational",
+        "reconstruction",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2023-O",
+      "year": 2023,
+      "number": "O",
+      "title": "Problem O",
+      "file": "by-year/2023/naclo-2023-O-problem.pdf",
+      "solution_file": "by-year/2023/naclo-2023-O-solution.pdf",
+      "tags": [
+        "comparative-linguistics",
+        "algorithm-design",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2023-P",
+      "year": 2023,
+      "number": "P",
+      "title": "Problem P",
+      "file": "by-year/2023/naclo-2023-P-problem.pdf",
+      "solution_file": "by-year/2023/naclo-2023-P-solution.pdf",
+      "tags": [
+        "morphology",
+        "decipherment",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2023-Q",
+      "year": 2023,
+      "number": "Q",
+      "title": "Problem Q",
+      "file": "by-year/2023/naclo-2023-Q-problem.pdf",
+      "solution_file": "by-year/2023/naclo-2023-Q-solution.pdf",
+      "tags": [
+        "syntax",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2025-A",
+      "year": 2025,
+      "number": "A",
+      "title": "Problem A",
+      "file": "by-year/2025/naclo-2025-A-problem.pdf",
+      "solution_file": "by-year/2025/naclo-2025-A-solution.pdf",
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2025-B",
+      "year": 2025,
+      "number": "B",
+      "title": "Problem B",
+      "file": "by-year/2025/naclo-2025-B-problem.pdf",
+      "solution_file": "by-year/2025/naclo-2025-B-solution.pdf",
+      "tags": [
+        "phonology",
+        "translation",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2025-C",
+      "year": 2025,
+      "number": "C",
+      "title": "Problem C",
+      "file": "by-year/2025/naclo-2025-C-problem.pdf",
+      "solution_file": "by-year/2025/naclo-2025-C-solution.pdf",
+      "tags": [
+        "syntax",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2025-D",
+      "year": 2025,
+      "number": "D",
+      "title": "Problem D",
+      "file": "by-year/2025/naclo-2025-D-problem.pdf",
+      "solution_file": "by-year/2025/naclo-2025-D-solution.pdf",
+      "tags": [
+        "morphology",
+        "translation",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2025-E",
+      "year": 2025,
+      "number": "E",
+      "title": "Problem E",
+      "file": "by-year/2025/naclo-2025-E-problem.pdf",
+      "solution_file": "by-year/2025/naclo-2025-E-solution.pdf",
+      "tags": [
+        "semantics",
+        "pattern-recognition",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2025-F",
+      "year": 2025,
+      "number": "F",
+      "title": "Problem F",
+      "file": "by-year/2025/naclo-2025-F-problem.pdf",
+      "solution_file": "by-year/2025/naclo-2025-F-solution.pdf",
+      "tags": [
+        "morphology",
+        "rule-formulation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2025-G",
+      "year": 2025,
+      "number": "G",
+      "title": "Problem G",
+      "file": "by-year/2025/naclo-2025-G-problem.pdf",
+      "solution_file": "by-year/2025/naclo-2025-G-solution.pdf",
+      "tags": [
+        "phonology",
+        "translation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2025-H",
+      "year": 2025,
+      "number": "H",
+      "title": "Problem H",
+      "file": "by-year/2025/naclo-2025-H-problem.pdf",
+      "solution_file": "by-year/2025/naclo-2025-H-solution.pdf",
+      "tags": [
+        "syntax",
+        "paradigm",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2025-I",
+      "year": 2025,
+      "number": "I",
+      "title": "Problem I",
+      "file": "by-year/2025/naclo-2025-I-problem.pdf",
+      "solution_file": "by-year/2025/naclo-2025-I-solution.pdf",
+      "tags": [
+        "writing-systems",
+        "pattern-recognition",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2025-J",
+      "year": 2025,
+      "number": "J",
+      "title": "Problem J",
+      "file": "by-year/2025/naclo-2025-J-problem.pdf",
+      "solution_file": "by-year/2025/naclo-2025-J-solution.pdf",
+      "tags": [
+        "semantics",
+        "rule-formulation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2025-K",
+      "year": 2025,
+      "number": "K",
+      "title": "Problem K",
+      "file": "by-year/2025/naclo-2025-K-problem.pdf",
+      "solution_file": "by-year/2025/naclo-2025-K-solution.pdf",
+      "tags": [
+        "morphology",
+        "translation",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2025-L",
+      "year": 2025,
+      "number": "L",
+      "title": "Problem L",
+      "file": "by-year/2025/naclo-2025-L-problem.pdf",
+      "solution_file": "by-year/2025/naclo-2025-L-solution.pdf",
+      "tags": [
+        "phonology",
+        "paradigm",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2025-M",
+      "year": 2025,
+      "number": "M",
+      "title": "Problem M",
+      "file": "by-year/2025/naclo-2025-M-problem.pdf",
+      "solution_file": "by-year/2025/naclo-2025-M-solution.pdf",
+      "tags": [
+        "historical-linguistics",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2025-N",
+      "year": 2025,
+      "number": "N",
+      "title": "Problem N",
+      "file": "by-year/2025/naclo-2025-N-problem.pdf",
+      "solution_file": "by-year/2025/naclo-2025-N-solution.pdf",
+      "tags": [
+        "computational",
+        "reconstruction",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2025-O",
+      "year": 2025,
+      "number": "O",
+      "title": "Problem O",
+      "file": "by-year/2025/naclo-2025-O-problem.pdf",
+      "solution_file": "by-year/2025/naclo-2025-O-solution.pdf",
+      "tags": [
+        "comparative-linguistics",
+        "algorithm-design",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    },
+    {
+      "id": "N2025-P",
+      "year": 2025,
+      "number": "P",
+      "title": "Problem P",
+      "file": "by-year/2025/naclo-2025-P-problem.pdf",
+      "solution_file": "by-year/2025/naclo-2025-P-solution.pdf",
+      "tags": [
+        "morphology",
+        "decipherment",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "status": "auto-generated",
+      "notes": "Tags auto-generated based on heuristics. Requires manual verification."
+    }
+  ],
+  "labeling_guidelines": {
+    "difficulty_progression": {
+      "A-D": "typically beginner (difficulty 1)",
+      "E-H": "typically beginner-intermediate (difficulty 2)",
+      "I-L": "typically intermediate (difficulty 2-3)",
+      "M-P": "typically intermediate-advanced (difficulty 3)",
+      "Q-S": "typically advanced (difficulty 3-4)"
+    },
+    "common_naclo_topics": {
+      "morphology": "Noun classes, verb conjugation, case systems, derivation",
+      "phonology": "Sound patterns, phonotactics, tone, vowel/consonant harmony",
+      "syntax": "Word order, agreement, grammatical relations, constituent structure",
+      "writing-systems": "Scripts, orthography, character systems, transliteration",
+      "computational": "Algorithms, formal grammars, text processing, coding",
+      "semantics": "Meaning relations, semantic roles, compositionality",
+      "historical-linguistics": "Sound change, reconstruction, cognates, etymology"
+    },
+    "manual_refinement_needed": [
+      "Problem titles (extract from PDFs)",
+      "Specific language families (requires reading problem content)",
+      "Additional specialized tags (e.g., 'multiple-languages', 'diachronic')",
+      "Actual difficulty ratings (may vary from estimates)"
+    ]
+  },
+  "statistics": {
+    "total_problems": 292,
+    "years_covered": 18,
+    "by_difficulty": {
+      "1_easiest": 0,
+      "2_easy": 72,
+      "3_medium": 140,
+      "4_hard": 80,
+      "5_hardest": 0
+    }
+  }
+}

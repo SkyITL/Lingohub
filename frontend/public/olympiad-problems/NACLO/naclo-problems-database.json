@@ -1,0 +1,110 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "last_updated": "2025-11-02",
+    "total_problems": 290,
+    "years": "2007-2025",
+    "description": "Comprehensive database of NACLO problems with linguistic tags"
+  },
+  "taxonomy": {
+    "linguistic_areas": [
+      "phonology", "morphology", "syntax", "semantics", "pragmatics",
+      "writing-systems", "historical-linguistics", "computational",
+      "sociolinguistics", "comparative-linguistics"
+    ],
+    "problem_types": [
+      "pattern-recognition", "rule-formulation", "translation",
+      "reconstruction", "decipherment", "algorithm-design"
+    ],
+    "difficulty_levels": ["beginner", "intermediate", "advanced", "expert"]
+  },
+  "problems": [
+    {
+      "id": "N2007-A",
+      "year": 2007,
+      "number": "A",
+      "file": "by-year/2007/naclo-2007-A-problem.pdf",
+      "tags": ["morphology", "pattern-recognition", "beginner"],
+      "estimated_difficulty": 1,
+      "notes": "Early NACLO problems (A-D) typically beginner level"
+    },
+    {
+      "id": "N2007-B",
+      "year": 2007,
+      "number": "B",
+      "file": "by-year/2007/naclo-2007-B-problem.pdf",
+      "tags": ["phonology", "pattern-recognition", "beginner"],
+      "estimated_difficulty": 1
+    },
+    {
+      "id": "N2007-C",
+      "year": 2007,
+      "number": "C",
+      "file": "by-year/2007/naclo-2007-C-problem.pdf",
+      "tags": ["syntax", "translation", "beginner"],
+      "estimated_difficulty": 1
+    },
+    {
+      "id": "N2007-D",
+      "year": 2007,
+      "number": "D",
+      "file": "by-year/2007/naclo-2007-D-problem.pdf",
+      "tags": ["morphology", "pattern-recognition", "intermediate"],
+      "estimated_difficulty": 2
+    },
+    {
+      "id": "N2007-E",
+      "year": 2007,
+      "number": "E",
+      "file": "by-year/2007/naclo-2007-E-problem.pdf",
+      "tags": ["writing-systems", "decipherment", "intermediate"],
+      "estimated_difficulty": 2
+    },
+    {
+      "id": "N2007-F",
+      "year": 2007,
+      "number": "F",
+      "file": "by-year/2007/naclo-2007-F-problem.pdf",
+      "tags": ["computational", "algorithm-design", "advanced"],
+      "estimated_difficulty": 3
+    },
+    {
+      "id": "N2007-G",
+      "year": 2007,
+      "number": "G",
+      "file": "by-year/2007/naclo-2007-G-problem.pdf",
+      "tags": ["syntax", "rule-formulation", "advanced"],
+      "estimated_difficulty": 3
+    },
+    {
+      "id": "N2007-H",
+      "year": 2007,
+      "number": "H",
+      "file": "by-year/2007/naclo-2007-H-problem.pdf",
+      "tags": ["morphology", "historical-linguistics", "expert"],
+      "estimated_difficulty": 4
+    }
+  ],
+  "labeling_guidelines": {
+    "difficulty_progression": {
+      "A-D": "typically beginner (difficulty 1-2)",
+      "E-H": "typically beginner-intermediate (difficulty 2)",
+      "I-L": "typically intermediate (difficulty 2-3)",
+      "M-P": "typically intermediate-advanced (difficulty 3)",
+      "Q-R": "typically advanced-expert (difficulty 3-4)"
+    },
+    "common_patterns": {
+      "morphology": "Word formation, affixes, noun classes, verb conjugation",
+      "phonology": "Sound patterns, phonotactics, vowel/consonant harmony",
+      "syntax": "Word order, agreement, grammatical relations",
+      "writing-systems": "Scripts, orthography, character systems",
+      "computational": "Algorithms, formal grammars, text processing"
+    }
+  },
+  "instructions": {
+    "how_to_use": "This database maps each NACLO problem to linguistic tags",
+    "tag_format": "Use lowercase, hyphenated tags from taxonomy",
+    "difficulty_scale": "1=beginner, 2=intermediate, 3=advanced, 4=expert",
+    "extending": "Add new problems following the same JSON structure"
+  }
+}

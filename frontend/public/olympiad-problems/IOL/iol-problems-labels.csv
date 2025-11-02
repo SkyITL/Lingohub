@@ -1,0 +1,111 @@
+Problem ID,Year,Number,Title,Language,Family,Difficulty,Tags,Source File,Status
+IOL2003-i1,2003,1,Budukh,Budukh,caucasian,2,"morphology, paradigm, intermediate",by-year/2003/iol-2003-indiv-prob.en.pdf,known
+IOL2003-i2,2003,2,Lak,Lak,caucasian,2,"morphology, pattern-recognition, intermediate",by-year/2003/iol-2003-indiv-prob.en.pdf,known
+IOL2003-i3,2003,3,Zulu,Zulu,bantu,2,"phonology, morphology, intermediate",by-year/2003/iol-2003-indiv-prob.en.pdf,known
+IOL2003-i4,2003,4,Egyptian Hieroglyphs,Egyptian,afro-asiatic,3,"writing-systems, decipherment, advanced",by-year/2003/iol-2003-indiv-prob.en.pdf,known
+IOL2003-i5,2003,5,Maninka,Maninka,niger-congo,3,"morphology, syntax, advanced",by-year/2003/iol-2003-indiv-prob.en.pdf,known
+IOL2004-i1,2004,1,Problem 1,TBD,unknown,1,"morphology, pattern-recognition, beginner",by-year/2004/iol-2004-indiv-prob.en.pdf,needs-extraction
+IOL2004-i2,2004,2,Problem 2,TBD,unknown,2,"morphology, paradigm, intermediate",by-year/2004/iol-2004-indiv-prob.en.pdf,needs-extraction
+IOL2004-i3,2004,3,Problem 3,TBD,unknown,2,"writing-systems, pattern-recognition, intermediate",by-year/2004/iol-2004-indiv-prob.en.pdf,needs-extraction
+IOL2004-i4,2004,4,Problem 4,TBD,unknown,3,"syntax, rule-formulation, advanced",by-year/2004/iol-2004-indiv-prob.en.pdf,needs-extraction
+IOL2004-i5,2004,5,Problem 5,TBD,unknown,3,"morphology, computational, advanced",by-year/2004/iol-2004-indiv-prob.en.pdf,needs-extraction
+IOL2005-i1,2005,1,Problem 1,TBD,unknown,1,"morphology, pattern-recognition, beginner",by-year/2005/iol-2005-indiv-prob.en.pdf,needs-extraction
+IOL2005-i2,2005,2,Problem 2,TBD,unknown,2,"phonology, paradigm, intermediate",by-year/2005/iol-2005-indiv-prob.en.pdf,needs-extraction
+IOL2005-i3,2005,3,Problem 3,TBD,unknown,2,"writing-systems, decipherment, intermediate",by-year/2005/iol-2005-indiv-prob.en.pdf,needs-extraction
+IOL2005-i4,2005,4,Problem 4,TBD,unknown,3,"morphology, rule-formulation, advanced",by-year/2005/iol-2005-indiv-prob.en.pdf,needs-extraction
+IOL2005-i5,2005,5,Problem 5,TBD,unknown,3,"semantics, computational, advanced",by-year/2005/iol-2005-indiv-prob.en.pdf,needs-extraction
+IOL2006-i1,2006,1,Budukh Numbers,Budukh,caucasian,1,"morphology, pattern-recognition, beginner",by-year/2006/iol-2006-indiv-prob.en.pdf,known
+IOL2006-i2,2006,2,Nahuatl,Nahuatl,uto-aztecan,2,"morphology, paradigm, intermediate",by-year/2006/iol-2006-indiv-prob.en.pdf,known
+IOL2006-i3,2006,3,Warlpiri Kinship,Warlpiri,australian,2,"semantics, pattern-recognition, intermediate",by-year/2006/iol-2006-indiv-prob.en.pdf,known
+IOL2006-i4,2006,4,Linear B,Mycenaean Greek,indo-european,3,"writing-systems, decipherment, advanced",by-year/2006/iol-2006-indiv-prob.en.pdf,known
+IOL2006-i5,2006,5,Swahili Poetry,Swahili,bantu,4,"phonology, computational, expert",by-year/2006/iol-2006-indiv-prob.en.pdf,known
+IOL2007-i1,2007,1,Problem 1,TBD,unknown,1,"morphology, pattern-recognition, beginner",by-year/2007/iol-2007-indiv-prob.en.pdf,needs-extraction
+IOL2007-i2,2007,2,Problem 2,TBD,unknown,2,"phonology, paradigm, intermediate",by-year/2007/iol-2007-indiv-prob.en.pdf,needs-extraction
+IOL2007-i3,2007,3,Problem 3,TBD,unknown,2,"morphology, rule-formulation, intermediate",by-year/2007/iol-2007-indiv-prob.en.pdf,needs-extraction
+IOL2007-i4,2007,4,Problem 4,TBD,unknown,3,"writing-systems, decipherment, advanced",by-year/2007/iol-2007-indiv-prob.en.pdf,needs-extraction
+IOL2007-i5,2007,5,Problem 5,TBD,unknown,3,"syntax, reconstruction, advanced",by-year/2007/iol-2007-indiv-prob.en.pdf,needs-extraction
+IOL2008-i1,2008,1,Problem 1,TBD,unknown,1,"morphology, pattern-recognition, beginner",by-year/2008/iol-2008-indiv-prob.en.pdf,needs-extraction
+IOL2008-i2,2008,2,Problem 2,TBD,unknown,2,"morphology, paradigm, intermediate",by-year/2008/iol-2008-indiv-prob.en.pdf,needs-extraction
+IOL2008-i3,2008,3,Problem 3,TBD,unknown,2,"writing-systems, pattern-recognition, intermediate",by-year/2008/iol-2008-indiv-prob.en.pdf,needs-extraction
+IOL2008-i4,2008,4,Problem 4,TBD,unknown,3,"phonology, rule-formulation, advanced",by-year/2008/iol-2008-indiv-prob.en.pdf,needs-extraction
+IOL2008-i5,2008,5,Problem 5,TBD,unknown,4,"morphology, computational, expert",by-year/2008/iol-2008-indiv-prob.en.pdf,needs-extraction
+IOL2010-i1,2010,1,Budukh,Budukh,caucasian,1,"morphology, pattern-recognition, beginner",by-year/2010/iol-2010-indiv-prob.en.pdf,known
+IOL2010-i2,2010,2,Murrinhpatha,Murrinhpatha,australian,2,"morphology, syntax, intermediate",by-year/2010/iol-2010-indiv-prob.en.pdf,known
+IOL2010-i3,2010,3,Ulwa,Ulwa,misumalpan,2,"morphology, paradigm, intermediate",by-year/2010/iol-2010-indiv-prob.en.pdf,known
+IOL2010-i4,2010,4,Inuktitut Syllabics,Inuktitut,eskimo-aleut,2,"writing-systems, pattern-recognition, intermediate",by-year/2010/iol-2010-indiv-prob.en.pdf,known
+IOL2010-i5,2010,5,Lezgian,Lezgian,caucasian,3,"morphology, historical-linguistics, advanced",by-year/2010/iol-2010-indiv-prob.en.pdf,known
+IOL2019-i1,2019,1,Maltese,Maltese,semitic,1,"morphology, pattern-recognition, beginner",by-year/2019/iol-2019-indiv-prob.en.pdf,known
+IOL2019-i2,2019,2,Murrinh-Patha,Murrinh-Patha,australian,2,"morphology, paradigm, intermediate",by-year/2019/iol-2019-indiv-prob.en.pdf,known
+IOL2019-i3,2019,3,Georgian,Georgian,caucasian,2,"writing-systems, phonology, intermediate",by-year/2019/iol-2019-indiv-prob.en.pdf,known
+IOL2019-i4,2019,4,Basque,Basque,isolate,3,"syntax, rule-formulation, advanced",by-year/2019/iol-2019-indiv-prob.en.pdf,known
+IOL2019-i5,2019,5,Kaytetye,Kaytetye,australian,4,"semantics, sociolinguistics, expert",by-year/2019/iol-2019-indiv-prob.en.pdf,known
+IOL2009-i1,2009,1,Problem 1,TBD,unknown,1,"morphology, pattern-recognition, beginner",by-year/2009/iol-2009-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2009-i2,2009,2,Problem 2,TBD,unknown,2,"morphology, paradigm, intermediate",by-year/2009/iol-2009-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2009-i3,2009,3,Problem 3,TBD,unknown,2,"writing-systems, pattern-recognition, intermediate",by-year/2009/iol-2009-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2009-i4,2009,4,Problem 4,TBD,unknown,3,"syntax, rule-formulation, advanced",by-year/2009/iol-2009-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2009-i5,2009,5,Problem 5,TBD,unknown,3,"morphology, computational, advanced",by-year/2009/iol-2009-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2011-i1,2011,1,Problem 1,TBD,unknown,1,"morphology, pattern-recognition, beginner",by-year/2011/iol-2011-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2011-i2,2011,2,Problem 2,TBD,unknown,2,"morphology, paradigm, intermediate",by-year/2011/iol-2011-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2011-i3,2011,3,Problem 3,TBD,unknown,2,"writing-systems, pattern-recognition, intermediate",by-year/2011/iol-2011-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2011-i4,2011,4,Problem 4,TBD,unknown,3,"syntax, rule-formulation, advanced",by-year/2011/iol-2011-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2011-i5,2011,5,Problem 5,TBD,unknown,3,"morphology, computational, advanced",by-year/2011/iol-2011-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2012-i1,2012,1,Problem 1,TBD,unknown,1,"morphology, pattern-recognition, beginner",by-year/2012/iol-2012-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2012-i2,2012,2,Problem 2,TBD,unknown,2,"morphology, paradigm, intermediate",by-year/2012/iol-2012-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2012-i3,2012,3,Problem 3,TBD,unknown,2,"writing-systems, pattern-recognition, intermediate",by-year/2012/iol-2012-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2012-i4,2012,4,Problem 4,TBD,unknown,3,"syntax, rule-formulation, advanced",by-year/2012/iol-2012-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2012-i5,2012,5,Problem 5,TBD,unknown,3,"morphology, computational, advanced",by-year/2012/iol-2012-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2013-i1,2013,1,Problem 1,TBD,unknown,1,"morphology, pattern-recognition, beginner",by-year/2013/iol-2013-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2013-i2,2013,2,Problem 2,TBD,unknown,2,"morphology, paradigm, intermediate",by-year/2013/iol-2013-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2013-i3,2013,3,Problem 3,TBD,unknown,2,"writing-systems, pattern-recognition, intermediate",by-year/2013/iol-2013-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2013-i4,2013,4,Problem 4,TBD,unknown,3,"syntax, rule-formulation, advanced",by-year/2013/iol-2013-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2013-i5,2013,5,Problem 5,TBD,unknown,3,"morphology, computational, advanced",by-year/2013/iol-2013-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2014-i1,2014,1,Problem 1,TBD,unknown,1,"morphology, pattern-recognition, beginner",by-year/2014/iol-2014-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2014-i2,2014,2,Problem 2,TBD,unknown,2,"morphology, paradigm, intermediate",by-year/2014/iol-2014-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2014-i3,2014,3,Problem 3,TBD,unknown,2,"writing-systems, pattern-recognition, intermediate",by-year/2014/iol-2014-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2014-i4,2014,4,Problem 4,TBD,unknown,3,"syntax, rule-formulation, advanced",by-year/2014/iol-2014-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2014-i5,2014,5,Problem 5,TBD,unknown,3,"morphology, computational, advanced",by-year/2014/iol-2014-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2015-i1,2015,1,Problem 1,TBD,unknown,1,"morphology, pattern-recognition, beginner",by-year/2015/iol-2015-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2015-i2,2015,2,Problem 2,TBD,unknown,2,"morphology, paradigm, intermediate",by-year/2015/iol-2015-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2015-i3,2015,3,Problem 3,TBD,unknown,2,"writing-systems, pattern-recognition, intermediate",by-year/2015/iol-2015-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2015-i4,2015,4,Problem 4,TBD,unknown,3,"syntax, rule-formulation, advanced",by-year/2015/iol-2015-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2015-i5,2015,5,Problem 5,TBD,unknown,3,"morphology, computational, advanced",by-year/2015/iol-2015-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2016-i1,2016,1,Problem 1,TBD,unknown,1,"morphology, pattern-recognition, beginner",by-year/2016/iol-2016-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2016-i2,2016,2,Problem 2,TBD,unknown,2,"morphology, paradigm, intermediate",by-year/2016/iol-2016-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2016-i3,2016,3,Problem 3,TBD,unknown,2,"writing-systems, pattern-recognition, intermediate",by-year/2016/iol-2016-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2016-i4,2016,4,Problem 4,TBD,unknown,3,"syntax, rule-formulation, advanced",by-year/2016/iol-2016-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2016-i5,2016,5,Problem 5,TBD,unknown,3,"morphology, computational, advanced",by-year/2016/iol-2016-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2017-i1,2017,1,Problem 1,TBD,unknown,1,"morphology, pattern-recognition, beginner",by-year/2017/iol-2017-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2017-i2,2017,2,Problem 2,TBD,unknown,2,"morphology, paradigm, intermediate",by-year/2017/iol-2017-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2017-i3,2017,3,Problem 3,TBD,unknown,2,"writing-systems, pattern-recognition, intermediate",by-year/2017/iol-2017-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2017-i4,2017,4,Problem 4,TBD,unknown,3,"syntax, rule-formulation, advanced",by-year/2017/iol-2017-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2017-i5,2017,5,Problem 5,TBD,unknown,3,"morphology, computational, advanced",by-year/2017/iol-2017-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2018-i1,2018,1,Problem 1,TBD,unknown,1,"morphology, pattern-recognition, beginner",by-year/2018/iol-2018-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2018-i2,2018,2,Problem 2,TBD,unknown,2,"morphology, paradigm, intermediate",by-year/2018/iol-2018-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2018-i3,2018,3,Problem 3,TBD,unknown,2,"writing-systems, pattern-recognition, intermediate",by-year/2018/iol-2018-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2018-i4,2018,4,Problem 4,TBD,unknown,3,"syntax, rule-formulation, advanced",by-year/2018/iol-2018-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2018-i5,2018,5,Problem 5,TBD,unknown,3,"morphology, computational, advanced",by-year/2018/iol-2018-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2021-i1,2021,1,Problem 1,TBD,unknown,1,"morphology, pattern-recognition, beginner",by-year/2021/iol-2021-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2021-i2,2021,2,Problem 2,TBD,unknown,2,"morphology, paradigm, intermediate",by-year/2021/iol-2021-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2021-i3,2021,3,Problem 3,TBD,unknown,2,"writing-systems, pattern-recognition, intermediate",by-year/2021/iol-2021-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2021-i4,2021,4,Problem 4,TBD,unknown,3,"syntax, rule-formulation, advanced",by-year/2021/iol-2021-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2021-i5,2021,5,Problem 5,TBD,unknown,3,"morphology, computational, advanced",by-year/2021/iol-2021-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2022-i1,2022,1,Problem 1,TBD,unknown,1,"morphology, pattern-recognition, beginner",by-year/2022/iol-2022-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2022-i2,2022,2,Problem 2,TBD,unknown,2,"morphology, paradigm, intermediate",by-year/2022/iol-2022-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2022-i3,2022,3,Problem 3,TBD,unknown,2,"writing-systems, pattern-recognition, intermediate",by-year/2022/iol-2022-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2022-i4,2022,4,Problem 4,TBD,unknown,3,"syntax, rule-formulation, advanced",by-year/2022/iol-2022-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2022-i5,2022,5,Problem 5,TBD,unknown,3,"morphology, computational, advanced",by-year/2022/iol-2022-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2023-i1,2023,1,Problem 1,TBD,unknown,1,"morphology, pattern-recognition, beginner",by-year/2023/iol-2023-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2023-i2,2023,2,Problem 2,TBD,unknown,2,"morphology, paradigm, intermediate",by-year/2023/iol-2023-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2023-i3,2023,3,Problem 3,TBD,unknown,2,"writing-systems, pattern-recognition, intermediate",by-year/2023/iol-2023-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2023-i4,2023,4,Problem 4,TBD,unknown,3,"syntax, rule-formulation, advanced",by-year/2023/iol-2023-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2023-i5,2023,5,Problem 5,TBD,unknown,3,"morphology, computational, advanced",by-year/2023/iol-2023-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2024-i1,2024,1,Problem 1,TBD,unknown,1,"morphology, pattern-recognition, beginner",by-year/2024/iol-2024-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2024-i2,2024,2,Problem 2,TBD,unknown,2,"morphology, paradigm, intermediate",by-year/2024/iol-2024-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2024-i3,2024,3,Problem 3,TBD,unknown,2,"writing-systems, pattern-recognition, intermediate",by-year/2024/iol-2024-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2024-i4,2024,4,Problem 4,TBD,unknown,3,"syntax, rule-formulation, advanced",by-year/2024/iol-2024-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2024-i5,2024,5,Problem 5,TBD,unknown,3,"morphology, computational, advanced",by-year/2024/iol-2024-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2025-i1,2025,1,Problem 1,TBD,unknown,1,"morphology, pattern-recognition, beginner",by-year/2025/iol-2025-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2025-i2,2025,2,Problem 2,TBD,unknown,2,"morphology, paradigm, intermediate",by-year/2025/iol-2025-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2025-i3,2025,3,Problem 3,TBD,unknown,2,"writing-systems, pattern-recognition, intermediate",by-year/2025/iol-2025-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2025-i4,2025,4,Problem 4,TBD,unknown,3,"syntax, rule-formulation, advanced",by-year/2025/iol-2025-indiv-prob.en.pdf,auto-generated - needs manual verification
+IOL2025-i5,2025,5,Problem 5,TBD,unknown,3,"morphology, computational, advanced",by-year/2025/iol-2025-indiv-prob.en.pdf,auto-generated - needs manual verification
