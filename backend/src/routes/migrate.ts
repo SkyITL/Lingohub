@@ -1,35 +1,33 @@
 import express, { Request, Response } from 'express'
-import { exec } from 'child_process'
-import { promisify } from 'util'
+import { PrismaClient } from '@prisma/client'
 
 const router = express.Router()
-const execAsync = promisify(exec)
+const prisma = new PrismaClient()
 
-// Run database migrations - ONLY call this after deploying schema changes
+// Run database migrations via raw SQL - ONLY call this after deploying schema changes
 router.post('/deploy', async (req: Request, res: Response) => {
   try {
     console.log('🔧 Running database migrations...')
 
-    // Run prisma migrate deploy
-    const { stdout, stderr } = await execAsync('npx prisma migrate deploy', {
-      cwd: '/var/task',  // Vercel serverless function directory
-      env: { ...process.env }
-    })
+    // Apply the pdfUrl and solutionUrl migration
+    await prisma.$executeRawUnsafe(`
+      ALTER TABLE "problems"
+      ADD COLUMN IF NOT EXISTS "pdfUrl" VARCHAR(500),
+      ADD COLUMN IF NOT EXISTS "solutionUrl" VARCHAR(500);
+    `)
 
-    console.log('Migration stdout:', stdout)
-    if (stderr) console.log('Migration stderr:', stderr)
+    console.log('✅ Migration applied: Added pdfUrl and solutionUrl columns')
 
     res.json({
       success: true,
       message: 'Migrations applied successfully!',
-      output: stdout
+      columns: ['pdfUrl', 'solutionUrl']
     })
   } catch (error: any) {
     console.error('Migration error:', error)
     res.status(500).json({
       error: 'Migration failed',
-      details: error.message,
-      stderr: error.stderr
+      details: error.message
     })
   }
 })
