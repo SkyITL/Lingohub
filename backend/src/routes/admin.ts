@@ -75,14 +75,6 @@ router.delete('/problems/without-pdf', async (req: Request, res: Response) => {
       where: { problemId: { in: problemIds } }
     })
 
-    await prisma.discussionReply.deleteMany({
-      where: {
-        discussion: {
-          problemId: { in: problemIds }
-        }
-      }
-    })
-
     await prisma.discussion.deleteMany({
       where: { problemId: { in: problemIds } }
     })
