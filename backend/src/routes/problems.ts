@@ -246,6 +246,7 @@ router.get('/:id', optionalAuth, async (req: Request, res: Response) => {
       const year = problem.year
       const problemNum = problem.number.replace('LH-IOL-', '').split('-')[1] // Get just the problem number (e.g., "1" from "LH-IOL-2003-1")
       pdfUrl = `/olympiad-problems/IOL/by-year/${year}/iol-${year}-i${problemNum}.pdf`
+      solutionPdfUrl = `/olympiad-problems/IOL/by-year/${year}/iol-${year}-i${problemNum}-solution.pdf`
     } else if (problem.number.startsWith('LH-APLO-')) {
       const parts = problem.number.split('-')
       const pNum = parts[parts.length - 1]
