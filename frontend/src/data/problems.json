@@ -1,83 +1,28 @@
 {
   "problems": [
     {
-      "id": "LH-IOL-2017-1",
-      "number": "LH-IOL-2017-1",
-      "title": "IOL 2017 Problem 1: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
+      "id": "LH-UK-2010-Gelbe",
+      "number": "LH-UK-2010-Gelbe",
+      "title": "UKLO 2010 2. Gelda’s House of Gelbergarg: English",
+      "content": "Loading from database...",
+      "officialSolution": "See official solution",
       "difficulty": 1,
       "rating": 1200,
-      "source": "IOL",
-      "year": 2017,
+      "source": "UKLO",
+      "year": 2010,
       "solveCount": 0,
       "tags": [
+        "morphology",
         "beginner",
-        "pattern-recognition",
-        "morphology"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2018-1",
-      "number": "LH-IOL-2018-1",
-      "title": "IOL 2018 Problem 1: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 1,
-      "rating": 1200,
-      "source": "IOL",
-      "year": 2018,
-      "solveCount": 0,
-      "tags": [
-        "beginner",
-        "pattern-recognition",
-        "morphology"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2016-1",
-      "number": "LH-IOL-2016-1",
-      "title": "IOL 2016 Problem 1: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 1,
-      "rating": 1200,
-      "source": "IOL",
-      "year": 2016,
-      "solveCount": 0,
-      "tags": [
-        "beginner",
-        "pattern-recognition",
-        "morphology"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2013-1",
-      "number": "LH-IOL-2013-1",
-      "title": "IOL 2013 Problem 1: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 1,
-      "rating": 1200,
-      "source": "IOL",
-      "year": 2013,
-      "solveCount": 0,
-      "tags": [
-        "beginner",
-        "pattern-recognition",
-        "morphology"
-      ],
-      "pdfUrl": null
+        "pattern-recognition"
+      ]
     },
     {
       "id": "LH-UK-2010-ths",
       "number": "LH-UK-2010-ths",
       "title": "UKLO 2010 *R2.3. F u cn rd ths: English",
-      "content": null,
-      "officialSolution": "Solution available in database",
+      "content": "Loading from database...",
+      "officialSolution": "See official solution",
       "difficulty": 1,
       "rating": 1200,
       "source": "UKLO",
@@ -87,123 +32,14 @@
         "algorithm-design",
         "beginner",
         "computational"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2012-1",
-      "number": "LH-IOL-2012-1",
-      "title": "IOL 2012 Problem 1: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 1,
-      "rating": 1200,
-      "source": "IOL",
-      "year": 2012,
-      "solveCount": 0,
-      "tags": [
-        "beginner",
-        "pattern-recognition",
-        "morphology"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2022-1",
-      "number": "LH-IOL-2022-1",
-      "title": "IOL 2022 Problem 1: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 1,
-      "rating": 1200,
-      "source": "IOL",
-      "year": 2022,
-      "solveCount": 0,
-      "tags": [
-        "beginner",
-        "pattern-recognition",
-        "morphology"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2015-1",
-      "number": "LH-IOL-2015-1",
-      "title": "IOL 2015 Problem 1: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 1,
-      "rating": 1200,
-      "source": "IOL",
-      "year": 2015,
-      "solveCount": 0,
-      "tags": [
-        "beginner",
-        "pattern-recognition",
-        "morphology"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2011-1",
-      "number": "LH-IOL-2011-1",
-      "title": "IOL 2011 Problem 1: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 1,
-      "rating": 1200,
-      "source": "IOL",
-      "year": 2011,
-      "solveCount": 0,
-      "tags": [
-        "beginner",
-        "pattern-recognition",
-        "morphology"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2023-1",
-      "number": "LH-IOL-2023-1",
-      "title": "IOL 2023 Problem 1: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 1,
-      "rating": 1200,
-      "source": "IOL",
-      "year": 2023,
-      "solveCount": 0,
-      "tags": [
-        "beginner",
-        "pattern-recognition",
-        "morphology"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2021-1",
-      "number": "LH-IOL-2021-1",
-      "title": "IOL 2021 Problem 1: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 1,
-      "rating": 1200,
-      "source": "IOL",
-      "year": 2021,
-      "solveCount": 0,
-      "tags": [
-        "beginner",
-        "pattern-recognition",
-        "morphology"
-      ],
-      "pdfUrl": null
+      ]
     },
     {
       "id": "LH-UK-2010-Abma",
       "number": "LH-UK-2010-Abma",
       "title": "UKLO 2010 *3. Say it in Abma: Abma",
-      "content": null,
-      "officialSolution": "Solution available in database",
+      "content": "Loading from database...",
+      "officialSolution": "See official solution",
       "difficulty": 1,
       "rating": 1200,
       "source": "UKLO",
@@ -213,15 +49,14 @@
         "morphology",
         "beginner",
         "pattern-recognition"
-      ],
-      "pdfUrl": null
+      ]
     },
     {
       "id": "LH-UK-2010-cucum",
       "number": "LH-UK-2010-cucum",
       "title": "UKLO 2010 *1. Sorry we have no red cucumbers: French",
-      "content": null,
-      "officialSolution": "Solution available in database",
+      "content": "Loading from database...",
+      "officialSolution": "See official solution",
       "difficulty": 1,
       "rating": 1200,
       "source": "UKLO",
@@ -231,87 +66,14 @@
         "rule-formulation",
         "beginner",
         "syntax"
-      ],
-      "pdfUrl": null
+      ]
     },
     {
-      "id": "LH-IOL-2014-1",
-      "number": "LH-IOL-2014-1",
-      "title": "IOL 2014 Problem 1: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 1,
-      "rating": 1200,
-      "source": "IOL",
-      "year": 2014,
-      "solveCount": 0,
-      "tags": [
-        "beginner",
-        "pattern-recognition",
-        "morphology"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-UK-2010-Gelbe",
-      "number": "LH-UK-2010-Gelbe",
-      "title": "UKLO 2010 2. Gelda’s House of Gelbergarg: English",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 1,
-      "rating": 1200,
-      "source": "UKLO",
-      "year": 2010,
-      "solveCount": 0,
-      "tags": [
-        "morphology",
-        "beginner",
-        "pattern-recognition"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2022-3",
-      "number": "LH-IOL-2022-3",
-      "title": "IOL 2022 Problem 3: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 2,
-      "rating": 1400,
-      "source": "IOL",
-      "year": 2022,
-      "solveCount": 0,
-      "tags": [
-        "beginner",
-        "pattern-recognition",
-        "writing-systems"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2009-2",
-      "number": "LH-IOL-2009-2",
-      "title": "IOL 2009 Problem 2: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 2,
-      "rating": 1400,
-      "source": "IOL",
-      "year": 2009,
-      "solveCount": 0,
-      "tags": [
-        "beginner",
-        "paradigm",
-        "morphology"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2003-2",
-      "number": "LH-IOL-2003-2",
-      "title": "IOL 2003 Problem 2: Lak",
-      "content": null,
-      "officialSolution": "Solution available in database",
+      "id": "LH-IOL-2003-3",
+      "number": "LH-IOL-2003-3",
+      "title": "IOL 2003 Problem 3: Zulu",
+      "content": "Loading from database...",
+      "officialSolution": "See official solution",
       "difficulty": 2,
       "rating": 1400,
       "source": "IOL",
@@ -319,125 +81,33 @@
       "solveCount": 0,
       "tags": [
         "beginner",
-        "pattern-recognition",
-        "morphology"
-      ],
-      "pdfUrl": null
+        "morphology",
+        "phonology"
+      ]
     },
     {
-      "id": "LH-IOL-2012-2",
-      "number": "LH-IOL-2012-2",
-      "title": "IOL 2012 Problem 2: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
+      "id": "LH-UK-2010-Uzzle",
+      "number": "LH-UK-2010-Uzzle",
+      "title": "UKLO 2010 *R2.1. Ardhay Uzzlepay: Minangkabau",
+      "content": "Loading from database...",
+      "officialSolution": "See official solution",
       "difficulty": 2,
       "rating": 1400,
-      "source": "IOL",
-      "year": 2012,
+      "source": "UKLO",
+      "year": 2010,
       "solveCount": 0,
       "tags": [
+        "morphology",
         "beginner",
-        "paradigm",
-        "morphology"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2012-3",
-      "number": "LH-IOL-2012-3",
-      "title": "IOL 2012 Problem 3: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 2,
-      "rating": 1400,
-      "source": "IOL",
-      "year": 2012,
-      "solveCount": 0,
-      "tags": [
-        "beginner",
-        "pattern-recognition",
-        "writing-systems"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2011-2",
-      "number": "LH-IOL-2011-2",
-      "title": "IOL 2011 Problem 2: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 2,
-      "rating": 1400,
-      "source": "IOL",
-      "year": 2011,
-      "solveCount": 0,
-      "tags": [
-        "beginner",
-        "paradigm",
-        "morphology"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-APLO-2019-1",
-      "number": "LH-APLO-2019-1",
-      "title": "APLO 2019 Problem 1",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 2,
-      "rating": 1400,
-      "source": "APLO",
-      "year": 2019,
-      "solveCount": 0,
-      "tags": [
-        "beginner",
-        "pattern-recognition",
-        "morphology"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2011-3",
-      "number": "LH-IOL-2011-3",
-      "title": "IOL 2011 Problem 3: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 2,
-      "rating": 1400,
-      "source": "IOL",
-      "year": 2011,
-      "solveCount": 0,
-      "tags": [
-        "beginner",
-        "pattern-recognition",
-        "writing-systems"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-NACLO-2007-A",
-      "number": "LH-NACLO-2007-A",
-      "title": "NACLO 2007 Problem A",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 2,
-      "rating": 1400,
-      "source": "NACLO",
-      "year": 2007,
-      "solveCount": 0,
-      "tags": [
-        "beginner",
-        "pattern-recognition",
-        "morphology"
-      ],
-      "pdfUrl": null
+        "pattern-recognition"
+      ]
     },
     {
       "id": "LH-NACLO-2007-B",
       "number": "LH-NACLO-2007-B",
       "title": "NACLO 2007 Problem B",
-      "content": null,
-      "officialSolution": "Solution available in database",
+      "content": "Loading from database...",
+      "officialSolution": "See official solution",
       "difficulty": 2,
       "rating": 1400,
       "source": "NACLO",
@@ -447,15 +117,14 @@
         "beginner",
         "translation",
         "phonology"
-      ],
-      "pdfUrl": null
+      ]
     },
     {
       "id": "LH-NACLO-2007-C",
       "number": "LH-NACLO-2007-C",
       "title": "NACLO 2007 Problem C",
-      "content": null,
-      "officialSolution": "Solution available in database",
+      "content": "Loading from database...",
+      "officialSolution": "See official solution",
       "difficulty": 2,
       "rating": 1400,
       "source": "NACLO",
@@ -465,15 +134,14 @@
         "beginner",
         "pattern-recognition",
         "syntax"
-      ],
-      "pdfUrl": null
+      ]
     },
     {
       "id": "LH-NACLO-2007-D",
       "number": "LH-NACLO-2007-D",
       "title": "NACLO 2007 Problem D",
-      "content": null,
-      "officialSolution": "Solution available in database",
+      "content": "Loading from database...",
+      "officialSolution": "See official solution",
       "difficulty": 2,
       "rating": 1400,
       "source": "NACLO",
@@ -483,87 +151,14 @@
         "beginner",
         "translation",
         "morphology"
-      ],
-      "pdfUrl": null
+      ]
     },
     {
-      "id": "LH-IOL-2014-3",
-      "number": "LH-IOL-2014-3",
-      "title": "IOL 2014 Problem 3: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 2,
-      "rating": 1400,
-      "source": "IOL",
-      "year": 2014,
-      "solveCount": 0,
-      "tags": [
-        "beginner",
-        "pattern-recognition",
-        "writing-systems"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2015-3",
-      "number": "LH-IOL-2015-3",
-      "title": "IOL 2015 Problem 3: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 2,
-      "rating": 1400,
-      "source": "IOL",
-      "year": 2015,
-      "solveCount": 0,
-      "tags": [
-        "beginner",
-        "pattern-recognition",
-        "writing-systems"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2016-2",
-      "number": "LH-IOL-2016-2",
-      "title": "IOL 2016 Problem 2: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 2,
-      "rating": 1400,
-      "source": "IOL",
-      "year": 2016,
-      "solveCount": 0,
-      "tags": [
-        "beginner",
-        "paradigm",
-        "morphology"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2016-3",
-      "number": "LH-IOL-2016-3",
-      "title": "IOL 2016 Problem 3: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 2,
-      "rating": 1400,
-      "source": "IOL",
-      "year": 2016,
-      "solveCount": 0,
-      "tags": [
-        "beginner",
-        "pattern-recognition",
-        "writing-systems"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2003-3",
-      "number": "LH-IOL-2003-3",
-      "title": "IOL 2003 Problem 3: Zulu",
-      "content": null,
-      "officialSolution": "Solution available in database",
+      "id": "LH-IOL-2003-2",
+      "number": "LH-IOL-2003-2",
+      "title": "IOL 2003 Problem 2: Lak",
+      "content": "Loading from database...",
+      "officialSolution": "See official solution",
       "difficulty": 2,
       "rating": 1400,
       "source": "IOL",
@@ -571,269 +166,84 @@
       "solveCount": 0,
       "tags": [
         "beginner",
-        "morphology",
-        "phonology"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2017-2",
-      "number": "LH-IOL-2017-2",
-      "title": "IOL 2017 Problem 2: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 2,
-      "rating": 1400,
-      "source": "IOL",
-      "year": 2017,
-      "solveCount": 0,
-      "tags": [
-        "beginner",
-        "paradigm",
+        "pattern-recognition",
         "morphology"
-      ],
-      "pdfUrl": null
+      ]
     },
     {
-      "id": "LH-IOL-2017-3",
-      "number": "LH-IOL-2017-3",
-      "title": "IOL 2017 Problem 3: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
+      "id": "LH-APLO-2019-1",
+      "number": "LH-APLO-2019-1",
+      "title": "APLO 2019 Problem 1",
+      "content": "Loading from database...",
+      "officialSolution": "See official solution",
       "difficulty": 2,
       "rating": 1400,
-      "source": "IOL",
-      "year": 2017,
+      "source": "APLO",
+      "year": 2019,
       "solveCount": 0,
       "tags": [
         "beginner",
         "pattern-recognition",
-        "writing-systems"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2014-2",
-      "number": "LH-IOL-2014-2",
-      "title": "IOL 2014 Problem 2: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 2,
-      "rating": 1400,
-      "source": "IOL",
-      "year": 2014,
-      "solveCount": 0,
-      "tags": [
-        "beginner",
-        "paradigm",
         "morphology"
-      ],
-      "pdfUrl": null
+      ]
     },
     {
-      "id": "LH-UK-2010-Uzzle",
-      "number": "LH-UK-2010-Uzzle",
-      "title": "UKLO 2010 *R2.1. Ardhay Uzzlepay: Minangkabau",
-      "content": null,
-      "officialSolution": "Solution available in database",
+      "id": "LH-NACLO-2007-A",
+      "number": "LH-NACLO-2007-A",
+      "title": "NACLO 2007 Problem A",
+      "content": "Loading from database...",
+      "officialSolution": "See official solution",
       "difficulty": 2,
       "rating": 1400,
-      "source": "UKLO",
-      "year": 2010,
-      "solveCount": 0,
-      "tags": [
-        "morphology",
-        "beginner",
-        "pattern-recognition"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2018-2",
-      "number": "LH-IOL-2018-2",
-      "title": "IOL 2018 Problem 2: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 2,
-      "rating": 1400,
-      "source": "IOL",
-      "year": 2018,
-      "solveCount": 0,
-      "tags": [
-        "beginner",
-        "paradigm",
-        "morphology"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2018-3",
-      "number": "LH-IOL-2018-3",
-      "title": "IOL 2018 Problem 3: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 2,
-      "rating": 1400,
-      "source": "IOL",
-      "year": 2018,
+      "source": "NACLO",
+      "year": 2007,
       "solveCount": 0,
       "tags": [
         "beginner",
         "pattern-recognition",
-        "writing-systems"
-      ],
-      "pdfUrl": null
+        "morphology"
+      ]
     },
     {
-      "id": "LH-IOL-2021-2",
-      "number": "LH-IOL-2021-2",
-      "title": "IOL 2021 Problem 2: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 2,
-      "rating": 1400,
-      "source": "IOL",
-      "year": 2021,
+      "id": "LH-APLO-2019-3",
+      "number": "LH-APLO-2019-3",
+      "title": "APLO 2019 Problem 3",
+      "content": "Loading from database...",
+      "officialSolution": "See official solution",
+      "difficulty": 3,
+      "rating": 1600,
+      "source": "APLO",
+      "year": 2019,
       "solveCount": 0,
       "tags": [
-        "beginner",
+        "intermediate",
+        "rule-formulation",
+        "syntax"
+      ]
+    },
+    {
+      "id": "LH-IOL-2003-1",
+      "number": "LH-IOL-2003-1",
+      "title": "IOL 2003 Problem 1: Budukh",
+      "content": "Loading from database...",
+      "officialSolution": "See official solution",
+      "difficulty": 3,
+      "rating": 1600,
+      "source": "IOL",
+      "year": 2003,
+      "solveCount": 0,
+      "tags": [
+        "intermediate",
         "paradigm",
         "morphology"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2021-3",
-      "number": "LH-IOL-2021-3",
-      "title": "IOL 2021 Problem 3: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 2,
-      "rating": 1400,
-      "source": "IOL",
-      "year": 2021,
-      "solveCount": 0,
-      "tags": [
-        "beginner",
-        "pattern-recognition",
-        "writing-systems"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2023-2",
-      "number": "LH-IOL-2023-2",
-      "title": "IOL 2023 Problem 2: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 2,
-      "rating": 1400,
-      "source": "IOL",
-      "year": 2023,
-      "solveCount": 0,
-      "tags": [
-        "beginner",
-        "paradigm",
-        "morphology"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2009-3",
-      "number": "LH-IOL-2009-3",
-      "title": "IOL 2009 Problem 3: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 2,
-      "rating": 1400,
-      "source": "IOL",
-      "year": 2009,
-      "solveCount": 0,
-      "tags": [
-        "beginner",
-        "pattern-recognition",
-        "writing-systems"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2022-2",
-      "number": "LH-IOL-2022-2",
-      "title": "IOL 2022 Problem 2: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 2,
-      "rating": 1400,
-      "source": "IOL",
-      "year": 2022,
-      "solveCount": 0,
-      "tags": [
-        "beginner",
-        "paradigm",
-        "morphology"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2013-2",
-      "number": "LH-IOL-2013-2",
-      "title": "IOL 2013 Problem 2: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 2,
-      "rating": 1400,
-      "source": "IOL",
-      "year": 2013,
-      "solveCount": 0,
-      "tags": [
-        "beginner",
-        "paradigm",
-        "morphology"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2015-2",
-      "number": "LH-IOL-2015-2",
-      "title": "IOL 2015 Problem 2: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 2,
-      "rating": 1400,
-      "source": "IOL",
-      "year": 2015,
-      "solveCount": 0,
-      "tags": [
-        "beginner",
-        "paradigm",
-        "morphology"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2013-3",
-      "number": "LH-IOL-2013-3",
-      "title": "IOL 2013 Problem 3: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 2,
-      "rating": 1400,
-      "source": "IOL",
-      "year": 2013,
-      "solveCount": 0,
-      "tags": [
-        "beginner",
-        "pattern-recognition",
-        "writing-systems"
-      ],
-      "pdfUrl": null
+      ]
     },
     {
       "id": "LH-APLO-2019-2",
       "number": "LH-APLO-2019-2",
       "title": "APLO 2019 Problem 2",
-      "content": null,
-      "officialSolution": "Solution available in database",
+      "content": "Loading from database...",
+      "officialSolution": "See official solution",
       "difficulty": 3,
       "rating": 1600,
       "source": "APLO",
@@ -843,15 +253,14 @@
         "intermediate",
         "paradigm",
         "phonology"
-      ],
-      "pdfUrl": null
+      ]
     },
     {
       "id": "LH-NACLO-2007-E",
       "number": "LH-NACLO-2007-E",
       "title": "NACLO 2007 Problem E",
-      "content": null,
-      "officialSolution": "Solution available in database",
+      "content": "Loading from database...",
+      "officialSolution": "See official solution",
       "difficulty": 3,
       "rating": 1600,
       "source": "NACLO",
@@ -861,87 +270,65 @@
         "intermediate",
         "pattern-recognition",
         "semantics"
-      ],
-      "pdfUrl": null
+      ]
     },
     {
-      "id": "LH-APLO-2019-3",
-      "number": "LH-APLO-2019-3",
-      "title": "APLO 2019 Problem 3",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 3,
-      "rating": 1600,
-      "source": "APLO",
-      "year": 2019,
-      "solveCount": 0,
-      "tags": [
-        "intermediate",
-        "rule-formulation",
-        "syntax"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2003-1",
-      "number": "LH-IOL-2003-1",
-      "title": "IOL 2003 Problem 1: Budukh",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 3,
-      "rating": 1600,
+      "id": "LH-IOL-2003-4",
+      "number": "LH-IOL-2003-4",
+      "title": "IOL 2003 Problem 4: Egyptian",
+      "content": "Loading from database...",
+      "officialSolution": "See official solution",
+      "difficulty": 4,
+      "rating": 1800,
       "source": "IOL",
       "year": 2003,
       "solveCount": 0,
       "tags": [
-        "intermediate",
-        "paradigm",
-        "morphology"
-      ],
-      "pdfUrl": null
+        "advanced",
+        "decipherment",
+        "writing-systems"
+      ]
     },
     {
-      "id": "LH-IOL-2022-4",
-      "number": "LH-IOL-2022-4",
-      "title": "IOL 2022 Problem 4: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
+      "id": "LH-APLO-2019-5",
+      "number": "LH-APLO-2019-5",
+      "title": "APLO 2019 Problem 5",
+      "content": "Loading from database...",
+      "officialSolution": "See official solution",
       "difficulty": 4,
       "rating": 1800,
-      "source": "IOL",
-      "year": 2022,
+      "source": "APLO",
+      "year": 2019,
       "solveCount": 0,
       "tags": [
         "advanced",
-        "rule-formulation",
-        "syntax"
-      ],
-      "pdfUrl": null
+        "computational",
+        "semantics"
+      ]
     },
     {
-      "id": "LH-IOL-2009-4",
-      "number": "LH-IOL-2009-4",
-      "title": "IOL 2009 Problem 4: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
+      "id": "LH-APLO-2019-4",
+      "number": "LH-APLO-2019-4",
+      "title": "APLO 2019 Problem 4",
+      "content": "Loading from database...",
+      "officialSolution": "See official solution",
       "difficulty": 4,
       "rating": 1800,
-      "source": "IOL",
-      "year": 2009,
+      "source": "APLO",
+      "year": 2019,
       "solveCount": 0,
       "tags": [
         "advanced",
-        "rule-formulation",
-        "syntax"
-      ],
-      "pdfUrl": null
+        "decipherment",
+        "writing-systems"
+      ]
     },
     {
       "id": "LH-IOL-2003-5",
       "number": "LH-IOL-2003-5",
       "title": "IOL 2003 Problem 5: Maninka",
-      "content": null,
-      "officialSolution": "Solution available in database",
+      "content": "Loading from database...",
+      "officialSolution": "See official solution",
       "difficulty": 4,
       "rating": 1800,
       "source": "IOL",
@@ -951,422 +338,7 @@
         "advanced",
         "syntax",
         "morphology"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2011-5",
-      "number": "LH-IOL-2011-5",
-      "title": "IOL 2011 Problem 5: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 4,
-      "rating": 1800,
-      "source": "IOL",
-      "year": 2011,
-      "solveCount": 0,
-      "tags": [
-        "advanced",
-        "computational",
-        "morphology"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-APLO-2019-4",
-      "number": "LH-APLO-2019-4",
-      "title": "APLO 2019 Problem 4",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 4,
-      "rating": 1800,
-      "source": "APLO",
-      "year": 2019,
-      "solveCount": 0,
-      "tags": [
-        "advanced",
-        "decipherment",
-        "writing-systems"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2012-4",
-      "number": "LH-IOL-2012-4",
-      "title": "IOL 2012 Problem 4: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 4,
-      "rating": 1800,
-      "source": "IOL",
-      "year": 2012,
-      "solveCount": 0,
-      "tags": [
-        "advanced",
-        "rule-formulation",
-        "syntax"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2012-5",
-      "number": "LH-IOL-2012-5",
-      "title": "IOL 2012 Problem 5: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 4,
-      "rating": 1800,
-      "source": "IOL",
-      "year": 2012,
-      "solveCount": 0,
-      "tags": [
-        "advanced",
-        "computational",
-        "morphology"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2013-4",
-      "number": "LH-IOL-2013-4",
-      "title": "IOL 2013 Problem 4: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 4,
-      "rating": 1800,
-      "source": "IOL",
-      "year": 2013,
-      "solveCount": 0,
-      "tags": [
-        "advanced",
-        "rule-formulation",
-        "syntax"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2013-5",
-      "number": "LH-IOL-2013-5",
-      "title": "IOL 2013 Problem 5: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 4,
-      "rating": 1800,
-      "source": "IOL",
-      "year": 2013,
-      "solveCount": 0,
-      "tags": [
-        "advanced",
-        "computational",
-        "morphology"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2022-5",
-      "number": "LH-IOL-2022-5",
-      "title": "IOL 2022 Problem 5: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 4,
-      "rating": 1800,
-      "source": "IOL",
-      "year": 2022,
-      "solveCount": 0,
-      "tags": [
-        "advanced",
-        "computational",
-        "morphology"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2009-5",
-      "number": "LH-IOL-2009-5",
-      "title": "IOL 2009 Problem 5: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 4,
-      "rating": 1800,
-      "source": "IOL",
-      "year": 2009,
-      "solveCount": 0,
-      "tags": [
-        "advanced",
-        "computational",
-        "morphology"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2003-4",
-      "number": "LH-IOL-2003-4",
-      "title": "IOL 2003 Problem 4: Egyptian",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 4,
-      "rating": 1800,
-      "source": "IOL",
-      "year": 2003,
-      "solveCount": 0,
-      "tags": [
-        "advanced",
-        "decipherment",
-        "writing-systems"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2011-4",
-      "number": "LH-IOL-2011-4",
-      "title": "IOL 2011 Problem 4: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 4,
-      "rating": 1800,
-      "source": "IOL",
-      "year": 2011,
-      "solveCount": 0,
-      "tags": [
-        "advanced",
-        "rule-formulation",
-        "syntax"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-APLO-2019-5",
-      "number": "LH-APLO-2019-5",
-      "title": "APLO 2019 Problem 5",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 4,
-      "rating": 1800,
-      "source": "APLO",
-      "year": 2019,
-      "solveCount": 0,
-      "tags": [
-        "advanced",
-        "computational",
-        "semantics"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2014-4",
-      "number": "LH-IOL-2014-4",
-      "title": "IOL 2014 Problem 4: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 4,
-      "rating": 1800,
-      "source": "IOL",
-      "year": 2014,
-      "solveCount": 0,
-      "tags": [
-        "advanced",
-        "rule-formulation",
-        "syntax"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2014-5",
-      "number": "LH-IOL-2014-5",
-      "title": "IOL 2014 Problem 5: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 4,
-      "rating": 1800,
-      "source": "IOL",
-      "year": 2014,
-      "solveCount": 0,
-      "tags": [
-        "advanced",
-        "computational",
-        "morphology"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2015-4",
-      "number": "LH-IOL-2015-4",
-      "title": "IOL 2015 Problem 4: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 4,
-      "rating": 1800,
-      "source": "IOL",
-      "year": 2015,
-      "solveCount": 0,
-      "tags": [
-        "advanced",
-        "rule-formulation",
-        "syntax"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2015-5",
-      "number": "LH-IOL-2015-5",
-      "title": "IOL 2015 Problem 5: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 4,
-      "rating": 1800,
-      "source": "IOL",
-      "year": 2015,
-      "solveCount": 0,
-      "tags": [
-        "advanced",
-        "computational",
-        "morphology"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2016-4",
-      "number": "LH-IOL-2016-4",
-      "title": "IOL 2016 Problem 4: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 4,
-      "rating": 1800,
-      "source": "IOL",
-      "year": 2016,
-      "solveCount": 0,
-      "tags": [
-        "advanced",
-        "rule-formulation",
-        "syntax"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2016-5",
-      "number": "LH-IOL-2016-5",
-      "title": "IOL 2016 Problem 5: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 4,
-      "rating": 1800,
-      "source": "IOL",
-      "year": 2016,
-      "solveCount": 0,
-      "tags": [
-        "advanced",
-        "computational",
-        "morphology"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2017-4",
-      "number": "LH-IOL-2017-4",
-      "title": "IOL 2017 Problem 4: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 4,
-      "rating": 1800,
-      "source": "IOL",
-      "year": 2017,
-      "solveCount": 0,
-      "tags": [
-        "advanced",
-        "rule-formulation",
-        "syntax"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2017-5",
-      "number": "LH-IOL-2017-5",
-      "title": "IOL 2017 Problem 5: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 4,
-      "rating": 1800,
-      "source": "IOL",
-      "year": 2017,
-      "solveCount": 0,
-      "tags": [
-        "advanced",
-        "computational",
-        "morphology"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2018-4",
-      "number": "LH-IOL-2018-4",
-      "title": "IOL 2018 Problem 4: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 4,
-      "rating": 1800,
-      "source": "IOL",
-      "year": 2018,
-      "solveCount": 0,
-      "tags": [
-        "advanced",
-        "rule-formulation",
-        "syntax"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2018-5",
-      "number": "LH-IOL-2018-5",
-      "title": "IOL 2018 Problem 5: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 4,
-      "rating": 1800,
-      "source": "IOL",
-      "year": 2018,
-      "solveCount": 0,
-      "tags": [
-        "advanced",
-        "computational",
-        "morphology"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2021-4",
-      "number": "LH-IOL-2021-4",
-      "title": "IOL 2021 Problem 4: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 4,
-      "rating": 1800,
-      "source": "IOL",
-      "year": 2021,
-      "solveCount": 0,
-      "tags": [
-        "advanced",
-        "rule-formulation",
-        "syntax"
-      ],
-      "pdfUrl": null
-    },
-    {
-      "id": "LH-IOL-2021-5",
-      "number": "LH-IOL-2021-5",
-      "title": "IOL 2021 Problem 5: TBD",
-      "content": null,
-      "officialSolution": "Solution available in database",
-      "difficulty": 4,
-      "rating": 1800,
-      "source": "IOL",
-      "year": 2021,
-      "solveCount": 0,
-      "tags": [
-        "advanced",
-        "computational",
-        "morphology"
-      ],
-      "pdfUrl": null
+      ]
     }
   ]
 }
