@@ -115,12 +115,15 @@ export const authApi = {
 export const problemsApi = {
   getAll: (filters?: Record<string, any>) =>
     api.get('/problems', { params: filters }),
-  
+
   getById: (id: string) =>
     api.get(`/problems/${id}`),
-  
+
   getStats: () =>
     api.get('/problems/stats/overview'),
+
+  viewSolution: (id: string) =>
+    api.post(`/problems/${id}/view-solution`),
 }
 
 // Solutions API

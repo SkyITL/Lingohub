@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "user_progress" ADD COLUMN "viewedSolution" BOOLEAN NOT NULL DEFAULT false;
+ALTER TABLE "user_progress" ADD COLUMN "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP;

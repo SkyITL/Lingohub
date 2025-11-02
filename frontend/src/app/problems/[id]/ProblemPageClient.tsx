@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { solutionsApi } from '@/lib/api'
+import { solutionsApi, problemsApi } from '@/lib/api'
 import { useAuth } from '@/contexts/AuthContext'
 import Header from "@/components/Header"
 import { Button } from "@/components/ui/button"
@@ -21,7 +21,8 @@ import {
   Check,
   Send,
   X,
-  Trash2
+  Trash2,
+  AlertTriangle
 } from "lucide-react"
 
 // Markdown content component
@@ -76,6 +77,8 @@ export default function ProblemPageClient({ initialProblem }: ProblemPageClientP
   const [isLoadingSolutions, setIsLoadingSolutions] = useState(true)
   const [userSolution, setUserSolution] = useState(null)
   const [isEditingUserSolution, setIsEditingUserSolution] = useState(false)
+  const [showSolutionWarning, setShowSolutionWarning] = useState(!initialProblem.viewedSolution)
+  const [solutionRevealed, setSolutionRevealed] = useState(initialProblem.viewedSolution || false)
 
   // Load saved state and solutions
   useEffect(() => {
@@ -408,6 +411,25 @@ export default function ProblemPageClient({ initialProblem }: ProblemPageClientP
     }
   }
 
+  const handleRevealSolution = async () => {
+    if (!user) {
+      alert('You must be logged in to view solutions.')
+      return
+    }
+
+    try {
+      // Call API to record solution view
+      await problemsApi.viewSolution(problem.id)
+      setSolutionRevealed(true)
+      setShowSolutionWarning(false)
+    } catch (error) {
+      console.error('Failed to record solution view:', error)
+      // Still reveal solution even if API call fails
+      setSolutionRevealed(true)
+      setShowSolutionWarning(false)
+    }
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
@@ -553,38 +575,66 @@ export default function ProblemPageClient({ initialProblem }: ProblemPageClientP
 
             {/* Official Solution Tab */}
             <Tabs.Content value="official" className="p-6">
-              <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
-                <p className="text-sm text-yellow-800">
-                  ⚠️ Official solutions contain spoilers. Make sure you've attempted the problem first!
-                </p>
-              </div>
-
-              {problem.solutionPdfUrl ? (
-                <div>
-                  <div className="border rounded-lg overflow-hidden bg-gray-100" style={{ height: '800px' }}>
-                    <iframe
-                      src={problem.solutionPdfUrl}
-                      className="w-full h-full"
-                      title="Official Solution PDF"
-                    />
-                  </div>
-                  <div className="mt-2 text-sm text-gray-600">
-                    <a
-                      href={problem.solutionPdfUrl}
-                      download
-                      className="text-blue-600 hover:underline inline-flex items-center gap-1"
-                      target="_blank"
-                      rel="noopener noreferrer"
+              {!solutionRevealed ? (
+                // Show warning and reveal button
+                <div className="text-center py-12">
+                  <div className="bg-red-50 border-2 border-red-200 rounded-lg p-8 max-w-2xl mx-auto">
+                    <AlertTriangle className="h-16 w-16 text-red-600 mx-auto mb-4" />
+                    <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                      ⚠️ Warning: Viewing Official Solution
+                    </h3>
+                    <p className="text-gray-700 mb-4">
+                      Once you view the official solution, you will <strong>NOT</strong> be able to gain rating from solving this problem.
+                    </p>
+                    <p className="text-gray-700 mb-6">
+                      Are you sure you want to continue? Make sure you&apos;ve attempted the problem first!
+                    </p>
+                    <Button
+                      onClick={handleRevealSolution}
+                      size="lg"
+                      className="bg-red-600 hover:bg-red-700 text-white"
                     >
-                      <Download className="h-4 w-4" />
-                      Download Solution PDF
-                    </a>
+                      I Understand, Show Solution
+                    </Button>
                   </div>
                 </div>
               ) : (
-                <div className="prose prose-lg max-w-none">
-                  <MarkdownContent content={problem.officialSolution || 'Official solution not yet available.'} />
-                </div>
+                // Show actual solution
+                <>
+                  <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
+                    <p className="text-sm text-yellow-800">
+                      ⚠️ You have viewed this solution. You cannot gain rating from this problem.
+                    </p>
+                  </div>
+
+                  {problem.solutionPdfUrl ? (
+                    <div>
+                      <div className="border rounded-lg overflow-hidden bg-gray-100" style={{ height: '800px' }}>
+                        <iframe
+                          src={problem.solutionPdfUrl}
+                          className="w-full h-full"
+                          title="Official Solution PDF"
+                        />
+                      </div>
+                      <div className="mt-2 text-sm text-gray-600">
+                        <a
+                          href={problem.solutionPdfUrl}
+                          download
+                          className="text-blue-600 hover:underline inline-flex items-center gap-1"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Download className="h-4 w-4" />
+                          Download Solution PDF
+                        </a>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="prose prose-lg max-w-none">
+                      <MarkdownContent content={problem.officialSolution || 'Official solution not yet available.'} />
+                    </div>
+                  )}
+                </>
               )}
             </Tabs.Content>
 

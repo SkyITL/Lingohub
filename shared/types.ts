@@ -39,6 +39,7 @@ export interface ProblemDetail extends Problem {
   officialSolution?: string
   pdfUrl?: string | null
   solutionPdfUrl?: string | null
+  viewedSolution?: boolean
   stats: {
     solveCount: number
     solutionCount: number

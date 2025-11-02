@@ -305,7 +305,8 @@ router.get('/:id', optionalAuth, async (req: Request, res: Response) => {
         solutionCount: problem._count.solutions,
         discussionCount: problem._count.discussions
       },
-      userStatus: req.user && problem.progress.length > 0 ? problem.progress[0].status : 'unsolved'
+      userStatus: req.user && problem.progress.length > 0 ? problem.progress[0].status : 'unsolved',
+      viewedSolution: req.user && problem.progress.length > 0 ? problem.progress[0].viewedSolution : false
     }
 
     res.json(transformedProblem)
@@ -346,6 +347,56 @@ router.get('/stats/overview', async (req: Request, res: Response) => {
     })
   } catch (error) {
     console.error('Stats fetch error:', error)
+    res.status(500).json({ error: 'Internal server error' })
+  }
+})
+
+// Record that user viewed official solution
+router.post('/:id/view-solution', optionalAuth, async (req: Request, res: Response) => {
+  try {
+    if (!req.user) {
+      return res.status(401).json({ error: 'Authentication required' })
+    }
+
+    const { id } = req.params
+
+    // Find problem by ID or number
+    const problem = await prisma.problem.findFirst({
+      where: {
+        OR: [
+          { id },
+          { number: id }
+        ]
+      }
+    })
+
+    if (!problem) {
+      return res.status(404).json({ error: 'Problem not found' })
+    }
+
+    // Update or create user progress with viewedSolution = true
+    await prisma.userProgress.upsert({
+      where: {
+        userId_problemId: {
+          userId: req.user.id,
+          problemId: problem.id
+        }
+      },
+      update: {
+        viewedSolution: true,
+        updatedAt: new Date()
+      },
+      create: {
+        userId: req.user.id,
+        problemId: problem.id,
+        viewedSolution: true,
+        status: 'unsolved'
+      }
+    })
+
+    res.json({ success: true, message: 'Solution view recorded' })
+  } catch (error) {
+    console.error('View solution error:', error)
     res.status(500).json({ error: 'Internal server error' })
   }
 })
