@@ -1,12 +1,13 @@
-### Claude Code 从荣八耻
-以瞎猜接口为耻，以认真查询为荣
-以模糊执行为耻，以寻求确认为荣
-以臆想业务为耻，以人类确认为荣
-以创造接口为耻，以复用现有为荣
-以跳过验证为耻，以主动测试为荣
-以破坏架构为耻，以遵循规范为荣
-以假装理解为耻，以诚实无知为荣
-以盲目修改为耻，以谨慎重构为荣
+### Claude Code Development Principles (从荣八耻)
+**IMPORTANT - Follow these principles strictly:**
+1. ❌ Never guess API interfaces → ✅ Always verify by reading code
+2. ❌ Never execute vaguely → ✅ Always seek confirmation when unclear
+3. ❌ Never assume business logic → ✅ Always confirm with humans
+4. ❌ Never create new interfaces → ✅ Always reuse existing ones
+5. ❌ Never skip validation → ✅ Always test proactively
+6. ❌ Never break architecture → ✅ Always follow established patterns
+7. ❌ Never pretend to understand → ✅ Always admit when uncertain
+8. ❌ Never blindly refactor → ✅ Always refactor cautiously
 
 # CLAUDE.md
 
@@ -20,10 +21,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run dev:backend` - Backend only (Express API on port 4000)
 
 ### Build and Test
-- `npm run build` - Build all packages (shared, frontend, backend)
-- `npm test` - Run all tests
-- `npm run lint` - Lint frontend code (run from frontend directory)
-- `npm run type-check` - Check TypeScript types (doesn't exist, use tsc in respective dirs)
+- `npm run build` - Build all packages in order: shared → frontend → backend
+  - Builds shared types package first (required for frontend/backend)
+  - Then builds frontend and backend in parallel
+- `npm test` - Run all tests across frontend and backend
+- `cd frontend && npm run lint` - Lint frontend code
+- `cd backend && npm run build` - Build backend (Prisma generate only)
+- `cd backend && npm run vercel-build` - Full backend build (Prisma + TypeScript compile)
 
 ### Database Operations
 - `cd backend && npm run migrate` - Create new migration from schema changes
@@ -33,7 +37,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `cd backend && npm run db:push` - Push schema changes without migration (dev only)
 
 ### Frontend-Specific
-- `cd frontend && npm run generate-problems` - Generate problem pages
+- `cd frontend && npm run generate-problems` - Generate static problem pages from problems.json
+  - Reads `frontend/src/data/problems.json`
+  - Creates page components in `frontend/src/app/problems/[number]/page.tsx`
+  - Uses `ProblemPageTemplate` component for rendering
 
 ## Architecture Overview
 
@@ -42,6 +49,10 @@ This is a monorepo with three main packages:
 - **frontend/**: Next.js 15 app with TypeScript and Tailwind CSS
 - **backend/**: Express.js API server with Prisma ORM
 - **shared/**: Common TypeScript types used by both frontend and backend
+  - **CRITICAL**: `shared/types.ts` must stay in sync between frontend/backend
+  - Contains all interface definitions (User, Problem, Solution, Discussion, etc.)
+  - Both packages import from `shared/types` for type safety
+  - Any API contract changes require updating shared types first
 
 ### Technology Stack
 - **Frontend**: Next.js 15, React 19, TypeScript, Tailwind CSS v4, Radix UI, React Query
@@ -71,9 +82,13 @@ Next.js App Router with:
 - Page components in `src/app/*/page.tsx`
 - Reusable UI components in `src/components/`
 - API client in `src/lib/api.ts` using axios with interceptors
+  - Automatic token injection from localStorage (`lingohub_token`)
+  - Auto-redirect to login on 401 errors
+  - Smart API URL detection (env var → production → localhost:4000)
+  - Comprehensive request/response logging via logger
 - Auth context in `src/contexts/AuthContext.tsx`
 - React Query provider in `src/providers/QueryProvider.tsx`
-- Static problem pages generated via script
+- Static problem pages generated via script (optional performance optimization)
 
 ## Key Features
 
@@ -108,11 +123,28 @@ Problems have a specific format:
 - Frontend auth state managed via AuthContext
 - Token stored in localStorage as `lingohub_token`
 
-### Database Migrations
-- Always use `npm run db:generate` after modifying schema.prisma
-- Use `npm run migrate` for development migrations
-- Use `npm run migrate:deploy` for production deployments
-- Seed data available via `npm run db:seed` script
+### Database Migrations and Prisma Workflow
+**IMPORTANT**: Follow this exact workflow when changing the database schema:
+
+1. **Edit schema**: Modify `backend/prisma/schema.prisma`
+2. **Generate client**: `cd backend && npm run db:generate` (regenerates Prisma Client)
+3. **Create migration** (production path):
+   - `cd backend && npm run migrate` (creates migration file)
+   - Commit the migration file to git
+   - Deploy with `npm run migrate:deploy`
+4. **Or push directly** (dev only):
+   - `cd backend && npm run db:push` (skips migration files)
+   - **Never use in production** - no migration history
+
+**After schema changes:**
+- Always run `db:generate` to update TypeScript types
+- Backend will have type errors until you regenerate
+- Frontend uses `shared/types.ts`, not Prisma types directly
+
+**Seeding:**
+- `cd backend && npm run db:seed` - runs `src/scripts/seed.ts`
+- Idempotent - safe to run multiple times
+- Creates/updates problems from `src/data/problems.ts`
 
 ## Admin Operations
 
@@ -153,23 +185,47 @@ curl -X POST https://lingohub-backend.vercel.app/api/seed/run
 ```
 
 **Important:** All problem data is centralized in `backend/src/data/problems.ts`. When you add a new problem:
-1. Add it to this file
-2. Run the seed endpoint
-3. Update `frontend/src/data/problems.json` (if using static pages)
-4. Regenerate problem pages with `npm run generate-problems` (if needed)
+1. Add it to this file with the proper format (number, title, content, source, year, difficulty, rating, officialSolution)
+2. Run the seed endpoint (production) or `npm run db:seed` (local)
+3. Update `frontend/src/data/problems.json` manually (if using static pages)
+4. Regenerate problem pages with `cd frontend && npm run generate-problems` (creates static page components)
+
+**Problem Data Workflow:**
+- `backend/src/data/problems.ts` is the **single source of truth**
+- Problems are stored in PostgreSQL database via seeding
+- Frontend can fetch from API (dynamic) or use static pages (faster)
+- Static pages require manual regeneration when problems change
+
+### Problem Scraping and Data Collection
+The `olympiad-problems/` directory contains scraped problem data from various linguistics olympiads:
+- **Sources**: IOL (ioling.org), NACLO (naclo.org), UKLO (uklo.org), APLO (aplo.asia)
+- **Purpose**: Collect and parse problems to import into the LingoHub database
+- **Scripts**: May include download and parsing scripts (e.g., `download-problems.sh`, `download-naclo.sh`)
+- **Workflow**:
+  1. Run scraping scripts to download problems from olympiad websites
+  2. Parse the downloaded content (often HTML or PDF) into structured format
+  3. Manually review and format problems into `backend/src/data/problems.ts`
+  4. Run seeding script to import into database
+- **Important**: This directory is untracked in git to avoid copyright issues
 
 ## Important Notes
 
 - PostgreSQL database required (default: "lingohub" database on port 5432)
 - Frontend expects API at http://localhost:4000 (configurable via NEXT_PUBLIC_API_URL)
 - Shared types in `shared/types.ts` must be kept in sync between frontend/backend
-- IPA content requires proper font loading for correct rendering
+  - The shared package is built separately and imported by both frontend and backend
+  - Any changes to shared types require rebuilding the shared package
+  - Run `npm run build:shared` from the root when types change
+- IPA content requires proper font loading for correct rendering (Charis SIL font)
 - Environment variables needed in backend/.env:
   - DATABASE_URL="postgresql://user:password@localhost:5432/lingohub"
   - JWT_SECRET (for access tokens)
   - JWT_REFRESH_SECRET (for refresh tokens)
 - CORS is configured to allow credentials from localhost:3000
 - ESLint and TypeScript errors are ignored during builds (see next.config.ts)
+- `olympiad-problems/` directory contains scraped problem data from various olympiads (untracked in git)
+  - Used for data collection and importing problems into the system
+  - Scripts may exist for downloading and parsing problems from IOL, NACLO, UKLO, APLO
 
 ## Deployment Notes (Vercel)
 
@@ -192,11 +248,21 @@ curl -X POST https://lingohub-backend.vercel.app/api/seed/run
 #### Backend Deployment
 - **Platform**: Vercel (Serverless Functions)
 - **Root Directory**: `backend`
-- **Entry Point**: `api/index.ts` (imports `src/server.ts`)
+- **Entry Point**: `backend/api/index.ts` (handler that wraps `src/server.ts`)
+  - **CRITICAL**: The entry point MUST be at `backend/api/index.ts` for Vercel's serverless architecture
+  - `api/index.ts` is the Vercel serverless function handler
+  - It imports and wraps the Express app from `src/server.ts`
+  - The Express app is exported as a default module from `src/server.ts`
+  - Vercel automatically converts all Express routes to serverless functions
+- **Build Command**: `npm run vercel-build` (runs `npx prisma generate && tsc`)
+  - Generates Prisma Client from schema
+  - Compiles TypeScript to JavaScript
+  - Output goes to `dist/` directory
 - **Environment Variables** (set in Vercel dashboard):
-  - `DATABASE_URL`: PostgreSQL connection string
+  - `DATABASE_URL`: PostgreSQL connection string (must use connection pooling for serverless, e.g., Supabase pooler or Neon)
   - `JWT_SECRET`: Secret for access tokens
   - `JWT_REFRESH_SECRET`: Secret for refresh tokens
+  - `NODE_ENV`: production
 
 #### Local Development Setup
 For local development against production backend:

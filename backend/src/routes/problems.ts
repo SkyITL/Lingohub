@@ -238,6 +238,27 @@ router.get('/:id', optionalAuth, async (req: Request, res: Response) => {
       return res.status(404).json({ error: 'Problem not found' })
     }
 
+    // Compute PDF URL based on problem source and number
+    let pdfUrl = null
+    if (problem.number.startsWith('LH-IOL-')) {
+      const year = problem.year
+      const num = problem.number.replace('LH-IOL-', '').replace('-', '-i')
+      pdfUrl = `/olympiad-problems/IOL/by-year/${year}/iol-${year}-${num}.pdf`
+    } else if (problem.number.startsWith('LH-APLO-')) {
+      const parts = problem.number.split('-')
+      const pNum = parts[parts.length - 1]
+      pdfUrl = `/olympiad-problems/APLO/aplo-${problem.year}-p${pNum}.pdf`
+    } else if (problem.number.startsWith('LH-NACLO-')) {
+      const year = problem.year
+      const letter = problem.number.split('-').pop()
+      pdfUrl = `/olympiad-problems/NACLO/by-year/${year}/naclo-${year}-${letter}-problem.pdf`
+    } else if (problem.number.startsWith('LH-UK-')) {
+      // UKLO PDFs use a different naming scheme
+      const year = problem.year
+      // Would need metadata to construct proper path
+      pdfUrl = null // TODO: Add metadata field for PDF path
+    }
+
     const transformedProblem = {
       id: problem.id,
       number: problem.number,
@@ -248,6 +269,7 @@ router.get('/:id', optionalAuth, async (req: Request, res: Response) => {
       rating: problem.rating,
       content: problem.content,
       officialSolution: problem.officialSolution,
+      pdfUrl: pdfUrl,
       tags: problem.tags.map((pt: any) => pt.tag.name),
       stats: {
         solveCount: problem._count.progress,
