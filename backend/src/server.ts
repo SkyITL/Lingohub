@@ -11,6 +11,7 @@ import solutionRoutes from './routes/solutions'
 import seedRoutes from './routes/seed'
 import adminRoutes from './routes/admin'
 import olympiadRoutes from './routes/olympiad'
+import migrateRoutes from './routes/migrate'
 
 const app = express()
 const prisma = new PrismaClient()
@@ -59,6 +60,7 @@ app.use('/api/solutions', solutionRoutes)
 app.use('/api/seed', seedRoutes)
 app.use('/api/admin', adminRoutes)
 app.use('/api/olympiad', olympiadRoutes)
+app.use('/api/migrate', migrateRoutes)
 
 // Health check
 app.get('/api/health', async (req, res) => {
