@@ -1,0 +1,426 @@
+{
+  "metadata": {
+    "total_problems": 20,
+    "generated_at": "2025-11-02",
+    "format_version": "1.0",
+    "test_mode": true,
+    "description": "Test upload with 5 sample problems from each olympiad"
+  },
+  "problems": [
+    {
+      "number": "LH-IOL-2003-1",
+      "title": "IOL 2003 Problem 1: Budukh",
+      "source": "IOL",
+      "year": 2003,
+      "difficulty": 3,
+      "rating": 1600,
+      "tags": [
+        "morphology",
+        "paradigm",
+        "intermediate"
+      ],
+      "content": "# IOL 2003 Problem 1: Budukh\n\n**Source:** IOL 2003\n**Difficulty:** ⭐⭐⭐ (3/5)\n**Topics:** morphology, paradigm, intermediate\n\n## View Problem\n\nThe complete problem is displayed in the PDF viewer below.\n\n---\n*This is an official IOL problem. All olympiad problems are self-contained puzzles that require no prior linguistic knowledge.*",
+      "solution": "See solution file (if available)",
+      "pdfUrl": "/olympiad-problems/IOL/by-year/2003/iol-2003-i1.pdf",
+      "metadata": {
+        "language": "Budukh",
+        "family": "caucasian",
+        "original_id": "IOL2003-i1"
+      }
+    },
+    {
+      "number": "LH-IOL-2003-2",
+      "title": "IOL 2003 Problem 2: Lak",
+      "source": "IOL",
+      "year": 2003,
+      "difficulty": 2,
+      "rating": 1400,
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "content": "# IOL 2003 Problem 2: Lak\n\n**Source:** IOL 2003\n**Difficulty:** ⭐⭐ (2/5)\n**Topics:** morphology, pattern-recognition, beginner\n\n## View Problem\n\nThe complete problem is displayed in the PDF viewer below.\n\n---\n*This is an official IOL problem. All olympiad problems are self-contained puzzles that require no prior linguistic knowledge.*",
+      "solution": "See solution file (if available)",
+      "pdfUrl": "/olympiad-problems/IOL/by-year/2003/iol-2003-i2.pdf",
+      "metadata": {
+        "language": "Lak",
+        "family": "caucasian",
+        "original_id": "IOL2003-i2"
+      }
+    },
+    {
+      "number": "LH-IOL-2003-3",
+      "title": "IOL 2003 Problem 3: Zulu",
+      "source": "IOL",
+      "year": 2003,
+      "difficulty": 2,
+      "rating": 1400,
+      "tags": [
+        "phonology",
+        "morphology",
+        "beginner"
+      ],
+      "content": "# IOL 2003 Problem 3: Zulu\n\n**Source:** IOL 2003\n**Difficulty:** ⭐⭐ (2/5)\n**Topics:** phonology, morphology, beginner\n\n## View Problem\n\nThe complete problem is displayed in the PDF viewer below.\n\n---\n*This is an official IOL problem. All olympiad problems are self-contained puzzles that require no prior linguistic knowledge.*",
+      "solution": "See solution file (if available)",
+      "pdfUrl": "/olympiad-problems/IOL/by-year/2003/iol-2003-i3.pdf",
+      "metadata": {
+        "language": "Zulu",
+        "family": "bantu",
+        "original_id": "IOL2003-i3"
+      }
+    },
+    {
+      "number": "LH-IOL-2003-4",
+      "title": "IOL 2003 Problem 4: Egyptian",
+      "source": "IOL",
+      "year": 2003,
+      "difficulty": 4,
+      "rating": 1800,
+      "tags": [
+        "writing-systems",
+        "decipherment",
+        "advanced"
+      ],
+      "content": "# IOL 2003 Problem 4: Egyptian\n\n**Source:** IOL 2003\n**Difficulty:** ⭐⭐⭐⭐ (4/5)\n**Topics:** writing-systems, decipherment, advanced\n\n## View Problem\n\nThe complete problem is displayed in the PDF viewer below.\n\n---\n*This is an official IOL problem. All olympiad problems are self-contained puzzles that require no prior linguistic knowledge.*",
+      "solution": "See solution file (if available)",
+      "pdfUrl": "/olympiad-problems/IOL/by-year/2003/iol-2003-i4.pdf",
+      "metadata": {
+        "language": "Egyptian",
+        "family": "afro-asiatic",
+        "original_id": "IOL2003-i4"
+      }
+    },
+    {
+      "number": "LH-IOL-2003-5",
+      "title": "IOL 2003 Problem 5: Maninka",
+      "source": "IOL",
+      "year": 2003,
+      "difficulty": 4,
+      "rating": 1800,
+      "tags": [
+        "morphology",
+        "syntax",
+        "advanced"
+      ],
+      "content": "# IOL 2003 Problem 5: Maninka\n\n**Source:** IOL 2003\n**Difficulty:** ⭐⭐⭐⭐ (4/5)\n**Topics:** morphology, syntax, advanced\n\n## View Problem\n\nThe complete problem is displayed in the PDF viewer below.\n\n---\n*This is an official IOL problem. All olympiad problems are self-contained puzzles that require no prior linguistic knowledge.*",
+      "solution": "See solution file (if available)",
+      "pdfUrl": "/olympiad-problems/IOL/by-year/2003/iol-2003-i5.pdf",
+      "metadata": {
+        "language": "Maninka",
+        "family": "niger-congo",
+        "original_id": "IOL2003-i5"
+      }
+    },
+    {
+      "number": "LH-APLO-2019-1",
+      "title": "APLO 2019 Problem 1",
+      "source": "APLO",
+      "year": 2019,
+      "difficulty": 2,
+      "rating": 1400,
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "content": "# APLO 2019 Problem 1\n\n**Source:** APLO 2019\n**Difficulty:** ⭐⭐ (2/5)\n**Topics:** morphology, pattern-recognition, beginner\n\n## View Problem\n\nThe complete problem is displayed in the PDF viewer below.\n\n---\n*This is an official APLO problem. All olympiad problems are self-contained puzzles that require no prior linguistic knowledge.*",
+      "solution": "See solution file (if available)",
+      "pdfUrl": "/olympiad-problems/APLO/aplo-2019-p1.pdf",
+      "metadata": {
+        "language": "TBD",
+        "original_id": "APLO2019-p1"
+      }
+    },
+    {
+      "number": "LH-APLO-2019-2",
+      "title": "APLO 2019 Problem 2",
+      "source": "APLO",
+      "year": 2019,
+      "difficulty": 3,
+      "rating": 1600,
+      "tags": [
+        "phonology",
+        "paradigm",
+        "intermediate"
+      ],
+      "content": "# APLO 2019 Problem 2\n\n**Source:** APLO 2019\n**Difficulty:** ⭐⭐⭐ (3/5)\n**Topics:** phonology, paradigm, intermediate\n\n## View Problem\n\nThe complete problem is displayed in the PDF viewer below.\n\n---\n*This is an official APLO problem. All olympiad problems are self-contained puzzles that require no prior linguistic knowledge.*",
+      "solution": "See solution file (if available)",
+      "pdfUrl": "/olympiad-problems/APLO/aplo-2019-p2.pdf",
+      "metadata": {
+        "language": "TBD",
+        "original_id": "APLO2019-p2"
+      }
+    },
+    {
+      "number": "LH-APLO-2019-3",
+      "title": "APLO 2019 Problem 3",
+      "source": "APLO",
+      "year": 2019,
+      "difficulty": 3,
+      "rating": 1600,
+      "tags": [
+        "syntax",
+        "rule-formulation",
+        "intermediate"
+      ],
+      "content": "# APLO 2019 Problem 3\n\n**Source:** APLO 2019\n**Difficulty:** ⭐⭐⭐ (3/5)\n**Topics:** syntax, rule-formulation, intermediate\n\n## View Problem\n\nThe complete problem is displayed in the PDF viewer below.\n\n---\n*This is an official APLO problem. All olympiad problems are self-contained puzzles that require no prior linguistic knowledge.*",
+      "solution": "See solution file (if available)",
+      "pdfUrl": "/olympiad-problems/APLO/aplo-2019-p3.pdf",
+      "metadata": {
+        "language": "TBD",
+        "original_id": "APLO2019-p3"
+      }
+    },
+    {
+      "number": "LH-APLO-2019-4",
+      "title": "APLO 2019 Problem 4",
+      "source": "APLO",
+      "year": 2019,
+      "difficulty": 4,
+      "rating": 1800,
+      "tags": [
+        "writing-systems",
+        "decipherment",
+        "advanced"
+      ],
+      "content": "# APLO 2019 Problem 4\n\n**Source:** APLO 2019\n**Difficulty:** ⭐⭐⭐⭐ (4/5)\n**Topics:** writing-systems, decipherment, advanced\n\n## View Problem\n\nThe complete problem is displayed in the PDF viewer below.\n\n---\n*This is an official APLO problem. All olympiad problems are self-contained puzzles that require no prior linguistic knowledge.*",
+      "solution": "See solution file (if available)",
+      "pdfUrl": "/olympiad-problems/APLO/aplo-2019-p4.pdf",
+      "metadata": {
+        "language": "TBD",
+        "original_id": "APLO2019-p4"
+      }
+    },
+    {
+      "number": "LH-APLO-2019-5",
+      "title": "APLO 2019 Problem 5",
+      "source": "APLO",
+      "year": 2019,
+      "difficulty": 4,
+      "rating": 1800,
+      "tags": [
+        "semantics",
+        "computational",
+        "advanced"
+      ],
+      "content": "# APLO 2019 Problem 5\n\n**Source:** APLO 2019\n**Difficulty:** ⭐⭐⭐⭐ (4/5)\n**Topics:** semantics, computational, advanced\n\n## View Problem\n\nThe complete problem is displayed in the PDF viewer below.\n\n---\n*This is an official APLO problem. All olympiad problems are self-contained puzzles that require no prior linguistic knowledge.*",
+      "solution": "See solution file (if available)",
+      "pdfUrl": "/olympiad-problems/APLO/aplo-2019-p5.pdf",
+      "metadata": {
+        "language": "TBD",
+        "original_id": "APLO2019-p5"
+      }
+    },
+    {
+      "number": "LH-NACLO-2007-A",
+      "title": "NACLO 2007 Problem A",
+      "source": "NACLO",
+      "year": 2007,
+      "difficulty": 2,
+      "rating": 1400,
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "content": "# NACLO 2007 Problem A\n\n**Source:** NACLO 2007\n**Difficulty:** ⭐⭐ (2/5)\n**Topics:** morphology, pattern-recognition, beginner\n\n## View Problem\n\nThe complete problem is displayed in the PDF viewer below.\n\n---\n*This is an official NACLO problem. All olympiad problems are self-contained puzzles that require no prior linguistic knowledge.*",
+      "solution": "See solution: by-year/2007/naclo-2007-A-solution.pdf",
+      "pdfUrl": "/olympiad-problems/NACLO/by-year/2007/naclo-2007-A-problem.pdf",
+      "metadata": {
+        "original_id": "N2007-A"
+      }
+    },
+    {
+      "number": "LH-NACLO-2007-B",
+      "title": "NACLO 2007 Problem B",
+      "source": "NACLO",
+      "year": 2007,
+      "difficulty": 2,
+      "rating": 1400,
+      "tags": [
+        "phonology",
+        "translation",
+        "beginner"
+      ],
+      "content": "# NACLO 2007 Problem B\n\n**Source:** NACLO 2007\n**Difficulty:** ⭐⭐ (2/5)\n**Topics:** phonology, translation, beginner\n\n## View Problem\n\nThe complete problem is displayed in the PDF viewer below.\n\n---\n*This is an official NACLO problem. All olympiad problems are self-contained puzzles that require no prior linguistic knowledge.*",
+      "solution": "See solution: by-year/2007/naclo-2007-B-solution.pdf",
+      "pdfUrl": "/olympiad-problems/NACLO/by-year/2007/naclo-2007-B-problem.pdf",
+      "metadata": {
+        "original_id": "N2007-B"
+      }
+    },
+    {
+      "number": "LH-NACLO-2007-C",
+      "title": "NACLO 2007 Problem C",
+      "source": "NACLO",
+      "year": 2007,
+      "difficulty": 2,
+      "rating": 1400,
+      "tags": [
+        "syntax",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "content": "# NACLO 2007 Problem C\n\n**Source:** NACLO 2007\n**Difficulty:** ⭐⭐ (2/5)\n**Topics:** syntax, pattern-recognition, beginner\n\n## View Problem\n\nThe complete problem is displayed in the PDF viewer below.\n\n---\n*This is an official NACLO problem. All olympiad problems are self-contained puzzles that require no prior linguistic knowledge.*",
+      "solution": "See solution: by-year/2007/naclo-2007-C-solution.pdf",
+      "pdfUrl": "/olympiad-problems/NACLO/by-year/2007/naclo-2007-C-problem.pdf",
+      "metadata": {
+        "original_id": "N2007-C"
+      }
+    },
+    {
+      "number": "LH-NACLO-2007-D",
+      "title": "NACLO 2007 Problem D",
+      "source": "NACLO",
+      "year": 2007,
+      "difficulty": 2,
+      "rating": 1400,
+      "tags": [
+        "morphology",
+        "translation",
+        "beginner"
+      ],
+      "content": "# NACLO 2007 Problem D\n\n**Source:** NACLO 2007\n**Difficulty:** ⭐⭐ (2/5)\n**Topics:** morphology, translation, beginner\n\n## View Problem\n\nThe complete problem is displayed in the PDF viewer below.\n\n---\n*This is an official NACLO problem. All olympiad problems are self-contained puzzles that require no prior linguistic knowledge.*",
+      "solution": "See solution: by-year/2007/naclo-2007-D-solution.pdf",
+      "pdfUrl": "/olympiad-problems/NACLO/by-year/2007/naclo-2007-D-problem.pdf",
+      "metadata": {
+        "original_id": "N2007-D"
+      }
+    },
+    {
+      "number": "LH-NACLO-2007-E",
+      "title": "NACLO 2007 Problem E",
+      "source": "NACLO",
+      "year": 2007,
+      "difficulty": 3,
+      "rating": 1600,
+      "tags": [
+        "semantics",
+        "pattern-recognition",
+        "intermediate"
+      ],
+      "content": "# NACLO 2007 Problem E\n\n**Source:** NACLO 2007\n**Difficulty:** ⭐⭐⭐ (3/5)\n**Topics:** semantics, pattern-recognition, intermediate\n\n## View Problem\n\nThe complete problem is displayed in the PDF viewer below.\n\n---\n*This is an official NACLO problem. All olympiad problems are self-contained puzzles that require no prior linguistic knowledge.*",
+      "solution": "See solution: by-year/2007/naclo-2007-E-solution.pdf",
+      "pdfUrl": "/olympiad-problems/NACLO/by-year/2007/naclo-2007-E-problem.pdf",
+      "metadata": {
+        "original_id": "N2007-E"
+      }
+    },
+    {
+      "number": "LH-UK-2010-cucum",
+      "title": "UKLO 2010 *1. Sorry we have no red cucumbers: French",
+      "source": "UKLO",
+      "year": 2010,
+      "difficulty": 1,
+      "rating": 1200,
+      "tags": [
+        "syntax",
+        "beginner",
+        "rule-formulation"
+      ],
+      "content": "# UKLO 2010 *1. Sorry we have no red cucumbers: French\n\n**Source:** UKLO 2010\n**Difficulty:** ⭐ (1/5)\n**Topics:** syntax, beginner, rule-formulation\n\n## View Problem\n\nThe complete problem is displayed in the PDF viewer below.\n\n---\n*This is an official UKLO problem. All olympiad problems are self-contained puzzles that require no prior linguistic knowledge.*",
+      "solution": "See solution file (if available)",
+      "pdfUrl": "/olympiad-problems/UKLO/by-year/2010/uklo-2010-french-French-syntax.pdf",
+      "metadata": {
+        "language": "French",
+        "area": "syntax",
+        "author": "Dragomir Radev",
+        "difficulty_raw": 1.0,
+        "original_id": "UKLO2010-*1.-Sorry-we-have-no-red-cucumbers"
+      }
+    },
+    {
+      "number": "LH-UK-2010-Gelbe",
+      "title": "UKLO 2010 2. Gelda’s House of Gelbergarg: English",
+      "source": "UKLO",
+      "year": 2010,
+      "difficulty": 1,
+      "rating": 1200,
+      "tags": [
+        "pattern-recognition",
+        "beginner",
+        "morphology"
+      ],
+      "content": "# UKLO 2010 2. Gelda’s House of Gelbergarg: English\n\n**Source:** UKLO 2010\n**Difficulty:** ⭐ (1/5)\n**Topics:** pattern-recognition, beginner, morphology\n\n## View Problem\n\nThe complete problem is displayed in the PDF viewer below.\n\n---\n*This is an official UKLO problem. All olympiad problems are self-contained puzzles that require no prior linguistic knowledge.*",
+      "solution": "See solution file (if available)",
+      "pdfUrl": "/olympiad-problems/UKLO/by-year/2010/uklo-2010-eng-restaurant-English-general.pdf",
+      "metadata": {
+        "language": "English",
+        "area": "general",
+        "author": "Cindy Schneider",
+        "difficulty_raw": 1.0,
+        "original_id": "UKLO2010-2.-Gelda’s-House-of-Gelbergarg"
+      }
+    },
+    {
+      "number": "LH-UK-2010-Abma",
+      "title": "UKLO 2010 *3. Say it in Abma: Abma",
+      "source": "UKLO",
+      "year": 2010,
+      "difficulty": 1,
+      "rating": 1200,
+      "tags": [
+        "pattern-recognition",
+        "beginner",
+        "morphology"
+      ],
+      "content": "# UKLO 2010 *3. Say it in Abma: Abma\n\n**Source:** UKLO 2010\n**Difficulty:** ⭐ (1/5)\n**Topics:** pattern-recognition, beginner, morphology\n\n## View Problem\n\nThe complete problem is displayed in the PDF viewer below.\n\n---\n*This is an official UKLO problem. All olympiad problems are self-contained puzzles that require no prior linguistic knowledge.*",
+      "solution": "See solution file (if available)",
+      "pdfUrl": "/olympiad-problems/UKLO/by-year/2010/uklo-2010-abma-Abma-general.pdf",
+      "metadata": {
+        "language": "Abma",
+        "area": "general",
+        "author": "Luda Kedova & Rachel Nordlinger",
+        "difficulty_raw": 1.0,
+        "original_id": "UKLO2010-*3.-Say-it-in-Abma"
+      }
+    },
+    {
+      "number": "LH-UK-2010-ths",
+      "title": "UKLO 2010 *R2.3. F u cn rd ths: English",
+      "source": "UKLO",
+      "year": 2010,
+      "difficulty": 1,
+      "rating": 1200,
+      "tags": [
+        "computational",
+        "beginner",
+        "algorithm-design"
+      ],
+      "content": "# UKLO 2010 *R2.3. F u cn rd ths: English\n\n**Source:** UKLO 2010\n**Difficulty:** ⭐ (1/5)\n**Topics:** computational, beginner, algorithm-design\n\n## View Problem\n\nThe complete problem is displayed in the PDF viewer below.\n\n---\n*This is an official UKLO problem. All olympiad problems are self-contained puzzles that require no prior linguistic knowledge.*",
+      "solution": "See solution file (if available)",
+      "pdfUrl": "/olympiad-problems/UKLO/by-year/2010/uklo-2010-eng-abbreviations-English-computing.pdf",
+      "metadata": {
+        "language": "English",
+        "area": "computing",
+        "author": "Richard Sproat",
+        "difficulty_raw": 1.0,
+        "original_id": "UKLO2010-*R2.3.-F-u-cn-rd-ths"
+      }
+    },
+    {
+      "number": "LH-UK-2010-Uzzle",
+      "title": "UKLO 2010 *R2.1. Ardhay Uzzlepay: Minangkabau",
+      "source": "UKLO",
+      "year": 2010,
+      "difficulty": 2,
+      "rating": 1400,
+      "tags": [
+        "pattern-recognition",
+        "beginner",
+        "morphology"
+      ],
+      "content": "# UKLO 2010 *R2.1. Ardhay Uzzlepay: Minangkabau\n\n**Source:** UKLO 2010\n**Difficulty:** ⭐⭐ (2/5)\n**Topics:** pattern-recognition, beginner, morphology\n\n## View Problem\n\nThe complete problem is displayed in the PDF viewer below.\n\n---\n*This is an official UKLO problem. All olympiad problems are self-contained puzzles that require no prior linguistic knowledge.*",
+      "solution": "See solution file (if available)",
+      "pdfUrl": "/olympiad-problems/UKLO/by-year/2010/uklo-2010-minangkabau-Minangkabau-general.pdf",
+      "metadata": {
+        "language": "Minangkabau",
+        "area": "general",
+        "author": "John Henderson",
+        "difficulty_raw": 2.0,
+        "original_id": "UKLO2010-*R2.1.-Ardhay-Uzzlepay"
+      }
+    }
+  ]
+}

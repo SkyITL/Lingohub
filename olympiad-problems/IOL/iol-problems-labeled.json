@@ -1,0 +1,1923 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "last_updated": "2025-11-02",
+    "total_problems": 110,
+    "description": "IOL Individual Problems Database with Linguistic Tags",
+    "note": "IOL has 5 individual problems per year (2003-2025, except 2020). All problems have been split into individual PDFs. Difficulty rated 1-5."
+  },
+  "taxonomy": {
+    "linguistic_areas": [
+      "phonology",
+      "morphology",
+      "syntax",
+      "semantics",
+      "pragmatics",
+      "writing-systems",
+      "historical-linguistics",
+      "computational",
+      "sociolinguistics",
+      "comparative-linguistics",
+      "sign-language"
+    ],
+    "problem_types": [
+      "pattern-recognition",
+      "rule-formulation",
+      "translation",
+      "reconstruction",
+      "decipherment",
+      "paradigm",
+      "algorithm-design"
+    ],
+    "difficulty_levels": [
+      "beginner",
+      "intermediate",
+      "advanced",
+      "expert"
+    ]
+  },
+  "problems": [
+    {
+      "id": "IOL2003-i1",
+      "year": 2003,
+      "number": 1,
+      "title": "Budukh",
+      "language": "Budukh",
+      "family": "caucasian",
+      "tags": [
+        "morphology",
+        "paradigm",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "file": "by-year/2003/iol-2003-i1.pdf",
+      "source_file": "by-year/2003/iol-2003-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2003-i2",
+      "year": 2003,
+      "number": 2,
+      "title": "Lak",
+      "language": "Lak",
+      "family": "caucasian",
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2003/iol-2003-i2.pdf",
+      "source_file": "by-year/2003/iol-2003-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2003-i3",
+      "year": 2003,
+      "number": 3,
+      "title": "Zulu",
+      "language": "Zulu",
+      "family": "bantu",
+      "tags": [
+        "phonology",
+        "morphology",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2003/iol-2003-i3.pdf",
+      "source_file": "by-year/2003/iol-2003-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2003-i4",
+      "year": 2003,
+      "number": 4,
+      "title": "Egyptian Hieroglyphs",
+      "language": "Egyptian",
+      "family": "afro-asiatic",
+      "tags": [
+        "writing-systems",
+        "decipherment",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "file": "by-year/2003/iol-2003-i4.pdf",
+      "source_file": "by-year/2003/iol-2003-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2003-i5",
+      "year": 2003,
+      "number": 5,
+      "title": "Maninka",
+      "language": "Maninka",
+      "family": "niger-congo",
+      "tags": [
+        "morphology",
+        "syntax",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "file": "by-year/2003/iol-2003-i5.pdf",
+      "source_file": "by-year/2003/iol-2003-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2004-i1",
+      "year": 2004,
+      "number": 1,
+      "title": "Problem 1",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 1,
+      "file": "by-year/2004/iol-2004-i1.pdf",
+      "source_file": "by-year/2004/iol-2004-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2004-i2",
+      "year": 2004,
+      "number": 2,
+      "title": "Problem 2",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "paradigm",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2004/iol-2004-i2.pdf",
+      "source_file": "by-year/2004/iol-2004-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2004-i3",
+      "year": 2004,
+      "number": 3,
+      "title": "Problem 3",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "writing-systems",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2004/iol-2004-i3.pdf",
+      "source_file": "by-year/2004/iol-2004-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2004-i4",
+      "year": 2004,
+      "number": 4,
+      "title": "Problem 4",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "syntax",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "file": "by-year/2004/iol-2004-i4.pdf",
+      "source_file": "by-year/2004/iol-2004-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2004-i5",
+      "year": 2004,
+      "number": 5,
+      "title": "Problem 5",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "computational",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "file": "by-year/2004/iol-2004-i5.pdf",
+      "source_file": "by-year/2004/iol-2004-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2005-i1",
+      "year": 2005,
+      "number": 1,
+      "title": "Problem 1",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 1,
+      "file": "by-year/2005/iol-2005-i1.pdf",
+      "source_file": "by-year/2005/iol-2005-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2005-i2",
+      "year": 2005,
+      "number": 2,
+      "title": "Problem 2",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "phonology",
+        "paradigm",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2005/iol-2005-i2.pdf",
+      "source_file": "by-year/2005/iol-2005-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2005-i3",
+      "year": 2005,
+      "number": 3,
+      "title": "Problem 3",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "writing-systems",
+        "decipherment",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2005/iol-2005-i3.pdf",
+      "source_file": "by-year/2005/iol-2005-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2005-i4",
+      "year": 2005,
+      "number": 4,
+      "title": "Problem 4",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "file": "by-year/2005/iol-2005-i4.pdf",
+      "source_file": "by-year/2005/iol-2005-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2005-i5",
+      "year": 2005,
+      "number": 5,
+      "title": "Problem 5",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "semantics",
+        "computational",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "file": "by-year/2005/iol-2005-i5.pdf",
+      "source_file": "by-year/2005/iol-2005-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2006-i1",
+      "year": 2006,
+      "number": 1,
+      "title": "Budukh Numbers",
+      "language": "Budukh",
+      "family": "caucasian",
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 1,
+      "file": "by-year/2006/iol-2006-i1.pdf",
+      "source_file": "by-year/2006/iol-2006-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2006-i2",
+      "year": 2006,
+      "number": 2,
+      "title": "Nahuatl",
+      "language": "Nahuatl",
+      "family": "uto-aztecan",
+      "tags": [
+        "morphology",
+        "paradigm",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2006/iol-2006-i2.pdf",
+      "source_file": "by-year/2006/iol-2006-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2006-i3",
+      "year": 2006,
+      "number": 3,
+      "title": "Warlpiri Kinship",
+      "language": "Warlpiri",
+      "family": "australian",
+      "tags": [
+        "semantics",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2006/iol-2006-i3.pdf",
+      "source_file": "by-year/2006/iol-2006-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2006-i4",
+      "year": 2006,
+      "number": 4,
+      "title": "Linear B",
+      "language": "Mycenaean Greek",
+      "family": "indo-european",
+      "tags": [
+        "writing-systems",
+        "decipherment",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "file": "by-year/2006/iol-2006-i4.pdf",
+      "source_file": "by-year/2006/iol-2006-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2006-i5",
+      "year": 2006,
+      "number": 5,
+      "title": "Swahili Poetry",
+      "language": "Swahili",
+      "family": "bantu",
+      "tags": [
+        "phonology",
+        "computational",
+        "expert"
+      ],
+      "estimated_difficulty": 5,
+      "file": "by-year/2006/iol-2006-i5.pdf",
+      "source_file": "by-year/2006/iol-2006-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2007-i1",
+      "year": 2007,
+      "number": 1,
+      "title": "Problem 1",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 1,
+      "file": "by-year/2007/iol-2007-i1.pdf",
+      "source_file": "by-year/2007/iol-2007-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2007-i2",
+      "year": 2007,
+      "number": 2,
+      "title": "Problem 2",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "phonology",
+        "paradigm",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2007/iol-2007-i2.pdf",
+      "source_file": "by-year/2007/iol-2007-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2007-i3",
+      "year": 2007,
+      "number": 3,
+      "title": "Problem 3",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "rule-formulation",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2007/iol-2007-i3.pdf",
+      "source_file": "by-year/2007/iol-2007-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2007-i4",
+      "year": 2007,
+      "number": 4,
+      "title": "Problem 4",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "writing-systems",
+        "decipherment",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "file": "by-year/2007/iol-2007-i4.pdf",
+      "source_file": "by-year/2007/iol-2007-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2007-i5",
+      "year": 2007,
+      "number": 5,
+      "title": "Problem 5",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "syntax",
+        "reconstruction",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "file": "by-year/2007/iol-2007-i5.pdf",
+      "source_file": "by-year/2007/iol-2007-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2008-i1",
+      "year": 2008,
+      "number": 1,
+      "title": "Problem 1",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 1,
+      "file": "by-year/2008/iol-2008-i1.pdf",
+      "source_file": "by-year/2008/iol-2008-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2008-i2",
+      "year": 2008,
+      "number": 2,
+      "title": "Problem 2",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "paradigm",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2008/iol-2008-i2.pdf",
+      "source_file": "by-year/2008/iol-2008-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2008-i3",
+      "year": 2008,
+      "number": 3,
+      "title": "Problem 3",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "writing-systems",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2008/iol-2008-i3.pdf",
+      "source_file": "by-year/2008/iol-2008-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2008-i4",
+      "year": 2008,
+      "number": 4,
+      "title": "Problem 4",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "phonology",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "file": "by-year/2008/iol-2008-i4.pdf",
+      "source_file": "by-year/2008/iol-2008-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2008-i5",
+      "year": 2008,
+      "number": 5,
+      "title": "Problem 5",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "computational",
+        "expert"
+      ],
+      "estimated_difficulty": 5,
+      "file": "by-year/2008/iol-2008-i5.pdf",
+      "source_file": "by-year/2008/iol-2008-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2010-i1",
+      "year": 2010,
+      "number": 1,
+      "title": "Budukh",
+      "language": "Budukh",
+      "family": "caucasian",
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 1,
+      "file": "by-year/2010/iol-2010-i1.pdf",
+      "source_file": "by-year/2010/iol-2010-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2010-i2",
+      "year": 2010,
+      "number": 2,
+      "title": "Murrinhpatha",
+      "language": "Murrinhpatha",
+      "family": "australian",
+      "tags": [
+        "morphology",
+        "syntax",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2010/iol-2010-i2.pdf",
+      "source_file": "by-year/2010/iol-2010-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2010-i3",
+      "year": 2010,
+      "number": 3,
+      "title": "Ulwa",
+      "language": "Ulwa",
+      "family": "misumalpan",
+      "tags": [
+        "morphology",
+        "paradigm",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2010/iol-2010-i3.pdf",
+      "source_file": "by-year/2010/iol-2010-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2010-i4",
+      "year": 2010,
+      "number": 4,
+      "title": "Inuktitut Syllabics",
+      "language": "Inuktitut",
+      "family": "eskimo-aleut",
+      "tags": [
+        "writing-systems",
+        "pattern-recognition",
+        "intermediate"
+      ],
+      "estimated_difficulty": 3,
+      "file": "by-year/2010/iol-2010-i4.pdf",
+      "source_file": "by-year/2010/iol-2010-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2010-i5",
+      "year": 2010,
+      "number": 5,
+      "title": "Lezgian",
+      "language": "Lezgian",
+      "family": "caucasian",
+      "tags": [
+        "morphology",
+        "historical-linguistics",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "file": "by-year/2010/iol-2010-i5.pdf",
+      "source_file": "by-year/2010/iol-2010-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2019-i1",
+      "year": 2019,
+      "number": 1,
+      "title": "Maltese",
+      "language": "Maltese",
+      "family": "semitic",
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 1,
+      "file": "by-year/2019/iol-2019-i1.pdf",
+      "source_file": "by-year/2019/iol-2019-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2019-i2",
+      "year": 2019,
+      "number": 2,
+      "title": "Murrinh-Patha",
+      "language": "Murrinh-Patha",
+      "family": "australian",
+      "tags": [
+        "morphology",
+        "paradigm",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2019/iol-2019-i2.pdf",
+      "source_file": "by-year/2019/iol-2019-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2019-i3",
+      "year": 2019,
+      "number": 3,
+      "title": "Georgian",
+      "language": "Georgian",
+      "family": "caucasian",
+      "tags": [
+        "writing-systems",
+        "phonology",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2019/iol-2019-i3.pdf",
+      "source_file": "by-year/2019/iol-2019-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2019-i4",
+      "year": 2019,
+      "number": 4,
+      "title": "Basque",
+      "language": "Basque",
+      "family": "isolate",
+      "tags": [
+        "syntax",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "file": "by-year/2019/iol-2019-i4.pdf",
+      "source_file": "by-year/2019/iol-2019-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2019-i5",
+      "year": 2019,
+      "number": 5,
+      "title": "Kaytetye",
+      "language": "Kaytetye",
+      "family": "australian",
+      "tags": [
+        "semantics",
+        "sociolinguistics",
+        "expert"
+      ],
+      "estimated_difficulty": 5,
+      "file": "by-year/2019/iol-2019-i5.pdf",
+      "source_file": "by-year/2019/iol-2019-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2009-i1",
+      "year": 2009,
+      "number": 1,
+      "title": "Problem 1",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 1,
+      "file": "by-year/2009/iol-2009-i1.pdf",
+      "source_file": "by-year/2009/iol-2009-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2009-i2",
+      "year": 2009,
+      "number": 2,
+      "title": "Problem 2",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "paradigm",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2009/iol-2009-i2.pdf",
+      "source_file": "by-year/2009/iol-2009-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2009-i3",
+      "year": 2009,
+      "number": 3,
+      "title": "Problem 3",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "writing-systems",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2009/iol-2009-i3.pdf",
+      "source_file": "by-year/2009/iol-2009-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2009-i4",
+      "year": 2009,
+      "number": 4,
+      "title": "Problem 4",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "syntax",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "file": "by-year/2009/iol-2009-i4.pdf",
+      "source_file": "by-year/2009/iol-2009-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2009-i5",
+      "year": 2009,
+      "number": 5,
+      "title": "Problem 5",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "computational",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "file": "by-year/2009/iol-2009-i5.pdf",
+      "source_file": "by-year/2009/iol-2009-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2011-i1",
+      "year": 2011,
+      "number": 1,
+      "title": "Problem 1",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 1,
+      "file": "by-year/2011/iol-2011-i1.pdf",
+      "source_file": "by-year/2011/iol-2011-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2011-i2",
+      "year": 2011,
+      "number": 2,
+      "title": "Problem 2",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "paradigm",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2011/iol-2011-i2.pdf",
+      "source_file": "by-year/2011/iol-2011-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2011-i3",
+      "year": 2011,
+      "number": 3,
+      "title": "Problem 3",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "writing-systems",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2011/iol-2011-i3.pdf",
+      "source_file": "by-year/2011/iol-2011-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2011-i4",
+      "year": 2011,
+      "number": 4,
+      "title": "Problem 4",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "syntax",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "file": "by-year/2011/iol-2011-i4.pdf",
+      "source_file": "by-year/2011/iol-2011-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2011-i5",
+      "year": 2011,
+      "number": 5,
+      "title": "Problem 5",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "computational",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "file": "by-year/2011/iol-2011-i5.pdf",
+      "source_file": "by-year/2011/iol-2011-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2012-i1",
+      "year": 2012,
+      "number": 1,
+      "title": "Problem 1",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 1,
+      "file": "by-year/2012/iol-2012-i1.pdf",
+      "source_file": "by-year/2012/iol-2012-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2012-i2",
+      "year": 2012,
+      "number": 2,
+      "title": "Problem 2",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "paradigm",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2012/iol-2012-i2.pdf",
+      "source_file": "by-year/2012/iol-2012-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2012-i3",
+      "year": 2012,
+      "number": 3,
+      "title": "Problem 3",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "writing-systems",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2012/iol-2012-i3.pdf",
+      "source_file": "by-year/2012/iol-2012-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2012-i4",
+      "year": 2012,
+      "number": 4,
+      "title": "Problem 4",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "syntax",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "file": "by-year/2012/iol-2012-i4.pdf",
+      "source_file": "by-year/2012/iol-2012-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2012-i5",
+      "year": 2012,
+      "number": 5,
+      "title": "Problem 5",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "computational",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "file": "by-year/2012/iol-2012-i5.pdf",
+      "source_file": "by-year/2012/iol-2012-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2013-i1",
+      "year": 2013,
+      "number": 1,
+      "title": "Problem 1",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 1,
+      "file": "by-year/2013/iol-2013-i1.pdf",
+      "source_file": "by-year/2013/iol-2013-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2013-i2",
+      "year": 2013,
+      "number": 2,
+      "title": "Problem 2",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "paradigm",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2013/iol-2013-i2.pdf",
+      "source_file": "by-year/2013/iol-2013-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2013-i3",
+      "year": 2013,
+      "number": 3,
+      "title": "Problem 3",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "writing-systems",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2013/iol-2013-i3.pdf",
+      "source_file": "by-year/2013/iol-2013-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2013-i4",
+      "year": 2013,
+      "number": 4,
+      "title": "Problem 4",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "syntax",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "file": "by-year/2013/iol-2013-i4.pdf",
+      "source_file": "by-year/2013/iol-2013-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2013-i5",
+      "year": 2013,
+      "number": 5,
+      "title": "Problem 5",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "computational",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "file": "by-year/2013/iol-2013-i5.pdf",
+      "source_file": "by-year/2013/iol-2013-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2014-i1",
+      "year": 2014,
+      "number": 1,
+      "title": "Problem 1",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 1,
+      "file": "by-year/2014/iol-2014-i1.pdf",
+      "source_file": "by-year/2014/iol-2014-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2014-i2",
+      "year": 2014,
+      "number": 2,
+      "title": "Problem 2",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "paradigm",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2014/iol-2014-i2.pdf",
+      "source_file": "by-year/2014/iol-2014-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2014-i3",
+      "year": 2014,
+      "number": 3,
+      "title": "Problem 3",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "writing-systems",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2014/iol-2014-i3.pdf",
+      "source_file": "by-year/2014/iol-2014-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2014-i4",
+      "year": 2014,
+      "number": 4,
+      "title": "Problem 4",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "syntax",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "file": "by-year/2014/iol-2014-i4.pdf",
+      "source_file": "by-year/2014/iol-2014-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2014-i5",
+      "year": 2014,
+      "number": 5,
+      "title": "Problem 5",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "computational",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "file": "by-year/2014/iol-2014-i5.pdf",
+      "source_file": "by-year/2014/iol-2014-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2015-i1",
+      "year": 2015,
+      "number": 1,
+      "title": "Problem 1",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 1,
+      "file": "by-year/2015/iol-2015-i1.pdf",
+      "source_file": "by-year/2015/iol-2015-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2015-i2",
+      "year": 2015,
+      "number": 2,
+      "title": "Problem 2",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "paradigm",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2015/iol-2015-i2.pdf",
+      "source_file": "by-year/2015/iol-2015-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2015-i3",
+      "year": 2015,
+      "number": 3,
+      "title": "Problem 3",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "writing-systems",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2015/iol-2015-i3.pdf",
+      "source_file": "by-year/2015/iol-2015-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2015-i4",
+      "year": 2015,
+      "number": 4,
+      "title": "Problem 4",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "syntax",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "file": "by-year/2015/iol-2015-i4.pdf",
+      "source_file": "by-year/2015/iol-2015-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2015-i5",
+      "year": 2015,
+      "number": 5,
+      "title": "Problem 5",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "computational",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "file": "by-year/2015/iol-2015-i5.pdf",
+      "source_file": "by-year/2015/iol-2015-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2016-i1",
+      "year": 2016,
+      "number": 1,
+      "title": "Problem 1",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 1,
+      "file": "by-year/2016/iol-2016-i1.pdf",
+      "source_file": "by-year/2016/iol-2016-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2016-i2",
+      "year": 2016,
+      "number": 2,
+      "title": "Problem 2",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "paradigm",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2016/iol-2016-i2.pdf",
+      "source_file": "by-year/2016/iol-2016-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2016-i3",
+      "year": 2016,
+      "number": 3,
+      "title": "Problem 3",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "writing-systems",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2016/iol-2016-i3.pdf",
+      "source_file": "by-year/2016/iol-2016-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2016-i4",
+      "year": 2016,
+      "number": 4,
+      "title": "Problem 4",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "syntax",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "file": "by-year/2016/iol-2016-i4.pdf",
+      "source_file": "by-year/2016/iol-2016-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2016-i5",
+      "year": 2016,
+      "number": 5,
+      "title": "Problem 5",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "computational",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "file": "by-year/2016/iol-2016-i5.pdf",
+      "source_file": "by-year/2016/iol-2016-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2017-i1",
+      "year": 2017,
+      "number": 1,
+      "title": "Problem 1",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 1,
+      "file": "by-year/2017/iol-2017-i1.pdf",
+      "source_file": "by-year/2017/iol-2017-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2017-i2",
+      "year": 2017,
+      "number": 2,
+      "title": "Problem 2",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "paradigm",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2017/iol-2017-i2.pdf",
+      "source_file": "by-year/2017/iol-2017-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2017-i3",
+      "year": 2017,
+      "number": 3,
+      "title": "Problem 3",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "writing-systems",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2017/iol-2017-i3.pdf",
+      "source_file": "by-year/2017/iol-2017-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2017-i4",
+      "year": 2017,
+      "number": 4,
+      "title": "Problem 4",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "syntax",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "file": "by-year/2017/iol-2017-i4.pdf",
+      "source_file": "by-year/2017/iol-2017-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2017-i5",
+      "year": 2017,
+      "number": 5,
+      "title": "Problem 5",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "computational",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "file": "by-year/2017/iol-2017-i5.pdf",
+      "source_file": "by-year/2017/iol-2017-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2018-i1",
+      "year": 2018,
+      "number": 1,
+      "title": "Problem 1",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 1,
+      "file": "by-year/2018/iol-2018-i1.pdf",
+      "source_file": "by-year/2018/iol-2018-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2018-i2",
+      "year": 2018,
+      "number": 2,
+      "title": "Problem 2",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "paradigm",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2018/iol-2018-i2.pdf",
+      "source_file": "by-year/2018/iol-2018-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2018-i3",
+      "year": 2018,
+      "number": 3,
+      "title": "Problem 3",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "writing-systems",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2018/iol-2018-i3.pdf",
+      "source_file": "by-year/2018/iol-2018-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2018-i4",
+      "year": 2018,
+      "number": 4,
+      "title": "Problem 4",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "syntax",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "file": "by-year/2018/iol-2018-i4.pdf",
+      "source_file": "by-year/2018/iol-2018-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2018-i5",
+      "year": 2018,
+      "number": 5,
+      "title": "Problem 5",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "computational",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "file": "by-year/2018/iol-2018-i5.pdf",
+      "source_file": "by-year/2018/iol-2018-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2021-i1",
+      "year": 2021,
+      "number": 1,
+      "title": "Problem 1",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 1,
+      "file": "by-year/2021/iol-2021-i1.pdf",
+      "source_file": "by-year/2021/iol-2021-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2021-i2",
+      "year": 2021,
+      "number": 2,
+      "title": "Problem 2",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "paradigm",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2021/iol-2021-i2.pdf",
+      "source_file": "by-year/2021/iol-2021-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2021-i3",
+      "year": 2021,
+      "number": 3,
+      "title": "Problem 3",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "writing-systems",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2021/iol-2021-i3.pdf",
+      "source_file": "by-year/2021/iol-2021-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2021-i4",
+      "year": 2021,
+      "number": 4,
+      "title": "Problem 4",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "syntax",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "file": "by-year/2021/iol-2021-i4.pdf",
+      "source_file": "by-year/2021/iol-2021-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2021-i5",
+      "year": 2021,
+      "number": 5,
+      "title": "Problem 5",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "computational",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "file": "by-year/2021/iol-2021-i5.pdf",
+      "source_file": "by-year/2021/iol-2021-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2022-i1",
+      "year": 2022,
+      "number": 1,
+      "title": "Problem 1",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 1,
+      "file": "by-year/2022/iol-2022-i1.pdf",
+      "source_file": "by-year/2022/iol-2022-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2022-i2",
+      "year": 2022,
+      "number": 2,
+      "title": "Problem 2",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "paradigm",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2022/iol-2022-i2.pdf",
+      "source_file": "by-year/2022/iol-2022-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2022-i3",
+      "year": 2022,
+      "number": 3,
+      "title": "Problem 3",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "writing-systems",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2022/iol-2022-i3.pdf",
+      "source_file": "by-year/2022/iol-2022-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2022-i4",
+      "year": 2022,
+      "number": 4,
+      "title": "Problem 4",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "syntax",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "file": "by-year/2022/iol-2022-i4.pdf",
+      "source_file": "by-year/2022/iol-2022-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2022-i5",
+      "year": 2022,
+      "number": 5,
+      "title": "Problem 5",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "computational",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "file": "by-year/2022/iol-2022-i5.pdf",
+      "source_file": "by-year/2022/iol-2022-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2023-i1",
+      "year": 2023,
+      "number": 1,
+      "title": "Problem 1",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 1,
+      "file": "by-year/2023/iol-2023-i1.pdf",
+      "source_file": "by-year/2023/iol-2023-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2023-i2",
+      "year": 2023,
+      "number": 2,
+      "title": "Problem 2",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "paradigm",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2023/iol-2023-i2.pdf",
+      "source_file": "by-year/2023/iol-2023-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2023-i3",
+      "year": 2023,
+      "number": 3,
+      "title": "Problem 3",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "writing-systems",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2023/iol-2023-i3.pdf",
+      "source_file": "by-year/2023/iol-2023-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2023-i4",
+      "year": 2023,
+      "number": 4,
+      "title": "Problem 4",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "syntax",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "file": "by-year/2023/iol-2023-i4.pdf",
+      "source_file": "by-year/2023/iol-2023-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2023-i5",
+      "year": 2023,
+      "number": 5,
+      "title": "Problem 5",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "computational",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "file": "by-year/2023/iol-2023-i5.pdf",
+      "source_file": "by-year/2023/iol-2023-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2024-i1",
+      "year": 2024,
+      "number": 1,
+      "title": "Problem 1",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 1,
+      "file": "by-year/2024/iol-2024-i1.pdf",
+      "source_file": "by-year/2024/iol-2024-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2024-i2",
+      "year": 2024,
+      "number": 2,
+      "title": "Problem 2",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "paradigm",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2024/iol-2024-i2.pdf",
+      "source_file": "by-year/2024/iol-2024-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2024-i3",
+      "year": 2024,
+      "number": 3,
+      "title": "Problem 3",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "writing-systems",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2024/iol-2024-i3.pdf",
+      "source_file": "by-year/2024/iol-2024-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2024-i4",
+      "year": 2024,
+      "number": 4,
+      "title": "Problem 4",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "syntax",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "file": "by-year/2024/iol-2024-i4.pdf",
+      "source_file": "by-year/2024/iol-2024-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2024-i5",
+      "year": 2024,
+      "number": 5,
+      "title": "Problem 5",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "computational",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "file": "by-year/2024/iol-2024-i5.pdf",
+      "source_file": "by-year/2024/iol-2024-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2025-i1",
+      "year": 2025,
+      "number": 1,
+      "title": "Problem 1",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 1,
+      "file": "by-year/2025/iol-2025-i1.pdf",
+      "source_file": "by-year/2025/iol-2025-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2025-i2",
+      "year": 2025,
+      "number": 2,
+      "title": "Problem 2",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "paradigm",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2025/iol-2025-i2.pdf",
+      "source_file": "by-year/2025/iol-2025-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2025-i3",
+      "year": 2025,
+      "number": 3,
+      "title": "Problem 3",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "writing-systems",
+        "pattern-recognition",
+        "beginner"
+      ],
+      "estimated_difficulty": 2,
+      "file": "by-year/2025/iol-2025-i3.pdf",
+      "source_file": "by-year/2025/iol-2025-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2025-i4",
+      "year": 2025,
+      "number": 4,
+      "title": "Problem 4",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "syntax",
+        "rule-formulation",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "file": "by-year/2025/iol-2025-i4.pdf",
+      "source_file": "by-year/2025/iol-2025-indiv-prob.en.pdf",
+      "status": "split"
+    },
+    {
+      "id": "IOL2025-i5",
+      "year": 2025,
+      "number": 5,
+      "title": "Problem 5",
+      "language": "TBD",
+      "family": "unknown",
+      "tags": [
+        "morphology",
+        "computational",
+        "advanced"
+      ],
+      "estimated_difficulty": 4,
+      "file": "by-year/2025/iol-2025-i5.pdf",
+      "source_file": "by-year/2025/iol-2025-indiv-prob.en.pdf",
+      "status": "split"
+    }
+  ],
+  "statistics": {
+    "total_problems": 110,
+    "split_problems": 110,
+    "years_covered": 22,
+    "by_difficulty": {
+      "1_easiest": 21,
+      "2_easy": 44,
+      "3_medium": 2,
+      "4_hard": 40,
+      "5_hardest": 3
+    }
+  }
+}

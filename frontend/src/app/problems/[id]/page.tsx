@@ -598,9 +598,35 @@ export default function ProblemDetailPage({ params }: { params: Promise<{ id: st
 
             {/* Problem Tab */}
             <Tabs.Content value="problem" className="p-6">
-              <div className="prose prose-lg max-w-none">
+              <div className="prose prose-lg max-w-none mb-8">
                 <MarkdownContent content={problem.content || 'Problem content not available.'} />
               </div>
+
+              {/* PDF Viewer - if pdfUrl exists */}
+              {problem.pdfUrl && (
+                <div className="mt-8">
+                  <h3 className="text-xl font-semibold mb-4">📄 Problem PDF</h3>
+                  <div className="border rounded-lg overflow-hidden bg-gray-100" style={{ height: '800px' }}>
+                    <iframe
+                      src={problem.pdfUrl}
+                      className="w-full h-full"
+                      title="Problem PDF"
+                    />
+                  </div>
+                  <div className="mt-2 text-sm text-gray-600">
+                    <a
+                      href={problem.pdfUrl}
+                      download
+                      className="text-blue-600 hover:underline inline-flex items-center gap-1"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Download className="h-4 w-4" />
+                      Download Original PDF
+                    </a>
+                  </div>
+                </div>
+              )}
             </Tabs.Content>
 
             {/* Official Solution Tab */}
