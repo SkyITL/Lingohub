@@ -14,7 +14,6 @@ router.post('/clear', async (req: Request, res: Response) => {
     // Delete in order to respect foreign key constraints
     await prisma.problemTag.deleteMany({})
     await prisma.userProgress.deleteMany({})
-    await prisma.discussionReply.deleteMany({})
     await prisma.discussion.deleteMany({})
     await prisma.solutionVote.deleteMany({})
     await prisma.solution.deleteMany({})
