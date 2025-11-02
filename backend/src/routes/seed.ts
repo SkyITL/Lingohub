@@ -6,6 +6,33 @@ import { problems as realProblems } from '../data/problems'
 const router = express.Router()
 const prisma = new PrismaClient()
 
+// Clear all problems and related data
+router.post('/clear', async (req: Request, res: Response) => {
+  try {
+    console.log('🗑️  Clearing database...')
+
+    // Delete in order to respect foreign key constraints
+    await prisma.problemTag.deleteMany({})
+    await prisma.userProgress.deleteMany({})
+    await prisma.discussionReply.deleteMany({})
+    await prisma.discussion.deleteMany({})
+    await prisma.solutionVote.deleteMany({})
+    await prisma.solution.deleteMany({})
+    await prisma.problem.deleteMany({})
+    await prisma.tag.deleteMany({})
+
+    console.log('✅ Database cleared')
+
+    res.json({
+      success: true,
+      message: 'Database cleared successfully'
+    })
+  } catch (error) {
+    console.error('Clear error:', error)
+    res.status(500).json({ error: 'Clear failed', details: error })
+  }
+})
+
 // Batch seed endpoint - processes problems in batches to avoid timeout
 // Query params: ?batch=0&size=50 (batch number and batch size)
 router.post('/run', async (req: Request, res: Response) => {
