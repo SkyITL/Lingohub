@@ -1,601 +1,3894 @@
-// Real linguistics olympiad problems for seeding
-// This file is imported by both the seed script and the seed endpoint
+// Auto-generated linguistics olympiad problems for seeding
+// Generated from PDF files in frontend/public/olympiad-problems/
+// Excludes UKLO (needs modifications)
 
 export const problems = [
   {
-    number: 'LH-001',
-    title: 'Swahili Noun Classes',
-    content: `# Swahili Noun Classes
-
-Swahili is a Bantu language spoken in East Africa. Like other Bantu languages, it has a complex noun class system where nouns are grouped into classes, and these classes determine agreement patterns with adjectives, verbs, and other modifiers.
-
-## Data
-
-Consider the following Swahili sentences and their English translations:
-
-| Swahili | English |
-|---------|---------|
-| Mtoto mdogo anacheza | The small child is playing |
-| Watoto wadogo wanacheza | The small children are playing |
-| Mti mkubwa unaanguka | The big tree is falling |
-| Miti mikubwa inaanguka | The big trees are falling |
-| Kitabu kizuri kinasomwa | The good book is being read |
-| Vitabu vizuri vinasomwa | The good books are being read |
-| Jiwe kubwa linaanguka | The big stone is falling |
-| Mawe makubwa yanaanguka | The big stones are falling |
-
-## Tasks
-
-1. Identify the noun class prefixes for singular and plural forms
-2. Explain the agreement pattern between nouns, adjectives, and verbs
-3. Translate into Swahili:
-   - "The small tree is falling"
-   - "The good children are playing"
-   - "The small stones are falling"`,
+    number: 'LH-IOL-2003-1',
+    title: 'IOL 2003 Problem 1',
+    content: `See PDF for problem content.`,
     source: 'IOL',
-    year: 2019,
-    difficulty: 3,
-    rating: 1400,
-    officialSolution: `## Solution
-
-### Noun Class Prefixes:
-- Class 1/2 (people): m-/wa- (mtoto/watoto)
-- Class 3/4 (trees, plants): m-/mi- (mti/miti)
-- Class 7/8 (things): ki-/vi- (kitabu/vitabu)
-- Class 5/6 (augmentatives): ji-/ma- (jiwe/mawe)
-
-### Agreement Pattern:
-Each noun class has corresponding agreement prefixes for:
-- Adjectives: -dogo (small), -kubwa (big), -zuri (good)
-- Verbs: -na- (present tense marker) + verb stem
-
-### Translations:
-1. "The small tree is falling" → Mti mdogo unaanguka
-2. "The good children are playing" → Watoto wazuri wanacheza
-3. "The small stones are falling" → Mawe madogo yanaanguka`,
-    tags: ['morphology', 'niger-congo', 'intermediate']
-  },
-  {
-    number: 'LH-002',
-    title: 'Turkish Vowel Harmony',
-    content: `# Turkish Vowel Harmony
-
-Turkish exhibits vowel harmony, where vowels within a word must share certain phonetic features. This affects how suffixes are added to word stems.
-
-## Data
-
-Study these Turkish words with their plural forms and meanings:
-
-| Singular | Plural | Meaning |
-|----------|--------|---------|
-| ev | evler | house(s) |
-| köy | köyler | village(s) |
-| göz | gözler | eye(s) |
-| gül | güller | rose(s) |
-| at | atlar | horse(s) |
-| kız | kızlar | girl(s) |
-| yol | yollar | road(s) |
-| kuş | kuşlar | bird(s) |
-
-Now examine these possessive forms ("my X"):
-
-| Base | Possessive | Meaning |
-|------|------------|---------|
-| ev | evim | my house |
-| köy | köyüm | my village |
-| göz | gözüm | my eye |
-| at | atım | my horse |
-| kız | kızım | my girl |
-| yol | yolum | my road |
-
-## Tasks
-
-1. Describe the vowel harmony rule for the plural suffix
-2. Describe the vowel harmony rule for the possessive suffix
-3. Give the plural and possessive forms of:
-   - "kutu" (box)
-   - "köpek" (dog)
-   - "oda" (room)`,
-    source: 'NACLO',
-    year: 2018,
+    year: 2003,
     difficulty: 2,
-    rating: 1300,
-    officialSolution: `## Solution
-
-### Vowel Harmony Rules:
-
-**For Plural (-ler/-lar):**
-- Use -ler after front vowels (e, i, ö, ü)
-- Use -lar after back vowels (a, ı, o, u)
-
-**For Possessive ("my"):**
-- After front unrounded vowels (e, i): -im
-- After front rounded vowels (ö, ü): -üm
-- After back unrounded vowels (a, ı): -ım
-- After back rounded vowels (o, u): -um
-
-### Answers:
-- kutu: kutular (plural), kutum (my box)
-- köpek: köpekler (plural), köpeğim (my dog)
-- oda: odalar (plural), odam (my room)`,
-    tags: ['phonology', 'turkic', 'beginner']
+    rating: 1400,
   },
   {
-    number: 'LH-003',
-    title: 'Hawaiian Phonological Constraints',
-    content: `# Hawaiian Phonological Constraints
-
-Hawaiian has one of the world's smallest phoneme inventories, with only 13 phonemes (8 consonants and 5 vowels). This leads to interesting phonological adaptations when borrowing words from other languages.
-
-## Data
-
-Here are some English words and their Hawaiian adaptations:
-
-| English | Hawaiian |
-|---------|-----------|
-| Christmas | Kalikimaka |
-| Britain | Pelekane |
-| throne | kelone |
-| brush | palaki |
-| Fred | Peleke |
-| trust | kaluku |
-| president | pelekikena |
-| print | palinika |
-
-## Additional Information
-
-Hawaiian consonants: p, k, ʔ, h, m, n, l, w
-Hawaiian vowels: a, e, i, o, u
-
-All syllables in Hawaiian must be either V (vowel) or CV (consonant + vowel).
-
-## Tasks
-
-1. Describe the systematic changes that occur when English words are borrowed into Hawaiian
-2. Explain why these changes are necessary given Hawaiian's phonological constraints
-3. Predict the Hawaiian adaptation of:
-   - "Frank"
-   - "Scotland"`,
-    source: 'UKLO',
-    year: 2020,
+    number: 'LH-IOL-2003-2',
+    title: 'IOL 2003 Problem 2',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2003,
     difficulty: 3,
-    rating: 1500,
-    officialSolution: `## Solution
-
-### Systematic Changes:
-
-1. **Consonant Substitutions:**
-   - t → k (no t in Hawaiian)
-   - r → l (no r in Hawaiian)
-   - s → k (no s in Hawaiian)
-   - f → p (no f in Hawaiian)
-   - b → p (no b in Hawaiian)
-   - d → k (no d in Hawaiian)
-   - g → k (no g in Hawaiian)
-
-2. **Syllable Structure Repairs:**
-   - Consonant clusters are broken up with epenthetic vowels
-   - Final consonants get an added vowel
-   - Usually 'a' or 'i' is inserted, following vowel harmony patterns
-
-### Predictions:
-- "Frank" → Palani (f→p, r→l, nk cluster broken, final consonant needs vowel)
-- "Scotland" → Kokolana (s→k, c→k, tl cluster broken, nd→na)`,
-    tags: ['phonology', 'austronesian', 'intermediate']
+    rating: 1600,
   },
   {
-    number: 'LH-004',
-    title: 'Ancient Egyptian Hieroglyphs',
-    content: `# Ancient Egyptian Hieroglyphs
-
-Ancient Egyptian hieroglyphic writing combines logographic and alphabetic elements. Some signs represent whole words, while others represent sounds.
-
-## Data
-
-Study these hieroglyphic representations (shown as transliterations) and their meanings:
-
-| Hieroglyphic | Transliteration | Meaning |
-|--------------|-----------------|---------|
-| 𓊪𓏏𓇯 | pt | sky |
-| 𓊪𓏏𓇯𓏏 | ptt | ? |
-| 𓊖 | niwt | city |
-| 𓊖𓊖 | niwty | two cities |
-| 𓊖𓊖𓊖 | niwtw | cities (plural) |
-| 𓉐 | pr | house |
-| 𓉐𓅱 | prw | houses |
-| 𓉐𓏏 | prt | ? |
-| 𓄿𓏏𓆑 | itf | father |
-| 𓄿𓏏𓆑𓅱 | itfw | ? |
-
-## Tasks
-
-1. Identify which hieroglyphs are logograms (word signs) and which are phonograms (sound signs)
-2. Explain the Egyptian number and gender marking system
-3. Fill in the missing meanings marked with "?"
-4. How would you write "fathers" in hieroglyphs?`,
+    number: 'LH-IOL-2003-3',
+    title: 'IOL 2003 Problem 3',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2003,
+    difficulty: 4,
+    rating: 1800,
+  },
+  {
+    number: 'LH-IOL-2003-4',
+    title: 'IOL 2003 Problem 4',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2003,
+    difficulty: 5,
+    rating: 2000,
+  },
+  {
+    number: 'LH-IOL-2003-5',
+    title: 'IOL 2003 Problem 5',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2003,
+    difficulty: 5,
+    rating: 2000,
+  },
+  {
+    number: 'LH-IOL-2004-1',
+    title: 'IOL 2004 Problem 1',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2004,
+    difficulty: 2,
+    rating: 1410,
+  },
+  {
+    number: 'LH-IOL-2004-2',
+    title: 'IOL 2004 Problem 2',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2004,
+    difficulty: 3,
+    rating: 1610,
+  },
+  {
+    number: 'LH-IOL-2004-3',
+    title: 'IOL 2004 Problem 3',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2004,
+    difficulty: 4,
+    rating: 1810,
+  },
+  {
+    number: 'LH-IOL-2004-4',
+    title: 'IOL 2004 Problem 4',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2004,
+    difficulty: 5,
+    rating: 2010,
+  },
+  {
+    number: 'LH-IOL-2004-5',
+    title: 'IOL 2004 Problem 5',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2004,
+    difficulty: 5,
+    rating: 2010,
+  },
+  {
+    number: 'LH-IOL-2005-1',
+    title: 'IOL 2005 Problem 1',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2005,
+    difficulty: 2,
+    rating: 1420,
+  },
+  {
+    number: 'LH-IOL-2005-2',
+    title: 'IOL 2005 Problem 2',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2005,
+    difficulty: 3,
+    rating: 1620,
+  },
+  {
+    number: 'LH-IOL-2005-3',
+    title: 'IOL 2005 Problem 3',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2005,
+    difficulty: 4,
+    rating: 1820,
+  },
+  {
+    number: 'LH-IOL-2005-4',
+    title: 'IOL 2005 Problem 4',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2005,
+    difficulty: 5,
+    rating: 2020,
+  },
+  {
+    number: 'LH-IOL-2005-5',
+    title: 'IOL 2005 Problem 5',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2005,
+    difficulty: 5,
+    rating: 2020,
+  },
+  {
+    number: 'LH-IOL-2006-1',
+    title: 'IOL 2006 Problem 1',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2006,
+    difficulty: 2,
+    rating: 1430,
+  },
+  {
+    number: 'LH-IOL-2006-2',
+    title: 'IOL 2006 Problem 2',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2006,
+    difficulty: 3,
+    rating: 1630,
+  },
+  {
+    number: 'LH-IOL-2006-3',
+    title: 'IOL 2006 Problem 3',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2006,
+    difficulty: 4,
+    rating: 1830,
+  },
+  {
+    number: 'LH-IOL-2006-4',
+    title: 'IOL 2006 Problem 4',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2006,
+    difficulty: 5,
+    rating: 2030,
+  },
+  {
+    number: 'LH-IOL-2006-5',
+    title: 'IOL 2006 Problem 5',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2006,
+    difficulty: 5,
+    rating: 2030,
+  },
+  {
+    number: 'LH-IOL-2007-1',
+    title: 'IOL 2007 Problem 1',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2007,
+    difficulty: 2,
+    rating: 1440,
+  },
+  {
+    number: 'LH-IOL-2007-2',
+    title: 'IOL 2007 Problem 2',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2007,
+    difficulty: 3,
+    rating: 1640,
+  },
+  {
+    number: 'LH-IOL-2007-3',
+    title: 'IOL 2007 Problem 3',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2007,
+    difficulty: 4,
+    rating: 1840,
+  },
+  {
+    number: 'LH-IOL-2007-4',
+    title: 'IOL 2007 Problem 4',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2007,
+    difficulty: 5,
+    rating: 2040,
+  },
+  {
+    number: 'LH-IOL-2007-5',
+    title: 'IOL 2007 Problem 5',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2007,
+    difficulty: 5,
+    rating: 2040,
+  },
+  {
+    number: 'LH-IOL-2008-1',
+    title: 'IOL 2008 Problem 1',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2008,
+    difficulty: 2,
+    rating: 1450,
+  },
+  {
+    number: 'LH-IOL-2008-2',
+    title: 'IOL 2008 Problem 2',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2008,
+    difficulty: 3,
+    rating: 1650,
+  },
+  {
+    number: 'LH-IOL-2008-3',
+    title: 'IOL 2008 Problem 3',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2008,
+    difficulty: 4,
+    rating: 1850,
+  },
+  {
+    number: 'LH-IOL-2008-4',
+    title: 'IOL 2008 Problem 4',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2008,
+    difficulty: 5,
+    rating: 2050,
+  },
+  {
+    number: 'LH-IOL-2008-5',
+    title: 'IOL 2008 Problem 5',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2008,
+    difficulty: 5,
+    rating: 2050,
+  },
+  {
+    number: 'LH-IOL-2009-1',
+    title: 'IOL 2009 Problem 1',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2009,
+    difficulty: 2,
+    rating: 1460,
+  },
+  {
+    number: 'LH-IOL-2009-2',
+    title: 'IOL 2009 Problem 2',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2009,
+    difficulty: 3,
+    rating: 1660,
+  },
+  {
+    number: 'LH-IOL-2009-3',
+    title: 'IOL 2009 Problem 3',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2009,
+    difficulty: 4,
+    rating: 1860,
+  },
+  {
+    number: 'LH-IOL-2009-4',
+    title: 'IOL 2009 Problem 4',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2009,
+    difficulty: 5,
+    rating: 2060,
+  },
+  {
+    number: 'LH-IOL-2009-5',
+    title: 'IOL 2009 Problem 5',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2009,
+    difficulty: 5,
+    rating: 2060,
+  },
+  {
+    number: 'LH-IOL-2010-1',
+    title: 'IOL 2010 Problem 1',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2010,
+    difficulty: 2,
+    rating: 1470,
+  },
+  {
+    number: 'LH-IOL-2010-2',
+    title: 'IOL 2010 Problem 2',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2010,
+    difficulty: 3,
+    rating: 1670,
+  },
+  {
+    number: 'LH-IOL-2010-3',
+    title: 'IOL 2010 Problem 3',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2010,
+    difficulty: 4,
+    rating: 1870,
+  },
+  {
+    number: 'LH-IOL-2010-4',
+    title: 'IOL 2010 Problem 4',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2010,
+    difficulty: 5,
+    rating: 2070,
+  },
+  {
+    number: 'LH-IOL-2010-5',
+    title: 'IOL 2010 Problem 5',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2010,
+    difficulty: 5,
+    rating: 2070,
+  },
+  {
+    number: 'LH-IOL-2011-1',
+    title: 'IOL 2011 Problem 1',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2011,
+    difficulty: 2,
+    rating: 1480,
+  },
+  {
+    number: 'LH-IOL-2011-2',
+    title: 'IOL 2011 Problem 2',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2011,
+    difficulty: 3,
+    rating: 1680,
+  },
+  {
+    number: 'LH-IOL-2011-3',
+    title: 'IOL 2011 Problem 3',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2011,
+    difficulty: 4,
+    rating: 1880,
+  },
+  {
+    number: 'LH-IOL-2011-4',
+    title: 'IOL 2011 Problem 4',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2011,
+    difficulty: 5,
+    rating: 2080,
+  },
+  {
+    number: 'LH-IOL-2011-5',
+    title: 'IOL 2011 Problem 5',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2011,
+    difficulty: 5,
+    rating: 2080,
+  },
+  {
+    number: 'LH-IOL-2012-1',
+    title: 'IOL 2012 Problem 1',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2012,
+    difficulty: 2,
+    rating: 1490,
+  },
+  {
+    number: 'LH-IOL-2012-2',
+    title: 'IOL 2012 Problem 2',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2012,
+    difficulty: 3,
+    rating: 1690,
+  },
+  {
+    number: 'LH-IOL-2012-3',
+    title: 'IOL 2012 Problem 3',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2012,
+    difficulty: 4,
+    rating: 1890,
+  },
+  {
+    number: 'LH-IOL-2012-4',
+    title: 'IOL 2012 Problem 4',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2012,
+    difficulty: 5,
+    rating: 2090,
+  },
+  {
+    number: 'LH-IOL-2012-5',
+    title: 'IOL 2012 Problem 5',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2012,
+    difficulty: 5,
+    rating: 2090,
+  },
+  {
+    number: 'LH-IOL-2013-1',
+    title: 'IOL 2013 Problem 1',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2013,
+    difficulty: 2,
+    rating: 1500,
+  },
+  {
+    number: 'LH-IOL-2013-2',
+    title: 'IOL 2013 Problem 2',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2013,
+    difficulty: 3,
+    rating: 1700,
+  },
+  {
+    number: 'LH-IOL-2013-3',
+    title: 'IOL 2013 Problem 3',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2013,
+    difficulty: 4,
+    rating: 1900,
+  },
+  {
+    number: 'LH-IOL-2013-4',
+    title: 'IOL 2013 Problem 4',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2013,
+    difficulty: 5,
+    rating: 2100,
+  },
+  {
+    number: 'LH-IOL-2013-5',
+    title: 'IOL 2013 Problem 5',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2013,
+    difficulty: 5,
+    rating: 2100,
+  },
+  {
+    number: 'LH-IOL-2014-1',
+    title: 'IOL 2014 Problem 1',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2014,
+    difficulty: 2,
+    rating: 1510,
+  },
+  {
+    number: 'LH-IOL-2014-2',
+    title: 'IOL 2014 Problem 2',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2014,
+    difficulty: 3,
+    rating: 1710,
+  },
+  {
+    number: 'LH-IOL-2014-3',
+    title: 'IOL 2014 Problem 3',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2014,
+    difficulty: 4,
+    rating: 1910,
+  },
+  {
+    number: 'LH-IOL-2014-4',
+    title: 'IOL 2014 Problem 4',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2014,
+    difficulty: 5,
+    rating: 2110,
+  },
+  {
+    number: 'LH-IOL-2014-5',
+    title: 'IOL 2014 Problem 5',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2014,
+    difficulty: 5,
+    rating: 2110,
+  },
+  {
+    number: 'LH-IOL-2015-1',
+    title: 'IOL 2015 Problem 1',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2015,
+    difficulty: 2,
+    rating: 1520,
+  },
+  {
+    number: 'LH-IOL-2015-2',
+    title: 'IOL 2015 Problem 2',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2015,
+    difficulty: 3,
+    rating: 1720,
+  },
+  {
+    number: 'LH-IOL-2015-3',
+    title: 'IOL 2015 Problem 3',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2015,
+    difficulty: 4,
+    rating: 1920,
+  },
+  {
+    number: 'LH-IOL-2015-4',
+    title: 'IOL 2015 Problem 4',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2015,
+    difficulty: 5,
+    rating: 2120,
+  },
+  {
+    number: 'LH-IOL-2015-5',
+    title: 'IOL 2015 Problem 5',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2015,
+    difficulty: 5,
+    rating: 2120,
+  },
+  {
+    number: 'LH-IOL-2016-1',
+    title: 'IOL 2016 Problem 1',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2016,
+    difficulty: 2,
+    rating: 1530,
+  },
+  {
+    number: 'LH-IOL-2016-2',
+    title: 'IOL 2016 Problem 2',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2016,
+    difficulty: 3,
+    rating: 1730,
+  },
+  {
+    number: 'LH-IOL-2016-3',
+    title: 'IOL 2016 Problem 3',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2016,
+    difficulty: 4,
+    rating: 1930,
+  },
+  {
+    number: 'LH-IOL-2016-4',
+    title: 'IOL 2016 Problem 4',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2016,
+    difficulty: 5,
+    rating: 2130,
+  },
+  {
+    number: 'LH-IOL-2016-5',
+    title: 'IOL 2016 Problem 5',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2016,
+    difficulty: 5,
+    rating: 2130,
+  },
+  {
+    number: 'LH-IOL-2017-1',
+    title: 'IOL 2017 Problem 1',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2017,
+    difficulty: 2,
+    rating: 1540,
+  },
+  {
+    number: 'LH-IOL-2017-2',
+    title: 'IOL 2017 Problem 2',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2017,
+    difficulty: 3,
+    rating: 1740,
+  },
+  {
+    number: 'LH-IOL-2017-3',
+    title: 'IOL 2017 Problem 3',
+    content: `See PDF for problem content.`,
     source: 'IOL',
     year: 2017,
     difficulty: 4,
-    rating: 1600,
-    officialSolution: `## Solution
-
-### Sign Types:
-- Logograms: 𓊖 (city), 𓉐 (house)
-- Phonograms: 𓊪 (p), 𓏏 (t), 𓇯 (determinative for sky), 𓅱 (w), 𓄿 (i), 𓆑 (f)
-
-### Number and Gender:
-- Dual (two): repeat logogram twice or add -y
-- Plural (3+): repeat logogram three times or add -w
-- Feminine: add -t
-
-### Missing Meanings:
-- ptt = "sky" (feminine form)
-- prt = "house" (feminine form) or "winter"
-- itfw = "his father" (with possessive -w)
-
-### "Fathers" (plural):
-𓄿𓏏𓆑𓅱 (itfw) or 𓄿𓏏𓆑𓄿𓏏𓆑𓄿𓏏𓆑`,
-    tags: ['writing-systems', 'afroasiatic', 'advanced']
+    rating: 1940,
   },
   {
-    number: 'LH-005',
-    title: 'Dyirbal Ergativity',
-    content: `# Dyirbal Ergativity
-
-Dyirbal is an Australian Aboriginal language that uses an ergative-absolutive alignment system, which is different from the nominative-accusative system used in English.
-
-## Data
-
-Study these Dyirbal sentences:
-
-| Dyirbal | English |
-|---------|---------|
-| yabu banaga-nyu | Mother returned |
-| nguma yabu-nggu bura-n | Father saw mother |
-| yabu nguma bura-n | Mother saw father |
-| nguma banaga-nyu | Father returned |
-| yabu-nggu nguma bura-n | Mother saw father |
-| nguma-nggu yabu bura-n | Father saw mother |
-
-Vocabulary:
-- yabu = mother
-- nguma = father
-- banaga-nyu = returned
-- bura-n = saw
-- -nggu = ergative case marker
-
-## Tasks
-
-1. Explain the difference between ergative-absolutive and nominative-accusative alignment
-2. When is the ergative marker -nggu used in Dyirbal?
-3. Identify which noun is the subject and which is the object in each transitive sentence
-4. How would you say "Father returned and saw mother" in Dyirbal?`,
-    source: 'APLO',
-    year: 2016,
+    number: 'LH-IOL-2017-4',
+    title: 'IOL 2017 Problem 4',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2017,
+    difficulty: 5,
+    rating: 2140,
+  },
+  {
+    number: 'LH-IOL-2017-5',
+    title: 'IOL 2017 Problem 5',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2017,
+    difficulty: 5,
+    rating: 2140,
+  },
+  {
+    number: 'LH-IOL-2018-1',
+    title: 'IOL 2018 Problem 1',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2018,
+    difficulty: 2,
+    rating: 1550,
+  },
+  {
+    number: 'LH-IOL-2018-2',
+    title: 'IOL 2018 Problem 2',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2018,
+    difficulty: 3,
+    rating: 1750,
+  },
+  {
+    number: 'LH-IOL-2018-3',
+    title: 'IOL 2018 Problem 3',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2018,
     difficulty: 4,
-    rating: 1700,
-    officialSolution: `## Solution
-
-### Ergative-Absolutive Alignment:
-- **Absolutive case** (unmarked): Used for subjects of intransitive verbs AND objects of transitive verbs
-- **Ergative case** (-nggu): Used only for subjects of transitive verbs
-
-This differs from nominative-accusative (like English) where subjects are always nominative and objects are always accusative.
-
-### Use of -nggu:
-The ergative marker -nggu is added to the subject of a transitive verb (the one doing the action to someone else).
-
-### Subject-Object Identification:
-- nguma yabu-nggu bura-n: yabu-nggu (mother) = subject, nguma (father) = object
-- yabu nguma bura-n: nguma (father) = subject, yabu (mother) = object
-- yabu-nggu nguma bura-n: yabu-nggu (mother) = subject, nguma (father) = object
-- nguma-nggu yabu bura-n: nguma-nggu (father) = subject, yabu (mother) = object
-
-### Translation:
-"Father returned and saw mother" → nguma banaga-nyu, nguma-nggu yabu bura-n`,
-    tags: ['syntax', 'morphology', 'australian', 'advanced']
+    rating: 1950,
   },
   {
-    number: 'LH-006',
-    title: 'Tok Pisin Creole Formation',
-    content: `# Tok Pisin Creole Formation
-
-Tok Pisin is a creole language spoken in Papua New Guinea. It developed from English-based pidgin and shows interesting grammatical innovations.
-
-## Data
-
-Study these Tok Pisin sentences and their English translations:
-
-| Tok Pisin | English |
-|-----------|---------|
-| Mi go | I go |
-| Yu go | You go |
-| Em go | He/she goes |
-| Mipela go | We (exclusive) go |
-| Yumi go | We (inclusive) go |
-| Yupela go | You (plural) go |
-| Ol go | They go |
-| Mi go pinis | I went |
-| Bai mi go | I will go |
-| Mi go i stap | I am going |
-| Mi no go | I don't go |
-| Mi go long haus | I go to the house |
-| Mi lukim yu | I see you |
-| Yu lukim mi | You see me |
-| Mi givim buk long yu | I give the book to you |
-
-## Tasks
-
-1. Describe how Tok Pisin marks tense (past, present, future)
-2. Explain the inclusive/exclusive distinction in pronouns
-3. What is the function of "long" in these sentences?
-4. Translate into Tok Pisin:
-   - "They will see us (inclusive)"
-   - "She gave the book to me"
-   - "We (exclusive) didn't go to the house"`,
-    source: 'NACLO',
+    number: 'LH-IOL-2018-4',
+    title: 'IOL 2018 Problem 4',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2018,
+    difficulty: 5,
+    rating: 2150,
+  },
+  {
+    number: 'LH-IOL-2018-5',
+    title: 'IOL 2018 Problem 5',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2018,
+    difficulty: 5,
+    rating: 2150,
+  },
+  {
+    number: 'LH-IOL-2019-1',
+    title: 'IOL 2019 Problem 1',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2019,
+    difficulty: 2,
+    rating: 1560,
+  },
+  {
+    number: 'LH-IOL-2019-2',
+    title: 'IOL 2019 Problem 2',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2019,
+    difficulty: 3,
+    rating: 1760,
+  },
+  {
+    number: 'LH-IOL-2019-3',
+    title: 'IOL 2019 Problem 3',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2019,
+    difficulty: 4,
+    rating: 1960,
+  },
+  {
+    number: 'LH-IOL-2019-4',
+    title: 'IOL 2019 Problem 4',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2019,
+    difficulty: 5,
+    rating: 2160,
+  },
+  {
+    number: 'LH-IOL-2019-5',
+    title: 'IOL 2019 Problem 5',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2019,
+    difficulty: 5,
+    rating: 2160,
+  },
+  {
+    number: 'LH-IOL-2021-1',
+    title: 'IOL 2021 Problem 1',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
     year: 2021,
     difficulty: 2,
-    rating: 1350,
-    officialSolution: `## Solution
-
-### Tense Marking:
-- Present: unmarked (base verb)
-- Past: verb + "pinis" (from "finish")
-- Future: "bai" + subject + verb
-- Progressive: verb + "i stap" (from "stop/stay")
-
-### Inclusive/Exclusive Distinction:
-- **Mipela** = we (exclusive - not including the listener)
-- **Yumi** = we (inclusive - including the listener)
-This distinction is common in Austronesian languages of the region.
-
-### Function of "long":
-"Long" serves as a general preposition meaning "to", "at", "for", or indicating indirect objects.
-
-### Translations:
-1. "They will see us (inclusive)" → Bai ol lukim yumi
-2. "She gave the book to me" → Em givim buk long mi
-3. "We (exclusive) didn't go to the house" → Mipela no go long haus`,
-    tags: ['syntax', 'morphology', 'austronesian', 'intermediate']
+    rating: 1580,
   },
   {
-    number: 'LH-007',
-    title: 'Japanese Writing Systems',
-    content: `# Japanese Writing Systems
-
-Japanese uses three writing systems simultaneously: hiragana (for grammatical elements), katakana (for foreign words), and kanji (Chinese characters for content words).
-
-## Data
-
-Study these Japanese sentences written in romaji (Latin script) with word boundaries marked:
-
-| Japanese (Romaji) | English | Writing System Used |
-|-------------------|---------|---------------------|
-| watashi wa gakusei desu | I am a student | 私は学生です |
-| kore wa pen desu | This is a pen | これはペンです |
-| nihon no kuruma | Japanese car | 日本の車 |
-| amerika kara kimashita | Came from America | アメリカから来ました |
-| hon o yomimasu | Read a book | 本を読みます |
-| koohii o nomimasu | Drink coffee | コーヒーを飲みます |
-
-Where:
-- Hiragana: は (wa), の (no), を (o), です (desu), から (kara), ます (masu)
-- Katakana: ペン (pen), アメリカ (amerika), コーヒー (koohii)
-- Kanji: 私 (watashi), 学生 (gakusei), 日本 (nihon), 車 (kuruma), 本 (hon), 読 (yo), 飲 (no)
-
-## Tasks
-
-1. What determines which writing system is used for each word?
-2. Identify the grammatical particles in the sentences
-3. Why might "pen" and "coffee" be written differently from "book" and "car"?
-4. How would "I drink American coffee" likely be written (indicate which parts use which system)?`,
+    number: 'LH-IOL-2021-2',
+    title: 'IOL 2021 Problem 2',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2021,
+    difficulty: 3,
+    rating: 1780,
+  },
+  {
+    number: 'LH-IOL-2021-3',
+    title: 'IOL 2021 Problem 3',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2021,
+    difficulty: 4,
+    rating: 1980,
+  },
+  {
+    number: 'LH-IOL-2021-4',
+    title: 'IOL 2021 Problem 4',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2021,
+    difficulty: 5,
+    rating: 2180,
+  },
+  {
+    number: 'LH-IOL-2021-5',
+    title: 'IOL 2021 Problem 5',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2021,
+    difficulty: 5,
+    rating: 2180,
+  },
+  {
+    number: 'LH-IOL-2022-1',
+    title: 'IOL 2022 Problem 1',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2022,
+    difficulty: 2,
+    rating: 1590,
+  },
+  {
+    number: 'LH-IOL-2022-2',
+    title: 'IOL 2022 Problem 2',
+    content: `See PDF for problem content.`,
     source: 'IOL',
     year: 2022,
     difficulty: 3,
-    rating: 1450,
-    officialSolution: `## Solution
-
-### Writing System Rules:
-- **Kanji**: Native Japanese and Chinese-origin content words (nouns, verb stems, adjective stems)
-- **Hiragana**: Grammatical particles, verb endings, native Japanese words without kanji
-- **Katakana**: Foreign loanwords (except Chinese), onomatopoeia, emphasis
-
-### Grammatical Particles:
-- wa (は) - topic marker
-- no (の) - possessive/modifier particle
-- o (を) - direct object marker
-- kara (から) - "from"
-
-### "Pen" vs "Book":
-- "Pen" (ペン) and "coffee" (コーヒー) are recent loanwords from English, written in katakana
-- "Book" (本) and "car" (車) have established kanji as they're older concepts in Japanese
-
-### "I drink American coffee":
-- 私 (watashi - kanji) は (wa - hiragana) アメリカ (amerika - katakana) の (no - hiragana) コーヒー (koohii - katakana) を (o - hiragana) 飲みます (nomimasu - kanji + hiragana)`,
-    tags: ['writing-systems', 'sino-tibetan', 'intermediate']
+    rating: 1790,
   },
   {
-    number: 'LH-008',
-    title: 'Malagasy Word Order',
-    content: `# Malagasy Word Order
-
-Malagasy, spoken in Madagascar, has an unusual word order that is rare among world languages: Verb-Object-Subject (VOS).
-
-## Data
-
-Study these Malagasy sentences:
-
-| Malagasy | English |
-|----------|---------|
-| Mamaky boky ny mpianatra | The student reads a book |
-| Mamaky ny boky ny mpianatra | The student reads the book |
-| Nahita ny alika ny zaza | The child saw the dog |
-| Nahita alika ny zaza | The child saw a dog |
-| Manoratra taratasy ny mpampianatra | The teacher writes a letter |
-| Mividy ny ronono ny vehivavy | The woman buys the milk |
-| Nihinana ny mofo izy | He/she ate the bread |
-
-Vocabulary hints:
-- ny = the (definite article)
-- mamaky = reads
-- nahita = saw
-- manoratra = writes
-- mividy = buys
-- nihinana = ate
-
-## Tasks
-
-1. Confirm the VOS word order and identify V, O, and S in each sentence
-2. What is the difference between "boky" and "ny boky"?
-3. Where does the definite article appear relative to the noun?
-4. Translate into Malagasy:
-   - "The teacher saw the student"
-   - "A child buys milk"
-   - "He reads the letter"`,
+    number: 'LH-IOL-2022-3',
+    title: 'IOL 2022 Problem 3',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2022,
+    difficulty: 4,
+    rating: 1990,
+  },
+  {
+    number: 'LH-IOL-2022-4',
+    title: 'IOL 2022 Problem 4',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2022,
+    difficulty: 5,
+    rating: 2190,
+  },
+  {
+    number: 'LH-IOL-2022-5',
+    title: 'IOL 2022 Problem 5',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2022,
+    difficulty: 5,
+    rating: 2190,
+  },
+  {
+    number: 'LH-IOL-2023-1',
+    title: 'IOL 2023 Problem 1',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2023,
+    difficulty: 2,
+    rating: 1600,
+  },
+  {
+    number: 'LH-IOL-2023-2',
+    title: 'IOL 2023 Problem 2',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2023,
+    difficulty: 3,
+    rating: 1800,
+  },
+  {
+    number: 'LH-IOL-2023-3',
+    title: 'IOL 2023 Problem 3',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2023,
+    difficulty: 4,
+    rating: 2000,
+  },
+  {
+    number: 'LH-IOL-2023-4',
+    title: 'IOL 2023 Problem 4',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2023,
+    difficulty: 5,
+    rating: 2200,
+  },
+  {
+    number: 'LH-IOL-2023-5',
+    title: 'IOL 2023 Problem 5',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2023,
+    difficulty: 5,
+    rating: 2200,
+  },
+  {
+    number: 'LH-IOL-2024-1',
+    title: 'IOL 2024 Problem 1',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2024,
+    difficulty: 2,
+    rating: 1610,
+  },
+  {
+    number: 'LH-IOL-2024-2',
+    title: 'IOL 2024 Problem 2',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2024,
+    difficulty: 3,
+    rating: 1810,
+  },
+  {
+    number: 'LH-IOL-2024-3',
+    title: 'IOL 2024 Problem 3',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2024,
+    difficulty: 4,
+    rating: 2010,
+  },
+  {
+    number: 'LH-IOL-2024-4',
+    title: 'IOL 2024 Problem 4',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2024,
+    difficulty: 5,
+    rating: 2210,
+  },
+  {
+    number: 'LH-IOL-2024-5',
+    title: 'IOL 2024 Problem 5',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2024,
+    difficulty: 5,
+    rating: 2210,
+  },
+  {
+    number: 'LH-IOL-2025-1',
+    title: 'IOL 2025 Problem 1',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2025,
+    difficulty: 2,
+    rating: 1620,
+  },
+  {
+    number: 'LH-IOL-2025-2',
+    title: 'IOL 2025 Problem 2',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2025,
+    difficulty: 3,
+    rating: 1820,
+  },
+  {
+    number: 'LH-IOL-2025-3',
+    title: 'IOL 2025 Problem 3',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2025,
+    difficulty: 4,
+    rating: 2020,
+  },
+  {
+    number: 'LH-IOL-2025-4',
+    title: 'IOL 2025 Problem 4',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2025,
+    difficulty: 5,
+    rating: 2220,
+  },
+  {
+    number: 'LH-IOL-2025-5',
+    title: 'IOL 2025 Problem 5',
+    content: `See PDF for problem content.`,
+    source: 'IOL',
+    year: 2025,
+    difficulty: 5,
+    rating: 2220,
+  },
+  {
+    number: 'LH-APLO-2019-1',
+    title: 'APLO 2019 Problem 1',
+    content: `See PDF for problem content.`,
+    source: 'APLO',
+    year: 2019,
+    difficulty: 1,
+    rating: 1310,
+  },
+  {
+    number: 'LH-APLO-2019-2',
+    title: 'APLO 2019 Problem 2',
+    content: `See PDF for problem content.`,
+    source: 'APLO',
+    year: 2019,
+    difficulty: 2,
+    rating: 1510,
+  },
+  {
+    number: 'LH-APLO-2019-3',
+    title: 'APLO 2019 Problem 3',
+    content: `See PDF for problem content.`,
+    source: 'APLO',
+    year: 2019,
+    difficulty: 2,
+    rating: 1510,
+  },
+  {
+    number: 'LH-APLO-2019-4',
+    title: 'APLO 2019 Problem 4',
+    content: `See PDF for problem content.`,
+    source: 'APLO',
+    year: 2019,
+    difficulty: 3,
+    rating: 1710,
+  },
+  {
+    number: 'LH-APLO-2019-5',
+    title: 'APLO 2019 Problem 5',
+    content: `See PDF for problem content.`,
+    source: 'APLO',
+    year: 2019,
+    difficulty: 3,
+    rating: 1710,
+  },
+  {
+    number: 'LH-APLO-2020-1',
+    title: 'APLO 2020 Problem 1',
+    content: `See PDF for problem content.`,
+    source: 'APLO',
+    year: 2020,
+    difficulty: 1,
+    rating: 1320,
+  },
+  {
+    number: 'LH-APLO-2020-2',
+    title: 'APLO 2020 Problem 2',
+    content: `See PDF for problem content.`,
     source: 'APLO',
     year: 2020,
     difficulty: 2,
-    rating: 1400,
-    officialSolution: `## Solution
-
-### Word Order Confirmation (VOS):
-- Mamaky (V) boky (O) ny mpianatra (S) = "reads book the student"
-- Nahita (V) ny alika (O) ny zaza (S) = "saw the dog the child"
-- Mividy (V) ny ronono (O) ny vehivavy (S) = "buys the milk the woman"
-
-### Definite vs Indefinite:
-- "boky" = a book (indefinite)
-- "ny boky" = the book (definite)
-The definite article "ny" appears BEFORE the noun.
-
-### Translations:
-1. "The teacher saw the student" → Nahita ny mpianatra ny mpampianatra
-2. "A child buys milk" → Mividy ronono ny zaza
-3. "He reads the letter" → Mamaky ny taratasy izy`,
-    tags: ['syntax', 'austronesian', 'beginner']
+    rating: 1520,
   },
   {
-    number: 'LH-009',
-    title: 'Proto-Indo-European Reconstruction',
-    content: `# Proto-Indo-European Reconstruction
-
-Historical linguists reconstruct ancient languages by comparing related modern languages. Here we'll examine words for "father" across Indo-European languages.
-
-## Data
-
-| Language | Word for "father" | Language Family Branch |
-|----------|-------------------|------------------------|
-| English | father | Germanic |
-| German | Vater | Germanic |
-| Dutch | vader | Germanic |
-| Latin | pater | Italic |
-| Spanish | padre | Italic (Romance) |
-| French | père | Italic (Romance) |
-| Greek | πατήρ (patēr) | Hellenic |
-| Sanskrit | पितृ (pitṛ) | Indo-Aryan |
-| Hindi | पिता (pitā) | Indo-Aryan |
-| Russian | отец (otets) | Slavic |
-| Armenian | հայր (hayr) | Armenian |
-
-## Sound Correspondences
-
-Notice these patterns:
-- Germanic languages have 'f' or 'v' where other languages have 'p'
-- This is due to Grimm's Law: Proto-Indo-European *p → Germanic f
-
-## Tasks
-
-1. What was the likely initial consonant in the Proto-Indo-European word for "father"?
-2. Explain why Germanic languages are different from the others
-3. Given that English "foot" corresponds to Latin "ped-" (as in "pedestrian"), what sound change rule can you identify?
-4. Predict: If the PIE word for "fish" was *pisk-, what might it be in English?`,
-    source: 'IOL',
+    number: 'LH-APLO-2020-3',
+    title: 'APLO 2020 Problem 3',
+    content: `See PDF for problem content.`,
+    source: 'APLO',
+    year: 2020,
+    difficulty: 2,
+    rating: 1520,
+  },
+  {
+    number: 'LH-APLO-2020-4',
+    title: 'APLO 2020 Problem 4',
+    content: `See PDF for problem content.`,
+    source: 'APLO',
+    year: 2020,
+    difficulty: 3,
+    rating: 1720,
+  },
+  {
+    number: 'LH-APLO-2020-5',
+    title: 'APLO 2020 Problem 5',
+    content: `See PDF for problem content.`,
+    source: 'APLO',
+    year: 2020,
+    difficulty: 3,
+    rating: 1720,
+  },
+  {
+    number: 'LH-APLO-2021-1',
+    title: 'APLO 2021 Problem 1',
+    content: `See PDF for problem content.`,
+    source: 'APLO',
+    year: 2021,
+    difficulty: 1,
+    rating: 1330,
+  },
+  {
+    number: 'LH-APLO-2021-2',
+    title: 'APLO 2021 Problem 2',
+    content: `See PDF for problem content.`,
+    source: 'APLO',
+    year: 2021,
+    difficulty: 2,
+    rating: 1530,
+  },
+  {
+    number: 'LH-APLO-2021-3',
+    title: 'APLO 2021 Problem 3',
+    content: `See PDF for problem content.`,
+    source: 'APLO',
+    year: 2021,
+    difficulty: 2,
+    rating: 1530,
+  },
+  {
+    number: 'LH-APLO-2021-4',
+    title: 'APLO 2021 Problem 4',
+    content: `See PDF for problem content.`,
+    source: 'APLO',
     year: 2021,
     difficulty: 3,
-    rating: 1550,
-    officialSolution: `## Solution
-
-### Proto-Indo-European Reconstruction:
-The PIE word for "father" was likely *ph₂tḗr, beginning with *p.
-
-### Germanic Sound Change (Grimm's Law):
-Germanic languages underwent a systematic sound shift where:
-- PIE *p → Germanic *f
-- PIE *t → Germanic *θ (th)
-- PIE *k → Germanic *h
-
-This is why Germanic languages have 'f' where other Indo-European languages have 'p'.
-
-### Sound Change Rule:
-The correspondence foot/ped- confirms: PIE *p → English f
-
-### Prediction:
-PIE *pisk- → English "fish" (which is indeed correct!)
-The 'p' became 'f' following Grimm's Law.`,
-    tags: ['historical-linguistics', 'indo-european', 'intermediate']
+    rating: 1730,
   },
   {
-    number: 'LH-010',
-    title: 'Mandarin Chinese Tones',
-    content: `# Mandarin Chinese Tones
-
-Mandarin Chinese is a tonal language where the pitch pattern of a syllable changes its meaning. Mandarin has four main tones plus a neutral tone.
-
-## Data
-
-Here are some Mandarin syllables with different tones and their meanings:
-
-| Pinyin | Tone | Chinese | Meaning |
-|--------|------|---------|---------|
-| mā | 1 (high level) | 妈 | mother |
-| má | 2 (rising) | 麻 | hemp |
-| mǎ | 3 (dipping) | 马 | horse |
-| mà | 4 (falling) | 骂 | scold |
-| ma | 0 (neutral) | 吗 | question particle |
-| tāng | 1 | 汤 | soup |
-| táng | 2 | 糖 | sugar |
-| tǎng | 3 | 躺 | lie down |
-| tàng | 4 | 烫 | hot (to touch) |
-| shī | 1 | 诗 | poem |
-| shí | 2 | 十 | ten |
-| shǐ | 3 | 史 | history |
-| shì | 4 | 是 | to be |
-
-## Tone Patterns:
-1. First tone: high and level (55)
-2. Second tone: rising (35)
-3. Third tone: dipping (214)
-4. Fourth tone: falling (51)
-
-## Tasks
-
-1. Explain how tones function as phonemes in Mandarin
-2. What would happen if you said "mǎ mā" vs "mā mǎ"?
-3. Given that "wǒ" (我) means "I/me" and "ài" (爱) means "love", and "nǐ" (你) means "you", how would you say "I love you"?
-4. Why might tonal languages be challenging for speakers of non-tonal languages?`,
+    number: 'LH-APLO-2021-5',
+    title: 'APLO 2021 Problem 5',
+    content: `See PDF for problem content.`,
+    source: 'APLO',
+    year: 2021,
+    difficulty: 3,
+    rating: 1730,
+  },
+  {
+    number: 'LH-APLO-2022-1',
+    title: 'APLO 2022 Problem 1',
+    content: `See PDF for problem content.`,
+    source: 'APLO',
+    year: 2022,
+    difficulty: 1,
+    rating: 1340,
+  },
+  {
+    number: 'LH-APLO-2022-2',
+    title: 'APLO 2022 Problem 2',
+    content: `See PDF for problem content.`,
+    source: 'APLO',
+    year: 2022,
+    difficulty: 2,
+    rating: 1540,
+  },
+  {
+    number: 'LH-APLO-2022-3',
+    title: 'APLO 2022 Problem 3',
+    content: `See PDF for problem content.`,
+    source: 'APLO',
+    year: 2022,
+    difficulty: 2,
+    rating: 1540,
+  },
+  {
+    number: 'LH-APLO-2022-4',
+    title: 'APLO 2022 Problem 4',
+    content: `See PDF for problem content.`,
+    source: 'APLO',
+    year: 2022,
+    difficulty: 3,
+    rating: 1740,
+  },
+  {
+    number: 'LH-APLO-2022-5',
+    title: 'APLO 2022 Problem 5',
+    content: `See PDF for problem content.`,
+    source: 'APLO',
+    year: 2022,
+    difficulty: 3,
+    rating: 1740,
+  },
+  {
+    number: 'LH-APLO-2023-1',
+    title: 'APLO 2023 Problem 1',
+    content: `See PDF for problem content.`,
+    source: 'APLO',
+    year: 2023,
+    difficulty: 1,
+    rating: 1350,
+  },
+  {
+    number: 'LH-APLO-2023-2',
+    title: 'APLO 2023 Problem 2',
+    content: `See PDF for problem content.`,
+    source: 'APLO',
+    year: 2023,
+    difficulty: 2,
+    rating: 1550,
+  },
+  {
+    number: 'LH-APLO-2023-3',
+    title: 'APLO 2023 Problem 3',
+    content: `See PDF for problem content.`,
+    source: 'APLO',
+    year: 2023,
+    difficulty: 2,
+    rating: 1550,
+  },
+  {
+    number: 'LH-APLO-2023-4',
+    title: 'APLO 2023 Problem 4',
+    content: `See PDF for problem content.`,
+    source: 'APLO',
+    year: 2023,
+    difficulty: 3,
+    rating: 1750,
+  },
+  {
+    number: 'LH-APLO-2023-5',
+    title: 'APLO 2023 Problem 5',
+    content: `See PDF for problem content.`,
+    source: 'APLO',
+    year: 2023,
+    difficulty: 3,
+    rating: 1750,
+  },
+  {
+    number: 'LH-APLO-2024-1',
+    title: 'APLO 2024 Problem 1',
+    content: `See PDF for problem content.`,
+    source: 'APLO',
+    year: 2024,
+    difficulty: 1,
+    rating: 1360,
+  },
+  {
+    number: 'LH-APLO-2024-2',
+    title: 'APLO 2024 Problem 2',
+    content: `See PDF for problem content.`,
+    source: 'APLO',
+    year: 2024,
+    difficulty: 2,
+    rating: 1560,
+  },
+  {
+    number: 'LH-APLO-2024-3',
+    title: 'APLO 2024 Problem 3',
+    content: `See PDF for problem content.`,
+    source: 'APLO',
+    year: 2024,
+    difficulty: 2,
+    rating: 1560,
+  },
+  {
+    number: 'LH-APLO-2024-4',
+    title: 'APLO 2024 Problem 4',
+    content: `See PDF for problem content.`,
+    source: 'APLO',
+    year: 2024,
+    difficulty: 3,
+    rating: 1760,
+  },
+  {
+    number: 'LH-APLO-2024-5',
+    title: 'APLO 2024 Problem 5',
+    content: `See PDF for problem content.`,
+    source: 'APLO',
+    year: 2024,
+    difficulty: 3,
+    rating: 1760,
+  },
+  {
+    number: 'LH-NACLO-2007-A',
+    title: 'NACLO 2007 Problem A',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2007,
+    difficulty: 1,
+    rating: 1200,
+  },
+  {
+    number: 'LH-NACLO-2007-B',
+    title: 'NACLO 2007 Problem B',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2007,
+    difficulty: 1,
+    rating: 1200,
+  },
+  {
+    number: 'LH-NACLO-2007-C',
+    title: 'NACLO 2007 Problem C',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2007,
+    difficulty: 2,
+    rating: 1400,
+  },
+  {
+    number: 'LH-NACLO-2007-D',
+    title: 'NACLO 2007 Problem D',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2007,
+    difficulty: 2,
+    rating: 1400,
+  },
+  {
+    number: 'LH-NACLO-2007-E',
+    title: 'NACLO 2007 Problem E',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2007,
+    difficulty: 3,
+    rating: 1600,
+  },
+  {
+    number: 'LH-NACLO-2007-F',
+    title: 'NACLO 2007 Problem F',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2007,
+    difficulty: 3,
+    rating: 1600,
+  },
+  {
+    number: 'LH-NACLO-2007-G',
+    title: 'NACLO 2007 Problem G',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2007,
+    difficulty: 4,
+    rating: 1800,
+  },
+  {
+    number: 'LH-NACLO-2007-H',
+    title: 'NACLO 2007 Problem H',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2007,
+    difficulty: 4,
+    rating: 1800,
+  },
+  {
+    number: 'LH-NACLO-2008-A',
+    title: 'NACLO 2008 Problem A',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2008,
+    difficulty: 1,
+    rating: 1210,
+  },
+  {
+    number: 'LH-NACLO-2008-B',
+    title: 'NACLO 2008 Problem B',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2008,
+    difficulty: 1,
+    rating: 1210,
+  },
+  {
+    number: 'LH-NACLO-2008-C',
+    title: 'NACLO 2008 Problem C',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2008,
+    difficulty: 2,
+    rating: 1410,
+  },
+  {
+    number: 'LH-NACLO-2008-D',
+    title: 'NACLO 2008 Problem D',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2008,
+    difficulty: 2,
+    rating: 1410,
+  },
+  {
+    number: 'LH-NACLO-2008-E',
+    title: 'NACLO 2008 Problem E',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2008,
+    difficulty: 3,
+    rating: 1610,
+  },
+  {
+    number: 'LH-NACLO-2008-F',
+    title: 'NACLO 2008 Problem F',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2008,
+    difficulty: 3,
+    rating: 1610,
+  },
+  {
+    number: 'LH-NACLO-2008-G',
+    title: 'NACLO 2008 Problem G',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2008,
+    difficulty: 4,
+    rating: 1810,
+  },
+  {
+    number: 'LH-NACLO-2008-H',
+    title: 'NACLO 2008 Problem H',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2008,
+    difficulty: 4,
+    rating: 1810,
+  },
+  {
+    number: 'LH-NACLO-2008-I',
+    title: 'NACLO 2008 Problem I',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2008,
+    difficulty: 5,
+    rating: 2010,
+  },
+  {
+    number: 'LH-NACLO-2008-J',
+    title: 'NACLO 2008 Problem J',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2008,
+    difficulty: 5,
+    rating: 2010,
+  },
+  {
+    number: 'LH-NACLO-2008-K',
+    title: 'NACLO 2008 Problem K',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2008,
+    difficulty: 5,
+    rating: 2010,
+  },
+  {
+    number: 'LH-NACLO-2008-L',
+    title: 'NACLO 2008 Problem L',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2008,
+    difficulty: 5,
+    rating: 2010,
+  },
+  {
+    number: 'LH-NACLO-2009-A',
+    title: 'NACLO 2009 Problem A',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2009,
+    difficulty: 1,
+    rating: 1220,
+  },
+  {
+    number: 'LH-NACLO-2009-B',
+    title: 'NACLO 2009 Problem B',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2009,
+    difficulty: 1,
+    rating: 1220,
+  },
+  {
+    number: 'LH-NACLO-2009-C',
+    title: 'NACLO 2009 Problem C',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2009,
+    difficulty: 2,
+    rating: 1420,
+  },
+  {
+    number: 'LH-NACLO-2009-D',
+    title: 'NACLO 2009 Problem D',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2009,
+    difficulty: 2,
+    rating: 1420,
+  },
+  {
+    number: 'LH-NACLO-2009-E',
+    title: 'NACLO 2009 Problem E',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2009,
+    difficulty: 3,
+    rating: 1620,
+  },
+  {
+    number: 'LH-NACLO-2009-F',
+    title: 'NACLO 2009 Problem F',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2009,
+    difficulty: 3,
+    rating: 1620,
+  },
+  {
+    number: 'LH-NACLO-2009-G',
+    title: 'NACLO 2009 Problem G',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2009,
+    difficulty: 4,
+    rating: 1820,
+  },
+  {
+    number: 'LH-NACLO-2009-H',
+    title: 'NACLO 2009 Problem H',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2009,
+    difficulty: 4,
+    rating: 1820,
+  },
+  {
+    number: 'LH-NACLO-2009-I',
+    title: 'NACLO 2009 Problem I',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2009,
+    difficulty: 5,
+    rating: 2020,
+  },
+  {
+    number: 'LH-NACLO-2009-J',
+    title: 'NACLO 2009 Problem J',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2009,
+    difficulty: 5,
+    rating: 2020,
+  },
+  {
+    number: 'LH-NACLO-2009-K',
+    title: 'NACLO 2009 Problem K',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2009,
+    difficulty: 5,
+    rating: 2020,
+  },
+  {
+    number: 'LH-NACLO-2009-L',
+    title: 'NACLO 2009 Problem L',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2009,
+    difficulty: 5,
+    rating: 2020,
+  },
+  {
+    number: 'LH-NACLO-2009-M',
+    title: 'NACLO 2009 Problem M',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2009,
+    difficulty: 5,
+    rating: 2020,
+  },
+  {
+    number: 'LH-NACLO-2010-A',
+    title: 'NACLO 2010 Problem A',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2010,
+    difficulty: 1,
+    rating: 1230,
+  },
+  {
+    number: 'LH-NACLO-2010-B',
+    title: 'NACLO 2010 Problem B',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2010,
+    difficulty: 1,
+    rating: 1230,
+  },
+  {
+    number: 'LH-NACLO-2010-C',
+    title: 'NACLO 2010 Problem C',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2010,
+    difficulty: 2,
+    rating: 1430,
+  },
+  {
+    number: 'LH-NACLO-2010-D',
+    title: 'NACLO 2010 Problem D',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2010,
+    difficulty: 2,
+    rating: 1430,
+  },
+  {
+    number: 'LH-NACLO-2010-E',
+    title: 'NACLO 2010 Problem E',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2010,
+    difficulty: 3,
+    rating: 1630,
+  },
+  {
+    number: 'LH-NACLO-2010-F',
+    title: 'NACLO 2010 Problem F',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2010,
+    difficulty: 3,
+    rating: 1630,
+  },
+  {
+    number: 'LH-NACLO-2010-G',
+    title: 'NACLO 2010 Problem G',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2010,
+    difficulty: 4,
+    rating: 1830,
+  },
+  {
+    number: 'LH-NACLO-2010-H',
+    title: 'NACLO 2010 Problem H',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2010,
+    difficulty: 4,
+    rating: 1830,
+  },
+  {
+    number: 'LH-NACLO-2010-I',
+    title: 'NACLO 2010 Problem I',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2010,
+    difficulty: 5,
+    rating: 2030,
+  },
+  {
+    number: 'LH-NACLO-2010-J',
+    title: 'NACLO 2010 Problem J',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2010,
+    difficulty: 5,
+    rating: 2030,
+  },
+  {
+    number: 'LH-NACLO-2010-K',
+    title: 'NACLO 2010 Problem K',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2010,
+    difficulty: 5,
+    rating: 2030,
+  },
+  {
+    number: 'LH-NACLO-2010-L',
+    title: 'NACLO 2010 Problem L',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2010,
+    difficulty: 5,
+    rating: 2030,
+  },
+  {
+    number: 'LH-NACLO-2010-M',
+    title: 'NACLO 2010 Problem M',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2010,
+    difficulty: 5,
+    rating: 2030,
+  },
+  {
+    number: 'LH-NACLO-2010-N',
+    title: 'NACLO 2010 Problem N',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2010,
+    difficulty: 5,
+    rating: 2030,
+  },
+  {
+    number: 'LH-NACLO-2010-O',
+    title: 'NACLO 2010 Problem O',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2010,
+    difficulty: 5,
+    rating: 2030,
+  },
+  {
+    number: 'LH-NACLO-2010-P',
+    title: 'NACLO 2010 Problem P',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2010,
+    difficulty: 5,
+    rating: 2030,
+  },
+  {
+    number: 'LH-NACLO-2011-A',
+    title: 'NACLO 2011 Problem A',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2011,
+    difficulty: 1,
+    rating: 1240,
+  },
+  {
+    number: 'LH-NACLO-2011-B',
+    title: 'NACLO 2011 Problem B',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2011,
+    difficulty: 1,
+    rating: 1240,
+  },
+  {
+    number: 'LH-NACLO-2011-C',
+    title: 'NACLO 2011 Problem C',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2011,
+    difficulty: 2,
+    rating: 1440,
+  },
+  {
+    number: 'LH-NACLO-2011-D',
+    title: 'NACLO 2011 Problem D',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2011,
+    difficulty: 2,
+    rating: 1440,
+  },
+  {
+    number: 'LH-NACLO-2011-E',
+    title: 'NACLO 2011 Problem E',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2011,
+    difficulty: 3,
+    rating: 1640,
+  },
+  {
+    number: 'LH-NACLO-2011-F',
+    title: 'NACLO 2011 Problem F',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2011,
+    difficulty: 3,
+    rating: 1640,
+  },
+  {
+    number: 'LH-NACLO-2011-G',
+    title: 'NACLO 2011 Problem G',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2011,
+    difficulty: 4,
+    rating: 1840,
+  },
+  {
+    number: 'LH-NACLO-2011-H',
+    title: 'NACLO 2011 Problem H',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2011,
+    difficulty: 4,
+    rating: 1840,
+  },
+  {
+    number: 'LH-NACLO-2011-I',
+    title: 'NACLO 2011 Problem I',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2011,
+    difficulty: 5,
+    rating: 2040,
+  },
+  {
+    number: 'LH-NACLO-2011-J',
+    title: 'NACLO 2011 Problem J',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2011,
+    difficulty: 5,
+    rating: 2040,
+  },
+  {
+    number: 'LH-NACLO-2011-K',
+    title: 'NACLO 2011 Problem K',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2011,
+    difficulty: 5,
+    rating: 2040,
+  },
+  {
+    number: 'LH-NACLO-2011-L',
+    title: 'NACLO 2011 Problem L',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2011,
+    difficulty: 5,
+    rating: 2040,
+  },
+  {
+    number: 'LH-NACLO-2011-M',
+    title: 'NACLO 2011 Problem M',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2011,
+    difficulty: 5,
+    rating: 2040,
+  },
+  {
+    number: 'LH-NACLO-2011-N',
+    title: 'NACLO 2011 Problem N',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2011,
+    difficulty: 5,
+    rating: 2040,
+  },
+  {
+    number: 'LH-NACLO-2012-A',
+    title: 'NACLO 2012 Problem A',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2012,
+    difficulty: 1,
+    rating: 1250,
+  },
+  {
+    number: 'LH-NACLO-2012-B',
+    title: 'NACLO 2012 Problem B',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2012,
+    difficulty: 1,
+    rating: 1250,
+  },
+  {
+    number: 'LH-NACLO-2012-C',
+    title: 'NACLO 2012 Problem C',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2012,
+    difficulty: 2,
+    rating: 1450,
+  },
+  {
+    number: 'LH-NACLO-2012-D',
+    title: 'NACLO 2012 Problem D',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2012,
+    difficulty: 2,
+    rating: 1450,
+  },
+  {
+    number: 'LH-NACLO-2012-E',
+    title: 'NACLO 2012 Problem E',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2012,
+    difficulty: 3,
+    rating: 1650,
+  },
+  {
+    number: 'LH-NACLO-2012-F',
+    title: 'NACLO 2012 Problem F',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2012,
+    difficulty: 3,
+    rating: 1650,
+  },
+  {
+    number: 'LH-NACLO-2012-G',
+    title: 'NACLO 2012 Problem G',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2012,
+    difficulty: 4,
+    rating: 1850,
+  },
+  {
+    number: 'LH-NACLO-2012-H',
+    title: 'NACLO 2012 Problem H',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2012,
+    difficulty: 4,
+    rating: 1850,
+  },
+  {
+    number: 'LH-NACLO-2012-I',
+    title: 'NACLO 2012 Problem I',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2012,
+    difficulty: 5,
+    rating: 2050,
+  },
+  {
+    number: 'LH-NACLO-2012-J',
+    title: 'NACLO 2012 Problem J',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2012,
+    difficulty: 5,
+    rating: 2050,
+  },
+  {
+    number: 'LH-NACLO-2012-K',
+    title: 'NACLO 2012 Problem K',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2012,
+    difficulty: 5,
+    rating: 2050,
+  },
+  {
+    number: 'LH-NACLO-2012-L',
+    title: 'NACLO 2012 Problem L',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2012,
+    difficulty: 5,
+    rating: 2050,
+  },
+  {
+    number: 'LH-NACLO-2012-M',
+    title: 'NACLO 2012 Problem M',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2012,
+    difficulty: 5,
+    rating: 2050,
+  },
+  {
+    number: 'LH-NACLO-2012-N',
+    title: 'NACLO 2012 Problem N',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2012,
+    difficulty: 5,
+    rating: 2050,
+  },
+  {
+    number: 'LH-NACLO-2012-O',
+    title: 'NACLO 2012 Problem O',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2012,
+    difficulty: 5,
+    rating: 2050,
+  },
+  {
+    number: 'LH-NACLO-2012-P',
+    title: 'NACLO 2012 Problem P',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2012,
+    difficulty: 5,
+    rating: 2050,
+  },
+  {
+    number: 'LH-NACLO-2012-Q',
+    title: 'NACLO 2012 Problem Q',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2012,
+    difficulty: 5,
+    rating: 2050,
+  },
+  {
+    number: 'LH-NACLO-2012-R',
+    title: 'NACLO 2012 Problem R',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2012,
+    difficulty: 5,
+    rating: 2050,
+  },
+  {
+    number: 'LH-NACLO-2013-A',
+    title: 'NACLO 2013 Problem A',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2013,
+    difficulty: 1,
+    rating: 1260,
+  },
+  {
+    number: 'LH-NACLO-2013-B',
+    title: 'NACLO 2013 Problem B',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2013,
+    difficulty: 1,
+    rating: 1260,
+  },
+  {
+    number: 'LH-NACLO-2013-C',
+    title: 'NACLO 2013 Problem C',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2013,
+    difficulty: 2,
+    rating: 1460,
+  },
+  {
+    number: 'LH-NACLO-2013-D',
+    title: 'NACLO 2013 Problem D',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2013,
+    difficulty: 2,
+    rating: 1460,
+  },
+  {
+    number: 'LH-NACLO-2013-E',
+    title: 'NACLO 2013 Problem E',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2013,
+    difficulty: 3,
+    rating: 1660,
+  },
+  {
+    number: 'LH-NACLO-2013-F',
+    title: 'NACLO 2013 Problem F',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2013,
+    difficulty: 3,
+    rating: 1660,
+  },
+  {
+    number: 'LH-NACLO-2013-G',
+    title: 'NACLO 2013 Problem G',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2013,
+    difficulty: 4,
+    rating: 1860,
+  },
+  {
+    number: 'LH-NACLO-2013-H',
+    title: 'NACLO 2013 Problem H',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2013,
+    difficulty: 4,
+    rating: 1860,
+  },
+  {
+    number: 'LH-NACLO-2013-I',
+    title: 'NACLO 2013 Problem I',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2013,
+    difficulty: 5,
+    rating: 2060,
+  },
+  {
+    number: 'LH-NACLO-2013-J',
+    title: 'NACLO 2013 Problem J',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2013,
+    difficulty: 5,
+    rating: 2060,
+  },
+  {
+    number: 'LH-NACLO-2013-K',
+    title: 'NACLO 2013 Problem K',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2013,
+    difficulty: 5,
+    rating: 2060,
+  },
+  {
+    number: 'LH-NACLO-2013-L',
+    title: 'NACLO 2013 Problem L',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2013,
+    difficulty: 5,
+    rating: 2060,
+  },
+  {
+    number: 'LH-NACLO-2013-M',
+    title: 'NACLO 2013 Problem M',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2013,
+    difficulty: 5,
+    rating: 2060,
+  },
+  {
+    number: 'LH-NACLO-2013-N',
+    title: 'NACLO 2013 Problem N',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2013,
+    difficulty: 5,
+    rating: 2060,
+  },
+  {
+    number: 'LH-NACLO-2013-O',
+    title: 'NACLO 2013 Problem O',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2013,
+    difficulty: 5,
+    rating: 2060,
+  },
+  {
+    number: 'LH-NACLO-2013-P',
+    title: 'NACLO 2013 Problem P',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2013,
+    difficulty: 5,
+    rating: 2060,
+  },
+  {
+    number: 'LH-NACLO-2013-Q',
+    title: 'NACLO 2013 Problem Q',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2013,
+    difficulty: 5,
+    rating: 2060,
+  },
+  {
+    number: 'LH-NACLO-2013-R',
+    title: 'NACLO 2013 Problem R',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2013,
+    difficulty: 5,
+    rating: 2060,
+  },
+  {
+    number: 'LH-NACLO-2014-A',
+    title: 'NACLO 2014 Problem A',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2014,
+    difficulty: 1,
+    rating: 1270,
+  },
+  {
+    number: 'LH-NACLO-2014-B',
+    title: 'NACLO 2014 Problem B',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2014,
+    difficulty: 1,
+    rating: 1270,
+  },
+  {
+    number: 'LH-NACLO-2014-C',
+    title: 'NACLO 2014 Problem C',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2014,
+    difficulty: 2,
+    rating: 1470,
+  },
+  {
+    number: 'LH-NACLO-2014-D',
+    title: 'NACLO 2014 Problem D',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2014,
+    difficulty: 2,
+    rating: 1470,
+  },
+  {
+    number: 'LH-NACLO-2014-E',
+    title: 'NACLO 2014 Problem E',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2014,
+    difficulty: 3,
+    rating: 1670,
+  },
+  {
+    number: 'LH-NACLO-2014-F',
+    title: 'NACLO 2014 Problem F',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2014,
+    difficulty: 3,
+    rating: 1670,
+  },
+  {
+    number: 'LH-NACLO-2014-G',
+    title: 'NACLO 2014 Problem G',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2014,
+    difficulty: 4,
+    rating: 1870,
+  },
+  {
+    number: 'LH-NACLO-2014-H',
+    title: 'NACLO 2014 Problem H',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2014,
+    difficulty: 4,
+    rating: 1870,
+  },
+  {
+    number: 'LH-NACLO-2014-I',
+    title: 'NACLO 2014 Problem I',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2014,
+    difficulty: 5,
+    rating: 2070,
+  },
+  {
+    number: 'LH-NACLO-2014-J',
+    title: 'NACLO 2014 Problem J',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2014,
+    difficulty: 5,
+    rating: 2070,
+  },
+  {
+    number: 'LH-NACLO-2014-K',
+    title: 'NACLO 2014 Problem K',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2014,
+    difficulty: 5,
+    rating: 2070,
+  },
+  {
+    number: 'LH-NACLO-2014-L',
+    title: 'NACLO 2014 Problem L',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2014,
+    difficulty: 5,
+    rating: 2070,
+  },
+  {
+    number: 'LH-NACLO-2014-M',
+    title: 'NACLO 2014 Problem M',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2014,
+    difficulty: 5,
+    rating: 2070,
+  },
+  {
+    number: 'LH-NACLO-2014-N',
+    title: 'NACLO 2014 Problem N',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2014,
+    difficulty: 5,
+    rating: 2070,
+  },
+  {
+    number: 'LH-NACLO-2014-O',
+    title: 'NACLO 2014 Problem O',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2014,
+    difficulty: 5,
+    rating: 2070,
+  },
+  {
+    number: 'LH-NACLO-2014-P',
+    title: 'NACLO 2014 Problem P',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2014,
+    difficulty: 5,
+    rating: 2070,
+  },
+  {
+    number: 'LH-NACLO-2014-Q',
+    title: 'NACLO 2014 Problem Q',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2014,
+    difficulty: 5,
+    rating: 2070,
+  },
+  {
+    number: 'LH-NACLO-2015-A',
+    title: 'NACLO 2015 Problem A',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2015,
+    difficulty: 1,
+    rating: 1280,
+  },
+  {
+    number: 'LH-NACLO-2015-B',
+    title: 'NACLO 2015 Problem B',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2015,
+    difficulty: 1,
+    rating: 1280,
+  },
+  {
+    number: 'LH-NACLO-2015-C',
+    title: 'NACLO 2015 Problem C',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2015,
+    difficulty: 2,
+    rating: 1480,
+  },
+  {
+    number: 'LH-NACLO-2015-D',
+    title: 'NACLO 2015 Problem D',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2015,
+    difficulty: 2,
+    rating: 1480,
+  },
+  {
+    number: 'LH-NACLO-2015-E',
+    title: 'NACLO 2015 Problem E',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2015,
+    difficulty: 3,
+    rating: 1680,
+  },
+  {
+    number: 'LH-NACLO-2015-F',
+    title: 'NACLO 2015 Problem F',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2015,
+    difficulty: 3,
+    rating: 1680,
+  },
+  {
+    number: 'LH-NACLO-2015-G',
+    title: 'NACLO 2015 Problem G',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2015,
+    difficulty: 4,
+    rating: 1880,
+  },
+  {
+    number: 'LH-NACLO-2015-H',
+    title: 'NACLO 2015 Problem H',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2015,
+    difficulty: 4,
+    rating: 1880,
+  },
+  {
+    number: 'LH-NACLO-2015-I',
+    title: 'NACLO 2015 Problem I',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2015,
+    difficulty: 5,
+    rating: 2080,
+  },
+  {
+    number: 'LH-NACLO-2015-J',
+    title: 'NACLO 2015 Problem J',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2015,
+    difficulty: 5,
+    rating: 2080,
+  },
+  {
+    number: 'LH-NACLO-2015-K',
+    title: 'NACLO 2015 Problem K',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2015,
+    difficulty: 5,
+    rating: 2080,
+  },
+  {
+    number: 'LH-NACLO-2015-L',
+    title: 'NACLO 2015 Problem L',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2015,
+    difficulty: 5,
+    rating: 2080,
+  },
+  {
+    number: 'LH-NACLO-2015-M',
+    title: 'NACLO 2015 Problem M',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2015,
+    difficulty: 5,
+    rating: 2080,
+  },
+  {
+    number: 'LH-NACLO-2015-N',
+    title: 'NACLO 2015 Problem N',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2015,
+    difficulty: 5,
+    rating: 2080,
+  },
+  {
+    number: 'LH-NACLO-2015-O',
+    title: 'NACLO 2015 Problem O',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2015,
+    difficulty: 5,
+    rating: 2080,
+  },
+  {
+    number: 'LH-NACLO-2015-P',
+    title: 'NACLO 2015 Problem P',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2015,
+    difficulty: 5,
+    rating: 2080,
+  },
+  {
+    number: 'LH-NACLO-2016-A',
+    title: 'NACLO 2016 Problem A',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2016,
+    difficulty: 1,
+    rating: 1290,
+  },
+  {
+    number: 'LH-NACLO-2016-B',
+    title: 'NACLO 2016 Problem B',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2016,
+    difficulty: 1,
+    rating: 1290,
+  },
+  {
+    number: 'LH-NACLO-2016-C',
+    title: 'NACLO 2016 Problem C',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2016,
+    difficulty: 2,
+    rating: 1490,
+  },
+  {
+    number: 'LH-NACLO-2016-D',
+    title: 'NACLO 2016 Problem D',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2016,
+    difficulty: 2,
+    rating: 1490,
+  },
+  {
+    number: 'LH-NACLO-2016-E',
+    title: 'NACLO 2016 Problem E',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2016,
+    difficulty: 3,
+    rating: 1690,
+  },
+  {
+    number: 'LH-NACLO-2016-F',
+    title: 'NACLO 2016 Problem F',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2016,
+    difficulty: 3,
+    rating: 1690,
+  },
+  {
+    number: 'LH-NACLO-2016-G',
+    title: 'NACLO 2016 Problem G',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2016,
+    difficulty: 4,
+    rating: 1890,
+  },
+  {
+    number: 'LH-NACLO-2016-H',
+    title: 'NACLO 2016 Problem H',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2016,
+    difficulty: 4,
+    rating: 1890,
+  },
+  {
+    number: 'LH-NACLO-2016-I',
+    title: 'NACLO 2016 Problem I',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2016,
+    difficulty: 5,
+    rating: 2090,
+  },
+  {
+    number: 'LH-NACLO-2016-J',
+    title: 'NACLO 2016 Problem J',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2016,
+    difficulty: 5,
+    rating: 2090,
+  },
+  {
+    number: 'LH-NACLO-2016-K',
+    title: 'NACLO 2016 Problem K',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2016,
+    difficulty: 5,
+    rating: 2090,
+  },
+  {
+    number: 'LH-NACLO-2016-L',
+    title: 'NACLO 2016 Problem L',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2016,
+    difficulty: 5,
+    rating: 2090,
+  },
+  {
+    number: 'LH-NACLO-2016-M',
+    title: 'NACLO 2016 Problem M',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2016,
+    difficulty: 5,
+    rating: 2090,
+  },
+  {
+    number: 'LH-NACLO-2016-N',
+    title: 'NACLO 2016 Problem N',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2016,
+    difficulty: 5,
+    rating: 2090,
+  },
+  {
+    number: 'LH-NACLO-2016-O',
+    title: 'NACLO 2016 Problem O',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2016,
+    difficulty: 5,
+    rating: 2090,
+  },
+  {
+    number: 'LH-NACLO-2016-P',
+    title: 'NACLO 2016 Problem P',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2016,
+    difficulty: 5,
+    rating: 2090,
+  },
+  {
+    number: 'LH-NACLO-2016-Q',
+    title: 'NACLO 2016 Problem Q',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2016,
+    difficulty: 5,
+    rating: 2090,
+  },
+  {
+    number: 'LH-NACLO-2016-R',
+    title: 'NACLO 2016 Problem R',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2016,
+    difficulty: 5,
+    rating: 2090,
+  },
+  {
+    number: 'LH-NACLO-2017-A',
+    title: 'NACLO 2017 Problem A',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2017,
+    difficulty: 1,
+    rating: 1300,
+  },
+  {
+    number: 'LH-NACLO-2017-B',
+    title: 'NACLO 2017 Problem B',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2017,
+    difficulty: 1,
+    rating: 1300,
+  },
+  {
+    number: 'LH-NACLO-2017-C',
+    title: 'NACLO 2017 Problem C',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2017,
+    difficulty: 2,
+    rating: 1500,
+  },
+  {
+    number: 'LH-NACLO-2017-D',
+    title: 'NACLO 2017 Problem D',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2017,
+    difficulty: 2,
+    rating: 1500,
+  },
+  {
+    number: 'LH-NACLO-2017-E',
+    title: 'NACLO 2017 Problem E',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2017,
+    difficulty: 3,
+    rating: 1700,
+  },
+  {
+    number: 'LH-NACLO-2017-F',
+    title: 'NACLO 2017 Problem F',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2017,
+    difficulty: 3,
+    rating: 1700,
+  },
+  {
+    number: 'LH-NACLO-2017-G',
+    title: 'NACLO 2017 Problem G',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2017,
+    difficulty: 4,
+    rating: 1900,
+  },
+  {
+    number: 'LH-NACLO-2017-H',
+    title: 'NACLO 2017 Problem H',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2017,
+    difficulty: 4,
+    rating: 1900,
+  },
+  {
+    number: 'LH-NACLO-2017-I',
+    title: 'NACLO 2017 Problem I',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2017,
+    difficulty: 5,
+    rating: 2100,
+  },
+  {
+    number: 'LH-NACLO-2017-J',
+    title: 'NACLO 2017 Problem J',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2017,
+    difficulty: 5,
+    rating: 2100,
+  },
+  {
+    number: 'LH-NACLO-2017-K',
+    title: 'NACLO 2017 Problem K',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2017,
+    difficulty: 5,
+    rating: 2100,
+  },
+  {
+    number: 'LH-NACLO-2017-L',
+    title: 'NACLO 2017 Problem L',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2017,
+    difficulty: 5,
+    rating: 2100,
+  },
+  {
+    number: 'LH-NACLO-2017-M',
+    title: 'NACLO 2017 Problem M',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2017,
+    difficulty: 5,
+    rating: 2100,
+  },
+  {
+    number: 'LH-NACLO-2017-N',
+    title: 'NACLO 2017 Problem N',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2017,
+    difficulty: 5,
+    rating: 2100,
+  },
+  {
+    number: 'LH-NACLO-2017-O',
+    title: 'NACLO 2017 Problem O',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2017,
+    difficulty: 5,
+    rating: 2100,
+  },
+  {
+    number: 'LH-NACLO-2017-P',
+    title: 'NACLO 2017 Problem P',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2017,
+    difficulty: 5,
+    rating: 2100,
+  },
+  {
+    number: 'LH-NACLO-2017-Q',
+    title: 'NACLO 2017 Problem Q',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2017,
+    difficulty: 5,
+    rating: 2100,
+  },
+  {
+    number: 'LH-NACLO-2017-R',
+    title: 'NACLO 2017 Problem R',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2017,
+    difficulty: 5,
+    rating: 2100,
+  },
+  {
+    number: 'LH-NACLO-2018-A',
+    title: 'NACLO 2018 Problem A',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2018,
+    difficulty: 1,
+    rating: 1310,
+  },
+  {
+    number: 'LH-NACLO-2018-B',
+    title: 'NACLO 2018 Problem B',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2018,
+    difficulty: 1,
+    rating: 1310,
+  },
+  {
+    number: 'LH-NACLO-2018-C',
+    title: 'NACLO 2018 Problem C',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2018,
+    difficulty: 2,
+    rating: 1510,
+  },
+  {
+    number: 'LH-NACLO-2018-D',
+    title: 'NACLO 2018 Problem D',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2018,
+    difficulty: 2,
+    rating: 1510,
+  },
+  {
+    number: 'LH-NACLO-2018-E',
+    title: 'NACLO 2018 Problem E',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2018,
+    difficulty: 3,
+    rating: 1710,
+  },
+  {
+    number: 'LH-NACLO-2018-F',
+    title: 'NACLO 2018 Problem F',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2018,
+    difficulty: 3,
+    rating: 1710,
+  },
+  {
+    number: 'LH-NACLO-2018-G',
+    title: 'NACLO 2018 Problem G',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2018,
+    difficulty: 4,
+    rating: 1910,
+  },
+  {
+    number: 'LH-NACLO-2018-H',
+    title: 'NACLO 2018 Problem H',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2018,
+    difficulty: 4,
+    rating: 1910,
+  },
+  {
+    number: 'LH-NACLO-2018-I',
+    title: 'NACLO 2018 Problem I',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2018,
+    difficulty: 5,
+    rating: 2110,
+  },
+  {
+    number: 'LH-NACLO-2018-J',
+    title: 'NACLO 2018 Problem J',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2018,
+    difficulty: 5,
+    rating: 2110,
+  },
+  {
+    number: 'LH-NACLO-2018-K',
+    title: 'NACLO 2018 Problem K',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2018,
+    difficulty: 5,
+    rating: 2110,
+  },
+  {
+    number: 'LH-NACLO-2018-L',
+    title: 'NACLO 2018 Problem L',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2018,
+    difficulty: 5,
+    rating: 2110,
+  },
+  {
+    number: 'LH-NACLO-2018-M',
+    title: 'NACLO 2018 Problem M',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2018,
+    difficulty: 5,
+    rating: 2110,
+  },
+  {
+    number: 'LH-NACLO-2018-N',
+    title: 'NACLO 2018 Problem N',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2018,
+    difficulty: 5,
+    rating: 2110,
+  },
+  {
+    number: 'LH-NACLO-2018-O',
+    title: 'NACLO 2018 Problem O',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2018,
+    difficulty: 5,
+    rating: 2110,
+  },
+  {
+    number: 'LH-NACLO-2018-P',
+    title: 'NACLO 2018 Problem P',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2018,
+    difficulty: 5,
+    rating: 2110,
+  },
+  {
+    number: 'LH-NACLO-2018-Q',
+    title: 'NACLO 2018 Problem Q',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2018,
+    difficulty: 5,
+    rating: 2110,
+  },
+  {
+    number: 'LH-NACLO-2018-R',
+    title: 'NACLO 2018 Problem R',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2018,
+    difficulty: 5,
+    rating: 2110,
+  },
+  {
+    number: 'LH-NACLO-2019-A',
+    title: 'NACLO 2019 Problem A',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2019,
+    difficulty: 1,
+    rating: 1320,
+  },
+  {
+    number: 'LH-NACLO-2019-B',
+    title: 'NACLO 2019 Problem B',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2019,
+    difficulty: 1,
+    rating: 1320,
+  },
+  {
+    number: 'LH-NACLO-2019-C',
+    title: 'NACLO 2019 Problem C',
+    content: `See PDF for problem content.`,
     source: 'NACLO',
     year: 2019,
     difficulty: 2,
-    rating: 1300,
-    officialSolution: `## Solution
-
-### Tones as Phonemes:
-In Mandarin, tones are phonemic - they distinguish meaning just like consonants and vowels do. Changing the tone changes the word entirely, not just its pronunciation variant.
-
-### Sentence Meanings:
-- "mǎ mā" (马妈) = "horse mother" (nonsensical)
-- "mā mǎ" (妈马) = "mother horse" (also odd)
-- The correct way to say "mother" is just "māma" (妈妈)
-
-### "I love you":
-"wǒ ài nǐ" (我爱你) - with tones: wǒ (3rd) ài (4th) nǐ (3rd)
-
-### Challenges for Non-Tonal Language Speakers:
-1. Their native language doesn't use pitch to distinguish word meaning
-2. They use pitch for emphasis, emotion, or questions instead
-3. They must learn to control pitch precisely and consistently
-4. They must perceive pitch differences as meaningful rather than stylistic`,
-    tags: ['phonology', 'sino-tibetan', 'beginner']
-  }
+    rating: 1520,
+  },
+  {
+    number: 'LH-NACLO-2019-D',
+    title: 'NACLO 2019 Problem D',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2019,
+    difficulty: 2,
+    rating: 1520,
+  },
+  {
+    number: 'LH-NACLO-2019-E',
+    title: 'NACLO 2019 Problem E',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2019,
+    difficulty: 3,
+    rating: 1720,
+  },
+  {
+    number: 'LH-NACLO-2019-F',
+    title: 'NACLO 2019 Problem F',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2019,
+    difficulty: 3,
+    rating: 1720,
+  },
+  {
+    number: 'LH-NACLO-2019-G',
+    title: 'NACLO 2019 Problem G',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2019,
+    difficulty: 4,
+    rating: 1920,
+  },
+  {
+    number: 'LH-NACLO-2019-H',
+    title: 'NACLO 2019 Problem H',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2019,
+    difficulty: 4,
+    rating: 1920,
+  },
+  {
+    number: 'LH-NACLO-2019-I',
+    title: 'NACLO 2019 Problem I',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2019,
+    difficulty: 5,
+    rating: 2120,
+  },
+  {
+    number: 'LH-NACLO-2019-J',
+    title: 'NACLO 2019 Problem J',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2019,
+    difficulty: 5,
+    rating: 2120,
+  },
+  {
+    number: 'LH-NACLO-2019-K',
+    title: 'NACLO 2019 Problem K',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2019,
+    difficulty: 5,
+    rating: 2120,
+  },
+  {
+    number: 'LH-NACLO-2019-L',
+    title: 'NACLO 2019 Problem L',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2019,
+    difficulty: 5,
+    rating: 2120,
+  },
+  {
+    number: 'LH-NACLO-2019-M',
+    title: 'NACLO 2019 Problem M',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2019,
+    difficulty: 5,
+    rating: 2120,
+  },
+  {
+    number: 'LH-NACLO-2019-N',
+    title: 'NACLO 2019 Problem N',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2019,
+    difficulty: 5,
+    rating: 2120,
+  },
+  {
+    number: 'LH-NACLO-2019-O',
+    title: 'NACLO 2019 Problem O',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2019,
+    difficulty: 5,
+    rating: 2120,
+  },
+  {
+    number: 'LH-NACLO-2019-P',
+    title: 'NACLO 2019 Problem P',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2019,
+    difficulty: 5,
+    rating: 2120,
+  },
+  {
+    number: 'LH-NACLO-2019-Q',
+    title: 'NACLO 2019 Problem Q',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2019,
+    difficulty: 5,
+    rating: 2120,
+  },
+  {
+    number: 'LH-NACLO-2019-R',
+    title: 'NACLO 2019 Problem R',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2019,
+    difficulty: 5,
+    rating: 2120,
+  },
+  {
+    number: 'LH-NACLO-2020-A',
+    title: 'NACLO 2020 Problem A',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2020,
+    difficulty: 1,
+    rating: 1330,
+  },
+  {
+    number: 'LH-NACLO-2020-B',
+    title: 'NACLO 2020 Problem B',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2020,
+    difficulty: 1,
+    rating: 1330,
+  },
+  {
+    number: 'LH-NACLO-2020-C',
+    title: 'NACLO 2020 Problem C',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2020,
+    difficulty: 2,
+    rating: 1530,
+  },
+  {
+    number: 'LH-NACLO-2020-D',
+    title: 'NACLO 2020 Problem D',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2020,
+    difficulty: 2,
+    rating: 1530,
+  },
+  {
+    number: 'LH-NACLO-2020-E',
+    title: 'NACLO 2020 Problem E',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2020,
+    difficulty: 3,
+    rating: 1730,
+  },
+  {
+    number: 'LH-NACLO-2020-F',
+    title: 'NACLO 2020 Problem F',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2020,
+    difficulty: 3,
+    rating: 1730,
+  },
+  {
+    number: 'LH-NACLO-2020-G',
+    title: 'NACLO 2020 Problem G',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2020,
+    difficulty: 4,
+    rating: 1930,
+  },
+  {
+    number: 'LH-NACLO-2020-H',
+    title: 'NACLO 2020 Problem H',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2020,
+    difficulty: 4,
+    rating: 1930,
+  },
+  {
+    number: 'LH-NACLO-2020-I',
+    title: 'NACLO 2020 Problem I',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2020,
+    difficulty: 5,
+    rating: 2130,
+  },
+  {
+    number: 'LH-NACLO-2020-J',
+    title: 'NACLO 2020 Problem J',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2020,
+    difficulty: 5,
+    rating: 2130,
+  },
+  {
+    number: 'LH-NACLO-2020-K',
+    title: 'NACLO 2020 Problem K',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2020,
+    difficulty: 5,
+    rating: 2130,
+  },
+  {
+    number: 'LH-NACLO-2020-L',
+    title: 'NACLO 2020 Problem L',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2020,
+    difficulty: 5,
+    rating: 2130,
+  },
+  {
+    number: 'LH-NACLO-2020-M',
+    title: 'NACLO 2020 Problem M',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2020,
+    difficulty: 5,
+    rating: 2130,
+  },
+  {
+    number: 'LH-NACLO-2020-N',
+    title: 'NACLO 2020 Problem N',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2020,
+    difficulty: 5,
+    rating: 2130,
+  },
+  {
+    number: 'LH-NACLO-2020-O',
+    title: 'NACLO 2020 Problem O',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2020,
+    difficulty: 5,
+    rating: 2130,
+  },
+  {
+    number: 'LH-NACLO-2020-P',
+    title: 'NACLO 2020 Problem P',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2020,
+    difficulty: 5,
+    rating: 2130,
+  },
+  {
+    number: 'LH-NACLO-2020-Q',
+    title: 'NACLO 2020 Problem Q',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2020,
+    difficulty: 5,
+    rating: 2130,
+  },
+  {
+    number: 'LH-NACLO-2020-R',
+    title: 'NACLO 2020 Problem R',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2020,
+    difficulty: 5,
+    rating: 2130,
+  },
+  {
+    number: 'LH-NACLO-2021-A',
+    title: 'NACLO 2021 Problem A',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2021,
+    difficulty: 1,
+    rating: 1340,
+  },
+  {
+    number: 'LH-NACLO-2021-B',
+    title: 'NACLO 2021 Problem B',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2021,
+    difficulty: 1,
+    rating: 1340,
+  },
+  {
+    number: 'LH-NACLO-2021-C',
+    title: 'NACLO 2021 Problem C',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2021,
+    difficulty: 2,
+    rating: 1540,
+  },
+  {
+    number: 'LH-NACLO-2021-D',
+    title: 'NACLO 2021 Problem D',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2021,
+    difficulty: 2,
+    rating: 1540,
+  },
+  {
+    number: 'LH-NACLO-2021-E',
+    title: 'NACLO 2021 Problem E',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2021,
+    difficulty: 3,
+    rating: 1740,
+  },
+  {
+    number: 'LH-NACLO-2021-F',
+    title: 'NACLO 2021 Problem F',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2021,
+    difficulty: 3,
+    rating: 1740,
+  },
+  {
+    number: 'LH-NACLO-2021-G',
+    title: 'NACLO 2021 Problem G',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2021,
+    difficulty: 4,
+    rating: 1940,
+  },
+  {
+    number: 'LH-NACLO-2021-H',
+    title: 'NACLO 2021 Problem H',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2021,
+    difficulty: 4,
+    rating: 1940,
+  },
+  {
+    number: 'LH-NACLO-2021-I',
+    title: 'NACLO 2021 Problem I',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2021,
+    difficulty: 5,
+    rating: 2140,
+  },
+  {
+    number: 'LH-NACLO-2021-J',
+    title: 'NACLO 2021 Problem J',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2021,
+    difficulty: 5,
+    rating: 2140,
+  },
+  {
+    number: 'LH-NACLO-2021-K',
+    title: 'NACLO 2021 Problem K',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2021,
+    difficulty: 5,
+    rating: 2140,
+  },
+  {
+    number: 'LH-NACLO-2021-L',
+    title: 'NACLO 2021 Problem L',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2021,
+    difficulty: 5,
+    rating: 2140,
+  },
+  {
+    number: 'LH-NACLO-2021-M',
+    title: 'NACLO 2021 Problem M',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2021,
+    difficulty: 5,
+    rating: 2140,
+  },
+  {
+    number: 'LH-NACLO-2021-N',
+    title: 'NACLO 2021 Problem N',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2021,
+    difficulty: 5,
+    rating: 2140,
+  },
+  {
+    number: 'LH-NACLO-2021-O',
+    title: 'NACLO 2021 Problem O',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2021,
+    difficulty: 5,
+    rating: 2140,
+  },
+  {
+    number: 'LH-NACLO-2021-P',
+    title: 'NACLO 2021 Problem P',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2021,
+    difficulty: 5,
+    rating: 2140,
+  },
+  {
+    number: 'LH-NACLO-2021-Q',
+    title: 'NACLO 2021 Problem Q',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2021,
+    difficulty: 5,
+    rating: 2140,
+  },
+  {
+    number: 'LH-NACLO-2021-R',
+    title: 'NACLO 2021 Problem R',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2021,
+    difficulty: 5,
+    rating: 2140,
+  },
+  {
+    number: 'LH-NACLO-2021-S',
+    title: 'NACLO 2021 Problem S',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2021,
+    difficulty: 5,
+    rating: 2140,
+  },
+  {
+    number: 'LH-NACLO-2022-A',
+    title: 'NACLO 2022 Problem A',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2022,
+    difficulty: 1,
+    rating: 1350,
+  },
+  {
+    number: 'LH-NACLO-2022-B',
+    title: 'NACLO 2022 Problem B',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2022,
+    difficulty: 1,
+    rating: 1350,
+  },
+  {
+    number: 'LH-NACLO-2022-C',
+    title: 'NACLO 2022 Problem C',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2022,
+    difficulty: 2,
+    rating: 1550,
+  },
+  {
+    number: 'LH-NACLO-2022-D',
+    title: 'NACLO 2022 Problem D',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2022,
+    difficulty: 2,
+    rating: 1550,
+  },
+  {
+    number: 'LH-NACLO-2022-E',
+    title: 'NACLO 2022 Problem E',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2022,
+    difficulty: 3,
+    rating: 1750,
+  },
+  {
+    number: 'LH-NACLO-2022-F',
+    title: 'NACLO 2022 Problem F',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2022,
+    difficulty: 3,
+    rating: 1750,
+  },
+  {
+    number: 'LH-NACLO-2022-G',
+    title: 'NACLO 2022 Problem G',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2022,
+    difficulty: 4,
+    rating: 1950,
+  },
+  {
+    number: 'LH-NACLO-2022-H',
+    title: 'NACLO 2022 Problem H',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2022,
+    difficulty: 4,
+    rating: 1950,
+  },
+  {
+    number: 'LH-NACLO-2022-I',
+    title: 'NACLO 2022 Problem I',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2022,
+    difficulty: 5,
+    rating: 2150,
+  },
+  {
+    number: 'LH-NACLO-2022-J',
+    title: 'NACLO 2022 Problem J',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2022,
+    difficulty: 5,
+    rating: 2150,
+  },
+  {
+    number: 'LH-NACLO-2022-K',
+    title: 'NACLO 2022 Problem K',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2022,
+    difficulty: 5,
+    rating: 2150,
+  },
+  {
+    number: 'LH-NACLO-2022-L',
+    title: 'NACLO 2022 Problem L',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2022,
+    difficulty: 5,
+    rating: 2150,
+  },
+  {
+    number: 'LH-NACLO-2022-M',
+    title: 'NACLO 2022 Problem M',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2022,
+    difficulty: 5,
+    rating: 2150,
+  },
+  {
+    number: 'LH-NACLO-2022-N',
+    title: 'NACLO 2022 Problem N',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2022,
+    difficulty: 5,
+    rating: 2150,
+  },
+  {
+    number: 'LH-NACLO-2022-O',
+    title: 'NACLO 2022 Problem O',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2022,
+    difficulty: 5,
+    rating: 2150,
+  },
+  {
+    number: 'LH-NACLO-2022-P',
+    title: 'NACLO 2022 Problem P',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2022,
+    difficulty: 5,
+    rating: 2150,
+  },
+  {
+    number: 'LH-NACLO-2022-Q',
+    title: 'NACLO 2022 Problem Q',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2022,
+    difficulty: 5,
+    rating: 2150,
+  },
+  {
+    number: 'LH-NACLO-2022-R',
+    title: 'NACLO 2022 Problem R',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2022,
+    difficulty: 5,
+    rating: 2150,
+  },
+  {
+    number: 'LH-NACLO-2023-A',
+    title: 'NACLO 2023 Problem A',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2023,
+    difficulty: 1,
+    rating: 1360,
+  },
+  {
+    number: 'LH-NACLO-2023-B',
+    title: 'NACLO 2023 Problem B',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2023,
+    difficulty: 1,
+    rating: 1360,
+  },
+  {
+    number: 'LH-NACLO-2023-C',
+    title: 'NACLO 2023 Problem C',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2023,
+    difficulty: 2,
+    rating: 1560,
+  },
+  {
+    number: 'LH-NACLO-2023-D',
+    title: 'NACLO 2023 Problem D',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2023,
+    difficulty: 2,
+    rating: 1560,
+  },
+  {
+    number: 'LH-NACLO-2023-E',
+    title: 'NACLO 2023 Problem E',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2023,
+    difficulty: 3,
+    rating: 1760,
+  },
+  {
+    number: 'LH-NACLO-2023-F',
+    title: 'NACLO 2023 Problem F',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2023,
+    difficulty: 3,
+    rating: 1760,
+  },
+  {
+    number: 'LH-NACLO-2023-G',
+    title: 'NACLO 2023 Problem G',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2023,
+    difficulty: 4,
+    rating: 1960,
+  },
+  {
+    number: 'LH-NACLO-2023-H',
+    title: 'NACLO 2023 Problem H',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2023,
+    difficulty: 4,
+    rating: 1960,
+  },
+  {
+    number: 'LH-NACLO-2023-I',
+    title: 'NACLO 2023 Problem I',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2023,
+    difficulty: 5,
+    rating: 2160,
+  },
+  {
+    number: 'LH-NACLO-2023-J',
+    title: 'NACLO 2023 Problem J',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2023,
+    difficulty: 5,
+    rating: 2160,
+  },
+  {
+    number: 'LH-NACLO-2023-K',
+    title: 'NACLO 2023 Problem K',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2023,
+    difficulty: 5,
+    rating: 2160,
+  },
+  {
+    number: 'LH-NACLO-2023-L',
+    title: 'NACLO 2023 Problem L',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2023,
+    difficulty: 5,
+    rating: 2160,
+  },
+  {
+    number: 'LH-NACLO-2023-M',
+    title: 'NACLO 2023 Problem M',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2023,
+    difficulty: 5,
+    rating: 2160,
+  },
+  {
+    number: 'LH-NACLO-2023-N',
+    title: 'NACLO 2023 Problem N',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2023,
+    difficulty: 5,
+    rating: 2160,
+  },
+  {
+    number: 'LH-NACLO-2023-O',
+    title: 'NACLO 2023 Problem O',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2023,
+    difficulty: 5,
+    rating: 2160,
+  },
+  {
+    number: 'LH-NACLO-2023-P',
+    title: 'NACLO 2023 Problem P',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2023,
+    difficulty: 5,
+    rating: 2160,
+  },
+  {
+    number: 'LH-NACLO-2023-Q',
+    title: 'NACLO 2023 Problem Q',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2023,
+    difficulty: 5,
+    rating: 2160,
+  },
+  {
+    number: 'LH-NACLO-2025-A',
+    title: 'NACLO 2025 Problem A',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2025,
+    difficulty: 1,
+    rating: 1380,
+  },
+  {
+    number: 'LH-NACLO-2025-B',
+    title: 'NACLO 2025 Problem B',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2025,
+    difficulty: 1,
+    rating: 1380,
+  },
+  {
+    number: 'LH-NACLO-2025-C',
+    title: 'NACLO 2025 Problem C',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2025,
+    difficulty: 2,
+    rating: 1580,
+  },
+  {
+    number: 'LH-NACLO-2025-D',
+    title: 'NACLO 2025 Problem D',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2025,
+    difficulty: 2,
+    rating: 1580,
+  },
+  {
+    number: 'LH-NACLO-2025-E',
+    title: 'NACLO 2025 Problem E',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2025,
+    difficulty: 3,
+    rating: 1780,
+  },
+  {
+    number: 'LH-NACLO-2025-F',
+    title: 'NACLO 2025 Problem F',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2025,
+    difficulty: 3,
+    rating: 1780,
+  },
+  {
+    number: 'LH-NACLO-2025-G',
+    title: 'NACLO 2025 Problem G',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2025,
+    difficulty: 4,
+    rating: 1980,
+  },
+  {
+    number: 'LH-NACLO-2025-H',
+    title: 'NACLO 2025 Problem H',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2025,
+    difficulty: 4,
+    rating: 1980,
+  },
+  {
+    number: 'LH-NACLO-2025-I',
+    title: 'NACLO 2025 Problem I',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2025,
+    difficulty: 5,
+    rating: 2180,
+  },
+  {
+    number: 'LH-NACLO-2025-J',
+    title: 'NACLO 2025 Problem J',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2025,
+    difficulty: 5,
+    rating: 2180,
+  },
+  {
+    number: 'LH-NACLO-2025-K',
+    title: 'NACLO 2025 Problem K',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2025,
+    difficulty: 5,
+    rating: 2180,
+  },
+  {
+    number: 'LH-NACLO-2025-L',
+    title: 'NACLO 2025 Problem L',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2025,
+    difficulty: 5,
+    rating: 2180,
+  },
+  {
+    number: 'LH-NACLO-2025-M',
+    title: 'NACLO 2025 Problem M',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2025,
+    difficulty: 5,
+    rating: 2180,
+  },
+  {
+    number: 'LH-NACLO-2025-N',
+    title: 'NACLO 2025 Problem N',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2025,
+    difficulty: 5,
+    rating: 2180,
+  },
+  {
+    number: 'LH-NACLO-2025-O',
+    title: 'NACLO 2025 Problem O',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2025,
+    difficulty: 5,
+    rating: 2180,
+  },
+  {
+    number: 'LH-NACLO-2025-P',
+    title: 'NACLO 2025 Problem P',
+    content: `See PDF for problem content.`,
+    source: 'NACLO',
+    year: 2025,
+    difficulty: 5,
+    rating: 2180,
+  },
 ]
