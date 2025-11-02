@@ -37,6 +37,8 @@ model Problem {
   difficulty       Int      @default(1) // 1-5 stars
   rating           Int      @default(1200) // 1000-2400 complexity
   content          String   @db.Text // Problem statement
+  pdfUrl           String?  @db.VarChar(500) // URL to problem PDF
+  solutionUrl      String?  @db.VarChar(500) // URL to solution PDF
   officialSolution String?  @db.Text
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
