@@ -73,9 +73,6 @@ const mockProblems = [
   }
 ]
 
-// Load static problems from JSON
-import problemsData from '@/data/problems.json'
-
 function ProblemsPageContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
@@ -108,70 +105,45 @@ function ProblemsPageContent() {
     }
   }, [searchParams])
 
-  // Use static data for now since API might be slow
-  const staticProblems = problemsData.problems
+  // Fetch problems from API with filters
+  const apiFilters: Record<string, any> = {}
 
-  // Apply client-side filtering
-  const filteredProblems = staticProblems.filter(problem => {
-    // Search filter
-    if (filters.search) {
-      const searchLower = filters.search.toLowerCase()
-      if (!problem.title.toLowerCase().includes(searchLower) &&
-          !problem.number.toLowerCase().includes(searchLower) &&
-          !problem.content.toLowerCase().includes(searchLower)) {
+  if (filters.search) apiFilters.search = filters.search
+  if (filters.sources.length > 0 && filters.sources.length < 4) {
+    apiFilters.source = filters.sources.join(',')
+  }
+  if (filters.difficulties.length > 0) {
+    apiFilters.difficulty = filters.difficulties.join(',')
+  }
+  if (filters.topics.length > 0) {
+    apiFilters.tags = filters.topics.join(',')
+  }
+  if (filters.yearFrom || filters.yearTo) {
+    const yearFrom = filters.yearFrom || '2000'
+    const yearTo = filters.yearTo || new Date().getFullYear().toString()
+    apiFilters.year = `${yearFrom}-${yearTo}`
+  }
+  if (sortBy) apiFilters.sortBy = sortBy
+
+  // Use API to fetch problems
+  const { data: apiResponse, isLoading, error } = useProblems(apiFilters)
+
+  // Extract problems from API response
+  const apiProblems = apiResponse?.problems || []
+
+  // API already handles most filtering, just apply status filter if needed
+  const filteredProblems = apiProblems.filter((problem: any) => {
+    // Status filter (requires auth, handled client-side)
+    if (filters.status && filters.status !== 'all') {
+      if (problem.userStatus !== filters.status) {
         return false
       }
     }
-
-    // Source filter
-    if (filters.sources.length > 0 && filters.sources.length < 4) {
-      if (!filters.sources.includes(problem.source)) {
-        return false
-      }
-    }
-
-    // Difficulty filter
-    if (filters.difficulties.length > 0) {
-      if (!filters.difficulties.includes(problem.difficulty)) {
-        return false
-      }
-    }
-
-    // Topic filter
-    if (filters.topics.length > 0) {
-      const problemTags = problem.tags.map(t => t.toLowerCase())
-      const hasMatchingTag = filters.topics.some(topic => 
-        problemTags.some(tag => tag.includes(topic.toLowerCase()))
-      )
-      if (!hasMatchingTag) {
-        return false
-      }
-    }
-
-    // Year filter
-    if (filters.yearFrom && problem.year < parseInt(filters.yearFrom)) {
-      return false
-    }
-    if (filters.yearTo && problem.year > parseInt(filters.yearTo)) {
-      return false
-    }
-
     return true
   })
 
-  // Sort problems
-  const sortedProblems = [...filteredProblems].sort((a, b) => {
-    switch (sortBy) {
-      case 'difficulty':
-        return a.difficulty - b.difficulty
-      case 'year-desc':
-        return b.year - a.year
-      case 'rating':
-        return b.rating - a.rating
-      default:
-        return a.number.localeCompare(b.number)
-    }
-  })
+  // API already handles sorting, no need to sort again
+  const sortedProblems = filteredProblems
 
   const handleFilterChange = (key: string, value: any) => {
     setFilters(prev => ({ ...prev, [key]: value }))
@@ -498,13 +470,29 @@ function ProblemsPageContent() {
               </div>
             )}
 
+            {/* Loading State */}
+            {isLoading && (
+              <div className="text-center py-12">
+                <div className="text-gray-500 text-lg">Loading problems...</div>
+              </div>
+            )}
+
+            {/* Error State */}
+            {error && (
+              <div className="text-center py-12">
+                <p className="text-red-500 text-lg">Failed to load problems. Please try again.</p>
+              </div>
+            )}
+
             {/* Results Count */}
-            <div className="text-gray-600 mb-4">
-              Found {sortedProblems.length} problem{sortedProblems.length !== 1 ? 's' : ''}
-            </div>
+            {!isLoading && !error && (
+              <div className="text-gray-600 mb-4">
+                Found {sortedProblems.length} problem{sortedProblems.length !== 1 ? 's' : ''}
+              </div>
+            )}
 
             {/* Problems Grid/List */}
-            {sortedProblems.length > 0 ? (
+            {!isLoading && !error && sortedProblems.length > 0 ? (
               viewMode === 'grid' ? (
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {sortedProblems.map((problem) => (
@@ -518,11 +506,11 @@ function ProblemsPageContent() {
                   ))}
                 </div>
               )
-            ) : (
+            ) : !isLoading && !error && (
               <div className="text-center py-12">
                 <p className="text-gray-500 text-lg">No problems found matching your filters.</p>
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   className="mt-4"
                   onClick={resetFilters}
                 >
