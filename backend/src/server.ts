@@ -1,3 +1,4 @@
+// LingoHub Backend API Server
 import express from 'express'
 import cors from 'cors'
 import helmet from 'helmet'
