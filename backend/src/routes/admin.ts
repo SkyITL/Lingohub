@@ -115,4 +115,85 @@ router.delete('/problems/without-pdf', async (req: Request, res: Response) => {
   }
 })
 
+// Delete placeholder problems with "TBD" in title
+router.delete('/problems/placeholders', async (req: Request, res: Response) => {
+  try {
+    console.log('Finding placeholder problems with TBD...')
+
+    // Find problems with TBD in title
+    const placeholderProblems = await prisma.problem.findMany({
+      where: {
+        title: {
+          contains: 'TBD'
+        }
+      },
+      select: {
+        id: true,
+        number: true,
+        title: true
+      }
+    })
+
+    console.log(`Found ${placeholderProblems.length} placeholder problems`)
+
+    if (placeholderProblems.length === 0) {
+      return res.json({
+        message: 'No placeholder problems to delete',
+        deleted: 0
+      })
+    }
+
+    const problemIds = placeholderProblems.map(p => p.id)
+
+    // Delete related data first (respecting foreign keys)
+    await prisma.problemTag.deleteMany({
+      where: { problemId: { in: problemIds } }
+    })
+
+    await prisma.userProgress.deleteMany({
+      where: { problemId: { in: problemIds } }
+    })
+
+    await prisma.discussion.deleteMany({
+      where: { problemId: { in: problemIds } }
+    })
+
+    await prisma.solutionVote.deleteMany({
+      where: {
+        solution: {
+          problemId: { in: problemIds }
+        }
+      }
+    })
+
+    await prisma.solution.deleteMany({
+      where: { problemId: { in: problemIds } }
+    })
+
+    // Now delete the problems
+    const deleted = await prisma.problem.deleteMany({
+      where: {
+        title: {
+          contains: 'TBD'
+        }
+      }
+    })
+
+    console.log(`Deleted ${deleted.count} placeholder problems`)
+
+    // Get remaining count
+    const remaining = await prisma.problem.count()
+
+    res.json({
+      message: 'Placeholder problems deleted successfully',
+      deleted: deleted.count,
+      problems: placeholderProblems.map(p => ({ number: p.number, title: p.title })),
+      remaining
+    })
+  } catch (error) {
+    console.error('Admin delete error:', error)
+    res.status(500).json({ error: 'Internal server error' })
+  }
+})
+
 export default router
