@@ -20,12 +20,24 @@ const prisma = new PrismaClient()
 // Security middleware
 app.use(helmet())
 app.use(cors({
-  origin: [
-    'http://localhost:3000',
-    'https://lingohubs.org',
-    'https://www.lingohubs.org',
-    'https://lingohub-frontend.vercel.app' // Vercel preview URL
-  ],
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl)
+    if (!origin) return callback(null, true)
+
+    const allowedOrigins = [
+      'http://localhost:3000',
+      'https://lingohubs.org',
+      'https://www.lingohubs.org',
+      'https://lingohub-frontend.vercel.app'
+    ]
+
+    // Allow all Vercel preview deployments (*.vercel.app)
+    if (origin.endsWith('.vercel.app') || allowedOrigins.includes(origin)) {
+      return callback(null, true)
+    }
+
+    callback(new Error('Not allowed by CORS'))
+  },
   credentials: true
 }))
 
