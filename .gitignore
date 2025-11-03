@@ -105,4 +105,9 @@ Thumbs.db
 *.sqlite3
 
 # Prisma
-prisma/migrations/
+prisma/migrations/# Archived scripts and temporary files
+archive/
+cleanup-workspace.sh
+
+# Deployment summary
+DEPLOYMENT-SUMMARY.md
