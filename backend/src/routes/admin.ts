@@ -115,7 +115,64 @@ router.delete('/problems/without-pdf', async (req: Request, res: Response) => {
   }
 })
 
-// Delete placeholder problems with "TBD" in title
+// Update problem titles to remove ": TBD" suffix
+router.put('/problems/fix-tbd-titles', async (req: Request, res: Response) => {
+  try {
+    console.log('Finding problems with TBD in title...')
+
+    // Find problems with ": TBD" in title
+    const tbdProblems = await prisma.problem.findMany({
+      where: {
+        title: {
+          contains: ': TBD'
+        }
+      },
+      select: {
+        id: true,
+        number: true,
+        title: true
+      }
+    })
+
+    console.log(`Found ${tbdProblems.length} problems with TBD`)
+
+    if (tbdProblems.length === 0) {
+      return res.json({
+        message: 'No TBD problems to fix',
+        updated: 0
+      })
+    }
+
+    // Update each problem to remove ": TBD"
+    const updates = await Promise.all(
+      tbdProblems.map(problem =>
+        prisma.problem.update({
+          where: { id: problem.id },
+          data: {
+            title: problem.title.replace(': TBD', '')
+          }
+        })
+      )
+    )
+
+    console.log(`Updated ${updates.length} problem titles`)
+
+    res.json({
+      message: 'TBD titles fixed successfully',
+      updated: updates.length,
+      problems: tbdProblems.map(p => ({
+        number: p.number,
+        oldTitle: p.title,
+        newTitle: p.title.replace(': TBD', '')
+      }))
+    })
+  } catch (error) {
+    console.error('Admin fix error:', error)
+    res.status(500).json({ error: 'Internal server error' })
+  }
+})
+
+// Delete placeholder problems with "TBD" in title (DEPRECATED - use fix-tbd-titles instead)
 router.delete('/problems/placeholders', async (req: Request, res: Response) => {
   try {
     console.log('Finding placeholder problems with TBD...')
