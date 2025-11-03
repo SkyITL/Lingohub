@@ -96,7 +96,9 @@ function ProblemsPageContent() {
   const [sortBy, setSortBy] = useState('difficulty')
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('list')
   const [showFilters, setShowFilters] = useState(false)
-  
+  const [page, setPage] = useState(1)
+  const limit = 24 // Problems per page
+
   // Check for tag filter in URL
   useEffect(() => {
     const tagParam = searchParams.get('tags')
@@ -105,8 +107,16 @@ function ProblemsPageContent() {
     }
   }, [searchParams])
 
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setPage(1)
+  }, [filters, sortBy])
+
   // Fetch problems from API with filters
-  const apiFilters: Record<string, any> = {}
+  const apiFilters: Record<string, any> = {
+    page,
+    limit
+  }
 
   if (filters.search) apiFilters.search = filters.search
   if (filters.sources.length > 0 && filters.sources.length < 4) {
@@ -485,9 +495,9 @@ function ProblemsPageContent() {
             )}
 
             {/* Results Count */}
-            {!isLoading && !error && (
+            {!isLoading && !error && apiResponse?.pagination && (
               <div className="text-gray-600 mb-4">
-                Found {sortedProblems.length} problem{sortedProblems.length !== 1 ? 's' : ''}
+                Showing {sortedProblems.length} of {apiResponse.pagination.total} problem{apiResponse.pagination.total !== 1 ? 's' : ''}
               </div>
             )}
 
@@ -515,6 +525,31 @@ function ProblemsPageContent() {
                   onClick={resetFilters}
                 >
                   Reset Filters
+                </Button>
+              </div>
+            )}
+
+            {/* Pagination Controls */}
+            {!isLoading && !error && apiResponse?.pagination && sortedProblems.length > 0 && apiResponse.pagination.totalPages > 1 && (
+              <div className="flex justify-center items-center gap-4 mt-8 pt-6 border-t border-gray-200">
+                <Button
+                  variant="outline"
+                  disabled={page === 1}
+                  onClick={() => setPage(p => p - 1)}
+                  className="disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  Previous
+                </Button>
+                <span className="text-sm text-gray-600">
+                  Page {page} of {apiResponse.pagination.totalPages}
+                </span>
+                <Button
+                  variant="outline"
+                  disabled={page >= apiResponse.pagination.totalPages}
+                  onClick={() => setPage(p => p + 1)}
+                  className="disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  Next
                 </Button>
               </div>
             )}
