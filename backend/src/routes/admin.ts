@@ -253,4 +253,141 @@ router.delete('/problems/placeholders', async (req: Request, res: Response) => {
   }
 })
 
+// Upload problem labels from CSV
+router.post('/problems/upload-labels', async (req: Request, res: Response) => {
+  try {
+    const { labels } = req.body
+
+    if (!labels || !Array.isArray(labels)) {
+      return res.status(400).json({ error: 'labels array required' })
+    }
+
+    console.log(`Uploading labels for ${labels.length} problems...`)
+
+    let updated = 0
+    let notFound = 0
+    const errors: string[] = []
+
+    for (const label of labels) {
+      try {
+        const { number, new_difficulty, primary_category, secondary_tags } = label
+
+        if (!number) {
+          errors.push(`Missing problem number in label`)
+          continue
+        }
+
+        // Find problem by number
+        const problem = await prisma.problem.findUnique({
+          where: { number }
+        })
+
+        if (!problem) {
+          notFound++
+          errors.push(`Problem ${number} not found in database`)
+          continue
+        }
+
+        // Map new_difficulty (1-5) to rating (1000-2400)
+        const difficultyToRating: { [key: string]: number } = {
+          '1': 1000,
+          '2': 1200,
+          '3': 1400,
+          '4': 1600,
+          '5': 2000
+        }
+
+        const updates: any = {}
+
+        if (new_difficulty) {
+          const difficulty = parseInt(new_difficulty)
+          if (difficulty >= 1 && difficulty <= 5) {
+            updates.difficulty = difficulty
+            updates.rating = difficultyToRating[new_difficulty]
+          }
+        }
+
+        // Update problem
+        if (Object.keys(updates).length > 0) {
+          await prisma.problem.update({
+            where: { id: problem.id },
+            data: updates
+          })
+        }
+
+        // Handle tags - parse secondary_tags and create/link them
+        if (primary_category || secondary_tags) {
+          // Remove existing tags for this problem
+          await prisma.problemTag.deleteMany({
+            where: { problemId: problem.id }
+          })
+
+          const tagNames: string[] = []
+
+          if (primary_category) {
+            tagNames.push(primary_category)
+          }
+
+          if (secondary_tags) {
+            const tags = secondary_tags.split(',').map((t: string) => t.trim()).filter((t: string) => t)
+            tagNames.push(...tags)
+          }
+
+          // Create/find tags and link them
+          for (const tagName of tagNames) {
+            // Find or create tag
+            let tag = await prisma.tag.findUnique({
+              where: { name: tagName }
+            })
+
+            if (!tag) {
+              // Determine category based on tag name
+              let category = 'other'
+              if (tagName === primary_category) {
+                category = 'primary'
+              } else if (tagName.includes('-')) {
+                category = 'language-feature'
+              } else {
+                category = 'attribute'
+              }
+
+              tag = await prisma.tag.create({
+                data: {
+                  name: tagName,
+                  category
+                }
+              })
+            }
+
+            // Link tag to problem
+            await prisma.problemTag.create({
+              data: {
+                problemId: problem.id,
+                tagId: tag.id
+              }
+            })
+          }
+        }
+
+        updated++
+      } catch (error) {
+        errors.push(`Error updating ${label.number}: ${error}`)
+      }
+    }
+
+    console.log(`Upload complete: ${updated} updated, ${notFound} not found`)
+
+    res.json({
+      message: 'Labels uploaded successfully',
+      updated,
+      notFound,
+      total: labels.length,
+      errors: errors.length > 0 ? errors.slice(0, 10) : undefined
+    })
+  } catch (error) {
+    console.error('Upload labels error:', error)
+    res.status(500).json({ error: 'Internal server error' })
+  }
+})
+
 export default router
