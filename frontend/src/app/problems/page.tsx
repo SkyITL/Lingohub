@@ -4,6 +4,7 @@ import { useSearchParams, useRouter } from 'next/navigation'
 import { useState, useEffect, Suspense } from 'react'
 import Header from "@/components/Header"
 import ProblemCard from "@/components/ProblemCard"
+import ProblemTableRow from "@/components/ProblemTableRow"
 import SearchBar from "@/components/SearchBar"
 import { Button } from "@/components/ui/button"
 import { Filter, Grid, List, Star, Users } from "lucide-react"
@@ -501,21 +502,51 @@ function ProblemsPageContent() {
               </div>
             )}
 
-            {/* Problems Grid/List */}
+            {/* Problems Table */}
             {!isLoading && !error && sortedProblems.length > 0 ? (
-              viewMode === 'grid' ? (
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {sortedProblems.map((problem) => (
-                    <ProblemCard key={problem.id} {...problem} />
-                  ))}
-                </div>
-              ) : (
-                <div className="space-y-3">
-                  {sortedProblems.map((problem) => (
-                    <ProblemListItem key={problem.id} problem={problem} />
-                  ))}
-                </div>
-              )
+              <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+                <table className="w-full">
+                  <thead className="bg-gray-50 border-b border-gray-200">
+                    <tr>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-12">
+                        <input type="checkbox" className="w-4 h-4 rounded border-gray-300" />
+                      </th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-32">
+                        题号
+                      </th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        题目名称
+                      </th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        标签
+                      </th>
+                      <th className="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-32">
+                        难度
+                      </th>
+                      <th className="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-32">
+                        通过率
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {sortedProblems.map((problem) => (
+                      <ProblemTableRow
+                        key={problem.id}
+                        id={problem.id}
+                        number={problem.number}
+                        title={problem.title}
+                        source={problem.source}
+                        year={problem.year}
+                        difficulty={problem.difficulty}
+                        rating={problem.rating}
+                        tags={problem.tags}
+                        solveCount={problem.solveCount}
+                        passRate={problem.passRate}
+                      />
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             ) : !isLoading && !error && (
               <div className="text-center py-12">
                 <p className="text-gray-500 text-lg">No problems found matching your filters.</p>
@@ -529,28 +560,107 @@ function ProblemsPageContent() {
               </div>
             )}
 
-            {/* Pagination Controls */}
+            {/* Pagination Controls - Luogu Style */}
             {!isLoading && !error && apiResponse?.pagination && sortedProblems.length > 0 && apiResponse.pagination.totalPages > 1 && (
-              <div className="flex justify-center items-center gap-4 mt-8 pt-6 border-t border-gray-200">
-                <Button
-                  variant="outline"
-                  disabled={page === 1}
-                  onClick={() => setPage(p => p - 1)}
-                  className="disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  Previous
-                </Button>
-                <span className="text-sm text-gray-600">
-                  Page {page} of {apiResponse.pagination.totalPages}
+              <div className="flex justify-center items-center gap-2 mt-8">
+                <span className="text-sm text-gray-600 mr-2">
+                  共 {apiResponse.pagination.totalPages} 页
                 </span>
-                <Button
-                  variant="outline"
-                  disabled={page >= apiResponse.pagination.totalPages}
-                  onClick={() => setPage(p => p + 1)}
-                  className="disabled:opacity-50 disabled:cursor-not-allowed"
+
+                {/* First Page */}
+                <button
+                  onClick={() => setPage(1)}
+                  disabled={page === 1}
+                  className="px-3 py-1.5 border border-gray-300 rounded hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
                 >
-                  Next
-                </Button>
+                  ≪
+                </button>
+
+                {/* Previous Page */}
+                <button
+                  onClick={() => setPage(p => p - 1)}
+                  disabled={page === 1}
+                  className="px-3 py-1.5 border border-gray-300 rounded hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                >
+                  ‹
+                </button>
+
+                {/* Page Numbers */}
+                {(() => {
+                  const totalPages = apiResponse.pagination.totalPages
+                  const currentPage = page
+                  const pageNumbers: (number | string)[] = []
+
+                  // Always show first page
+                  pageNumbers.push(1)
+
+                  // Calculate range around current page
+                  let startPage = Math.max(2, currentPage - 2)
+                  let endPage = Math.min(totalPages - 1, currentPage + 2)
+
+                  // Add ellipsis after first page if needed
+                  if (startPage > 2) {
+                    pageNumbers.push('...')
+                  }
+
+                  // Add pages around current page
+                  for (let i = startPage; i <= endPage; i++) {
+                    pageNumbers.push(i)
+                  }
+
+                  // Add ellipsis before last page if needed
+                  if (endPage < totalPages - 1) {
+                    pageNumbers.push('...')
+                  }
+
+                  // Always show last page if there's more than 1 page
+                  if (totalPages > 1) {
+                    pageNumbers.push(totalPages)
+                  }
+
+                  return pageNumbers.map((pageNum, idx) => {
+                    if (pageNum === '...') {
+                      return (
+                        <span key={`ellipsis-${idx}`} className="px-2 text-gray-400">
+                          ...
+                        </span>
+                      )
+                    }
+
+                    const isActive = pageNum === currentPage
+                    return (
+                      <button
+                        key={pageNum}
+                        onClick={() => setPage(pageNum as number)}
+                        className={`px-3 py-1.5 border rounded text-sm ${
+                          isActive
+                            ? 'bg-blue-500 text-white border-blue-500'
+                            : 'border-gray-300 hover:bg-gray-50'
+                        }`}
+                      >
+                        {pageNum}
+                      </button>
+                    )
+                  })
+                })()}
+
+                {/* Next Page */}
+                <button
+                  onClick={() => setPage(p => p + 1)}
+                  disabled={page >= apiResponse.pagination.totalPages}
+                  className="px-3 py-1.5 border border-gray-300 rounded hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                >
+                  ›
+                </button>
+
+                {/* Last Page */}
+                <button
+                  onClick={() => setPage(apiResponse.pagination.totalPages)}
+                  disabled={page >= apiResponse.pagination.totalPages}
+                  className="px-3 py-1.5 border border-gray-300 rounded hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                >
+                  ≫
+                </button>
               </div>
             )}
           </div>
