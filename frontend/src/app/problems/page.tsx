@@ -481,13 +481,6 @@ function ProblemsPageContent() {
               </div>
             )}
 
-            {/* Loading State */}
-            {isLoading && (
-              <div className="text-center py-12">
-                <div className="text-gray-500 text-lg">Loading problems...</div>
-              </div>
-            )}
-
             {/* Error State */}
             {error && (
               <div className="text-center py-12">
@@ -496,35 +489,32 @@ function ProblemsPageContent() {
             )}
 
             {/* Results Count */}
-            {!isLoading && !error && apiResponse?.pagination && (
+            {!error && apiResponse?.pagination && (
               <div className="text-gray-600 mb-4">
                 Showing {sortedProblems.length} of {apiResponse.pagination.total} problem{apiResponse.pagination.total !== 1 ? 's' : ''}
               </div>
             )}
 
             {/* Problems Table */}
-            {!isLoading && !error && sortedProblems.length > 0 ? (
+            {!error && sortedProblems.length > 0 ? (
               <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
                 <table className="w-full">
                   <thead className="bg-gray-50 border-b border-gray-200">
                     <tr>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-12">
-                        <input type="checkbox" className="w-4 h-4 rounded border-gray-300" />
-                      </th>
                       <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-32">
-                        题号
+                        Number
                       </th>
                       <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        题目名称
+                        Title
                       </th>
                       <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        标签
+                        Tags
                       </th>
                       <th className="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-32">
-                        难度
+                        Difficulty
                       </th>
                       <th className="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-32">
-                        通过率
+                        Pass Rate
                       </th>
                     </tr>
                   </thead>
@@ -547,7 +537,7 @@ function ProblemsPageContent() {
                   </tbody>
                 </table>
               </div>
-            ) : !isLoading && !error && (
+            ) : !error && (
               <div className="text-center py-12">
                 <p className="text-gray-500 text-lg">No problems found matching your filters.</p>
                 <Button
@@ -561,10 +551,10 @@ function ProblemsPageContent() {
             )}
 
             {/* Pagination Controls - Luogu Style */}
-            {!isLoading && !error && apiResponse?.pagination && sortedProblems.length > 0 && apiResponse.pagination.totalPages > 1 && (
+            {!error && apiResponse?.pagination && sortedProblems.length > 0 && apiResponse.pagination.totalPages > 1 && (
               <div className="flex justify-center items-center gap-2 mt-8">
                 <span className="text-sm text-gray-600 mr-2">
-                  共 {apiResponse.pagination.totalPages} 页
+                  {apiResponse.pagination.totalPages} pages
                 </span>
 
                 {/* First Page */}

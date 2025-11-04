@@ -23,11 +23,11 @@ const difficultyColors = {
 }
 
 const difficultyLabels = {
-  1: '入门',
-  2: '普及-',
-  3: '普及/提高',
-  4: '普及+/提高',
-  5: '提高+/省选-',
+  1: 'Intro',
+  2: 'Easy',
+  3: 'Medium',
+  4: 'Hard',
+  5: 'Expert',
 }
 
 export default function ProblemTableRow({
@@ -44,11 +44,6 @@ export default function ProblemTableRow({
 }: ProblemTableRowProps) {
   return (
     <tr className="border-b border-gray-200 hover:bg-gray-50 transition-colors">
-      {/* Checkbox */}
-      <td className="px-4 py-3 text-center">
-        <input type="checkbox" className="w-4 h-4 rounded border-gray-300" />
-      </td>
-
       {/* Problem Number */}
       <td className="px-4 py-3 text-gray-700 font-mono text-sm">
         {number}
@@ -67,10 +62,6 @@ export default function ProblemTableRow({
       {/* Tags */}
       <td className="px-4 py-3">
         <div className="flex flex-wrap gap-1">
-          {/* Display Algorithm/Show Tags button like Luogu */}
-          <button className="text-xs text-blue-600 hover:underline">
-            显示算法标签
-          </button>
           {/* Source Tag */}
           <span className="px-2 py-0.5 bg-cyan-500 text-white rounded text-xs">
             {source}
