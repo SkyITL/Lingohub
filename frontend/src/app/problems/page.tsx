@@ -590,7 +590,9 @@ function ProblemsPageContent() {
                   const pageNumbers: (number | string)[] = []
 
                   // Always show first page
-                  pageNumbers.push(1)
+                  if (totalPages >= 1) {
+                    pageNumbers.push(1)
+                  }
 
                   // Calculate range around current page
                   let startPage = Math.max(2, currentPage - 2)
@@ -630,11 +632,17 @@ function ProblemsPageContent() {
                       <button
                         key={pageNum}
                         onClick={() => setPage(pageNum as number)}
-                        className={`px-3 py-1.5 border rounded text-sm transition-colors ${
-                          isActive
-                            ? 'bg-blue-600 text-white border-blue-600 font-semibold'
-                            : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50 hover:border-gray-400'
-                        }`}
+                        style={isActive ? {
+                          backgroundColor: '#2563eb',
+                          color: 'white',
+                          borderColor: '#2563eb',
+                          fontWeight: '600'
+                        } : {
+                          backgroundColor: 'white',
+                          color: '#374151',
+                          borderColor: '#d1d5db'
+                        }}
+                        className="px-3 py-1.5 border rounded text-sm transition-colors hover:bg-gray-50 hover:border-gray-400"
                       >
                         {pageNum}
                       </button>
