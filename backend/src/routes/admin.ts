@@ -454,4 +454,63 @@ router.put('/problems/clean-iol-titles', async (req: Request, res: Response) => 
   }
 })
 
+// Remove excluded tags (pattern-recognition, logical-reasoning) from all problems
+router.delete('/problems/clean-excluded-tags', async (req: Request, res: Response) => {
+  try {
+    console.log('Finding problems with excluded tags...')
+
+    const EXCLUDED_TAGS = ['pattern-recognition', 'logical-reasoning']
+
+    // Find the tag IDs for excluded tags
+    const excludedTagRecords = await prisma.tag.findMany({
+      where: {
+        name: { in: EXCLUDED_TAGS }
+      },
+      select: {
+        id: true,
+        name: true
+      }
+    })
+
+    if (excludedTagRecords.length === 0) {
+      return res.json({
+        message: 'No excluded tags found in database',
+        deleted: 0
+      })
+    }
+
+    console.log(`Found ${excludedTagRecords.length} excluded tags: ${excludedTagRecords.map(t => t.name).join(', ')}`)
+
+    const excludedTagIds = excludedTagRecords.map(t => t.id)
+
+    // Delete all ProblemTag entries linking to these tags
+    const deletedLinks = await prisma.problemTag.deleteMany({
+      where: {
+        tagId: { in: excludedTagIds }
+      }
+    })
+
+    console.log(`Deleted ${deletedLinks.count} problem-tag links`)
+
+    // Optionally delete the tags themselves if they have no more links
+    const deletedTags = await prisma.tag.deleteMany({
+      where: {
+        id: { in: excludedTagIds }
+      }
+    })
+
+    console.log(`Deleted ${deletedTags.count} tags`)
+
+    res.json({
+      message: 'Excluded tags cleaned successfully',
+      deletedLinks: deletedLinks.count,
+      deletedTags: deletedTags.count,
+      tags: excludedTagRecords.map(t => t.name)
+    })
+  } catch (error) {
+    console.error('Clean excluded tags error:', error)
+    res.status(500).json({ error: 'Internal server error' })
+  }
+})
+
 export default router
