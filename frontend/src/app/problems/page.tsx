@@ -495,8 +495,16 @@ function ProblemsPageContent() {
               </div>
             )}
 
+            {/* Loading State */}
+            {isLoading && (
+              <div className="text-center py-12">
+                <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+                <p className="text-gray-500 mt-4">Loading problems...</p>
+              </div>
+            )}
+
             {/* Problems Table */}
-            {!error && sortedProblems.length > 0 ? (
+            {!isLoading && !error && sortedProblems.length > 0 ? (
               <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
                 <table className="w-full">
                   <thead className="bg-gray-50 border-b border-gray-200">
@@ -537,7 +545,7 @@ function ProblemsPageContent() {
                   </tbody>
                 </table>
               </div>
-            ) : !error && (
+            ) : !isLoading && !error && (
               <div className="text-center py-12">
                 <p className="text-gray-500 text-lg">No problems found matching your filters.</p>
                 <Button
@@ -551,7 +559,7 @@ function ProblemsPageContent() {
             )}
 
             {/* Pagination Controls - Luogu Style */}
-            {!error && apiResponse?.pagination && sortedProblems.length > 0 && apiResponse.pagination.totalPages > 1 && (
+            {!isLoading && !error && apiResponse?.pagination && sortedProblems.length > 0 && apiResponse.pagination.totalPages > 1 && (
               <div className="flex justify-center items-center gap-2 mt-8">
                 <span className="text-sm text-gray-600 mr-2">
                   {apiResponse.pagination.totalPages} pages
