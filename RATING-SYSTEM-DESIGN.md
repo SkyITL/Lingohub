@@ -134,6 +134,53 @@ ELSE IF score < 40 OR confidence = "low":
 4. **Calibration**: Test against 100+ manually-reviewed solutions (target 85%+ accuracy)
 5. **Continuous Learning**: Update prompts based on overturn cases
 
+#### **Rate Limiting & Abuse Prevention**
+
+To prevent spam, abuse, and cost overruns:
+
+**Per-User Limits:**
+```typescript
+{
+  submissions_per_hour: 5,        // Max 5 solution submissions per hour
+  submissions_per_day: 20,        // Max 20 solutions per day
+  llm_evaluations_per_day: 25,   // Allows 5 failed attempts to be retried
+  cooldown_between_submissions: 60000 // 1 minute cooldown between submissions
+}
+```
+
+**Implementation:**
+- Use Redis or in-memory cache to track submission timestamps per user
+- Return clear error messages when limits hit:
+  ```json
+  {
+    "error": "Rate limit exceeded",
+    "message": "Please wait 45 seconds before submitting again",
+    "retry_after": 45,
+    "daily_remaining": 15
+  }
+  ```
+
+**Progressive Limits by Rating:**
+Higher-rated users get more submissions (they've proven they're not spammers):
+```typescript
+function getSubmissionLimits(userRating: number) {
+  if (userRating >= 2000) return { hourly: 10, daily: 40 }      // Masters+
+  if (userRating >= 1600) return { hourly: 8, daily: 30 }       // Experts
+  if (userRating >= 1400) return { hourly: 6, daily: 25 }       // Specialists
+  return { hourly: 5, daily: 20 }                                // Everyone else
+}
+```
+
+**Anti-Spam Detection:**
+- Flag users who hit rate limits frequently
+- Temporary ban (1 hour) if user submits 10+ identical/near-identical solutions
+- Permanent ban for automated bot behavior
+
+**Cost Protection:**
+- Set daily API budget cap ($50/day = 5000 evals)
+- If approaching budget limit → pause LLM evaluation, send all to community queue
+- Alert admins when 80% budget consumed
+
 #### **Cost Analysis**
 
 At scale (1000 submissions/day):
@@ -141,10 +188,20 @@ At scale (1000 submissions/day):
 - 20% sent to community: **Free**
 - **Monthly cost: ~$240**
 
+With rate limiting (20 submissions/user/day, 100 active users):
+- Realistic usage: ~300 submissions/day
+- Daily cost: ~$3
+- **Monthly cost: ~$90** (much more affordable)
+
 For comparison:
 - Hiring reviewers: ~$2000+/month
 - Pure community: Free but too slow
 - Manual review: Doesn't scale
+
+**Budget safety:**
+- Set daily cap at $20 (2000 evaluations)
+- At 300/day usage, takes 6-7 days to hit cap
+- Plenty of buffer for growth
 
 ---
 
@@ -374,6 +431,7 @@ model User {
   ratingHistory RatingHistory[]
   solutionFlags SolutionFlag[] // NEW
   receivedFlags SolutionFlag[] @relation("FlaggedUser") // NEW
+  rateLimitLogs RateLimitLog[] // NEW
 
   @@map("users")
 }
@@ -389,7 +447,13 @@ model Solution {
   userId    String
   content   String   @db.Text
   voteScore Int      @default(0)
-  status    String   @default("pending") // NEW: pending, verified, flagged, approved
+  status    String   @default("pending") // NEW: pending, verified, flagged, approved, partial
+
+  // NEW: LLM evaluation results
+  llmScore  Int?     // 0-100 score from LLM
+  llmFeedback String? @db.Text // Detailed feedback from LLM
+  llmConfidence String? // low, medium, high
+  isPartialCredit Boolean @default(false) // 50% rating for scores 40-69
 
   // NEW: Anti-cheat fields
   timeSpent Int      @default(0) // milliseconds spent on problem before submission
@@ -405,8 +469,62 @@ model Solution {
   user    User           @relation(fields: [userId], references: [id], onDelete: Cascade)
   votes   SolutionVote[]
   flags   SolutionFlag[] // NEW
+  evaluation SolutionEvaluation? // NEW
 
   @@map("solutions")
+}
+```
+
+### New Table: `SolutionEvaluation`
+Store detailed LLM evaluation breakdown.
+
+```prisma
+model SolutionEvaluation {
+  id         String   @id @default(cuid())
+  solutionId String   @unique
+
+  // Detailed scores
+  totalScore      Int      // 0-100
+  correctness     Int      // 0-40
+  reasoning       Int      // 0-30
+  coverage        Int      // 0-20
+  clarity         Int      // 0-10
+
+  confidence      String   // low, medium, high
+  feedback        String   @db.Text
+  errors          String[] @default([])
+  strengths       String[] @default([])
+  suggestions     String[] @default([])
+
+  // Metadata
+  modelUsed       String   // "gpt-4o-mini", "claude-3-haiku", etc
+  promptVersion   String   // Track which prompt version was used
+  evaluationTime  Int      // milliseconds taken
+  cost            Float    // Cost in USD
+
+  createdAt DateTime @default(now())
+
+  solution Solution @relation(fields: [solutionId], references: [id], onDelete: Cascade)
+
+  @@map("solution_evaluations")
+}
+```
+
+### New Table: `RateLimitLog`
+Track rate limit usage per user (can use Redis in production for performance).
+
+```prisma
+model RateLimitLog {
+  id            String   @id @default(cuid())
+  userId        String
+  actionType    String   // "submission", "llm_eval", "appeal"
+  timestamp     DateTime @default(now())
+  rateLimitHit  Boolean  @default(false)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, timestamp])
+  @@map("rate_limit_logs")
 }
 ```
 
