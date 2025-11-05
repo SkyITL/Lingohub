@@ -16,14 +16,24 @@ model User {
   email     String   @unique @db.VarChar(255)
   password  String
   rating    Int      @default(1200)
+
+  // Anti-cheat fields
+  isCheater      Boolean   @default(false)
+  cheaterUntil   DateTime? // null = permanent, date = temporary ban
+  cheatingStrikes Int      @default(0)
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   // Relations
-  solutions   Solution[]
-  discussions Discussion[]
-  progress    UserProgress[]
-  votes       SolutionVote[]
+  solutions      Solution[]
+  discussions    Discussion[]
+  progress       UserProgress[]
+  votes          SolutionVote[]
+  ratingHistory  RatingHistory[]
+  solutionFlags  SolutionFlag[]
+  receivedFlags  SolutionFlag[]  @relation("FlaggedUser")
+  rateLimitLogs  RateLimitLog[]
 
   @@map("users")
 }
@@ -44,10 +54,11 @@ model Problem {
   updatedAt        DateTime @updatedAt
 
   // Relations
-  tags        ProblemTag[]
-  solutions   Solution[]
-  discussions Discussion[]
-  progress    UserProgress[]
+  tags          ProblemTag[]
+  solutions     Solution[]
+  discussions   Discussion[]
+  progress      UserProgress[]
+  ratingHistory RatingHistory[]
 
   @@map("problems")
 }
@@ -80,14 +91,29 @@ model Solution {
   userId    String
   content   String   @db.Text
   voteScore Int      @default(0)
-  status    String   @default("submitted") // draft, submitted, approved
+  status    String   @default("pending") // pending, verified, flagged, approved, partial
+
+  // LLM evaluation results
+  llmScore       Int?     // 0-100 score from LLM
+  llmFeedback    String?  @db.Text
+  llmConfidence  String?  // low, medium, high
+  isPartialCredit Boolean @default(false)
+
+  // Anti-cheat fields
+  timeSpent        Int      @default(0) // milliseconds
+  viewedSolutions  String[] @default([])
+  similarityScore  Float?
+  flagCount        Int      @default(0)
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   // Relations
-  problem Problem        @relation(fields: [problemId], references: [id], onDelete: Cascade)
-  user    User           @relation(fields: [userId], references: [id], onDelete: Cascade)
-  votes   SolutionVote[]
+  problem    Problem             @relation(fields: [problemId], references: [id], onDelete: Cascade)
+  user       User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  votes      SolutionVote[]
+  flags      SolutionFlag[]
+  evaluation SolutionEvaluation?
 
   @@map("solutions")
 }
@@ -124,14 +150,100 @@ model Discussion {
 model UserProgress {
   userId         String
   problemId      String
-  status         String   @default("unsolved") // unsolved, solved, bookmarked
-  viewedSolution Boolean  @default(false) // Track if user viewed official solution
-  lastAttempt    DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  status         String    @default("unsolved") // unsolved, solved, bookmarked
+  viewedSolution Boolean   @default(false)
+  ratingGained   Boolean   @default(false) // Prevent duplicate rating gains
+  startedAt      DateTime? // When user first opened problem
+  lastAttempt    DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
 
   user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   problem Problem @relation(fields: [problemId], references: [id], onDelete: Cascade)
 
   @@id([userId, problemId])
   @@map("user_progress")
+}
+
+model RatingHistory {
+  id            String   @id @default(cuid())
+  userId        String
+  problemId     String
+  oldRating     Int
+  newRating     Int
+  change        Int // Can be negative
+  problemRating Int // Problem rating at time of solve
+  viewedSolution Boolean @default(false)
+  verified      Boolean  @default(false)
+  createdAt     DateTime @default(now())
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  problem Problem @relation(fields: [problemId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([problemId])
+  @@map("rating_history")
+}
+
+model SolutionEvaluation {
+  id         String   @id @default(cuid())
+  solutionId String   @unique
+
+  // Detailed scores
+  totalScore   Int // 0-100
+  correctness  Int // 0-40
+  reasoning    Int // 0-30
+  coverage     Int // 0-20
+  clarity      Int // 0-10
+
+  confidence   String   // low, medium, high
+  feedback     String   @db.Text
+  errors       String[] @default([])
+  strengths    String[] @default([])
+  suggestions  String[] @default([])
+
+  // Metadata
+  modelUsed      String // "gpt-4o-mini", "claude-3-haiku", etc
+  promptVersion  String // Track which prompt version was used
+  evaluationTime Int    // milliseconds taken
+  cost           Float  // Cost in USD
+
+  createdAt DateTime @default(now())
+
+  solution Solution @relation(fields: [solutionId], references: [id], onDelete: Cascade)
+
+  @@map("solution_evaluations")
+}
+
+model SolutionFlag {
+  id            String   @id @default(cuid())
+  solutionId    String
+  reporterId    String
+  flaggedUserId String // User who submitted the flagged solution
+  reason        String   @db.VarChar(50) // "plagiarism", "incorrect", "spam"
+  details       String?  @db.Text
+  status        String   @default("pending") // pending, reviewed, confirmed, rejected
+  reviewedBy    String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  solution    Solution @relation(fields: [solutionId], references: [id], onDelete: Cascade)
+  reporter    User     @relation(fields: [reporterId], references: [id], onDelete: Cascade)
+  flaggedUser User     @relation("FlaggedUser", fields: [flaggedUserId], references: [id], onDelete: Cascade)
+
+  @@index([solutionId])
+  @@index([flaggedUserId])
+  @@map("solution_flags")
+}
+
+model RateLimitLog {
+  id           String   @id @default(cuid())
+  userId       String
+  actionType   String // "submission", "llm_eval", "appeal"
+  timestamp    DateTime @default(now())
+  rateLimitHit Boolean  @default(false)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, timestamp])
+  @@map("rate_limit_logs")
 }
