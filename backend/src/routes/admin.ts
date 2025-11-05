@@ -322,6 +322,9 @@ router.post('/problems/upload-labels', async (req: Request, res: Response) => {
             where: { problemId: problem.id }
           })
 
+          // Tags that are too common (appear in >30% of problems) - filter them out
+          const EXCLUDED_TAGS = ['pattern-recognition', 'logical-reasoning']
+
           const tagNames: string[] = []
 
           if (primary_category) {
@@ -329,7 +332,9 @@ router.post('/problems/upload-labels', async (req: Request, res: Response) => {
           }
 
           if (secondary_tags) {
-            const tags = secondary_tags.split(',').map((t: string) => t.trim()).filter((t: string) => t)
+            const tags = secondary_tags.split(',')
+              .map((t: string) => t.trim())
+              .filter((t: string) => t && !EXCLUDED_TAGS.includes(t))
             tagNames.push(...tags)
           }
 
