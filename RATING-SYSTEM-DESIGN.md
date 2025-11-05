@@ -5,11 +5,13 @@ LingoHub uses an **Elo-like rating system** similar to Codeforces, where users g
 
 ## Key Design Decisions
 
-### ✅ **Solution Verification: Hybrid Approach**
-Since linguistics problems are open-ended (no test cases), we use:
-- **High-stakes problems** (>40 rating gain): Community voting required (+5 upvotes from users rated >1400)
-- **Low-stakes problems** (≤40 rating gain): Auto-approved with basic checks + spot audits
-- **Provisional ratings** shown immediately, finalized after verification
+### ✅ **Solution Verification: LLM + Community Hybrid**
+Since linguistics problems are open-ended (no test cases), we use AI-assisted verification:
+- **Primary: LLM evaluation** - GPT-4/Claude evaluates solution against official answer (2-5 seconds)
+- **Auto-approve**: Score ≥70% with high confidence → instant rating update
+- **Partial credit**: Score 40-70% → 50% rating gain + detailed feedback
+- **Community backup**: Score <40% or low confidence → human review queue
+- **Benefit**: Instant detailed feedback on what's wrong, not just pass/fail
 
 ### ✅ **Anti-Cheat: Name Color System (Luogu-inspired)**
 - Users get **color-coded names** based on rating tier (Green → Black/Gold)
@@ -56,59 +58,93 @@ Unlike algorithmic problems with test cases, linguistics olympiad problems often
 - Partial credit scenarios
 - Subjective evaluation of reasoning quality
 
-### **Verification Strategy: Community + Automatic Checks**
+### **Verification Strategy: LLM-Powered Evaluation**
 
-#### **Option A: Trusted Community Voting (Recommended for MVP)**
-1. User submits solution with detailed explanation
-2. Solution becomes visible to community after submission
-3. Other users can upvote/downvote solutions
-4. **Solution is "verified" when**:
-   - Gets +5 net upvotes from users with rating > 1400, OR
-   - Gets +10 net upvotes from any users, OR
-   - Gets manually approved by moderator/admin
-5. Rating updates only after verification (prevents fake solves)
+#### **Why LLM Verification?**
 
-**Pros:**
-- Community-driven quality control
-- Scales well as user base grows
-- Encourages high-quality explanations
-- Natural anti-cheat (community spots plagiarism)
+Traditional approaches have issues:
+- **Community voting**: Too slow (need 5-10 votes), cold start problem, decreasing engagement
+- **Auto-approval**: No feedback on errors, can be gamed easily
+- **Manual review**: Doesn't scale, expensive, slow
 
-**Cons:**
-- Delay between submission and rating update
-- Requires active community
+**LLM advantages:**
+- ⚡ **Instant feedback** (2-5 seconds)
+- 📚 **Educational** - Detailed explanation of what's wrong
+- 🎯 **Consistent** - Same criteria for everyone
+- 💰 **Cost-effective** - ~$0.01 per evaluation with GPT-4-mini
+- 🔄 **Scalable** - Can handle unlimited submissions
 
-#### **Option B: Auto-Verification + Spot Checks**
-1. User submits solution
-2. Automatic checks:
-   - Solution length > 100 characters (prevents empty submissions)
-   - Time spent on problem > 5 minutes (prevents instant fake solves)
-   - Check for plagiarism against other solutions (text similarity)
-3. Solution auto-approved if passes checks
-4. Random 10% sample manually reviewed by moderators
-5. If caught cheating → rating rollback + penalty
+#### **LLM Evaluation Process** ✅
 
-**Pros:**
-- Instant rating updates
-- Better user experience (immediate feedback)
-- Less reliance on community
+**Step 1: Submit Solution**
+```typescript
+{
+  content: "User's solution explanation...",
+  timeSpent: 1800000, // 30 minutes in milliseconds
+  viewedOfficialSolution: false
+}
+```
 
-**Cons:**
-- Can be gamed by sophisticated cheaters
-- Requires moderator resources
+**Step 2: LLM Evaluation (GPT-4-mini or Claude)**
+```
+Prompt:
+- Problem statement
+- Official solution (as reference)
+- User's solution
+- Evaluation rubric (correctness, reasoning, coverage, clarity)
 
-#### **Proposed Hybrid Approach** ✅
+Response (JSON):
+{
+  "score": 85,
+  "passed": true,
+  "confidence": "high", // low, medium, high
+  "correctness": 38/40,
+  "reasoning": 25/30,
+  "coverage": 15/20,
+  "clarity": 7/10,
+  "feedback": "Your analysis correctly identifies the morphological patterns...",
+  "errors": ["Missing discussion of vowel harmony", "Incorrect claim about stress"],
+  "strengths": ["Excellent pattern recognition", "Clear table organization"],
+  "suggestions": ["Consider the phonological context", "Review compound formation"]
+}
+```
 
-**For High-Stakes Problems (rating gain > 40)**:
-- Require community verification (+5 upvotes)
-- Show "Pending Verification" badge
-- Provisional rating update (shown in gray)
-- Finalize after verification
+**Step 3: Decision Logic**
+```
+IF score ≥ 70 AND confidence = "high":
+  → Auto-approve + full rating update
+  → Show detailed feedback
 
-**For Low-Stakes Problems (rating gain ≤ 40)**:
-- Auto-approve if passes basic checks
-- Spot check 20% randomly
-- Community can flag suspicious solutions
+ELSE IF score 40-69:
+  → Partial credit (50% rating)
+  → Show feedback for improvement
+  → User can revise and resubmit
+
+ELSE IF score < 40 OR confidence = "low":
+  → Send to community review queue
+  → Show LLM feedback as guidance
+  → Need +3 upvotes from rating >1400 users
+```
+
+#### **Accuracy Safeguards**
+
+1. **Confidence Gating**: Only auto-approve if LLM is confident
+2. **Community Backup**: Low-scoring or uncertain solutions → human review
+3. **User Appeals**: Can contest LLM decision once per problem
+4. **Calibration**: Test against 100+ manually-reviewed solutions (target 85%+ accuracy)
+5. **Continuous Learning**: Update prompts based on overturn cases
+
+#### **Cost Analysis**
+
+At scale (1000 submissions/day):
+- 80% auto-approved by LLM: 800 × $0.01 = **$8/day**
+- 20% sent to community: **Free**
+- **Monthly cost: ~$240**
+
+For comparison:
+- Hiring reviewers: ~$2000+/month
+- Pure community: Free but too slow
+- Manual review: Doesn't scale
 
 ---
 
