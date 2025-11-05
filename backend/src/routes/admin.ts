@@ -395,4 +395,63 @@ router.post('/problems/upload-labels', async (req: Request, res: Response) => {
   }
 })
 
+// Remove language names from IOL problem titles (e.g., "IOL 2003 Problem 1: Budukh" -> "IOL 2003 Problem 1")
+router.put('/problems/clean-iol-titles', async (req: Request, res: Response) => {
+  try {
+    console.log('Finding IOL problems with language names in titles...')
+
+    // Find IOL problems with ": " in title (indicating language name)
+    const iolProblems = await prisma.problem.findMany({
+      where: {
+        AND: [
+          { number: { startsWith: 'LH-IOL-' } },
+          { title: { contains: ': ' } }
+        ]
+      },
+      select: {
+        id: true,
+        number: true,
+        title: true
+      }
+    })
+
+    console.log(`Found ${iolProblems.length} IOL problems with language names`)
+
+    if (iolProblems.length === 0) {
+      return res.json({
+        message: 'No IOL problems with language names to clean',
+        updated: 0
+      })
+    }
+
+    // Update each problem to remove language name
+    const updates = await Promise.all(
+      iolProblems.map(problem => {
+        // Remove everything after ": " (including the colon and space)
+        const cleanTitle = problem.title.split(':')[0].trim()
+
+        return prisma.problem.update({
+          where: { id: problem.id },
+          data: { title: cleanTitle }
+        })
+      })
+    )
+
+    console.log(`Updated ${updates.length} IOL problem titles`)
+
+    res.json({
+      message: 'IOL problem titles cleaned successfully',
+      updated: updates.length,
+      problems: iolProblems.map(p => ({
+        number: p.number,
+        oldTitle: p.title,
+        newTitle: p.title.split(':')[0].trim()
+      }))
+    })
+  } catch (error) {
+    console.error('Clean IOL titles error:', error)
+    res.status(500).json({ error: 'Internal server error' })
+  }
+})
+
 export default router
