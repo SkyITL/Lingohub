@@ -622,10 +622,10 @@ function ProblemsPageContent() {
                       <button
                         key={pageNum}
                         onClick={() => setPage(pageNum as number)}
-                        className={`px-3 py-1.5 border rounded text-sm ${
+                        className={`px-3 py-1.5 border rounded text-sm transition-colors ${
                           isActive
-                            ? 'bg-blue-500 text-white border-blue-500'
-                            : 'border-gray-300 hover:bg-gray-50'
+                            ? 'bg-blue-600 text-white border-blue-600 font-semibold'
+                            : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50 hover:border-gray-400'
                         }`}
                       >
                         {pageNum}
