@@ -1,0 +1,139 @@
+PROBLEM LABELING PROGRESS TRACKER
+==================================
+Last Updated: 2025-11-04
+
+OVERALL PROGRESS: 148/432 problems (34.3% complete)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+█████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 34%
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SOURCE BREAKDOWN:
+─────────────────
+
+APLO (30 problems)
+✅ █████████████████████████████████████████████ 100%
+   ✓ 2019: 30 problems
+
+IOL (110 problems)  
+✅ █████████████████████████████████████████████ 100%
+   ✓ 2003-2023: 100 problems (20 years)
+   ✓ 2024: 5 problems
+   ✓ 2025: 5 problems
+
+NACLO (292 problems)
+⏳ ███░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 3%
+   ✓ 2007: 8 problems
+   ⏳ 2008-2024: 284 problems remaining
+
+YEAR-BY-YEAR STATUS:
+────────────────────
+
+APLO:
+  ✅ 2019: [██████████] 30/30
+
+IOL:
+  ✅ 2003: [██████████] 5/5
+  ✅ 2004: [██████████] 5/5
+  ✅ 2005: [██████████] 5/5
+  ✅ 2006: [██████████] 5/5
+  ✅ 2007: [██████████] 5/5
+  ✅ 2008: [██████████] 5/5
+  ✅ 2009: [██████████] 5/5
+  ✅ 2010: [██████████] 5/5
+  ✅ 2011: [██████████] 5/5
+  ✅ 2012: [██████████] 5/5
+  ✅ 2013: [██████████] 5/5
+  ✅ 2014: [██████████] 5/5
+  ✅ 2015: [██████████] 5/5
+  ✅ 2016: [██████████] 5/5
+  ✅ 2017: [██████████] 5/5
+  ✅ 2018: [██████████] 5/5
+  ✅ 2019: [██████████] 5/5
+  ✅ 2020: [██████████] 5/5
+  ✅ 2021: [██████████] 5/5
+  ✅ 2022: [██████████] 5/5
+  ✅ 2023: [██████████] 5/5
+  ✅ 2024: [██████████] 5/5
+  ✅ 2025: [██████████] 5/5
+
+NACLO:
+  ✅ 2007: [██████████] 8/8
+  ⏳ 2008: [░░░░░░░░░░] 0/16  ← START HERE
+  ⏳ 2009: [░░░░░░░░░░] 0/16
+  ⏳ 2010: [░░░░░░░░░░] 0/16
+  ⏳ 2011: [░░░░░░░░░░] 0/16
+  ⏳ 2012: [░░░░░░░░░░] 0/16
+  ⏳ 2013: [░░░░░░░░░░] 0/16
+  ⏳ 2014: [░░░░░░░░░░] 0/16
+  ⏳ 2015: [░░░░░░░░░░] 0/16
+  ⏳ 2016: [░░░░░░░░░░] 0/16
+  ⏳ 2017: [░░░░░░░░░░] 0/16
+  ⏳ 2018: [░░░░░░░░░░] 0/16
+  ⏳ 2019: [░░░░░░░░░░] 0/16
+  ⏳ 2020: [░░░░░░░░░░] 0/16
+  ⏳ 2021: [░░░░░░░░░░] 0/16
+  ⏳ 2022: [░░░░░░░░░░] 0/16
+  ⏳ 2023: [░░░░░░░░░░] 0/16
+  ⏳ 2024: [░░░░░░░░░░] 0/20  ← Note: 20 problems!
+
+NEXT STEPS:
+───────────
+
+1. Choose labeling approach:
+   
+   OPTION A: Sequential (one year at a time)
+   └─ Start with NACLO 2008
+   └─ Use prompt from NACLO-LABELING-PROMPTS.md
+   └─ Time: ~20-25 min per year
+
+   OPTION B: Parallel (4 sessions)
+   └─ Session 1: NACLO 2008-2012 (80 problems)
+   └─ Session 2: NACLO 2013-2017 (80 problems)
+   └─ Session 3: NACLO 2018-2022 (80 problems)
+   └─ Session 4: NACLO 2023-2024 (36 problems)
+   └─ Time: ~1.5-2 hrs per session, run in parallel
+
+2. After all labeling complete:
+   $ cd /Users/skyliu/Lingohub
+   $ python3 merge-labels.py
+
+3. Output: PROBLEM-LABELS-COMPLETE.csv (432 problems)
+
+RESOURCES:
+──────────
+
+📖 Read First:
+  - LABELING-QUICK-START.md
+  - NACLO-LABELING-PROMPTS.md
+
+📚 Reference:
+  - PROBLEM-CATEGORIES.md
+  - DIFFICULTY-LEVELING-STRATEGY.md
+  - LABELING-INSTRUCTIONS.md
+
+✅ Examples:
+  - labeling-splits/LABELS-IOL-2024.csv
+  - labeling-splits/LABELS-APLO-2019.csv
+  - labeling-splits/LABELS-NACLO-2007.csv
+
+🔧 Tools:
+  - merge-labels.py
+
+TIME REMAINING:
+───────────────
+
+Remaining work: 284 problems (17 NACLO years)
+
+  Fast (30 sec/problem):    2.4 hours
+  Careful (2 min/problem):  9.5 hours
+  Realistic:                6-8 hours
+
+If parallelized (4 sessions):  1.5-2 hours per session
+
+YOU'VE GOT THIS! 🚀
+
+Progress = 148/432 = 34.3%
+Remaining = 284 problems = 65.7%
+
+Keep going! The finish line is in sight! 💪

@@ -1,0 +1,170 @@
+NACLO PROBLEM LABELING - BATCH PROMPTS READY
+=============================================
+
+Created: 2025-11-04
+Status: Ready for parallel processing
+
+WHAT'S BEEN CREATED:
+-------------------
+
+1. ✅ NACLO-LABELING-PROMPTS.md
+   - 17 year-specific prompts (2008-2024)
+   - Self-contained instructions for each year
+   - Copy-paste ready for Claude Code sessions
+   - Includes quality checks and examples
+
+2. ✅ merge-labels.py
+   - Python script to merge all 46 split files
+   - Validates data quality
+   - Reports statistics
+   - Outputs PROBLEM-LABELS-COMPLETE.csv
+
+3. ✅ LABELING-QUICK-START.md
+   - Quick reference guide
+   - Time estimates
+   - Common mistakes
+   - Pro tips
+
+CURRENT PROGRESS:
+----------------
+
+Completed: 148/432 problems (34%)
+  ✓ APLO 2019: 30 problems
+  ✓ IOL 2003-2025: 110 problems (all 22 years)
+  ✓ NACLO 2007: 8 problems
+
+Remaining: 284/432 problems (66%)
+  ⏳ NACLO 2008-2024: 17 years
+
+HOW TO USE THE PROMPTS:
+-----------------------
+
+SEQUENTIAL APPROACH (Best for consistency):
+1. Open NACLO-LABELING-PROMPTS.md
+2. Find "NACLO 2008 Labeling Prompt" section
+3. Copy entire prompt
+4. Paste into Claude Code
+5. Let it complete the year
+6. Repeat for 2009, 2010, ... 2024
+
+PARALLEL APPROACH (Fastest):
+1. Open 4 Claude Code sessions
+2. Session 1: Copy NACLO 2008-2012 prompts (80 problems)
+3. Session 2: Copy NACLO 2013-2017 prompts (80 problems)
+4. Session 3: Copy NACLO 2018-2022 prompts (80 problems)
+5. Session 4: Copy NACLO 2023-2024 prompts (36 problems)
+6. Run all in parallel
+7. Merge when all complete
+
+EACH PROMPT INCLUDES:
+--------------------
+✓ File path to edit
+✓ PDF locations
+✓ Reference materials to read
+✓ Step-by-step instructions
+✓ Quality check list
+✓ NACLO-specific patterns
+✓ Example formats
+
+TIME ESTIMATES:
+--------------
+
+Per Year (16 problems):
+  Fast (30 sec/problem): 8 minutes
+  Careful (2 min/problem): 32 minutes
+  Realistic: 20-25 minutes
+
+Total (17 years):
+  Fast: 2.3 hours
+  Careful: 9 hours
+  Realistic with breaks: 6-8 hours
+
+AFTER ALL LABELING COMPLETE:
+----------------------------
+
+1. Run merge script:
+   $ cd /Users/skyliu/Lingohub
+   $ python3 merge-labels.py
+
+2. Output: PROBLEM-LABELS-COMPLETE.csv (432 problems)
+
+3. Verify:
+   - All 432 rows present
+   - All fields filled
+   - No validation errors
+
+4. Ready for database import!
+
+FILES CREATED:
+-------------
+
+Location: /Users/skyliu/Lingohub/
+
+1. NACLO-LABELING-PROMPTS.md (17 prompts, ~8KB)
+2. merge-labels.py (validation + merge script, ~5KB)
+3. LABELING-QUICK-START.md (reference guide, ~6KB)
+4. This file: LABELING-BATCH-PROMPTS-SUMMARY.txt
+
+REFERENCE FILES (Already Exist):
+-------------------------------
+
+1. PROBLEM-CATEGORIES.md - Category taxonomy
+2. DIFFICULTY-LEVELING-STRATEGY.md - Difficulty guide
+3. LABELING-INSTRUCTIONS.md - Workflow guide
+4. LABELING-SUMMARY.md - Original overview
+
+SPLIT FILES DIRECTORY:
+---------------------
+
+Location: /Users/skyliu/Lingohub/labeling-splits/
+
+Completed (9 files):
+  ✓ LABELS-APLO-2019.csv
+  ✓ LABELS-IOL-2003.csv through LABELS-IOL-2025.csv (22 files)
+  ✓ LABELS-NACLO-2007.csv
+
+Pending (17 files):
+  ⏳ LABELS-NACLO-2008.csv
+  ⏳ LABELS-NACLO-2009.csv
+  ⏳ LABELS-NACLO-2010.csv
+  ⏳ LABELS-NACLO-2011.csv
+  ⏳ LABELS-NACLO-2012.csv
+  ⏳ LABELS-NACLO-2013.csv
+  ⏳ LABELS-NACLO-2014.csv
+  ⏳ LABELS-NACLO-2015.csv
+  ⏳ LABELS-NACLO-2016.csv
+  ⏳ LABELS-NACLO-2017.csv
+  ⏳ LABELS-NACLO-2018.csv
+  ⏳ LABELS-NACLO-2019.csv
+  ⏳ LABELS-NACLO-2020.csv
+  ⏳ LABELS-NACLO-2021.csv
+  ⏳ LABELS-NACLO-2022.csv
+  ⏳ LABELS-NACLO-2023.csv
+  ⏳ LABELS-NACLO-2024.csv (20 problems, not 16!)
+
+NEXT STEPS:
+----------
+
+OPTION A: Continue in this session
+  → I can continue labeling NACLO 2008-2024 year by year
+
+OPTION B: Use prompts in new sessions
+  → Copy prompts from NACLO-LABELING-PROMPTS.md
+  → Paste into fresh Claude Code session(s)
+  → Let them work through each year
+
+RECOMMENDED: Option B (parallel processing)
+  - Faster completion (6-8 hours total, parallelizable)
+  - Fresh context for each batch
+  - Can work on multiple years simultaneously
+
+QUESTIONS?
+---------
+
+Read these in order:
+1. LABELING-QUICK-START.md (for overview)
+2. NACLO-LABELING-PROMPTS.md (for specific prompts)
+3. PROBLEM-CATEGORIES.md (for category reference)
+4. DIFFICULTY-LEVELING-STRATEGY.md (for difficulty rating)
+
+All set! Ready to label the remaining 284 problems. 🚀
