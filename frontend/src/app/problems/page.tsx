@@ -320,20 +320,24 @@ function ProblemsPageContent() {
               <h3 className="font-medium mb-3">Topics</h3>
               <div className="max-h-60 overflow-y-auto space-y-2">
                 {[
-                  "morphology", "phonology", "syntax", "semantics", "pragmatics",
-                  "writing-systems", "phonetics", "historical", "ipa", "english",
-                  "tutorial", "plurals", "trees", "grammar", "language-families",
-                  "romance", "transcription", "historical-linguistics", 
-                  "african-languages", "noun-classes", "greek"
+                  "beginner-friendly",
+                  "morphology-noun", "morphology-verb", "phonology", "syntax", "semantics",
+                  "segmentation", "translation", "correspondence",
+                  "writing-systems", "number-systems",
+                  "comparative-method", "cultural-context",
+                  "rare-language", "extinct", "ancient",
+                  "native-american", "indo-european", "austronesian", "sino-tibetan",
+                  "papuan", "niger-congo", "afro-asiatic", "uralic",
+                  "asia", "americas", "oceania", "europe", "africa"
                 ].map((tag) => (
                   <label key={tag} className="flex items-center">
-                    <input 
-                      type="checkbox" 
-                      className="rounded mr-2" 
+                    <input
+                      type="checkbox"
+                      className="rounded mr-2"
                       checked={filters.topics.includes(tag)}
                       onChange={() => handleTopicToggle(tag)}
                     />
-                    <span className="text-sm capitalize">{tag.replace('-', ' ')}</span>
+                    <span className="text-sm capitalize">{tag.replace(/-/g, ' ')}</span>
                   </label>
                 ))}
               </div>
@@ -569,7 +573,7 @@ function ProblemsPageContent() {
                 <button
                   onClick={() => setPage(1)}
                   disabled={page === 1}
-                  className="px-3 py-1.5 border border-gray-300 rounded hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                  className="min-w-[36px] h-9 px-3 rounded-md text-sm font-medium transition-all disabled:opacity-40 disabled:cursor-not-allowed bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-gray-300 shadow-sm"
                 >
                   ≪
                 </button>
@@ -578,7 +582,7 @@ function ProblemsPageContent() {
                 <button
                   onClick={() => setPage(p => p - 1)}
                   disabled={page === 1}
-                  className="px-3 py-1.5 border border-gray-300 rounded hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                  className="min-w-[36px] h-9 px-3 rounded-md text-sm font-medium transition-all disabled:opacity-40 disabled:cursor-not-allowed bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-gray-300 shadow-sm"
                 >
                   ‹
                 </button>
@@ -632,17 +636,11 @@ function ProblemsPageContent() {
                       <button
                         key={pageNum}
                         onClick={() => setPage(pageNum as number)}
-                        style={isActive ? {
-                          backgroundColor: '#2563eb',
-                          color: 'white',
-                          borderColor: '#2563eb',
-                          fontWeight: '600'
-                        } : {
-                          backgroundColor: 'white',
-                          color: '#374151',
-                          borderColor: '#d1d5db'
-                        }}
-                        className="px-3 py-1.5 border rounded text-sm transition-colors hover:bg-gray-50 hover:border-gray-400"
+                        className={`min-w-[36px] h-9 px-3 rounded-md text-sm font-medium transition-all shadow-sm ${
+                          isActive
+                            ? 'bg-blue-600 text-white border border-blue-600 hover:bg-blue-700'
+                            : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50 hover:border-gray-300'
+                        }`}
                       >
                         {pageNum}
                       </button>
@@ -654,7 +652,7 @@ function ProblemsPageContent() {
                 <button
                   onClick={() => setPage(p => p + 1)}
                   disabled={page >= apiResponse.pagination.totalPages}
-                  className="px-3 py-1.5 border border-gray-300 rounded hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                  className="min-w-[36px] h-9 px-3 rounded-md text-sm font-medium transition-all disabled:opacity-40 disabled:cursor-not-allowed bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-gray-300 shadow-sm"
                 >
                   ›
                 </button>
@@ -663,7 +661,7 @@ function ProblemsPageContent() {
                 <button
                   onClick={() => setPage(apiResponse.pagination.totalPages)}
                   disabled={page >= apiResponse.pagination.totalPages}
-                  className="px-3 py-1.5 border border-gray-300 rounded hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                  className="min-w-[36px] h-9 px-3 rounded-md text-sm font-medium transition-all disabled:opacity-40 disabled:cursor-not-allowed bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-gray-300 shadow-sm"
                 >
                   ≫
                 </button>
