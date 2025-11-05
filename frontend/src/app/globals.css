@@ -471,47 +471,60 @@ a.text-black {
   text-rendering: optimizeLegibility !important;
 }
 
-/* Explicit pagination button styles - highest specificity */
-.min-w-\[36px\].h-9.px-3.rounded-md.text-sm.font-medium.transition-all.shadow-sm.bg-blue-600 {
+/* Explicit pagination button styles - ULTRA highest specificity with html prefix */
+/* These must come last and override all other button styles */
+
+/* Blue active pagination buttons */
+html body button.min-w-\[36px\].h-9.px-3.rounded-md.text-sm.font-medium.transition-all.shadow-sm.bg-blue-600,
+html body button.rounded-md.shadow-sm.min-w-\[36px\].bg-blue-600,
+html body button.min-w-\[36px\].bg-blue-600 {
   background-color: #2563eb !important;
   color: #ffffff !important;
   border-color: #2563eb !important;
   -webkit-text-fill-color: #ffffff !important;
 }
 
-.min-w-\[36px\].h-9.px-3.rounded-md.text-sm.font-medium.transition-all.shadow-sm.bg-blue-600:hover {
+html body button.min-w-\[36px\].h-9.px-3.rounded-md.text-sm.font-medium.transition-all.shadow-sm.bg-blue-600:hover,
+html body button.rounded-md.shadow-sm.min-w-\[36px\].bg-blue-600:hover,
+html body button.min-w-\[36px\].bg-blue-600:hover {
   background-color: #1d4ed8 !important;
 }
 
-.min-w-\[36px\].h-9.px-3.rounded-md.text-sm.font-medium.transition-all.shadow-sm.bg-white {
+/* White inactive pagination buttons */
+html body button.min-w-\[36px\].h-9.px-3.rounded-md.text-sm.font-medium.transition-all.shadow-sm.bg-white,
+html body button.rounded-md.shadow-sm.min-w-\[36px\].bg-white,
+html body button.min-w-\[36px\].bg-white {
   background-color: #ffffff !important;
   color: #374151 !important;
   border-color: #e5e7eb !important;
   -webkit-text-fill-color: #374151 !important;
 }
 
-.min-w-\[36px\].h-9.px-3.rounded-md.text-sm.font-medium.transition-all.shadow-sm.bg-white:hover {
+html body button.min-w-\[36px\].h-9.px-3.rounded-md.text-sm.font-medium.transition-all.shadow-sm.bg-white:hover,
+html body button.rounded-md.shadow-sm.min-w-\[36px\].bg-white:hover,
+html body button.min-w-\[36px\].bg-white:hover {
   background-color: #f9fafb !important;
   border-color: #d1d5db !important;
 }
 
-/* Override any button interference for pagination */
-button.rounded-md.shadow-sm.min-w-\[36px\] {
-  background-color: inherit !important;
-}
-
-button.rounded-md.shadow-sm.min-w-\[36px\].bg-blue-600 {
-  background-color: #2563eb !important;
+/* Text color overrides for pagination buttons */
+html body button.rounded-md.shadow-sm.min-w-\[36px\].text-white,
+html body button.min-w-\[36px\].text-white {
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
 }
 
-button.rounded-md.shadow-sm.min-w-\[36px\].text-white {
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-}
-
-button.rounded-md.shadow-sm.min-w-\[36px\].text-gray-700 {
+html body button.rounded-md.shadow-sm.min-w-\[36px\].text-gray-700,
+html body button.min-w-\[36px\].text-gray-700 {
   color: #374151 !important;
   -webkit-text-fill-color: #374151 !important;
+}
+
+/* Border color classes */
+html body button.min-w-\[36px\].border.border-blue-600 {
+  border-color: #2563eb !important;
+}
+
+html body button.min-w-\[36px\].border.border-gray-200 {
+  border-color: #e5e7eb !important;
 }
