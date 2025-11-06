@@ -80,6 +80,9 @@ export default function ProblemPageClient({ initialProblem }: ProblemPageClientP
   const [showSolutionWarning, setShowSolutionWarning] = useState(!initialProblem.viewedSolution)
   const [solutionRevealed, setSolutionRevealed] = useState(initialProblem.viewedSolution || false)
   const [showOfficialSolution, setShowOfficialSolution] = useState(false)
+  const [selectedImages, setSelectedImages] = useState<File[]>([])
+  const [imagePreviews, setImagePreviews] = useState<string[]>([])
+  const [imageError, setImageError] = useState('')
 
   // Load saved state and solutions
   useEffect(() => {
@@ -172,6 +175,70 @@ export default function ProblemPageClient({ initialProblem }: ProblemPageClientP
     }
   }
 
+  const handleImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files
+    if (!files) return
+
+    setImageError('')
+
+    // Validate file count (max 3 images)
+    if (selectedImages.length + files.length > 3) {
+      setImageError('You can upload a maximum of 3 images')
+      return
+    }
+
+    const newImages: File[] = []
+    const newPreviews: string[] = []
+    let totalSize = selectedImages.reduce((sum, img) => sum + img.size, 0)
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i]
+
+      // Validate file type
+      if (!file.type.startsWith('image/')) {
+        setImageError(`${file.name} is not an image file`)
+        continue
+      }
+
+      // Validate individual file size (5MB per image)
+      const maxFileSize = 5 * 1024 * 1024 // 5MB
+      if (file.size > maxFileSize) {
+        setImageError(`${file.name} is too large. Maximum size is 5MB per image`)
+        continue
+      }
+
+      // Validate total size (10MB total)
+      totalSize += file.size
+      const maxTotalSize = 10 * 1024 * 1024 // 10MB
+      if (totalSize > maxTotalSize) {
+        setImageError('Total image size cannot exceed 10MB')
+        continue
+      }
+
+      newImages.push(file)
+
+      // Create preview
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        newPreviews.push(reader.result as string)
+        if (newPreviews.length === newImages.length) {
+          setImagePreviews([...imagePreviews, ...newPreviews])
+        }
+      }
+      reader.readAsDataURL(file)
+    }
+
+    setSelectedImages([...selectedImages, ...newImages])
+  }
+
+  const handleRemoveImage = (index: number) => {
+    const newImages = selectedImages.filter((_, i) => i !== index)
+    const newPreviews = imagePreviews.filter((_, i) => i !== index)
+    setSelectedImages(newImages)
+    setImagePreviews(newPreviews)
+    setImageError('')
+  }
+
   const handleSubmitSolution = async () => {
     if (!newSolution.trim()) return
 
@@ -201,6 +268,9 @@ export default function ProblemPageClient({ initialProblem }: ProblemPageClientP
 
       // Clear form
       setNewSolution('')
+      setSelectedImages([])
+      setImagePreviews([])
+      setImageError('')
       setShowSolutionForm(false)
       setIsEditingUserSolution(false)
     } catch (error) {
@@ -601,6 +671,72 @@ export default function ProblemPageClient({ initialProblem }: ProblemPageClientP
                       placeholder="Share your analysis and solution approach... Be clear and detailed in your reasoning."
                     />
                   </div>
+
+                  {/* Image Upload Section */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Upload Images (Optional)
+                    </label>
+                    <div className="border-2 border-dashed border-gray-300 rounded-lg p-4">
+                      <input
+                        type="file"
+                        accept="image/*"
+                        multiple
+                        onChange={handleImageSelect}
+                        className="hidden"
+                        id="image-upload"
+                        disabled={selectedImages.length >= 3}
+                      />
+                      <label
+                        htmlFor="image-upload"
+                        className={`flex flex-col items-center justify-center cursor-pointer ${
+                          selectedImages.length >= 3 ? 'opacity-50 cursor-not-allowed' : ''
+                        }`}
+                      >
+                        <Download className="h-8 w-8 text-gray-400 mb-2" />
+                        <span className="text-sm text-gray-600">
+                          {selectedImages.length >= 3
+                            ? 'Maximum 3 images'
+                            : 'Click to upload images of your work'}
+                        </span>
+                        <span className="text-xs text-gray-500 mt-1">
+                          Max 5MB per image, 10MB total ({selectedImages.length}/3 images)
+                        </span>
+                      </label>
+                    </div>
+
+                    {/* Error Message */}
+                    {imageError && (
+                      <div className="mt-2 text-sm text-red-600">
+                        {imageError}
+                      </div>
+                    )}
+
+                    {/* Image Previews */}
+                    {imagePreviews.length > 0 && (
+                      <div className="mt-4 grid grid-cols-3 gap-4">
+                        {imagePreviews.map((preview, index) => (
+                          <div key={index} className="relative group">
+                            <img
+                              src={preview}
+                              alt={`Preview ${index + 1}`}
+                              className="w-full h-32 object-cover rounded-lg border"
+                            />
+                            <button
+                              onClick={() => handleRemoveImage(index)}
+                              className="absolute top-1 right-1 bg-red-600 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                            >
+                              <X className="h-4 w-4" />
+                            </button>
+                            <div className="text-xs text-gray-500 mt-1 truncate">
+                              {selectedImages[index].name} ({(selectedImages[index].size / 1024).toFixed(0)}KB)
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
                   <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                     <p className="text-sm text-blue-800">
                       <strong>Tips for a good solution:</strong>
@@ -609,13 +745,19 @@ export default function ProblemPageClient({ initialProblem }: ProblemPageClientP
                       <li>Explain your linguistic reasoning clearly</li>
                       <li>Show all your work and pattern analysis</li>
                       <li>Use tables or formatting to organize your answer</li>
+                      <li>Upload photos of handwritten work or diagrams if helpful</li>
                       <li>Cite any assumptions or rules you discovered</li>
                     </ul>
                   </div>
                   <div className="flex justify-end space-x-3">
                     <Button
                       variant="outline"
-                      onClick={() => setNewSolution('')}
+                      onClick={() => {
+                        setNewSolution('')
+                        setSelectedImages([])
+                        setImagePreviews([])
+                        setImageError('')
+                      }}
                     >
                       Clear
                     </Button>
