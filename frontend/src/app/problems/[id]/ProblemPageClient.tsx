@@ -939,6 +939,38 @@ export default function ProblemPageClient({ initialProblem }: ProblemPageClientP
                         {userSolution.content}
                       </div>
                     </div>
+
+                    {/* Attachments */}
+                    {userSolution.attachments && Array.isArray(userSolution.attachments) && userSolution.attachments.length > 0 && (
+                      <div className="mt-4 pt-4 border-t">
+                        <h4 className="text-sm font-semibold text-gray-700 mb-3">Attachments ({userSolution.attachments.length})</h4>
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                          {userSolution.attachments.map((attachment: any, index: number) => (
+                            <div key={index} className="relative group">
+                              {attachment.type === 'pdf' ? (
+                                <a
+                                  href={attachment.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="flex flex-col items-center justify-center h-32 bg-red-50 border border-red-200 rounded-lg hover:bg-red-100 transition-colors"
+                                >
+                                  <FileText className="h-12 w-12 text-red-600 mb-2" />
+                                  <span className="text-xs text-gray-600 text-center px-2 truncate w-full">{attachment.filename}</span>
+                                </a>
+                              ) : (
+                                <a href={attachment.url} target="_blank" rel="noopener noreferrer">
+                                  <img
+                                    src={attachment.url}
+                                    alt={attachment.filename}
+                                    className="w-full h-32 object-cover rounded-lg border hover:opacity-90 transition-opacity cursor-pointer"
+                                  />
+                                </a>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 )}
 
@@ -995,6 +1027,38 @@ export default function ProblemPageClient({ initialProblem }: ProblemPageClientP
                         {solution.content}
                       </div>
                     </div>
+
+                    {/* Attachments */}
+                    {solution.attachments && Array.isArray(solution.attachments) && solution.attachments.length > 0 && (
+                      <div className="mt-4 pt-4 border-t">
+                        <h4 className="text-sm font-semibold text-gray-700 mb-3">Attachments ({solution.attachments.length})</h4>
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                          {solution.attachments.map((attachment: any, index: number) => (
+                            <div key={index} className="relative group">
+                              {attachment.type === 'pdf' ? (
+                                <a
+                                  href={attachment.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="flex flex-col items-center justify-center h-32 bg-red-50 border border-red-200 rounded-lg hover:bg-red-100 transition-colors"
+                                >
+                                  <FileText className="h-12 w-12 text-red-600 mb-2" />
+                                  <span className="text-xs text-gray-600 text-center px-2 truncate w-full">{attachment.filename}</span>
+                                </a>
+                              ) : (
+                                <a href={attachment.url} target="_blank" rel="noopener noreferrer">
+                                  <img
+                                    src={attachment.url}
+                                    alt={attachment.filename}
+                                    className="w-full h-32 object-cover rounded-lg border hover:opacity-90 transition-opacity cursor-pointer"
+                                  />
+                                </a>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 ))}
 
