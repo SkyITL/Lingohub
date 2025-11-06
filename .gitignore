@@ -111,3 +111,4 @@ cleanup-workspace.sh
 
 # Deployment summary
 DEPLOYMENT-SUMMARY.md
+frontend/public/olympiad-problems.zip
