@@ -22,7 +22,11 @@ import {
   Send,
   X,
   Trash2,
-  AlertTriangle
+  AlertTriangle,
+  Edit,
+  FileText,
+  Award,
+  TrendingUp
 } from "lucide-react"
 
 // Markdown content component
@@ -57,6 +61,42 @@ function MarkdownContent({ content }: { content: string }) {
       className="text-gray-700 linguistic-content"
       dangerouslySetInnerHTML={{ __html: htmlContent }}
     />
+  )
+}
+
+// Score badge component for LLM evaluation
+function ScoreBadge({ score, confidence }: { score?: number, confidence?: string }) {
+  if (score === null || score === undefined) return null
+
+  const getScoreColor = (score: number) => {
+    if (score >= 85) return 'bg-green-100 text-green-800 border-green-300'
+    if (score >= 70) return 'bg-blue-100 text-blue-800 border-blue-300'
+    if (score >= 40) return 'bg-yellow-100 text-yellow-800 border-yellow-300'
+    return 'bg-red-100 text-red-800 border-red-300'
+  }
+
+  const getConfidenceBadge = (confidence?: string) => {
+    if (!confidence) return null
+    const colors = {
+      high: 'bg-green-50 text-green-700',
+      medium: 'bg-yellow-50 text-yellow-700',
+      low: 'bg-orange-50 text-orange-700'
+    }
+    return (
+      <span className={`text-xs px-2 py-0.5 rounded ${colors[confidence] || colors.medium}`}>
+        {confidence} confidence
+      </span>
+    )
+  }
+
+  return (
+    <div className="flex items-center gap-2">
+      <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border ${getScoreColor(score)}`}>
+        <Award className="h-4 w-4" />
+        <span className="font-semibold text-sm">{score}/100</span>
+      </div>
+      {getConfidenceBadge(confidence)}
+    </div>
   )
 }
 
@@ -279,25 +319,30 @@ export default function ProblemPageClient({ initialProblem }: ProblemPageClientP
     }
 
     try {
-      if (userSolution && isEditingUserSolution) {
-        console.log('Editing solution not implemented yet')
-        return
-      }
-
       if (!user) {
         alert('You must be logged in to submit a solution.')
         return
       }
 
-      // Submit solution with files
-      const response = await solutionsApi.submit(
-        problem.id,
-        newSolution,
-        selectedImages.length > 0 ? selectedImages : undefined
-      )
-      const newSol = response.data.solution
-
-      console.log('Solution submitted successfully:', newSol)
+      if (userSolution && isEditingUserSolution) {
+        // Edit existing solution
+        const response = await solutionsApi.edit(
+          userSolution.id,
+          newSolution,
+          selectedImages.length > 0 ? selectedImages : undefined
+        )
+        const updatedSol = response.data.solution
+        console.log('Solution updated successfully:', updatedSol)
+      } else {
+        // Submit new solution
+        const response = await solutionsApi.submit(
+          problem.id,
+          newSolution,
+          selectedImages.length > 0 ? selectedImages : undefined
+        )
+        const newSol = response.data.solution
+        console.log('Solution submitted successfully:', newSol)
+      }
 
       // Reload solutions from backend
       await loadSolutions()
@@ -321,7 +366,7 @@ export default function ProblemPageClient({ initialProblem }: ProblemPageClientP
         errorMessage = error.message
       }
 
-      alert(`Error submitting solution: ${errorMessage}`)
+      alert(`Error ${isEditingUserSolution ? 'updating' : 'submitting'} solution: ${errorMessage}`)
     }
   }
 
@@ -365,6 +410,27 @@ export default function ProblemPageClient({ initialProblem }: ProblemPageClientP
       default:
         return solutionsCopy.sort((a, b) => b.votes - a.votes)
     }
+  }
+
+  const handleEditSolution = () => {
+    if (!userSolution) return
+
+    // Populate form with existing solution
+    setNewSolution(userSolution.content)
+    setIsEditingUserSolution(true)
+    setShowSolutionForm(true)
+
+    // Note: We don't pre-load existing attachments since users need to re-upload files
+    // This is a limitation of the current implementation
+  }
+
+  const handleCancelEdit = () => {
+    setNewSolution('')
+    setSelectedImages([])
+    setImagePreviews([])
+    setImageError('')
+    setIsEditingUserSolution(false)
+    setShowSolutionForm(false)
   }
 
   const handleDeleteSolution = async () => {
@@ -682,7 +748,9 @@ export default function ProblemPageClient({ initialProblem }: ProblemPageClientP
 
             {/* Submit Solution Tab */}
             <Tabs.Content value="submit" className="p-6">
-              <h2 className="text-2xl font-bold mb-4">Submit Your Solution</h2>
+              <h2 className="text-2xl font-bold mb-4">
+                {isEditingUserSolution ? 'Edit Your Solution' : 'Submit Your Solution'}
+              </h2>
               {!user ? (
                 <div className="text-center py-12">
                   <div className="bg-blue-50 border-2 border-blue-200 rounded-lg p-8 max-w-2xl mx-auto">
@@ -806,12 +874,20 @@ export default function ProblemPageClient({ initialProblem }: ProblemPageClientP
                     >
                       Clear
                     </Button>
+                    {isEditingUserSolution && (
+                      <Button
+                        variant="ghost"
+                        onClick={handleCancelEdit}
+                      >
+                        Cancel
+                      </Button>
+                    )}
                     <Button
                       onClick={handleSubmitSolution}
                       disabled={!newSolution.trim()}
                     >
                       <Send className="h-4 w-4 mr-1" />
-                      Submit Solution
+                      {isEditingUserSolution ? 'Update Solution' : 'Submit Solution'}
                     </Button>
                   </div>
                 </div>
@@ -932,13 +1008,55 @@ export default function ProblemPageClient({ initialProblem }: ProblemPageClientP
                           </div>
                         </div>
                       </div>
+
+                      {/* Edit and Delete buttons */}
+                      <div className="flex items-center gap-2">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={handleEditSolution}
+                          className="hover:bg-green-100"
+                        >
+                          <Edit className="h-4 w-4 mr-1" />
+                          Edit
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={handleDeleteSolution}
+                          className="hover:bg-red-100 text-red-600"
+                        >
+                          <Trash2 className="h-4 w-4 mr-1" />
+                          Delete
+                        </Button>
+                      </div>
                     </div>
+
+                    {/* LLM Evaluation Score */}
+                    {userSolution.llmScore !== null && userSolution.llmScore !== undefined && (
+                      <div className="mb-4">
+                        <ScoreBadge score={userSolution.llmScore} confidence={userSolution.llmConfidence} />
+                      </div>
+                    )}
 
                     <div className="prose max-w-none">
                       <div className="text-gray-700 whitespace-pre-wrap">
                         {userSolution.content}
                       </div>
                     </div>
+
+                    {/* LLM Feedback */}
+                    {userSolution.llmFeedback && (
+                      <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                        <div className="flex items-start gap-2">
+                          <TrendingUp className="h-5 w-5 text-blue-600 mt-0.5 flex-shrink-0" />
+                          <div>
+                            <div className="font-semibold text-blue-900 text-sm mb-1">AI Feedback</div>
+                            <div className="text-sm text-blue-800">{userSolution.llmFeedback}</div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
 
                     {/* Attachments */}
                     {userSolution.attachments && Array.isArray(userSolution.attachments) && userSolution.attachments.length > 0 && (
@@ -1022,11 +1140,31 @@ export default function ProblemPageClient({ initialProblem }: ProblemPageClientP
                       </div>
                     </div>
 
+                    {/* LLM Evaluation Score */}
+                    {solution.llmScore !== null && solution.llmScore !== undefined && (
+                      <div className="mb-4">
+                        <ScoreBadge score={solution.llmScore} confidence={solution.llmConfidence} />
+                      </div>
+                    )}
+
                     <div className="prose max-w-none">
                       <div className="text-gray-700 whitespace-pre-wrap">
                         {solution.content}
                       </div>
                     </div>
+
+                    {/* LLM Feedback */}
+                    {solution.llmFeedback && (
+                      <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                        <div className="flex items-start gap-2">
+                          <TrendingUp className="h-5 w-5 text-blue-600 mt-0.5 flex-shrink-0" />
+                          <div>
+                            <div className="font-semibold text-blue-900 text-sm mb-1">AI Feedback</div>
+                            <div className="text-sm text-blue-800">{solution.llmFeedback}</div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
 
                     {/* Attachments */}
                     {solution.attachments && Array.isArray(solution.attachments) && solution.attachments.length > 0 && (
