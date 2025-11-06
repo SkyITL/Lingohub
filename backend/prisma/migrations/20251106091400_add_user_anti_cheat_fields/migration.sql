@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "users" ADD COLUMN "isCheater" BOOLEAN NOT NULL DEFAULT false,
+ADD COLUMN "cheaterUntil" TIMESTAMP(3),
+ADD COLUMN "cheatingStrikes" INTEGER NOT NULL DEFAULT 0;
