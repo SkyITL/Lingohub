@@ -37,6 +37,65 @@ const voteSchema = z.object({
   vote: z.number().min(-1).max(1)
 })
 
+// Get all submissions (for submissions page)
+router.get('/submissions', optionalAuth, async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.query
+
+    const where: any = {}
+    if (userId) {
+      where.userId = userId
+    }
+
+    const submissions = await prisma.solution.findMany({
+      where,
+      include: {
+        user: {
+          select: {
+            id: true,
+            username: true,
+            rating: true
+          }
+        },
+        problem: {
+          select: {
+            id: true,
+            number: true,
+            title: true
+          }
+        }
+      },
+      orderBy: {
+        createdAt: 'desc'
+      },
+      take: 100 // Limit to recent 100 submissions
+    })
+
+    const transformedSubmissions = submissions.map((submission) => ({
+      id: submission.id,
+      problemId: submission.problemId,
+      problemNumber: submission.problem.number,
+      problemTitle: submission.problem.title,
+      userId: submission.userId,
+      username: submission.user.username,
+      llmScore: submission.llmScore,
+      llmConfidence: submission.llmConfidence,
+      status: submission.status,
+      createdAt: submission.createdAt,
+      // Only include content if it's the user's own submission
+      content: req.user && submission.userId === req.user.id ? submission.content : undefined,
+      llmFeedback: req.user && submission.userId === req.user.id ? submission.llmFeedback : undefined,
+      attachments: req.user && submission.userId === req.user.id ? submission.attachments : undefined,
+      isOwnSubmission: req.user ? submission.userId === req.user.id : false
+    }))
+
+    res.json({ submissions: transformedSubmissions })
+  } catch (error) {
+    console.error('Submissions fetch error:', error)
+    res.status(500).json({ error: 'Internal server error' })
+  }
+})
+
 // Get solutions for a problem
 router.get('/problem/:problemId', optionalAuth, async (req: Request, res: Response) => {
   try {
