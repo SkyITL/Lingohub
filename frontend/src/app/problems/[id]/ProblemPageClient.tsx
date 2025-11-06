@@ -289,7 +289,12 @@ export default function ProblemPageClient({ initialProblem }: ProblemPageClientP
         return
       }
 
-      const response = await solutionsApi.submit(problem.id, newSolution)
+      // Submit solution with files
+      const response = await solutionsApi.submit(
+        problem.id,
+        newSolution,
+        selectedImages.length > 0 ? selectedImages : undefined
+      )
       const newSol = response.data.solution
 
       console.log('Solution submitted successfully:', newSol)

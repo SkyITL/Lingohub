@@ -1,10 +1,30 @@
 import express, { Request, Response } from 'express'
 import { z } from 'zod'
 import { PrismaClient } from '@prisma/client'
+import multer from 'multer'
 import { authenticateToken, optionalAuth } from '../middleware/auth'
+import { uploadMultipleFiles, FileAttachment } from '../services/fileUpload'
 
 const router = express.Router()
 const prisma = new PrismaClient()
+
+// Configure multer for file uploads (store in memory)
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: {
+    fileSize: 15 * 1024 * 1024, // 15MB max total
+    files: 5 // Max 5 files
+  },
+  fileFilter: (req, file, cb) => {
+    // Accept only images and PDFs
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'application/pdf']
+    if (allowedTypes.includes(file.mimetype)) {
+      cb(null, true)
+    } else {
+      cb(new Error(`Invalid file type: ${file.mimetype}. Only images and PDFs are allowed.`))
+    }
+  }
+})
 
 // Validation schemas
 const solutionSchema = z.object({
@@ -76,6 +96,7 @@ router.get('/problem/:problemId', optionalAuth, async (req: Request, res: Respon
     const transformedSolutions = solutions.map((solution: any) => ({
       id: solution.id,
       content: solution.content,
+      attachments: solution.attachments,
       voteScore: solution.voteScore,
       createdAt: solution.createdAt,
       user: solution.user,
@@ -90,8 +111,8 @@ router.get('/problem/:problemId', optionalAuth, async (req: Request, res: Respon
   }
 })
 
-// Submit a solution
-router.post('/', authenticateToken, async (req: Request, res: Response) => {
+// Submit a solution (with optional file attachments)
+router.post('/', authenticateToken, upload.array('files', 5), async (req: Request, res: Response) => {
   try {
     if (!req.user) {
       return res.status(401).json({ error: 'Authentication required' })
@@ -127,12 +148,33 @@ router.post('/', authenticateToken, async (req: Request, res: Response) => {
       return res.status(400).json({ error: 'Solution already submitted for this problem' })
     }
 
+    // Handle file uploads if present
+    let attachments: FileAttachment[] | undefined
+    if (req.files && Array.isArray(req.files) && req.files.length > 0) {
+      console.log(`📤 Uploading ${req.files.length} files...`)
+
+      const filesToUpload = req.files.map((file: Express.Multer.File) => ({
+        buffer: file.buffer,
+        filename: file.originalname,
+        mimetype: file.mimetype
+      }))
+
+      try {
+        attachments = await uploadMultipleFiles(filesToUpload)
+        console.log(`✅ Uploaded ${attachments.length} files successfully`)
+      } catch (uploadError) {
+        console.error('File upload error:', uploadError)
+        return res.status(500).json({ error: 'Failed to upload files. Please try again.' })
+      }
+    }
+
     const solution = await prisma.solution.create({
       data: {
         problemId: problem.id,
         userId: req.user.id,
         content,
-        status: 'submitted'
+        status: 'submitted',
+        attachments: attachments ? JSON.parse(JSON.stringify(attachments)) : undefined
       },
       include: {
         user: {
@@ -169,6 +211,7 @@ router.post('/', authenticateToken, async (req: Request, res: Response) => {
       solution: {
         id: solution.id,
         content: solution.content,
+        attachments: solution.attachments,
         voteScore: solution.voteScore,
         createdAt: solution.createdAt,
         user: solution.user
@@ -177,6 +220,9 @@ router.post('/', authenticateToken, async (req: Request, res: Response) => {
   } catch (error) {
     if (error instanceof z.ZodError) {
       return res.status(400).json({ error: error.errors })
+    }
+    if (error instanceof multer.MulterError) {
+      return res.status(400).json({ error: `File upload error: ${error.message}` })
     }
     console.error('Solution submit error:', error)
     res.status(500).json({ error: 'Internal server error' })

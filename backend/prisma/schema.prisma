@@ -93,6 +93,9 @@ model Solution {
   voteScore Int      @default(0)
   status    String   @default("pending") // pending, verified, flagged, approved, partial
 
+  // File attachments (images/PDFs)
+  attachments Json? // Array of {url: string, type: 'image' | 'pdf', filename: string, size: number}
+
   // LLM evaluation results
   llmScore       Int?     // 0-100 score from LLM
   llmFeedback    String?  @db.Text

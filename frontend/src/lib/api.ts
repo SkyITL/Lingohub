@@ -130,13 +130,29 @@ export const problemsApi = {
 export const solutionsApi = {
   getByProblem: (problemId: string, sortBy?: string) =>
     api.get(`/solutions/problem/${problemId}`, { params: { sortBy } }),
-  
-  submit: (problemId: string, content: string) =>
-    api.post('/solutions', { problemId, content }),
-  
+
+  submit: (problemId: string, content: string, files?: File[]) => {
+    const formData = new FormData()
+    formData.append('problemId', problemId)
+    formData.append('content', content)
+
+    // Add files if present
+    if (files && files.length > 0) {
+      files.forEach((file) => {
+        formData.append('files', file)
+      })
+    }
+
+    return api.post('/solutions', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+  },
+
   vote: (solutionId: string, vote: number) =>
     api.post(`/solutions/${solutionId}/vote`, { vote }),
-  
+
   delete: (solutionId: string) =>
     api.delete(`/solutions/${solutionId}`),
 }
