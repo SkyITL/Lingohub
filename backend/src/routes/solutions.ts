@@ -4,6 +4,7 @@ import { PrismaClient } from '@prisma/client'
 import multer from 'multer'
 import { authenticateToken, optionalAuth } from '../middleware/auth'
 import { uploadMultipleFiles, FileAttachment } from '../services/fileUpload'
+import { evaluateSolution } from '../services/llmEvaluator'
 
 const router = express.Router()
 const prisma = new PrismaClient()
@@ -235,6 +236,67 @@ router.post('/', authenticateToken, upload.array('files', 5), async (req: Reques
     })
 
     console.log('🔵 [SOLUTION SUBMIT] User progress updated')
+
+    // Evaluate solution with LLM if official solution exists
+    let evaluationResult = null
+    if (problem.officialSolution) {
+      try {
+        console.log('🔵 [SOLUTION SUBMIT] Starting LLM evaluation...')
+
+        evaluationResult = await evaluateSolution(
+          problem.content,
+          problem.officialSolution,
+          content
+        )
+
+        console.log('🔵 [SOLUTION SUBMIT] LLM evaluation completed:', {
+          score: evaluationResult.totalScore,
+          confidence: evaluationResult.confidence,
+          cost: evaluationResult.cost
+        })
+
+        // Store evaluation results
+        await prisma.solution.update({
+          where: { id: solution.id },
+          data: {
+            llmScore: evaluationResult.totalScore,
+            llmFeedback: evaluationResult.feedback,
+            llmConfidence: evaluationResult.confidence,
+            isPartialCredit: evaluationResult.totalScore >= 40 && evaluationResult.totalScore < 70
+          }
+        })
+
+        // Create detailed evaluation record
+        await prisma.solutionEvaluation.create({
+          data: {
+            solutionId: solution.id,
+            totalScore: evaluationResult.totalScore,
+            correctness: evaluationResult.scores.correctness,
+            reasoning: evaluationResult.scores.reasoning,
+            coverage: evaluationResult.scores.coverage,
+            clarity: evaluationResult.scores.clarity,
+            confidence: evaluationResult.confidence,
+            feedback: evaluationResult.feedback,
+            errors: evaluationResult.errors,
+            strengths: evaluationResult.strengths,
+            suggestions: evaluationResult.suggestions,
+            modelUsed: evaluationResult.modelUsed,
+            promptVersion: 'v1',
+            evaluationTime: 0, // Will be tracked later
+            cost: evaluationResult.cost
+          }
+        })
+
+        console.log('✅ [SOLUTION SUBMIT] Evaluation stored')
+      } catch (evalError) {
+        console.error('🔴 [SOLUTION SUBMIT] LLM evaluation failed:', evalError)
+        // Don't fail the submission if evaluation fails
+        // The solution is still saved, just without evaluation
+      }
+    } else {
+      console.log('⚠️  [SOLUTION SUBMIT] No official solution available, skipping LLM evaluation')
+    }
+
     console.log('✅ [SOLUTION SUBMIT] Submission complete!')
 
     res.status(201).json({
@@ -245,7 +307,10 @@ router.post('/', authenticateToken, upload.array('files', 5), async (req: Reques
         attachments: solution.attachments,
         voteScore: solution.voteScore,
         createdAt: solution.createdAt,
-        user: solution.user
+        user: solution.user,
+        llmScore: evaluationResult?.totalScore,
+        llmFeedback: evaluationResult?.feedback,
+        llmConfidence: evaluationResult?.confidence
       }
     })
   } catch (error) {
@@ -344,6 +409,162 @@ router.post('/:id/vote', authenticateToken, async (req: Request, res: Response) 
       return res.status(400).json({ error: error.errors })
     }
     console.error('Vote error:', error)
+    res.status(500).json({ error: 'Internal server error' })
+  }
+})
+
+// Edit a solution
+router.put('/:id', authenticateToken, upload.array('files', 5), async (req: Request, res: Response) => {
+  try {
+    if (!req.user) {
+      return res.status(401).json({ error: 'Authentication required' })
+    }
+
+    const { id } = req.params
+    const { content } = req.body
+
+    if (!content || content.length < 10) {
+      return res.status(400).json({ error: 'Solution content must be at least 10 characters' })
+    }
+
+    console.log('🔵 [SOLUTION EDIT] Starting edit for solution:', id)
+
+    // Check if solution exists
+    const solution = await prisma.solution.findUnique({
+      where: { id },
+      include: {
+        problem: true
+      }
+    })
+
+    if (!solution) {
+      return res.status(404).json({ error: 'Solution not found' })
+    }
+
+    // Only allow the author to edit their solution
+    if (solution.userId !== req.user.id) {
+      return res.status(403).json({ error: 'You can only edit your own solutions' })
+    }
+
+    // Handle file uploads if present
+    let newAttachments: FileAttachment[] | undefined
+    if (req.files && Array.isArray(req.files) && req.files.length > 0) {
+      console.log(`📤 Uploading ${req.files.length} new files...`)
+
+      const filesToUpload = req.files.map((file: Express.Multer.File) => ({
+        buffer: file.buffer,
+        filename: file.originalname,
+        mimetype: file.mimetype
+      }))
+
+      try {
+        newAttachments = await uploadMultipleFiles(filesToUpload)
+        console.log(`✅ Uploaded ${newAttachments.length} files successfully`)
+      } catch (uploadError) {
+        console.error('File upload error:', uploadError)
+        return res.status(500).json({ error: 'Failed to upload files. Please try again.' })
+      }
+    }
+
+    // Update solution
+    const updatedSolution = await prisma.solution.update({
+      where: { id },
+      data: {
+        content,
+        attachments: newAttachments ? JSON.parse(JSON.stringify(newAttachments)) : solution.attachments,
+        updatedAt: new Date()
+      },
+      include: {
+        user: {
+          select: {
+            id: true,
+            username: true,
+            rating: true
+          }
+        }
+      }
+    })
+
+    console.log('🔵 [SOLUTION EDIT] Solution updated, re-evaluating...')
+
+    // Re-evaluate with LLM if official solution exists
+    let evaluationResult = null
+    if (solution.problem.officialSolution) {
+      try {
+        console.log('🔵 [SOLUTION EDIT] Starting LLM re-evaluation...')
+
+        evaluationResult = await evaluateSolution(
+          solution.problem.content,
+          solution.problem.officialSolution,
+          content
+        )
+
+        console.log('🔵 [SOLUTION EDIT] LLM evaluation completed:', {
+          score: evaluationResult.totalScore,
+          confidence: evaluationResult.confidence
+        })
+
+        // Update evaluation results
+        await prisma.solution.update({
+          where: { id },
+          data: {
+            llmScore: evaluationResult.totalScore,
+            llmFeedback: evaluationResult.feedback,
+            llmConfidence: evaluationResult.confidence,
+            isPartialCredit: evaluationResult.totalScore >= 40 && evaluationResult.totalScore < 70
+          }
+        })
+
+        // Delete old evaluation and create new one
+        await prisma.solutionEvaluation.deleteMany({
+          where: { solutionId: id }
+        })
+
+        await prisma.solutionEvaluation.create({
+          data: {
+            solutionId: id,
+            totalScore: evaluationResult.totalScore,
+            correctness: evaluationResult.scores.correctness,
+            reasoning: evaluationResult.scores.reasoning,
+            coverage: evaluationResult.scores.coverage,
+            clarity: evaluationResult.scores.clarity,
+            confidence: evaluationResult.confidence,
+            feedback: evaluationResult.feedback,
+            errors: evaluationResult.errors,
+            strengths: evaluationResult.strengths,
+            suggestions: evaluationResult.suggestions,
+            modelUsed: evaluationResult.modelUsed,
+            promptVersion: 'v1',
+            evaluationTime: 0,
+            cost: evaluationResult.cost
+          }
+        })
+
+        console.log('✅ [SOLUTION EDIT] Re-evaluation stored')
+      } catch (evalError) {
+        console.error('🔴 [SOLUTION EDIT] LLM re-evaluation failed:', evalError)
+      }
+    }
+
+    console.log('✅ [SOLUTION EDIT] Edit complete!')
+
+    res.json({
+      message: 'Solution updated successfully',
+      solution: {
+        id: updatedSolution.id,
+        content: updatedSolution.content,
+        attachments: updatedSolution.attachments,
+        voteScore: updatedSolution.voteScore,
+        createdAt: updatedSolution.createdAt,
+        updatedAt: updatedSolution.updatedAt,
+        user: updatedSolution.user,
+        llmScore: evaluationResult?.totalScore,
+        llmFeedback: evaluationResult?.feedback,
+        llmConfidence: evaluationResult?.confidence
+      }
+    })
+  } catch (error) {
+    console.error('🔴 [SOLUTION EDIT] Error:', error)
     res.status(500).json({ error: 'Internal server error' })
   }
 })
