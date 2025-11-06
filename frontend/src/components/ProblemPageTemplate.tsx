@@ -73,11 +73,11 @@ interface ProblemPageTemplateProps {
 
 export default function ProblemPageTemplate({ problem }: ProblemPageTemplateProps) {
   const { user } = useAuth()
-  const [showSolution, setShowSolution] = useState(false)
+  const [activeTab, setActiveTab] = useState<'problem' | 'submit' | 'solutions'>('problem')
+  const [showOfficialSolution, setShowOfficialSolution] = useState(false)
   const [isSaved, setIsSaved] = useState(false)
   const [showShareMenu, setShowShareMenu] = useState(false)
   const [showDownloadMenu, setShowDownloadMenu] = useState(false)
-  const [showSubmitModal, setShowSubmitModal] = useState(false)
   const [solutionText, setSolutionText] = useState('')
   const [copied, setCopied] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -312,8 +312,10 @@ Downloaded from: ${window.location.href}
       setCommunitySolutions([newSolution, ...communitySolutions])
 
       // Reset form
-      setShowSubmitModal(false)
       setSolutionText('')
+
+      // Switch to solutions tab to see the submitted solution
+      setActiveTab('solutions')
 
       // Show success message
       alert('Solution submitted successfully!')
@@ -513,136 +515,166 @@ Downloaded from: ${window.location.href}
           </div>
         </div>
 
-        {/* Problem Content */}
-        <div className="bg-white rounded-lg shadow-sm border p-6 mb-6">
-          <h2 className="text-xl font-semibold mb-4">Problem</h2>
-          <MarkdownContent content={problem.content} />
+        {/* Tab Navigation */}
+        <div className="bg-white rounded-t-lg shadow-sm border-t border-x">
+          <div className="flex border-b">
+            <button
+              onClick={() => setActiveTab('problem')}
+              className={`px-6 py-3 font-medium transition-colors ${
+                activeTab === 'problem'
+                  ? 'border-b-2 border-blue-600 text-blue-600'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              Problem
+            </button>
+            <button
+              onClick={() => setActiveTab('submit')}
+              className={`px-6 py-3 font-medium transition-colors ${
+                activeTab === 'submit'
+                  ? 'border-b-2 border-blue-600 text-blue-600'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              Submit Solution
+            </button>
+            <button
+              onClick={() => setActiveTab('solutions')}
+              className={`px-6 py-3 font-medium transition-colors ${
+                activeTab === 'solutions'
+                  ? 'border-b-2 border-blue-600 text-blue-600'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              Solutions ({communitySolutions.length + 1})
+            </button>
+          </div>
         </div>
 
-        {/* Solution Section */}
-        <div className="bg-white rounded-lg shadow-sm border p-6 mb-6">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-semibold">Official Solution</h2>
-            <Button
-              onClick={() => setShowSolution(!showSolution)}
-              variant={showSolution ? "outline" : "default"}
-            >
-              {showSolution ? "Hide Solution" : "Show Solution"}
-            </Button>
-          </div>
-          
-          {showSolution ? (
-            <MarkdownContent content={problem.officialSolution} />
-          ) : (
-            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-              <p className="text-yellow-800">
-                Click "Show Solution" to reveal the answer. Try solving it yourself first!
-              </p>
+        {/* Tab Content */}
+        <div className="bg-white rounded-b-lg shadow-sm border-x border-b p-6">
+          {activeTab === 'problem' && (
+            <div>
+              <h2 className="text-xl font-semibold mb-4">Problem</h2>
+              <MarkdownContent content={problem.content} />
             </div>
           )}
-        </div>
 
-        {/* User Solutions Section */}
-        <div className="bg-white rounded-lg shadow-sm border p-6">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-semibold">Community Solutions ({communitySolutions.length})</h2>
-            <Button onClick={() => setShowSubmitModal(true)}>
-              <Send className="h-4 w-4 mr-2" />
-              Submit Solution
-            </Button>
-          </div>
-          
-          {loadingSolutions ? (
-            <div className="text-center py-8 text-gray-500">Loading solutions...</div>
-          ) : communitySolutions.length > 0 ? (
-            <div className="space-y-4">
-              {communitySolutions.map((solution) => (
-                <div key={solution.id} className="border rounded-lg p-4">
-                  <div className="flex justify-between items-start mb-2">
-                    <div className="flex items-center space-x-2">
-                      <span className="font-medium">{solution.username || 'Anonymous'}</span>
-                      <span className="text-sm text-gray-500">{formatDate(solution.createdAt)}</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <button className="flex items-center space-x-1 text-gray-600 hover:text-green-600">
-                        <ThumbsUp className="h-4 w-4" />
-                        <span className="text-sm">{solution.upvotes}</span>
-                      </button>
-                      <button className="flex items-center space-x-1 text-gray-600 hover:text-red-600">
-                        <ThumbsDown className="h-4 w-4" />
-                        <span className="text-sm">{solution.downvotes}</span>
-                      </button>
-                    </div>
-                  </div>
-                  <p className="text-gray-700 whitespace-pre-line">{solution.content}</p>
+          {activeTab === 'submit' && (
+            <div>
+              <h2 className="text-2xl font-bold mb-4">Submit Your Solution</h2>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Your Solution
+                  </label>
+                  <textarea
+                    value={solutionText}
+                    onChange={(e) => setSolutionText(e.target.value)}
+                    className="w-full h-64 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Explain your solution here... Be clear and detailed in your reasoning."
+                  />
                 </div>
-              ))}
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                  <p className="text-sm text-blue-800">
+                    <strong>Tips for a good solution:</strong>
+                  </p>
+                  <ul className="text-sm text-blue-800 mt-2 list-disc list-inside space-y-1">
+                    <li>Explain your linguistic reasoning clearly</li>
+                    <li>Show all your work and pattern analysis</li>
+                    <li>Use tables or formatting to organize your answer</li>
+                    <li>Cite any assumptions or rules you discovered</li>
+                  </ul>
+                </div>
+                <div className="flex justify-end space-x-3">
+                  <Button
+                    variant="outline"
+                    onClick={() => setSolutionText('')}
+                    disabled={isSubmitting}
+                  >
+                    Clear
+                  </Button>
+                  <Button
+                    onClick={handleSubmitSolution}
+                    disabled={isSubmitting || !solutionText.trim()}
+                  >
+                    {isSubmitting ? 'Submitting...' : 'Submit Solution'}
+                  </Button>
+                </div>
+              </div>
             </div>
-          ) : (
-            <div className="text-center py-8 text-gray-500">
-              No community solutions yet. Be the first to submit one!
+          )}
+
+          {activeTab === 'solutions' && (
+            <div>
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-xl font-semibold">Solutions</h2>
+                <div className="flex items-center space-x-2">
+                  <Button
+                    variant={showOfficialSolution ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setShowOfficialSolution(!showOfficialSolution)}
+                  >
+                    {showOfficialSolution ? "Show Community" : "Show Official"}
+                  </Button>
+                </div>
+              </div>
+
+              {showOfficialSolution ? (
+                <div>
+                  <div className="flex items-center justify-between mb-4 pb-2 border-b">
+                    <h3 className="text-lg font-semibold text-green-700">Official Solution</h3>
+                  </div>
+                  <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
+                    <p className="text-sm text-green-800 mb-2">
+                      This is the official solution from the {problem.source} {problem.year} competition.
+                    </p>
+                  </div>
+                  <MarkdownContent content={problem.officialSolution} />
+                </div>
+              ) : (
+                <div>
+                  <div className="flex items-center justify-between mb-4 pb-2 border-b">
+                    <h3 className="text-lg font-semibold">Community Solutions ({communitySolutions.length})</h3>
+                  </div>
+                  {loadingSolutions ? (
+                    <div className="text-center py-8 text-gray-500">Loading solutions...</div>
+                  ) : communitySolutions.length > 0 ? (
+                    <div className="space-y-4">
+                      {communitySolutions.map((solution) => (
+                        <div key={solution.id} className="border rounded-lg p-4">
+                          <div className="flex justify-between items-start mb-2">
+                            <div className="flex items-center space-x-2">
+                              <span className="font-medium">{solution.username || 'Anonymous'}</span>
+                              <span className="text-sm text-gray-500">{formatDate(solution.createdAt)}</span>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                              <button className="flex items-center space-x-1 text-gray-600 hover:text-green-600">
+                                <ThumbsUp className="h-4 w-4" />
+                                <span className="text-sm">{solution.upvotes}</span>
+                              </button>
+                              <button className="flex items-center space-x-1 text-gray-600 hover:text-red-600">
+                                <ThumbsDown className="h-4 w-4" />
+                                <span className="text-sm">{solution.downvotes}</span>
+                              </button>
+                            </div>
+                          </div>
+                          <p className="text-gray-700 whitespace-pre-line">{solution.content}</p>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="text-center py-8 text-gray-500">
+                      No community solutions yet. Be the first to submit one!
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           )}
         </div>
       </div>
 
-      {/* Submit Solution Modal */}
-      {showSubmitModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-auto">
-            <div className="p-6">
-              <div className="flex justify-between items-center mb-4">
-                <h2 className="text-2xl font-bold">Submit Your Solution</h2>
-                <button
-                  onClick={() => setShowSubmitModal(false)}
-                  className="text-gray-500 hover:text-gray-700"
-                >
-                  <X className="h-6 w-6" />
-                </button>
-              </div>
-              
-              <div className="mb-4">
-                <p className="text-gray-600 mb-2">Problem: {problem.title}</p>
-                <p className="text-sm text-gray-500">Share your approach and solution with the community</p>
-              </div>
-
-              <textarea
-                value={solutionText}
-                onChange={(e) => setSolutionText(e.target.value)}
-                placeholder="Explain your solution here... 
-
-You can describe:
-- The patterns you noticed
-- Your approach to solving the problem
-- Step-by-step reasoning
-- Any linguistic concepts involved"
-                className="w-full h-64 p-4 border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono text-sm"
-              />
-
-              <div className="text-sm text-gray-500 mt-2">
-                {solutionText.length} characters
-              </div>
-
-              <div className="flex justify-end space-x-3 mt-4">
-                <Button
-                  variant="outline"
-                  onClick={() => setShowSubmitModal(false)}
-                  disabled={isSubmitting}
-                >
-                  Cancel
-                </Button>
-                <Button
-                  onClick={handleSubmitSolution}
-                  disabled={!solutionText.trim() || isSubmitting}
-                  className="bg-blue-600 hover:bg-blue-700 text-white"
-                >
-                  {isSubmitting ? 'Submitting...' : 'Submit Solution'}
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   )
 }
