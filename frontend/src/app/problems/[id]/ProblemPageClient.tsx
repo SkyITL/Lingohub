@@ -175,15 +175,15 @@ export default function ProblemPageClient({ initialProblem }: ProblemPageClientP
     }
   }
 
-  const handleImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files
     if (!files) return
 
     setImageError('')
 
-    // Validate file count (max 3 images)
-    if (selectedImages.length + files.length > 3) {
-      setImageError('You can upload a maximum of 3 images')
+    // Validate file count (max 5 files: images + PDFs)
+    if (selectedImages.length + files.length > 5) {
+      setImageError('You can upload a maximum of 5 files (images or PDFs)')
       return
     }
 
@@ -193,31 +193,54 @@ export default function ProblemPageClient({ initialProblem }: ProblemPageClientP
 
     for (let i = 0; i < files.length; i++) {
       const file = files[i]
+      const isPDF = file.type === 'application/pdf'
+      const isImage = file.type.startsWith('image/')
 
-      // Validate file type
-      if (!file.type.startsWith('image/')) {
-        setImageError(`${file.name} is not an image file`)
+      // Validate file type (images or PDF)
+      if (!isImage && !isPDF) {
+        setImageError(`${file.name} is not an image or PDF file`)
         continue
       }
 
-      // Validate individual file size (5MB per image)
-      const maxFileSize = 5 * 1024 * 1024 // 5MB
+      // Different size limits for images vs PDFs
+      const maxFileSize = isPDF ? 10 * 1024 * 1024 : 5 * 1024 * 1024 // 10MB for PDF, 5MB for images (before compression)
       if (file.size > maxFileSize) {
-        setImageError(`${file.name} is too large. Maximum size is 5MB per image`)
+        setImageError(`${file.name} is too large. Maximum size is ${isPDF ? '10MB for PDFs' : '5MB for images'}`)
         continue
       }
 
-      // Validate total size (10MB total)
-      totalSize += file.size
-      const maxTotalSize = 10 * 1024 * 1024 // 10MB
+      let processedFile = file
+
+      // Compress images (but not PDFs)
+      if (isImage) {
+        try {
+          const imageCompression = (await import('browser-image-compression')).default
+          const options = {
+            maxSizeMB: 1, // Compress to max 1MB
+            maxWidthOrHeight: 1920, // Max dimension
+            useWebWorker: true,
+            fileType: file.type as 'image/jpeg' | 'image/png' | 'image/webp'
+          }
+          processedFile = await imageCompression(file, options)
+          console.log(`Compressed ${file.name} from ${(file.size / 1024).toFixed(0)}KB to ${(processedFile.size / 1024).toFixed(0)}KB`)
+        } catch (error) {
+          console.error('Image compression failed:', error)
+          // If compression fails, use original (it's already under 5MB)
+          processedFile = file
+        }
+      }
+
+      // Validate total size after compression (15MB total)
+      totalSize += processedFile.size
+      const maxTotalSize = 15 * 1024 * 1024 // 15MB total
       if (totalSize > maxTotalSize) {
-        setImageError('Total image size cannot exceed 10MB')
+        setImageError('Total file size cannot exceed 15MB')
         continue
       }
 
-      newImages.push(file)
+      newImages.push(processedFile)
 
-      // Create preview
+      // Create preview (for images only, PDFs show icon)
       const reader = new FileReader()
       reader.onloadend = () => {
         newPreviews.push(reader.result as string)
@@ -225,7 +248,15 @@ export default function ProblemPageClient({ initialProblem }: ProblemPageClientP
           setImagePreviews([...imagePreviews, ...newPreviews])
         }
       }
-      reader.readAsDataURL(file)
+      if (isPDF) {
+        // For PDFs, store a placeholder
+        newPreviews.push('PDF_PLACEHOLDER')
+        if (newPreviews.length === newImages.length) {
+          setImagePreviews([...imagePreviews, ...newPreviews])
+        }
+      } else {
+        reader.readAsDataURL(processedFile)
+      }
     }
 
     setSelectedImages([...selectedImages, ...newImages])
@@ -672,35 +703,35 @@ export default function ProblemPageClient({ initialProblem }: ProblemPageClientP
                     />
                   </div>
 
-                  {/* Image Upload Section */}
+                  {/* File Upload Section */}
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Upload Images (Optional)
+                      Upload Files (Optional)
                     </label>
                     <div className="border-2 border-dashed border-gray-300 rounded-lg p-4">
                       <input
                         type="file"
-                        accept="image/*"
+                        accept="image/*,application/pdf"
                         multiple
                         onChange={handleImageSelect}
                         className="hidden"
                         id="image-upload"
-                        disabled={selectedImages.length >= 3}
+                        disabled={selectedImages.length >= 5}
                       />
                       <label
                         htmlFor="image-upload"
                         className={`flex flex-col items-center justify-center cursor-pointer ${
-                          selectedImages.length >= 3 ? 'opacity-50 cursor-not-allowed' : ''
+                          selectedImages.length >= 5 ? 'opacity-50 cursor-not-allowed' : ''
                         }`}
                       >
                         <Download className="h-8 w-8 text-gray-400 mb-2" />
                         <span className="text-sm text-gray-600">
-                          {selectedImages.length >= 3
-                            ? 'Maximum 3 images'
-                            : 'Click to upload images of your work'}
+                          {selectedImages.length >= 5
+                            ? 'Maximum 5 files'
+                            : 'Click to upload images or PDFs of your work'}
                         </span>
                         <span className="text-xs text-gray-500 mt-1">
-                          Max 5MB per image, 10MB total ({selectedImages.length}/3 images)
+                          Images: max 5MB (auto-compressed to ~1MB) | PDFs: max 10MB | Total: 15MB ({selectedImages.length}/5 files)
                         </span>
                       </label>
                     </div>
@@ -712,27 +743,36 @@ export default function ProblemPageClient({ initialProblem }: ProblemPageClientP
                       </div>
                     )}
 
-                    {/* Image Previews */}
+                    {/* File Previews */}
                     {imagePreviews.length > 0 && (
                       <div className="mt-4 grid grid-cols-3 gap-4">
-                        {imagePreviews.map((preview, index) => (
-                          <div key={index} className="relative group">
-                            <img
-                              src={preview}
-                              alt={`Preview ${index + 1}`}
-                              className="w-full h-32 object-cover rounded-lg border"
-                            />
-                            <button
-                              onClick={() => handleRemoveImage(index)}
-                              className="absolute top-1 right-1 bg-red-600 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
-                            >
-                              <X className="h-4 w-4" />
-                            </button>
-                            <div className="text-xs text-gray-500 mt-1 truncate">
-                              {selectedImages[index].name} ({(selectedImages[index].size / 1024).toFixed(0)}KB)
+                        {imagePreviews.map((preview, index) => {
+                          const isPDF = preview === 'PDF_PLACEHOLDER'
+                          return (
+                            <div key={index} className="relative group">
+                              {isPDF ? (
+                                <div className="w-full h-32 flex items-center justify-center bg-red-50 rounded-lg border border-red-200">
+                                  <FileText className="h-12 w-12 text-red-600" />
+                                </div>
+                              ) : (
+                                <img
+                                  src={preview}
+                                  alt={`Preview ${index + 1}`}
+                                  className="w-full h-32 object-cover rounded-lg border"
+                                />
+                              )}
+                              <button
+                                onClick={() => handleRemoveImage(index)}
+                                className="absolute top-1 right-1 bg-red-600 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                              >
+                                <X className="h-4 w-4" />
+                              </button>
+                              <div className="text-xs text-gray-500 mt-1 truncate">
+                                {selectedImages[index].name} ({(selectedImages[index].size / 1024).toFixed(0)}KB)
+                              </div>
                             </div>
-                          </div>
-                        ))}
+                          )
+                        })}
                       </div>
                     )}
                   </div>
@@ -745,7 +785,7 @@ export default function ProblemPageClient({ initialProblem }: ProblemPageClientP
                       <li>Explain your linguistic reasoning clearly</li>
                       <li>Show all your work and pattern analysis</li>
                       <li>Use tables or formatting to organize your answer</li>
-                      <li>Upload photos of handwritten work or diagrams if helpful</li>
+                      <li>Upload photos/PDFs of handwritten work or diagrams (images auto-compressed)</li>
                       <li>Cite any assumptions or rules you discovered</li>
                     </ul>
                   </div>
