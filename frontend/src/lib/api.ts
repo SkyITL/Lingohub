@@ -150,6 +150,24 @@ export const solutionsApi = {
     })
   },
 
+  edit: (solutionId: string, content: string, files?: File[]) => {
+    const formData = new FormData()
+    formData.append('content', content)
+
+    // Add files if present
+    if (files && files.length > 0) {
+      files.forEach((file) => {
+        formData.append('files', file)
+      })
+    }
+
+    return api.put(`/solutions/${solutionId}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+  },
+
   vote: (solutionId: string, vote: number) =>
     api.post(`/solutions/${solutionId}/vote`, { vote }),
 
