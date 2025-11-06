@@ -8,6 +8,7 @@
 6. ❌ Never break architecture → ✅ Always follow established patterns
 7. ❌ Never pretend to understand → ✅ Always admit when uncertain
 8. ❌ Never blindly refactor → ✅ Always refactor cautiously
+9. ❌ Never commit API keys/secrets → ✅ Always use environment variables
 
 # CLAUDE.md
 
