@@ -114,29 +114,43 @@ router.get('/problem/:problemId', optionalAuth, async (req: Request, res: Respon
 // Submit a solution (with optional file attachments)
 router.post('/', authenticateToken, upload.array('files', 5), async (req: Request, res: Response) => {
   try {
+    console.log('🔵 [SOLUTION SUBMIT] Starting submission...')
+    console.log('🔵 [SOLUTION SUBMIT] User:', req.user?.id, req.user?.username)
+    console.log('🔵 [SOLUTION SUBMIT] Body:', { problemId: req.body.problemId, contentLength: req.body.content?.length })
+    console.log('🔵 [SOLUTION SUBMIT] Files:', req.files ? (req.files as any).length : 0)
+
     if (!req.user) {
+      console.log('🔴 [SOLUTION SUBMIT] No user authenticated')
       return res.status(401).json({ error: 'Authentication required' })
     }
 
+    console.log('🔵 [SOLUTION SUBMIT] Validating schema...')
     const { problemId, content } = solutionSchema.parse(req.body)
+    console.log('🔵 [SOLUTION SUBMIT] Schema valid. ProblemId:', problemId)
 
     // Check if problem exists (try by ID first, then by number)
+    console.log('🔵 [SOLUTION SUBMIT] Finding problem by ID:', problemId)
     let problem = await prisma.problem.findUnique({
       where: { id: problemId }
     })
 
     // If not found by ID, try to find by number (e.g., "LH-001")
     if (!problem) {
+      console.log('🔵 [SOLUTION SUBMIT] Not found by ID, trying by number...')
       problem = await prisma.problem.findUnique({
         where: { number: problemId }
       })
     }
 
     if (!problem) {
+      console.log('🔴 [SOLUTION SUBMIT] Problem not found:', problemId)
       return res.status(404).json({ error: 'Problem not found' })
     }
 
+    console.log('🔵 [SOLUTION SUBMIT] Problem found:', problem.id, problem.number)
+
     // Check if user already submitted a solution for this problem
+    console.log('🔵 [SOLUTION SUBMIT] Checking for existing solution...')
     const existingSolution = await prisma.solution.findFirst({
       where: {
         problemId: problem.id,
@@ -145,8 +159,11 @@ router.post('/', authenticateToken, upload.array('files', 5), async (req: Reques
     })
 
     if (existingSolution) {
+      console.log('🔴 [SOLUTION SUBMIT] Solution already exists:', existingSolution.id)
       return res.status(400).json({ error: 'Solution already submitted for this problem' })
     }
+
+    console.log('🔵 [SOLUTION SUBMIT] No existing solution, proceeding...')
 
     // Handle file uploads if present
     let attachments: FileAttachment[] | undefined
@@ -168,6 +185,14 @@ router.post('/', authenticateToken, upload.array('files', 5), async (req: Reques
       }
     }
 
+    console.log('🔵 [SOLUTION SUBMIT] Creating solution in database...')
+    console.log('🔵 [SOLUTION SUBMIT] Data:', {
+      problemId: problem.id,
+      userId: req.user.id,
+      contentLength: content.length,
+      hasAttachments: !!attachments
+    })
+
     const solution = await prisma.solution.create({
       data: {
         problemId: problem.id,
@@ -187,7 +212,10 @@ router.post('/', authenticateToken, upload.array('files', 5), async (req: Reques
       }
     })
 
+    console.log('🔵 [SOLUTION SUBMIT] Solution created:', solution.id)
+
     // Update user progress to solved
+    console.log('🔵 [SOLUTION SUBMIT] Updating user progress...')
     await prisma.userProgress.upsert({
       where: {
         userId_problemId: {
@@ -206,6 +234,9 @@ router.post('/', authenticateToken, upload.array('files', 5), async (req: Reques
       }
     })
 
+    console.log('🔵 [SOLUTION SUBMIT] User progress updated')
+    console.log('✅ [SOLUTION SUBMIT] Submission complete!')
+
     res.status(201).json({
       message: 'Solution submitted successfully',
       solution: {
@@ -218,14 +249,26 @@ router.post('/', authenticateToken, upload.array('files', 5), async (req: Reques
       }
     })
   } catch (error) {
+    console.error('🔴 [SOLUTION SUBMIT] Error caught in handler')
+    console.error('🔴 [SOLUTION SUBMIT] Error type:', error?.constructor?.name)
+    console.error('🔴 [SOLUTION SUBMIT] Error message:', (error as any)?.message)
+    console.error('🔴 [SOLUTION SUBMIT] Full error:', error)
+
     if (error instanceof z.ZodError) {
+      console.error('🔴 [SOLUTION SUBMIT] Zod validation error:', error.errors)
       return res.status(400).json({ error: error.errors })
     }
     if (error instanceof multer.MulterError) {
+      console.error('🔴 [SOLUTION SUBMIT] Multer error:', error.message)
       return res.status(400).json({ error: `File upload error: ${error.message}` })
     }
-    console.error('Solution submit error:', error)
-    res.status(500).json({ error: 'Internal server error' })
+
+    // Log detailed error for debugging
+    console.error('🔴 [SOLUTION SUBMIT] Unhandled error:', JSON.stringify(error, null, 2))
+    res.status(500).json({
+      error: 'Internal server error',
+      message: process.env.NODE_ENV === 'development' ? (error as any)?.message : undefined
+    })
   }
 })
 
