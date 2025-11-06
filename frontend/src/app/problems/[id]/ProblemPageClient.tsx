@@ -79,6 +79,7 @@ export default function ProblemPageClient({ initialProblem }: ProblemPageClientP
   const [isEditingUserSolution, setIsEditingUserSolution] = useState(false)
   const [showSolutionWarning, setShowSolutionWarning] = useState(!initialProblem.viewedSolution)
   const [solutionRevealed, setSolutionRevealed] = useState(initialProblem.viewedSolution || false)
+  const [showOfficialSolution, setShowOfficialSolution] = useState(false)
 
   // Load saved state and solutions
   useEffect(() => {
@@ -529,16 +530,16 @@ export default function ProblemPageClient({ initialProblem }: ProblemPageClientP
                 Problem
               </Tabs.Trigger>
               <Tabs.Trigger
-                value="official"
+                value="submit"
                 className="px-6 py-4 font-medium text-gray-600 border-b-2 border-transparent data-[state=active]:text-blue-600 data-[state=active]:border-blue-600"
               >
-                Official Solution
+                Submit Solution
               </Tabs.Trigger>
               <Tabs.Trigger
                 value="solutions"
                 className="px-6 py-4 font-medium text-gray-600 border-b-2 border-transparent data-[state=active]:text-blue-600 data-[state=active]:border-blue-600"
               >
-                User Solutions ({(userSolution ? 1 : 0) + solutions.length})
+                Solutions ({(userSolution ? 1 : 0) + solutions.length + 1})
               </Tabs.Trigger>
             </Tabs.List>
 
@@ -573,152 +574,155 @@ export default function ProblemPageClient({ initialProblem }: ProblemPageClientP
               )}
             </Tabs.Content>
 
-            {/* Official Solution Tab */}
-            <Tabs.Content value="official" className="p-6">
-              {!solutionRevealed ? (
-                // Show warning and reveal button
+            {/* Submit Solution Tab */}
+            <Tabs.Content value="submit" className="p-6">
+              <h2 className="text-2xl font-bold mb-4">Submit Your Solution</h2>
+              {!user ? (
                 <div className="text-center py-12">
-                  <div className="bg-red-50 border-2 border-red-200 rounded-lg p-8 max-w-2xl mx-auto">
-                    <AlertTriangle className="h-16 w-16 text-red-600 mx-auto mb-4" />
-                    <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                      ⚠️ Warning: Viewing Official Solution
-                    </h3>
-                    <p className="text-gray-700 mb-4">
-                      Once you view the official solution, you will <strong>NOT</strong> be able to gain rating from solving this problem.
-                    </p>
+                  <div className="bg-blue-50 border-2 border-blue-200 rounded-lg p-8 max-w-2xl mx-auto">
                     <p className="text-gray-700 mb-6">
-                      Are you sure you want to continue? Make sure you&apos;ve attempted the problem first!
+                      You need to be logged in to submit a solution.
                     </p>
-                    <Button
-                      onClick={handleRevealSolution}
-                      size="lg"
-                      className="bg-red-600 hover:bg-red-700 text-white"
-                    >
-                      I Understand, Show Solution
+                    <Button size="lg" onClick={() => window.location.href = '/auth/login'}>
+                      Login to Submit Solution
                     </Button>
                   </div>
                 </div>
               ) : (
-                // Show actual solution
-                <>
-                  <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
-                    <p className="text-sm text-yellow-800">
-                      ⚠️ You have viewed this solution. You cannot gain rating from this problem.
-                    </p>
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Your Solution
+                    </label>
+                    <textarea
+                      value={newSolution}
+                      onChange={(e) => setNewSolution(e.target.value)}
+                      className="w-full h-64 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      placeholder="Share your analysis and solution approach... Be clear and detailed in your reasoning."
+                    />
                   </div>
-
-                  {problem.solutionPdfUrl ? (
-                    <div>
-                      <div className="border rounded-lg overflow-hidden bg-gray-100" style={{ height: '800px' }}>
-                        <iframe
-                          src={problem.solutionPdfUrl}
-                          className="w-full h-full"
-                          title="Official Solution PDF"
-                        />
-                      </div>
-                      <div className="mt-2 text-sm text-gray-600">
-                        <a
-                          href={problem.solutionPdfUrl}
-                          download
-                          className="text-blue-600 hover:underline inline-flex items-center gap-1"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <Download className="h-4 w-4" />
-                          Download Solution PDF
-                        </a>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="prose prose-lg max-w-none">
-                      <MarkdownContent content={problem.officialSolution || 'Official solution not yet available.'} />
-                    </div>
-                  )}
-                </>
-              )}
-            </Tabs.Content>
-
-            {/* User Solutions Tab */}
-            <Tabs.Content value="solutions" className="p-6">
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-semibold">Community Solutions</h3>
-                <div className="flex items-center space-x-3">
-                  <select
-                    className="border rounded px-3 py-2 text-sm"
-                    value={sortBy}
-                    onChange={(e) => setSortBy(e.target.value)}
-                  >
-                    <option value="most-upvoted">Most Upvoted</option>
-                    <option value="newest">Newest</option>
-                    <option value="oldest">Oldest</option>
-                  </select>
-                  {!user ? (
-                    <Button size="sm" onClick={() => window.location.href = '/auth/login'}>
-                      Login to Submit Solution
-                    </Button>
-                  ) : userSolution ? (
-                    <div className="flex space-x-2">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => {
-                          setNewSolution(userSolution.content)
-                          setIsEditingUserSolution(true)
-                          setShowSolutionForm(true)
-                        }}
-                      >
-                        Edit Your Solution
-                      </Button>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={handleDeleteSolution}
-                        className="text-red-600 hover:text-red-700 hover:border-red-300"
-                      >
-                        <Trash2 className="h-4 w-4 mr-1" />
-                        Delete
-                      </Button>
-                    </div>
-                  ) : (
-                    <Button size="sm" onClick={() => setShowSolutionForm(true)}>
-                      Submit Solution
-                    </Button>
-                  )}
-                </div>
-              </div>
-
-              {/* Solution Submission Form */}
-              {showSolutionForm && (
-                <div className="border rounded-lg p-6 mb-6 bg-blue-50">
-                  <h4 className="text-lg font-semibold mb-4">
-                    {isEditingUserSolution ? 'Edit Your Solution' : 'Submit Your Solution'}
-                  </h4>
-                  <textarea
-                    value={newSolution}
-                    onChange={(e) => setNewSolution(e.target.value)}
-                    placeholder="Share your analysis and solution approach..."
-                    className="w-full h-32 p-3 border rounded-lg resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  />
-                  <div className="flex items-center justify-end space-x-3 mt-4">
-                    <Button variant="outline" size="sm" onClick={() => {
-                      setShowSolutionForm(false)
-                      setIsEditingUserSolution(false)
-                      setNewSolution('')
-                    }}>
-                      <X className="h-4 w-4 mr-1" />
-                      Cancel
+                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                    <p className="text-sm text-blue-800">
+                      <strong>Tips for a good solution:</strong>
+                    </p>
+                    <ul className="text-sm text-blue-800 mt-2 list-disc list-inside space-y-1">
+                      <li>Explain your linguistic reasoning clearly</li>
+                      <li>Show all your work and pattern analysis</li>
+                      <li>Use tables or formatting to organize your answer</li>
+                      <li>Cite any assumptions or rules you discovered</li>
+                    </ul>
+                  </div>
+                  <div className="flex justify-end space-x-3">
+                    <Button
+                      variant="outline"
+                      onClick={() => setNewSolution('')}
+                    >
+                      Clear
                     </Button>
                     <Button
-                      size="sm"
                       onClick={handleSubmitSolution}
                       disabled={!newSolution.trim()}
                     >
                       <Send className="h-4 w-4 mr-1" />
-                      {isEditingUserSolution ? 'Update' : 'Submit'}
+                      Submit Solution
                     </Button>
                   </div>
                 </div>
               )}
+            </Tabs.Content>
+
+            {/* Solutions Tab (merged official + community) */}
+            <Tabs.Content value="solutions" className="p-6">
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-lg font-semibold">Solutions</h3>
+                <div className="flex items-center space-x-3">
+                  <Button
+                    variant={showOfficialSolution ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setShowOfficialSolution(!showOfficialSolution)}
+                  >
+                    {showOfficialSolution ? "Show Community" : "Show Official"}
+                  </Button>
+                  {!showOfficialSolution && (
+                    <select
+                      className="border rounded px-3 py-2 text-sm"
+                      value={sortBy}
+                      onChange={(e) => setSortBy(e.target.value)}
+                    >
+                      <option value="most-upvoted">Most Upvoted</option>
+                      <option value="newest">Newest</option>
+                      <option value="oldest">Oldest</option>
+                    </select>
+                  )}
+                </div>
+              </div>
+
+              {showOfficialSolution ? (
+                // Official Solution
+                <>
+                  {!solutionRevealed ? (
+                    <div className="text-center py-12">
+                      <div className="bg-red-50 border-2 border-red-200 rounded-lg p-8 max-w-2xl mx-auto">
+                        <AlertTriangle className="h-16 w-16 text-red-600 mx-auto mb-4" />
+                        <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                          ⚠️ Warning: Viewing Official Solution
+                        </h3>
+                        <p className="text-gray-700 mb-4">
+                          Once you view the official solution, you will <strong>NOT</strong> be able to gain rating from solving this problem.
+                        </p>
+                        <p className="text-gray-700 mb-6">
+                          Are you sure you want to continue? Make sure you&apos;ve attempted the problem first!
+                        </p>
+                        <Button
+                          onClick={handleRevealSolution}
+                          size="lg"
+                          className="bg-red-600 hover:bg-red-700 text-white"
+                        >
+                          I Understand, Show Solution
+                        </Button>
+                      </div>
+                    </div>
+                  ) : (
+                    <>
+                      <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
+                        <p className="text-sm text-yellow-800">
+                          ⚠️ You have viewed this solution. You cannot gain rating from this problem.
+                        </p>
+                      </div>
+
+                      {problem.solutionPdfUrl ? (
+                        <div>
+                          <div className="border rounded-lg overflow-hidden bg-gray-100" style={{ height: '800px' }}>
+                            <iframe
+                              src={problem.solutionPdfUrl}
+                              className="w-full h-full"
+                              title="Official Solution PDF"
+                            />
+                          </div>
+                          <div className="mt-2 text-sm text-gray-600">
+                            <a
+                              href={problem.solutionPdfUrl}
+                              download
+                              className="text-blue-600 hover:underline inline-flex items-center gap-1"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              <Download className="h-4 w-4" />
+                              Download Solution PDF
+                            </a>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="prose prose-lg max-w-none">
+                          <MarkdownContent content={problem.officialSolution || 'Official solution not yet available.'} />
+                        </div>
+                      )}
+                    </>
+                  )}
+                </>
+              ) : (
+                // Community Solutions
+                <>
 
               <div className="space-y-6">
                 {/* User's own solution first */}
@@ -815,6 +819,8 @@ export default function ProblemPageClient({ initialProblem }: ProblemPageClientP
                   </div>
                 )}
               </div>
+                </>
+              )}
             </Tabs.Content>
           </Tabs.Root>
         </div>
