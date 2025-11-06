@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import { solutionsApi, problemsApi } from '@/lib/api'
 import { useAuth } from '@/contexts/AuthContext'
 import Header from "@/components/Header"
@@ -105,6 +106,7 @@ interface ProblemPageClientProps {
 }
 
 export default function ProblemPageClient({ initialProblem }: ProblemPageClientProps) {
+  const router = useRouter()
   const { user } = useAuth()
   const [problem] = useState(initialProblem)
   const [isSaved, setIsSaved] = useState(false)
@@ -354,6 +356,11 @@ export default function ProblemPageClient({ initialProblem }: ProblemPageClientP
       setImageError('')
       setShowSolutionForm(false)
       setIsEditingUserSolution(false)
+
+      // Redirect to submissions page to see result
+      if (!isEditingUserSolution) {
+        router.push('/submissions')
+      }
     } catch (error) {
       console.error('Failed to submit solution:', error)
 

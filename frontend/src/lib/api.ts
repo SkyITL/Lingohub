@@ -128,6 +128,9 @@ export const problemsApi = {
 
 // Solutions API
 export const solutionsApi = {
+  getAllSubmissions: (userId?: string) =>
+    api.get('/solutions/submissions', { params: userId ? { userId } : {} }),
+
   getByProblem: (problemId: string, sortBy?: string) =>
     api.get(`/solutions/problem/${problemId}`, { params: { sortBy } }),
 

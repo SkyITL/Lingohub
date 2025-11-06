@@ -32,6 +32,9 @@ export default function Header() {
               <Link href="/problems" className="text-gray-700 hover:text-blue-600 font-medium">
                 Problems
               </Link>
+              <Link href="/submissions" className="text-gray-700 hover:text-blue-600 font-medium">
+                Submissions
+              </Link>
             </nav>
           </div>
 
