@@ -47,20 +47,30 @@ interface LLMResponse {
 }
 
 /**
- * Build evaluation prompt for LLM
+ * Build evaluation prompt for LLM (with optional PDF URLs)
  */
 function buildEvaluationPrompt(
   problemContent: string,
   officialSolution: string,
-  userSolution: string
+  userSolution: string,
+  problemPdfUrl?: string,
+  solutionPdfUrl?: string
 ): string {
+  let problemSection = `# PROBLEM\n${problemContent}`
+  if (problemPdfUrl) {
+    problemSection = `# PROBLEM\nSee the problem PDF for full details. The problem statement is also provided below for reference:\n${problemContent}`
+  }
+
+  let solutionSection = `# OFFICIAL SOLUTION\n${officialSolution}`
+  if (solutionPdfUrl) {
+    solutionSection = `# OFFICIAL SOLUTION\nRefer to the solution PDF for the complete official solution.`
+  }
+
   return `You are an expert linguistics problem evaluator. Evaluate the following user solution to a linguistics olympiad problem.
 
-# PROBLEM
-${problemContent}
+${problemSection}
 
-# OFFICIAL SOLUTION
-${officialSolution}
+${solutionSection}
 
 # USER SOLUTION
 ${userSolution}
@@ -130,11 +140,35 @@ function calculateCost(
 }
 
 /**
- * Call OpenRouter API to evaluate solution
+ * Call OpenRouter API to evaluate solution (with optional PDF URLs)
  */
-async function callOpenRouter(prompt: string, model: string): Promise<LLMResponse> {
+async function callOpenRouter(
+  prompt: string,
+  model: string,
+  problemPdfUrl?: string,
+  solutionPdfUrl?: string
+): Promise<LLMResponse> {
   if (!OPENROUTER_API_KEY) {
     throw new Error('OPENROUTER_API_KEY environment variable not set')
+  }
+
+  // Build content array for multimodal input (text + PDFs)
+  const contentParts: any[] = [{ type: 'text', text: prompt }]
+
+  // Add problem PDF if provided
+  if (problemPdfUrl) {
+    contentParts.push({
+      type: 'image_url',
+      image_url: { url: problemPdfUrl }
+    })
+  }
+
+  // Add solution PDF if provided
+  if (solutionPdfUrl) {
+    contentParts.push({
+      type: 'image_url',
+      image_url: { url: solutionPdfUrl }
+    })
   }
 
   const response = await fetch(OPENROUTER_API_URL, {
@@ -150,7 +184,7 @@ async function callOpenRouter(prompt: string, model: string): Promise<LLMRespons
       messages: [
         {
           role: 'user',
-          content: prompt,
+          content: contentParts.length === 1 ? prompt : contentParts,
         },
       ],
       temperature: 0.3, // Lower temperature for more consistent evaluations
@@ -212,19 +246,28 @@ function parseLLMResponse(responseText: string, modelUsed: string, usage: any): 
 
 /**
  * Evaluate a user's solution using LLM
+ * Can accept either text solutions or PDF URLs for multimodal evaluation
  */
 export async function evaluateSolution(
   problemContent: string,
   officialSolution: string,
   userSolution: string,
-  model: string = DEFAULT_MODEL
+  model: string = DEFAULT_MODEL,
+  problemPdfUrl?: string,
+  solutionPdfUrl?: string
 ): Promise<EvaluationResult> {
   try {
     // Build prompt
-    const prompt = buildEvaluationPrompt(problemContent, officialSolution, userSolution)
+    const prompt = buildEvaluationPrompt(
+      problemContent,
+      officialSolution,
+      userSolution,
+      problemPdfUrl,
+      solutionPdfUrl
+    )
 
-    // Call LLM
-    const response = await callOpenRouter(prompt, model)
+    // Call LLM with PDF URLs if provided
+    const response = await callOpenRouter(prompt, model, problemPdfUrl, solutionPdfUrl)
 
     // Parse and validate response
     const result = parseLLMResponse(

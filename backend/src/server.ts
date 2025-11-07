@@ -54,6 +54,9 @@ app.use(limiter)
 app.use(express.json({ limit: '10mb' }))
 app.use(express.urlencoded({ extended: true }))
 
+// Serve olympiad problem PDFs as static files
+app.use('/olympiad-problems', express.static('olympiad-problems'))
+
 // Root route
 app.get('/', (req, res) => {
   res.json({

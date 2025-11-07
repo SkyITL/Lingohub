@@ -280,9 +280,11 @@ router.post('/', authenticateToken, upload.array('files', 5), async (req: Reques
 
     console.log('🔵 [SUBMISSION SUBMIT] User progress updated')
 
-    // Evaluate submission with LLM if official solution exists
+    // Evaluate submission with LLM if official solution exists (text or PDF)
     let evaluationResult = null
-    if (problem.officialSolution) {
+    const hasOfficialSolution = problem.officialSolution || problem.solutionUrl
+
+    if (hasOfficialSolution) {
       // Check rate limit for AI evaluation (separate from submission limit)
       const evalRateLimit = await checkRateLimit(req.user.id, RATE_LIMITS.LLM_EVAL)
 
@@ -301,11 +303,27 @@ router.post('/', authenticateToken, upload.array('files', 5), async (req: Reques
       } else {
         try {
           console.log('🔵 [SUBMISSION SUBMIT] Starting LLM evaluation...')
+          console.log('🔵 [SUBMISSION SUBMIT] Has text solution:', !!problem.officialSolution)
+          console.log('🔵 [SUBMISSION SUBMIT] Has PDF solution:', !!problem.solutionUrl)
+
+          // Use text solution as fallback if no PDF, or empty string if only PDF
+          const officialSolutionText = problem.officialSolution || 'See PDF for official solution'
+
+          // Construct full URLs for PDFs (Gemini needs publicly accessible URLs)
+          const baseUrl = process.env.BACKEND_URL || 'https://lingohub-backend.vercel.app'
+          const problemPdfFullUrl = problem.pdfUrl ? `${baseUrl}${problem.pdfUrl}` : undefined
+          const solutionPdfFullUrl = problem.solutionUrl ? `${baseUrl}${problem.solutionUrl}` : undefined
+
+          console.log('🔵 [SUBMISSION SUBMIT] Problem PDF URL:', problemPdfFullUrl)
+          console.log('🔵 [SUBMISSION SUBMIT] Solution PDF URL:', solutionPdfFullUrl)
 
           evaluationResult = await evaluateSolution(
             problem.content,
-            problem.officialSolution,
-            content
+            officialSolutionText,
+            content,
+            undefined, // model (use default)
+            problemPdfFullUrl, // problem PDF
+            solutionPdfFullUrl // solution PDF
           )
 
           // Log AI evaluation action for rate limiting
