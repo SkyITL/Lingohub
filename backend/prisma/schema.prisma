@@ -26,14 +26,15 @@ model User {
   updatedAt DateTime @updatedAt
 
   // Relations
-  solutions      Solution[]
-  discussions    Discussion[]
-  progress       UserProgress[]
-  votes          SolutionVote[]
-  ratingHistory  RatingHistory[]
-  solutionFlags  SolutionFlag[]
-  receivedFlags  SolutionFlag[]  @relation("FlaggedUser")
-  rateLimitLogs  RateLimitLog[]
+  submissions     Submission[]
+  solutions       Solution[]
+  discussions     Discussion[]
+  progress        UserProgress[]
+  solutionVotes   SolutionVote[]
+  ratingHistory   RatingHistory[]
+  submissionFlags SubmissionFlag[]
+  receivedFlags   SubmissionFlag[] @relation("FlaggedUser")
+  rateLimitLogs   RateLimitLog[]
 
   @@map("users")
 }
@@ -55,6 +56,7 @@ model Problem {
 
   // Relations
   tags          ProblemTag[]
+  submissions   Submission[]
   solutions     Solution[]
   discussions   Discussion[]
   progress      UserProgress[]
@@ -85,13 +87,13 @@ model ProblemTag {
   @@map("problem_tags")
 }
 
-model Solution {
+// Submission - Private attempts to solve problems
+model Submission {
   id        String   @id @default(cuid())
   problemId String
   userId    String
   content   String   @db.Text
-  voteScore Int      @default(0)
-  status    String   @default("pending") // pending, verified, flagged, approved, partial
+  status    String   @default("pending") // pending, judging, accepted, wrong_answer, partial
 
   // File attachments (images/PDFs)
   attachments Json? // Array of {url: string, type: 'image' | 'pdf', filename: string, size: number}
@@ -112,11 +114,31 @@ model Solution {
   updatedAt DateTime @updatedAt
 
   // Relations
-  problem    Problem             @relation(fields: [problemId], references: [id], onDelete: Cascade)
-  user       User                @relation(fields: [userId], references: [id], onDelete: Cascade)
-  votes      SolutionVote[]
-  flags      SolutionFlag[]
-  evaluation SolutionEvaluation?
+  problem    Problem              @relation(fields: [problemId], references: [id], onDelete: Cascade)
+  user       User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  flags      SubmissionFlag[]
+  evaluation SubmissionEvaluation?
+
+  @@map("submissions")
+}
+
+// Solution - Public write-ups/tutorials (题解)
+model Solution {
+  id        String   @id @default(cuid())
+  problemId String
+  userId    String
+  title     String   @db.VarChar(255)
+  content   String   @db.Text // Markdown content explaining the approach
+  voteScore Int      @default(0)
+  viewCount Int      @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  problem Problem        @relation(fields: [problemId], references: [id], onDelete: Cascade)
+  user    User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  votes   SolutionVote[]
 
   @@map("solutions")
 }
@@ -187,9 +209,9 @@ model RatingHistory {
   @@map("rating_history")
 }
 
-model SolutionEvaluation {
-  id         String   @id @default(cuid())
-  solutionId String   @unique
+model SubmissionEvaluation {
+  id           String   @id @default(cuid())
+  submissionId String   @unique
 
   // Detailed scores
   totalScore   Int // 0-100
@@ -212,16 +234,16 @@ model SolutionEvaluation {
 
   createdAt DateTime @default(now())
 
-  solution Solution @relation(fields: [solutionId], references: [id], onDelete: Cascade)
+  submission Submission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
 
-  @@map("solution_evaluations")
+  @@map("submission_evaluations")
 }
 
-model SolutionFlag {
+model SubmissionFlag {
   id            String   @id @default(cuid())
-  solutionId    String
+  submissionId  String
   reporterId    String
-  flaggedUserId String // User who submitted the flagged solution
+  flaggedUserId String // User who submitted the flagged submission
   reason        String   @db.VarChar(50) // "plagiarism", "incorrect", "spam"
   details       String?  @db.Text
   status        String   @default("pending") // pending, reviewed, confirmed, rejected
@@ -229,13 +251,13 @@ model SolutionFlag {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
-  solution    Solution @relation(fields: [solutionId], references: [id], onDelete: Cascade)
-  reporter    User     @relation(fields: [reporterId], references: [id], onDelete: Cascade)
-  flaggedUser User     @relation("FlaggedUser", fields: [flaggedUserId], references: [id], onDelete: Cascade)
+  submission  Submission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+  reporter    User       @relation(fields: [reporterId], references: [id], onDelete: Cascade)
+  flaggedUser User       @relation("FlaggedUser", fields: [flaggedUserId], references: [id], onDelete: Cascade)
 
-  @@index([solutionId])
+  @@index([submissionId])
   @@index([flaggedUserId])
-  @@map("solution_flags")
+  @@map("submission_flags")
 }
 
 model RateLimitLog {
