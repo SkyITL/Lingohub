@@ -55,26 +55,20 @@ export default function SubmissionDetailPage() {
       setIsLoading(true)
       setError(null)
 
-      // For now, we need to fetch from the submissions list since we don't have a getById endpoint yet
-      const response = await submissionsApi.getAll()
-      const submissions = response.data.submissions
-      const found = submissions.find((s: any) => s.id === submissionId)
-
-      if (!found) {
-        setError('Submission not found')
-        return
-      }
-
-      // Check if user has permission to view this submission
-      if (!user || found.userId !== user.id) {
-        setError('You do not have permission to view this submission')
-        return
-      }
-
-      setSubmission(found)
-    } catch (error) {
+      const response = await submissionsApi.getById(submissionId)
+      setSubmission(response.data.submission)
+    } catch (error: any) {
       console.error('Failed to load submission:', error)
-      setError('Failed to load submission details')
+
+      if (error.response?.status === 403) {
+        setError('You do not have permission to view this submission')
+      } else if (error.response?.status === 404) {
+        setError('Submission not found')
+      } else if (error.response?.status === 401) {
+        setError('Please log in to view your submissions')
+      } else {
+        setError('Failed to load submission details')
+      }
     } finally {
       setIsLoading(false)
     }

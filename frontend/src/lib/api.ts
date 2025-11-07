@@ -131,6 +131,9 @@ export const submissionsApi = {
   getAll: (userId?: string) =>
     api.get('/submissions', { params: userId ? { userId } : {} }),
 
+  getById: (submissionId: string) =>
+    api.get(`/submissions/${submissionId}`),
+
   submit: (problemId: string, content: string, files?: File[]) => {
     const formData = new FormData()
     formData.append('problemId', problemId)

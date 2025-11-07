@@ -93,6 +93,67 @@ router.get('/', optionalAuth, async (req: Request, res: Response) => {
   }
 })
 
+// Get single submission by ID
+router.get('/:id', authenticateToken, async (req: Request, res: Response) => {
+  try {
+    if (!req.user) {
+      return res.status(401).json({ error: 'Authentication required' })
+    }
+
+    const { id } = req.params
+
+    const submission = await prisma.submission.findUnique({
+      where: { id },
+      include: {
+        user: {
+          select: {
+            id: true,
+            username: true,
+            rating: true
+          }
+        },
+        problem: {
+          select: {
+            id: true,
+            number: true,
+            title: true
+          }
+        }
+      }
+    })
+
+    if (!submission) {
+      return res.status(404).json({ error: 'Submission not found' })
+    }
+
+    // Only allow viewing own submissions
+    if (submission.userId !== req.user.id) {
+      return res.status(403).json({ error: 'You can only view your own submissions' })
+    }
+
+    res.json({
+      submission: {
+        id: submission.id,
+        problemId: submission.problemId,
+        problemNumber: submission.problem.number,
+        problemTitle: submission.problem.title,
+        userId: submission.userId,
+        username: submission.user.username,
+        content: submission.content,
+        llmScore: submission.llmScore,
+        llmFeedback: submission.llmFeedback,
+        llmConfidence: submission.llmConfidence,
+        status: submission.status,
+        createdAt: submission.createdAt,
+        attachments: submission.attachments
+      }
+    })
+  } catch (error) {
+    console.error('Submission fetch error:', error)
+    res.status(500).json({ error: 'Internal server error' })
+  }
+})
+
 // Submit a submission (with optional file attachments)
 router.post('/', authenticateToken, upload.array('files', 5), async (req: Request, res: Response) => {
   try {
