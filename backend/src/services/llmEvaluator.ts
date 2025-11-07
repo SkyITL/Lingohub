@@ -26,9 +26,9 @@ export interface EvaluationResult {
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY || ''
 const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions'
 
-// Use Google Gemini Flash 1.5 - very cost effective
+// Use Google Gemini Flash 1.5-8B - very cost effective with multimodal support
 // Input: $0.075 per 1M tokens, Output: $0.30 per 1M tokens
-const DEFAULT_MODEL = 'google/gemini-flash-1.5'
+const DEFAULT_MODEL = 'google/gemini-flash-1.5-8b'
 
 interface LLMResponse {
   id: string

@@ -310,9 +310,19 @@ router.post('/', authenticateToken, upload.array('files', 5), async (req: Reques
           const officialSolutionText = problem.officialSolution || 'See PDF for official solution'
 
           // Construct full URLs for PDFs (Gemini needs publicly accessible URLs)
+          // If URL is already absolute (starts with http/https), use as-is
+          // Otherwise, prepend backend URL for relative paths
           const baseUrl = process.env.BACKEND_URL || 'https://lingohub-backend.vercel.app'
-          const problemPdfFullUrl = problem.pdfUrl ? `${baseUrl}${problem.pdfUrl}` : undefined
-          const solutionPdfFullUrl = problem.solutionUrl ? `${baseUrl}${problem.solutionUrl}` : undefined
+          const problemPdfFullUrl = problem.pdfUrl
+            ? (problem.pdfUrl.startsWith('http://') || problem.pdfUrl.startsWith('https://'))
+              ? problem.pdfUrl
+              : `${baseUrl}${problem.pdfUrl}`
+            : undefined
+          const solutionPdfFullUrl = problem.solutionUrl
+            ? (problem.solutionUrl.startsWith('http://') || problem.solutionUrl.startsWith('https://'))
+              ? problem.solutionUrl
+              : `${baseUrl}${problem.solutionUrl}`
+            : undefined
 
           console.log('🔵 [SUBMISSION SUBMIT] Problem PDF URL:', problemPdfFullUrl)
           console.log('🔵 [SUBMISSION SUBMIT] Solution PDF URL:', solutionPdfFullUrl)
