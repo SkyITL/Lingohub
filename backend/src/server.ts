@@ -8,6 +8,7 @@ import { PrismaClient } from '@prisma/client'
 import authRoutes from './routes/auth'
 import problemRoutes from './routes/problems'
 import userRoutes from './routes/users'
+import submissionRoutes from './routes/submissions'
 import solutionRoutes from './routes/solutions'
 import seedRoutes from './routes/seed'
 import adminRoutes from './routes/admin'
@@ -64,6 +65,7 @@ app.get('/', (req, res) => {
       auth: '/api/auth',
       problems: '/api/problems',
       users: '/api/users',
+      submissions: '/api/submissions',
       solutions: '/api/solutions',
       admin: '/api/admin'
     }
@@ -74,6 +76,7 @@ app.get('/', (req, res) => {
 app.use('/api/auth', authRoutes)
 app.use('/api/problems', problemRoutes)
 app.use('/api/users', userRoutes)
+app.use('/api/submissions', submissionRoutes)
 app.use('/api/solutions', solutionRoutes)
 app.use('/api/seed', seedRoutes)
 app.use('/api/admin', adminRoutes)

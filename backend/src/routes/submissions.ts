@@ -28,13 +28,9 @@ const upload = multer({
 })
 
 // Validation schemas
-const solutionSchema = z.object({
+const submissionSchema = z.object({
   problemId: z.string(),
   content: z.string().min(10)
-})
-
-const voteSchema = z.object({
-  vote: z.number().min(-1).max(1)
 })
 
 // Get all submissions (for submissions page)
@@ -47,7 +43,7 @@ router.get('/submissions', optionalAuth, async (req: Request, res: Response) => 
       where.userId = userId
     }
 
-    const submissions = await prisma.solution.findMany({
+    const submissions = await prisma.submission.findMany({
       where,
       include: {
         user: {
@@ -96,134 +92,59 @@ router.get('/submissions', optionalAuth, async (req: Request, res: Response) => 
   }
 })
 
-// Get solutions for a problem
-router.get('/problem/:problemId', optionalAuth, async (req: Request, res: Response) => {
-  try {
-    const { problemId } = req.params
-    const { sortBy = 'votes' } = req.query
-
-    // Find problem by ID or number
-    let problem = await prisma.problem.findUnique({
-      where: { id: problemId }
-    })
-
-    if (!problem) {
-      problem = await prisma.problem.findUnique({
-        where: { number: problemId }
-      })
-    }
-
-    if (!problem) {
-      return res.status(404).json({ error: 'Problem not found' })
-    }
-
-    let orderBy: any = { voteScore: 'desc' }
-
-    switch (sortBy) {
-      case 'newest':
-        orderBy = { createdAt: 'desc' }
-        break
-      case 'oldest':
-        orderBy = { createdAt: 'asc' }
-        break
-    }
-
-    const solutions = await prisma.solution.findMany({
-      where: {
-        problemId: problem.id,
-        status: 'submitted' // Only show approved/submitted solutions
-      },
-      include: {
-        user: {
-          select: {
-            id: true,
-            username: true,
-            rating: true
-          }
-        },
-        votes: req.user ? {
-          where: { userId: req.user.id }
-        } : false,
-        _count: {
-          select: {
-            votes: true
-          }
-        }
-      },
-      orderBy
-    })
-
-    const transformedSolutions = solutions.map((solution: any) => ({
-      id: solution.id,
-      content: solution.content,
-      attachments: solution.attachments,
-      voteScore: solution.voteScore,
-      createdAt: solution.createdAt,
-      user: solution.user,
-      userVote: req.user && solution.votes.length > 0 ? solution.votes[0].vote : 0,
-      voteCount: solution._count.votes
-    }))
-
-    res.json({ solutions: transformedSolutions })
-  } catch (error) {
-    console.error('Solutions fetch error:', error)
-    res.status(500).json({ error: 'Internal server error' })
-  }
-})
-
-// Submit a solution (with optional file attachments)
+// Submit a submission (with optional file attachments)
 router.post('/', authenticateToken, upload.array('files', 5), async (req: Request, res: Response) => {
   try {
-    console.log('🔵 [SOLUTION SUBMIT] Starting submission...')
-    console.log('🔵 [SOLUTION SUBMIT] User:', req.user?.id, req.user?.username)
-    console.log('🔵 [SOLUTION SUBMIT] Body:', { problemId: req.body.problemId, contentLength: req.body.content?.length })
-    console.log('🔵 [SOLUTION SUBMIT] Files:', req.files ? (req.files as any).length : 0)
+    console.log('🔵 [SUBMISSION SUBMIT] Starting submission...')
+    console.log('🔵 [SUBMISSION SUBMIT] User:', req.user?.id, req.user?.username)
+    console.log('🔵 [SUBMISSION SUBMIT] Body:', { problemId: req.body.problemId, contentLength: req.body.content?.length })
+    console.log('🔵 [SUBMISSION SUBMIT] Files:', req.files ? (req.files as any).length : 0)
 
     if (!req.user) {
-      console.log('🔴 [SOLUTION SUBMIT] No user authenticated')
+      console.log('🔴 [SUBMISSION SUBMIT] No user authenticated')
       return res.status(401).json({ error: 'Authentication required' })
     }
 
-    console.log('🔵 [SOLUTION SUBMIT] Validating schema...')
-    const { problemId, content } = solutionSchema.parse(req.body)
-    console.log('🔵 [SOLUTION SUBMIT] Schema valid. ProblemId:', problemId)
+    console.log('🔵 [SUBMISSION SUBMIT] Validating schema...')
+    const { problemId, content } = submissionSchema.parse(req.body)
+    console.log('🔵 [SUBMISSION SUBMIT] Schema valid. ProblemId:', problemId)
 
     // Check if problem exists (try by ID first, then by number)
-    console.log('🔵 [SOLUTION SUBMIT] Finding problem by ID:', problemId)
+    console.log('🔵 [SUBMISSION SUBMIT] Finding problem by ID:', problemId)
     let problem = await prisma.problem.findUnique({
       where: { id: problemId }
     })
 
     // If not found by ID, try to find by number (e.g., "LH-001")
     if (!problem) {
-      console.log('🔵 [SOLUTION SUBMIT] Not found by ID, trying by number...')
+      console.log('🔵 [SUBMISSION SUBMIT] Not found by ID, trying by number...')
       problem = await prisma.problem.findUnique({
         where: { number: problemId }
       })
     }
 
     if (!problem) {
-      console.log('🔴 [SOLUTION SUBMIT] Problem not found:', problemId)
+      console.log('🔴 [SUBMISSION SUBMIT] Problem not found:', problemId)
       return res.status(404).json({ error: 'Problem not found' })
     }
 
-    console.log('🔵 [SOLUTION SUBMIT] Problem found:', problem.id, problem.number)
+    console.log('🔵 [SUBMISSION SUBMIT] Problem found:', problem.id, problem.number)
 
-    // Check if user already submitted a solution for this problem
-    console.log('🔵 [SOLUTION SUBMIT] Checking for existing solution...')
-    const existingSolution = await prisma.solution.findFirst({
+    // Check if user already submitted a submission for this problem
+    console.log('🔵 [SUBMISSION SUBMIT] Checking for existing submission...')
+    const existingSubmission = await prisma.submission.findFirst({
       where: {
         problemId: problem.id,
         userId: req.user.id
       }
     })
 
-    if (existingSolution) {
-      console.log('🔴 [SOLUTION SUBMIT] Solution already exists:', existingSolution.id)
-      return res.status(400).json({ error: 'Solution already submitted for this problem' })
+    if (existingSubmission) {
+      console.log('🔴 [SUBMISSION SUBMIT] Submission already exists:', existingSubmission.id)
+      return res.status(400).json({ error: 'Submission already submitted for this problem' })
     }
 
-    console.log('🔵 [SOLUTION SUBMIT] No existing solution, proceeding...')
+    console.log('🔵 [SUBMISSION SUBMIT] No existing submission, proceeding...')
 
     // Handle file uploads if present
     let attachments: FileAttachment[] | undefined
@@ -245,15 +166,15 @@ router.post('/', authenticateToken, upload.array('files', 5), async (req: Reques
       }
     }
 
-    console.log('🔵 [SOLUTION SUBMIT] Creating solution in database...')
-    console.log('🔵 [SOLUTION SUBMIT] Data:', {
+    console.log('🔵 [SUBMISSION SUBMIT] Creating submission in database...')
+    console.log('🔵 [SUBMISSION SUBMIT] Data:', {
       problemId: problem.id,
       userId: req.user.id,
       contentLength: content.length,
       hasAttachments: !!attachments
     })
 
-    const solution = await prisma.solution.create({
+    const submission = await prisma.submission.create({
       data: {
         problemId: problem.id,
         userId: req.user.id,
@@ -272,10 +193,10 @@ router.post('/', authenticateToken, upload.array('files', 5), async (req: Reques
       }
     })
 
-    console.log('🔵 [SOLUTION SUBMIT] Solution created:', solution.id)
+    console.log('🔵 [SUBMISSION SUBMIT] Submission created:', submission.id)
 
     // Update user progress to solved
-    console.log('🔵 [SOLUTION SUBMIT] Updating user progress...')
+    console.log('🔵 [SUBMISSION SUBMIT] Updating user progress...')
     await prisma.userProgress.upsert({
       where: {
         userId_problemId: {
@@ -294,13 +215,13 @@ router.post('/', authenticateToken, upload.array('files', 5), async (req: Reques
       }
     })
 
-    console.log('🔵 [SOLUTION SUBMIT] User progress updated')
+    console.log('🔵 [SUBMISSION SUBMIT] User progress updated')
 
-    // Evaluate solution with LLM if official solution exists
+    // Evaluate submission with LLM if official solution exists
     let evaluationResult = null
     if (problem.officialSolution) {
       try {
-        console.log('🔵 [SOLUTION SUBMIT] Starting LLM evaluation...')
+        console.log('🔵 [SUBMISSION SUBMIT] Starting LLM evaluation...')
 
         evaluationResult = await evaluateSolution(
           problem.content,
@@ -308,15 +229,15 @@ router.post('/', authenticateToken, upload.array('files', 5), async (req: Reques
           content
         )
 
-        console.log('🔵 [SOLUTION SUBMIT] LLM evaluation completed:', {
+        console.log('🔵 [SUBMISSION SUBMIT] LLM evaluation completed:', {
           score: evaluationResult.totalScore,
           confidence: evaluationResult.confidence,
           cost: evaluationResult.cost
         })
 
         // Store evaluation results
-        await prisma.solution.update({
-          where: { id: solution.id },
+        await prisma.submission.update({
+          where: { id: submission.id },
           data: {
             llmScore: evaluationResult.totalScore,
             llmFeedback: evaluationResult.feedback,
@@ -326,9 +247,9 @@ router.post('/', authenticateToken, upload.array('files', 5), async (req: Reques
         })
 
         // Create detailed evaluation record
-        await prisma.solutionEvaluation.create({
+        await prisma.submissionEvaluation.create({
           data: {
-            solutionId: solution.id,
+            submissionId: submission.id,
             totalScore: evaluationResult.totalScore,
             correctness: evaluationResult.scores.correctness,
             reasoning: evaluationResult.scores.reasoning,
@@ -346,49 +267,48 @@ router.post('/', authenticateToken, upload.array('files', 5), async (req: Reques
           }
         })
 
-        console.log('✅ [SOLUTION SUBMIT] Evaluation stored')
+        console.log('✅ [SUBMISSION SUBMIT] Evaluation stored')
       } catch (evalError) {
-        console.error('🔴 [SOLUTION SUBMIT] LLM evaluation failed:', evalError)
+        console.error('🔴 [SUBMISSION SUBMIT] LLM evaluation failed:', evalError)
         // Don't fail the submission if evaluation fails
-        // The solution is still saved, just without evaluation
+        // The submission is still saved, just without evaluation
       }
     } else {
-      console.log('⚠️  [SOLUTION SUBMIT] No official solution available, skipping LLM evaluation')
+      console.log('⚠️  [SUBMISSION SUBMIT] No official solution available, skipping LLM evaluation')
     }
 
-    console.log('✅ [SOLUTION SUBMIT] Submission complete!')
+    console.log('✅ [SUBMISSION SUBMIT] Submission complete!')
 
     res.status(201).json({
-      message: 'Solution submitted successfully',
-      solution: {
-        id: solution.id,
-        content: solution.content,
-        attachments: solution.attachments,
-        voteScore: solution.voteScore,
-        createdAt: solution.createdAt,
-        user: solution.user,
+      message: 'Submission submitted successfully',
+      submission: {
+        id: submission.id,
+        content: submission.content,
+        attachments: submission.attachments,
+        createdAt: submission.createdAt,
+        user: submission.user,
         llmScore: evaluationResult?.totalScore,
         llmFeedback: evaluationResult?.feedback,
         llmConfidence: evaluationResult?.confidence
       }
     })
   } catch (error) {
-    console.error('🔴 [SOLUTION SUBMIT] Error caught in handler')
-    console.error('🔴 [SOLUTION SUBMIT] Error type:', error?.constructor?.name)
-    console.error('🔴 [SOLUTION SUBMIT] Error message:', (error as any)?.message)
-    console.error('🔴 [SOLUTION SUBMIT] Full error:', error)
+    console.error('🔴 [SUBMISSION SUBMIT] Error caught in handler')
+    console.error('🔴 [SUBMISSION SUBMIT] Error type:', error?.constructor?.name)
+    console.error('🔴 [SUBMISSION SUBMIT] Error message:', (error as any)?.message)
+    console.error('🔴 [SUBMISSION SUBMIT] Full error:', error)
 
     if (error instanceof z.ZodError) {
-      console.error('🔴 [SOLUTION SUBMIT] Zod validation error:', error.errors)
+      console.error('🔴 [SUBMISSION SUBMIT] Zod validation error:', error.errors)
       return res.status(400).json({ error: error.errors })
     }
     if (error instanceof multer.MulterError) {
-      console.error('🔴 [SOLUTION SUBMIT] Multer error:', error.message)
+      console.error('🔴 [SUBMISSION SUBMIT] Multer error:', error.message)
       return res.status(400).json({ error: `File upload error: ${error.message}` })
     }
 
     // Log detailed error for debugging
-    console.error('🔴 [SOLUTION SUBMIT] Unhandled error:', JSON.stringify(error, null, 2))
+    console.error('🔴 [SUBMISSION SUBMIT] Unhandled error:', JSON.stringify(error, null, 2))
     res.status(500).json({
       error: 'Internal server error',
       message: process.env.NODE_ENV === 'development' ? (error as any)?.message : undefined
@@ -396,83 +316,7 @@ router.post('/', authenticateToken, upload.array('files', 5), async (req: Reques
   }
 })
 
-// Vote on a solution
-router.post('/:id/vote', authenticateToken, async (req: Request, res: Response) => {
-  try {
-    if (!req.user) {
-      return res.status(401).json({ error: 'Authentication required' })
-    }
-
-    const { id } = req.params
-    const { vote } = voteSchema.parse(req.body)
-
-    const solution = await prisma.solution.findUnique({
-      where: { id }
-    })
-
-    if (!solution) {
-      return res.status(404).json({ error: 'Solution not found' })
-    }
-
-    // Prevent voting on own solution
-    if (solution.userId === req.user.id) {
-      return res.status(400).json({ error: 'Cannot vote on your own solution' })
-    }
-
-    // Update or create vote
-    const existingVote = await prisma.solutionVote.findUnique({
-      where: {
-        userId_solutionId: {
-          userId: req.user.id,
-          solutionId: id
-        }
-      }
-    })
-
-    if (existingVote) {
-      // Update existing vote
-      await prisma.solutionVote.update({
-        where: {
-          userId_solutionId: {
-            userId: req.user.id,
-            solutionId: id
-          }
-        },
-        data: { vote }
-      })
-    } else {
-      // Create new vote
-      await prisma.solutionVote.create({
-        data: {
-          userId: req.user.id,
-          solutionId: id,
-          vote
-        }
-      })
-    }
-
-    // Recalculate solution vote score
-    const voteSum = await prisma.solutionVote.aggregate({
-      where: { solutionId: id },
-      _sum: { vote: true }
-    })
-
-    await prisma.solution.update({
-      where: { id },
-      data: { voteScore: voteSum._sum.vote || 0 }
-    })
-
-    res.json({ message: 'Vote recorded', voteScore: voteSum._sum.vote || 0 })
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      return res.status(400).json({ error: error.errors })
-    }
-    console.error('Vote error:', error)
-    res.status(500).json({ error: 'Internal server error' })
-  }
-})
-
-// Edit a solution
+// Edit a submission
 router.put('/:id', authenticateToken, upload.array('files', 5), async (req: Request, res: Response) => {
   try {
     if (!req.user) {
@@ -483,26 +327,26 @@ router.put('/:id', authenticateToken, upload.array('files', 5), async (req: Requ
     const { content } = req.body
 
     if (!content || content.length < 10) {
-      return res.status(400).json({ error: 'Solution content must be at least 10 characters' })
+      return res.status(400).json({ error: 'Submission content must be at least 10 characters' })
     }
 
-    console.log('🔵 [SOLUTION EDIT] Starting edit for solution:', id)
+    console.log('🔵 [SUBMISSION EDIT] Starting edit for submission:', id)
 
-    // Check if solution exists
-    const solution = await prisma.solution.findUnique({
+    // Check if submission exists
+    const submission = await prisma.submission.findUnique({
       where: { id },
       include: {
         problem: true
       }
     })
 
-    if (!solution) {
-      return res.status(404).json({ error: 'Solution not found' })
+    if (!submission) {
+      return res.status(404).json({ error: 'Submission not found' })
     }
 
-    // Only allow the author to edit their solution
-    if (solution.userId !== req.user.id) {
-      return res.status(403).json({ error: 'You can only edit your own solutions' })
+    // Only allow the author to edit their submission
+    if (submission.userId !== req.user.id) {
+      return res.status(403).json({ error: 'You can only edit your own submissions' })
     }
 
     // Handle file uploads if present
@@ -525,12 +369,12 @@ router.put('/:id', authenticateToken, upload.array('files', 5), async (req: Requ
       }
     }
 
-    // Update solution
-    const updatedSolution = await prisma.solution.update({
+    // Update submission
+    const updatedSubmission = await prisma.submission.update({
       where: { id },
       data: {
         content,
-        attachments: newAttachments ? JSON.parse(JSON.stringify(newAttachments)) : solution.attachments,
+        attachments: newAttachments ? JSON.parse(JSON.stringify(newAttachments)) : submission.attachments,
         updatedAt: new Date()
       },
       include: {
@@ -544,27 +388,27 @@ router.put('/:id', authenticateToken, upload.array('files', 5), async (req: Requ
       }
     })
 
-    console.log('🔵 [SOLUTION EDIT] Solution updated, re-evaluating...')
+    console.log('🔵 [SUBMISSION EDIT] Submission updated, re-evaluating...')
 
     // Re-evaluate with LLM if official solution exists
     let evaluationResult = null
-    if (solution.problem.officialSolution) {
+    if (submission.problem.officialSolution) {
       try {
-        console.log('🔵 [SOLUTION EDIT] Starting LLM re-evaluation...')
+        console.log('🔵 [SUBMISSION EDIT] Starting LLM re-evaluation...')
 
         evaluationResult = await evaluateSolution(
-          solution.problem.content,
-          solution.problem.officialSolution,
+          submission.problem.content,
+          submission.problem.officialSolution,
           content
         )
 
-        console.log('🔵 [SOLUTION EDIT] LLM evaluation completed:', {
+        console.log('🔵 [SUBMISSION EDIT] LLM evaluation completed:', {
           score: evaluationResult.totalScore,
           confidence: evaluationResult.confidence
         })
 
         // Update evaluation results
-        await prisma.solution.update({
+        await prisma.submission.update({
           where: { id },
           data: {
             llmScore: evaluationResult.totalScore,
@@ -575,13 +419,13 @@ router.put('/:id', authenticateToken, upload.array('files', 5), async (req: Requ
         })
 
         // Delete old evaluation and create new one
-        await prisma.solutionEvaluation.deleteMany({
-          where: { solutionId: id }
+        await prisma.submissionEvaluation.deleteMany({
+          where: { submissionId: id }
         })
 
-        await prisma.solutionEvaluation.create({
+        await prisma.submissionEvaluation.create({
           data: {
-            solutionId: id,
+            submissionId: id,
             totalScore: evaluationResult.totalScore,
             correctness: evaluationResult.scores.correctness,
             reasoning: evaluationResult.scores.reasoning,
@@ -599,36 +443,35 @@ router.put('/:id', authenticateToken, upload.array('files', 5), async (req: Requ
           }
         })
 
-        console.log('✅ [SOLUTION EDIT] Re-evaluation stored')
+        console.log('✅ [SUBMISSION EDIT] Re-evaluation stored')
       } catch (evalError) {
-        console.error('🔴 [SOLUTION EDIT] LLM re-evaluation failed:', evalError)
+        console.error('🔴 [SUBMISSION EDIT] LLM re-evaluation failed:', evalError)
       }
     }
 
-    console.log('✅ [SOLUTION EDIT] Edit complete!')
+    console.log('✅ [SUBMISSION EDIT] Edit complete!')
 
     res.json({
-      message: 'Solution updated successfully',
-      solution: {
-        id: updatedSolution.id,
-        content: updatedSolution.content,
-        attachments: updatedSolution.attachments,
-        voteScore: updatedSolution.voteScore,
-        createdAt: updatedSolution.createdAt,
-        updatedAt: updatedSolution.updatedAt,
-        user: updatedSolution.user,
+      message: 'Submission updated successfully',
+      submission: {
+        id: updatedSubmission.id,
+        content: updatedSubmission.content,
+        attachments: updatedSubmission.attachments,
+        createdAt: updatedSubmission.createdAt,
+        updatedAt: updatedSubmission.updatedAt,
+        user: updatedSubmission.user,
         llmScore: evaluationResult?.totalScore,
         llmFeedback: evaluationResult?.feedback,
         llmConfidence: evaluationResult?.confidence
       }
     })
   } catch (error) {
-    console.error('🔴 [SOLUTION EDIT] Error:', error)
+    console.error('🔴 [SUBMISSION EDIT] Error:', error)
     res.status(500).json({ error: 'Internal server error' })
   }
 })
 
-// Delete a solution
+// Delete a submission
 router.delete('/:id', authenticateToken, async (req: Request, res: Response) => {
   try {
     if (!req.user) {
@@ -637,32 +480,27 @@ router.delete('/:id', authenticateToken, async (req: Request, res: Response) => 
 
     const { id } = req.params
 
-    const solution = await prisma.solution.findUnique({
+    const submission = await prisma.submission.findUnique({
       where: { id }
     })
 
-    if (!solution) {
-      return res.status(404).json({ error: 'Solution not found' })
+    if (!submission) {
+      return res.status(404).json({ error: 'Submission not found' })
     }
 
-    // Only allow the author to delete their solution
-    if (solution.userId !== req.user.id) {
-      return res.status(403).json({ error: 'You can only delete your own solutions' })
+    // Only allow the author to delete their submission
+    if (submission.userId !== req.user.id) {
+      return res.status(403).json({ error: 'You can only delete your own submissions' })
     }
 
-    // Delete all votes associated with this solution first
-    await prisma.solutionVote.deleteMany({
-      where: { solutionId: id }
-    })
-
-    // Delete the solution
-    await prisma.solution.delete({
+    // Delete the submission (cascade will handle evaluation deletion)
+    await prisma.submission.delete({
       where: { id }
     })
 
-    res.json({ message: 'Solution deleted successfully' })
+    res.json({ message: 'Submission deleted successfully' })
   } catch (error) {
-    console.error('Solution delete error:', error)
+    console.error('Submission delete error:', error)
     res.status(500).json({ error: 'Internal server error' })
   }
 })

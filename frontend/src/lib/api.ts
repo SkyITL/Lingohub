@@ -126,13 +126,10 @@ export const problemsApi = {
     api.post(`/problems/${id}/view-solution`),
 }
 
-// Solutions API
-export const solutionsApi = {
-  getAllSubmissions: (userId?: string) =>
-    api.get('/solutions/submissions', { params: userId ? { userId } : {} }),
-
-  getByProblem: (problemId: string, sortBy?: string) =>
-    api.get(`/solutions/problem/${problemId}`, { params: { sortBy } }),
+// Submissions API (private attempts/提交)
+export const submissionsApi = {
+  getAll: (userId?: string) =>
+    api.get('/submissions/submissions', { params: userId ? { userId } : {} }),
 
   submit: (problemId: string, content: string, files?: File[]) => {
     const formData = new FormData()
@@ -146,14 +143,14 @@ export const solutionsApi = {
       })
     }
 
-    return api.post('/solutions', formData, {
+    return api.post('/submissions', formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
     })
   },
 
-  edit: (solutionId: string, content: string, files?: File[]) => {
+  edit: (submissionId: string, content: string, files?: File[]) => {
     const formData = new FormData()
     formData.append('content', content)
 
@@ -164,12 +161,30 @@ export const solutionsApi = {
       })
     }
 
-    return api.put(`/solutions/${solutionId}`, formData, {
+    return api.put(`/submissions/${submissionId}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
     })
   },
+
+  delete: (submissionId: string) =>
+    api.delete(`/submissions/${submissionId}`),
+}
+
+// Solutions API (public write-ups/题解)
+export const solutionsApi = {
+  getByProblem: (problemId: string, sortBy?: string) =>
+    api.get(`/solutions/problem/${problemId}`, { params: { sortBy } }),
+
+  getById: (solutionId: string) =>
+    api.get(`/solutions/${solutionId}`),
+
+  create: (problemId: string, title: string, content: string) =>
+    api.post('/solutions', { problemId, title, content }),
+
+  edit: (solutionId: string, title: string, content: string) =>
+    api.put(`/solutions/${solutionId}`, { title, content }),
 
   vote: (solutionId: string, vote: number) =>
     api.post(`/solutions/${solutionId}/vote`, { vote }),

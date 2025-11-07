@@ -710,11 +710,12 @@ In Mandarin, tones are phonemic - they distinguish meaning just like consonants 
   const allProblems = await prisma.problem.findMany()
 
   if (allProblems.length > 0) {
-    // Add a solution to the first problem
+    // Add a solution (题解 - public write-up) to the first problem
     const solution1 = await prisma.solution.create({
       data: {
         problemId: allProblems[0].id,
         userId: user2.id,
+        title: 'Understanding Bantu Noun Class Agreement',
         content: `## My Approach to Swahili Noun Classes
 
 I noticed that each noun class has consistent prefixes that appear on the noun, adjective, and verb. The pattern is:
@@ -729,8 +730,7 @@ For the translations:
 - "The small stones are falling" uses class 6 plural: Mawe madogo yanaanguka
 
 The key insight is that Bantu languages use agreement to maintain grammatical cohesion across the sentence.`,
-        voteScore: 15,
-        status: 'approved'
+        voteScore: 15
       }
     })
 
@@ -739,9 +739,9 @@ The key insight is that Bantu languages use agreement to maintain grammatical co
       data: {
         problemId: allProblems[0].id,
         userId: user3.id,
+        title: 'Semantic Patterns in Swahili Noun Classes',
         content: `The noun class system in Swahili is actually quite logical once you see the pattern. Each class has semantic associations - Class 1/2 for people, Class 3/4 for plants, etc.`,
-        voteScore: 8,
-        status: 'submitted'
+        voteScore: 8
       }
     })
 

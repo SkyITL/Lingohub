@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { solutionsApi, problemsApi } from '@/lib/api'
+import { submissionsApi, solutionsApi, problemsApi } from '@/lib/api'
 import { useAuth } from '@/contexts/AuthContext'
 import Header from "@/components/Header"
 import { Button } from "@/components/ui/button"
@@ -327,23 +327,23 @@ export default function ProblemPageClient({ initialProblem }: ProblemPageClientP
       }
 
       if (userSolution && isEditingUserSolution) {
-        // Edit existing solution
-        const response = await solutionsApi.edit(
+        // Edit existing submission
+        const response = await submissionsApi.edit(
           userSolution.id,
           newSolution,
           selectedImages.length > 0 ? selectedImages : undefined
         )
-        const updatedSol = response.data.solution
-        console.log('Solution updated successfully:', updatedSol)
+        const updatedSub = response.data.submission
+        console.log('Submission updated successfully:', updatedSub)
       } else {
-        // Submit new solution
-        const response = await solutionsApi.submit(
+        // Submit new submission
+        const response = await submissionsApi.submit(
           problem.id,
           newSolution,
           selectedImages.length > 0 ? selectedImages : undefined
         )
-        const newSol = response.data.solution
-        console.log('Solution submitted successfully:', newSol)
+        const newSub = response.data.submission
+        console.log('Submission submitted successfully:', newSub)
       }
 
       // Reload solutions from backend

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useAuth } from '@/contexts/AuthContext'
-import { solutionsApi } from '@/lib/api'
+import { submissionsApi } from '@/lib/api'
 import Header from "@/components/Header"
 import { Button } from "@/components/ui/button"
 import {
@@ -46,7 +46,7 @@ export default function SubmissionsPage() {
       setIsLoading(true)
 
       const userId = filter === 'mine' && user ? user.id : undefined
-      const response = await solutionsApi.getAllSubmissions(userId)
+      const response = await submissionsApi.getAll(userId)
 
       const loadedSubmissions = response.data.submissions.map((sub: any) => ({
         ...sub,
