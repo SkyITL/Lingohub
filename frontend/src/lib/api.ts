@@ -129,7 +129,7 @@ export const problemsApi = {
 // Submissions API (private attempts/提交)
 export const submissionsApi = {
   getAll: (userId?: string) =>
-    api.get('/submissions/submissions', { params: userId ? { userId } : {} }),
+    api.get('/submissions', { params: userId ? { userId } : {} }),
 
   submit: (problemId: string, content: string, files?: File[]) => {
     const formData = new FormData()

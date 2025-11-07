@@ -34,7 +34,7 @@ const submissionSchema = z.object({
 })
 
 // Get all submissions (for submissions page)
-router.get('/submissions', optionalAuth, async (req: Request, res: Response) => {
+router.get('/', optionalAuth, async (req: Request, res: Response) => {
   try {
     const { userId } = req.query
 
