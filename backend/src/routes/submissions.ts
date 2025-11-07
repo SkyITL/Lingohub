@@ -5,6 +5,7 @@ import multer from 'multer'
 import { authenticateToken, optionalAuth } from '../middleware/auth'
 import { uploadMultipleFiles, FileAttachment } from '../services/fileUpload'
 import { evaluateSolution } from '../services/llmEvaluator'
+import { checkRateLimit, logRateLimitAction, RATE_LIMITS } from '../utils/rateLimit'
 
 const router = express.Router()
 const prisma = new PrismaClient()
@@ -130,21 +131,19 @@ router.post('/', authenticateToken, upload.array('files', 5), async (req: Reques
 
     console.log('🔵 [SUBMISSION SUBMIT] Problem found:', problem.id, problem.number)
 
-    // Check if user already submitted a submission for this problem
-    console.log('🔵 [SUBMISSION SUBMIT] Checking for existing submission...')
-    const existingSubmission = await prisma.submission.findFirst({
-      where: {
-        problemId: problem.id,
-        userId: req.user.id
-      }
-    })
-
-    if (existingSubmission) {
-      console.log('🔴 [SUBMISSION SUBMIT] Submission already exists:', existingSubmission.id)
-      return res.status(400).json({ error: 'Submission already submitted for this problem' })
+    // Check rate limit for submissions
+    const submissionRateLimit = await checkRateLimit(req.user.id, RATE_LIMITS.SUBMISSION)
+    if (submissionRateLimit.limited) {
+      await logRateLimitAction(req.user.id, 'submission', true)
+      return res.status(429).json({
+        error: 'Rate limit exceeded',
+        message: `You can only submit ${RATE_LIMITS.SUBMISSION.maxRequests} times per hour. Please try again later.`,
+        remaining: 0,
+        resetAt: submissionRateLimit.resetAt
+      })
     }
 
-    console.log('🔵 [SUBMISSION SUBMIT] No existing submission, proceeding...')
+    console.log('🔵 [SUBMISSION SUBMIT] Rate limit OK, proceeding...')
 
     // Handle file uploads if present
     let attachments: FileAttachment[] | undefined
@@ -193,6 +192,9 @@ router.post('/', authenticateToken, upload.array('files', 5), async (req: Reques
       }
     })
 
+    // Log submission action for rate limiting
+    await logRateLimitAction(req.user.id, 'submission', false)
+
     console.log('🔵 [SUBMISSION SUBMIT] Submission created:', submission.id)
 
     // Update user progress to solved
@@ -220,14 +222,33 @@ router.post('/', authenticateToken, upload.array('files', 5), async (req: Reques
     // Evaluate submission with LLM if official solution exists
     let evaluationResult = null
     if (problem.officialSolution) {
-      try {
-        console.log('🔵 [SUBMISSION SUBMIT] Starting LLM evaluation...')
+      // Check rate limit for AI evaluation (separate from submission limit)
+      const evalRateLimit = await checkRateLimit(req.user.id, RATE_LIMITS.LLM_EVAL)
 
-        evaluationResult = await evaluateSolution(
-          problem.content,
-          problem.officialSolution,
-          content
-        )
+      if (evalRateLimit.limited) {
+        console.log('⚠️  [SUBMISSION SUBMIT] AI evaluation rate limit exceeded')
+        await logRateLimitAction(req.user.id, 'llm_eval', true)
+
+        // Still save the submission, but don't evaluate it
+        await prisma.submission.update({
+          where: { id: submission.id },
+          data: {
+            status: 'pending',
+            llmFeedback: `Rate limit exceeded. You can only request ${RATE_LIMITS.LLM_EVAL.maxRequests} AI evaluations per hour. Your submission has been saved and will remain pending.`
+          }
+        })
+      } else {
+        try {
+          console.log('🔵 [SUBMISSION SUBMIT] Starting LLM evaluation...')
+
+          evaluationResult = await evaluateSolution(
+            problem.content,
+            problem.officialSolution,
+            content
+          )
+
+          // Log AI evaluation action for rate limiting
+          await logRateLimitAction(req.user.id, 'llm_eval', false)
 
         console.log('🔵 [SUBMISSION SUBMIT] LLM evaluation completed:', {
           score: evaluationResult.totalScore,
@@ -267,17 +288,22 @@ router.post('/', authenticateToken, upload.array('files', 5), async (req: Reques
           }
         })
 
-        console.log('✅ [SUBMISSION SUBMIT] Evaluation stored')
-      } catch (evalError) {
-        console.error('🔴 [SUBMISSION SUBMIT] LLM evaluation failed:', evalError)
-        // Don't fail the submission if evaluation fails
-        // The submission is still saved, just without evaluation
+          console.log('✅ [SUBMISSION SUBMIT] Evaluation stored')
+        } catch (evalError) {
+          console.error('🔴 [SUBMISSION SUBMIT] LLM evaluation failed:', evalError)
+          // Don't fail the submission if evaluation fails
+          // The submission is still saved, just without evaluation
+        }
       }
     } else {
       console.log('⚠️  [SUBMISSION SUBMIT] No official solution available, skipping LLM evaluation')
     }
 
     console.log('✅ [SUBMISSION SUBMIT] Submission complete!')
+
+    // Get updated rate limit info to return to client
+    const updatedSubmissionLimit = await checkRateLimit(req.user.id, RATE_LIMITS.SUBMISSION)
+    const updatedEvalLimit = await checkRateLimit(req.user.id, RATE_LIMITS.LLM_EVAL)
 
     res.status(201).json({
       message: 'Submission submitted successfully',
@@ -290,6 +316,12 @@ router.post('/', authenticateToken, upload.array('files', 5), async (req: Reques
         llmScore: evaluationResult?.totalScore,
         llmFeedback: evaluationResult?.feedback,
         llmConfidence: evaluationResult?.confidence
+      },
+      debug: {
+        submissionsRemaining: updatedSubmissionLimit.remaining,
+        evaluationsRemaining: updatedEvalLimit.remaining,
+        problemHasOfficialSolution: !!problem.officialSolution,
+        evaluationPerformed: !!evaluationResult
       }
     })
   } catch (error) {

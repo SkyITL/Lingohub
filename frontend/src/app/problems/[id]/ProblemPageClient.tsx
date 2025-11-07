@@ -125,6 +125,10 @@ export default function ProblemPageClient({ initialProblem }: ProblemPageClientP
   const [selectedImages, setSelectedImages] = useState<File[]>([])
   const [imagePreviews, setImagePreviews] = useState<string[]>([])
   const [imageError, setImageError] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitSuccess, setSubmitSuccess] = useState(false)
+  const [submitError, setSubmitError] = useState('')
+  const [debugInfo, setDebugInfo] = useState<any>(null)
 
   // Load saved state and solutions
   useEffect(() => {
@@ -316,15 +320,21 @@ export default function ProblemPageClient({ initialProblem }: ProblemPageClientP
     if (!newSolution.trim()) return
 
     if (newSolution.trim().length < 10) {
-      alert('Solution must be at least 10 characters long.')
+      setSubmitError('Solution must be at least 10 characters long.')
       return
     }
 
     try {
       if (!user) {
-        alert('You must be logged in to submit a solution.')
+        setSubmitError('You must be logged in to submit a solution.')
         return
       }
+
+      // Reset states
+      setIsSubmitting(true)
+      setSubmitSuccess(false)
+      setSubmitError('')
+      setDebugInfo(null)
 
       if (userSolution && isEditingUserSolution) {
         // Edit existing submission
@@ -335,6 +345,8 @@ export default function ProblemPageClient({ initialProblem }: ProblemPageClientP
         )
         const updatedSub = response.data.submission
         console.log('Submission updated successfully:', updatedSub)
+        setSubmitSuccess(true)
+        setDebugInfo(response.data.debug)
       } else {
         // Submit new submission
         const response = await submissionsApi.submit(
@@ -343,29 +355,47 @@ export default function ProblemPageClient({ initialProblem }: ProblemPageClientP
           selectedImages.length > 0 ? selectedImages : undefined
         )
         const newSub = response.data.submission
+        const debug = response.data.debug
         console.log('Submission submitted successfully:', newSub)
+        console.log('Debug info:', debug)
+
+        setSubmitSuccess(true)
+        setDebugInfo(debug)
+
+        // Show success message with debug info
+        if (debug) {
+          const evalMsg = debug.evaluationPerformed
+            ? `✅ AI evaluated! (${debug.evaluationsRemaining} evals remaining)`
+            : `⏳ Pending (${debug.evaluationsRemaining} evals remaining)`
+          console.log(`📊 Submissions remaining: ${debug.submissionsRemaining}/20 | ${evalMsg}`)
+        }
       }
 
       // Reload solutions from backend
       await loadSolutions()
 
-      // Clear form
-      setNewSolution('')
-      setSelectedImages([])
-      setImagePreviews([])
-      setImageError('')
-      setShowSolutionForm(false)
-      setIsEditingUserSolution(false)
+      // Clear form after a delay to show success message
+      setTimeout(() => {
+        setNewSolution('')
+        setSelectedImages([])
+        setImagePreviews([])
+        setImageError('')
+        setShowSolutionForm(false)
+        setIsEditingUserSolution(false)
+        setSubmitSuccess(false)
 
-      // Redirect to submissions page to see result
-      if (!isEditingUserSolution) {
-        router.push('/submissions')
-      }
-    } catch (error) {
+        // Redirect to submissions page to see result
+        if (!isEditingUserSolution) {
+          router.push('/submissions')
+        }
+      }, 2000)
+    } catch (error: any) {
       console.error('Failed to submit solution:', error)
 
       let errorMessage = 'Unknown error occurred'
-      if (error.response?.data?.error) {
+      if (error.response?.data?.message) {
+        errorMessage = error.response.data.message
+      } else if (error.response?.data?.error) {
         errorMessage = error.response.data.error
       } else if (error.response?.data) {
         errorMessage = JSON.stringify(error.response.data)
@@ -373,7 +403,9 @@ export default function ProblemPageClient({ initialProblem }: ProblemPageClientP
         errorMessage = error.message
       }
 
-      alert(`Error ${isEditingUserSolution ? 'updating' : 'submitting'} solution: ${errorMessage}`)
+      setSubmitError(errorMessage)
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
@@ -891,12 +923,59 @@ export default function ProblemPageClient({ initialProblem }: ProblemPageClientP
                     )}
                     <Button
                       onClick={handleSubmitSolution}
-                      disabled={!newSolution.trim()}
+                      disabled={!newSolution.trim() || isSubmitting}
                     >
-                      <Send className="h-4 w-4 mr-1" />
-                      {isEditingUserSolution ? 'Update Solution' : 'Submit Solution'}
+                      {isSubmitting ? (
+                        <>
+                          <div className="animate-spin h-4 w-4 mr-2 border-2 border-white border-t-transparent rounded-full" />
+                          Submitting...
+                        </>
+                      ) : (
+                        <>
+                          <Send className="h-4 w-4 mr-1" />
+                          {isEditingUserSolution ? 'Update Solution' : 'Submit Solution'}
+                        </>
+                      )}
                     </Button>
                   </div>
+
+                  {/* Success/Error Feedback */}
+                  {submitSuccess && (
+                    <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-lg">
+                      <div className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-green-600 mt-0.5" />
+                        <div className="flex-1">
+                          <p className="font-medium text-green-900">Submission successful!</p>
+                          {debugInfo && (
+                            <div className="text-sm text-green-800 mt-1 space-y-1">
+                              <p>• Submissions remaining: {debugInfo.submissionsRemaining}/20 this hour</p>
+                              <p>• AI evaluations remaining: {debugInfo.evaluationsRemaining}/10 this hour</p>
+                              {debugInfo.evaluationPerformed ? (
+                                <p>• ✅ AI evaluation completed</p>
+                              ) : debugInfo.problemHasOfficialSolution ? (
+                                <p>• ⏳ AI evaluation pending (rate limit reached)</p>
+                              ) : (
+                                <p>• ℹ️ No official solution available for this problem</p>
+                              )}
+                            </div>
+                          )}
+                          <p className="text-sm text-green-700 mt-2">Redirecting to submissions page...</p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {submitError && (
+                    <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+                      <div className="flex items-start gap-3">
+                        <XCircle className="h-5 w-5 text-red-600 mt-0.5" />
+                        <div className="flex-1">
+                          <p className="font-medium text-red-900">Submission failed</p>
+                          <p className="text-sm text-red-800 mt-1">{submitError}</p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
             </Tabs.Content>
