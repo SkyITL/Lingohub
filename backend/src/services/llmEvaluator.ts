@@ -26,9 +26,9 @@ export interface EvaluationResult {
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY || ''
 const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions'
 
-// Use Google Gemini Flash 1.5-8B - very cost effective with multimodal support
+// Use Google Gemini Flash 1.5 - cost effective with multimodal support
 // Input: $0.075 per 1M tokens, Output: $0.30 per 1M tokens
-const DEFAULT_MODEL = 'google/gemini-flash-1.5-8b'
+const DEFAULT_MODEL = 'google/gemini-flash-1.5'
 
 interface LLMResponse {
   id: string
@@ -124,10 +124,11 @@ function calculateCost(
   completionTokens: number,
   model: string
 ): number {
-  // Pricing per 1M tokens
+  // Pricing per 1M tokens (as of 2025)
   const pricing: Record<string, { input: number; output: number }> = {
     'google/gemini-flash-1.5': { input: 0.075, output: 0.3 },
-    'google/gemini-flash-1.5-8b': { input: 0.0375, output: 0.15 },
+    'google/gemini-2.0-flash-001': { input: 0.10, output: 0.40 },
+    'google/gemini-2.5-flash': { input: 0.30, output: 2.50 },
     'anthropic/claude-3-haiku': { input: 0.25, output: 1.25 },
     'openai/gpt-4o-mini': { input: 0.15, output: 0.6 },
   }
