@@ -336,7 +336,7 @@ router.post('/', authenticateToken, upload.array('files', 5), async (req: Reques
         problemId: problem.id,
         userId: req.user.id,
         content,
-        status: 'submitted',
+        status: 'pending', // Use 'pending' as initial status
         attachments: attachments ? JSON.parse(JSON.stringify(attachments)) : undefined
       },
       include: {
@@ -418,6 +418,14 @@ router.post('/', authenticateToken, upload.array('files', 5), async (req: Reques
       }
     } else {
       console.log('⚠️  [SUBMISSION SUBMIT] No official solution available, skipping LLM evaluation')
+      // Mark submission as accepted when no official solution exists
+      await prisma.submission.update({
+        where: { id: submission.id },
+        data: {
+          status: 'accepted',
+          llmFeedback: 'No official solution available for automatic evaluation.'
+        }
+      })
     }
 
     console.log('✅ [SUBMISSION SUBMIT] Submission complete!')
