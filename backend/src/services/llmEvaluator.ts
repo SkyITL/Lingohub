@@ -26,10 +26,10 @@ export interface EvaluationResult {
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY || ''
 const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions'
 
-// Use GPT-4o - strong multimodal support for linguistics with PDF handling
-// Input: $5.00 per 1M tokens, Output: $15.00 per 1M tokens
-// Supports images, PDFs, IPA charts, syntactic trees, and visual linguistics content
-const DEFAULT_MODEL = 'openai/gpt-4o'
+// Use OpenRouter Auto - FREE! Automatically routes to the best available model
+// Input: $0 per 1M tokens, Output: $0 per 1M tokens
+// Intelligently selects the best model based on your request
+const DEFAULT_MODEL = 'openrouter/auto'
 
 interface LLMResponse {
   id: string
@@ -127,6 +127,9 @@ function calculateCost(
 ): number {
   // Pricing per 1M tokens (as of 2025)
   const pricing: Record<string, { input: number; output: number }> = {
+    'openrouter/auto': { input: 0, output: 0 }, // Free auto-routing
+    'x-ai/grok-4.1-fast': { input: 0, output: 0 }, // Free
+    'nvidia/nemotron-nano-12b-v2-vl:free': { input: 0, output: 0 }, // Free
     'google/gemini-2.0-flash-exp:free': { input: 0, output: 0 }, // Free tier
     'google/gemini-flash-1.5': { input: 0.075, output: 0.3 },
     'google/gemini-2.0-flash-001': { input: 0.10, output: 0.40 },

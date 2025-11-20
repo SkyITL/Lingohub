@@ -1,5 +1,5 @@
 /**
- * Test multimodal AI evaluation with Cloudinary PDFs
+ * Test simple AI evaluation without PDFs using free model
  */
 
 import { evaluateSolution } from '../services/llmEvaluator'
@@ -9,47 +9,41 @@ import * as path from 'path'
 // Load environment variables
 config({ path: path.join(__dirname, '../../.env') })
 
-async function testMultimodalEvaluation() {
-  console.log('🧪 Testing Multimodal AI Evaluation with PDFs\n')
+async function testSimpleEvaluation() {
+  console.log('🧪 Testing AI Evaluation with Free Model (no PDFs)\n')
   console.log('=' + '='.repeat(50))
 
-  // Test problem with PDF URLs
   const problemContent = `
-IOL 2023 Problem 1: Language Analysis
+Examine the following data from a language and answer the questions below:
 
-Analyze the patterns in the following language data and answer the questions.
-(See PDF for full problem details)
+1. mano = hand
+2. manos = hands
+3. libro = book
+4. libros = books
+5. casa = house
+6. casas = houses
+
+Question: How do you form the plural in this language?
   `.trim()
 
   const officialSolution = `
-The solution involves identifying morphological patterns.
-(See PDF for complete solution)
+To form the plural in this language (Spanish), add -s to words ending in a vowel.
+All singular forms end in -o or -a (vowels), and the plural is formed by adding -s.
   `.trim()
 
   const userSolution = `
-Based on the data provided, I can see that this language uses agglutination
-with clear morphological markers for tense and plurality.
+The plural is formed by adding an 's' to the end of the singular form.
+Looking at the pattern: mano→manos, libro→libros, casa→casas.
   `.trim()
 
-  // Use actual Cloudinary URLs that are now public
-  const problemPdfUrl = 'https://res.cloudinary.com/dvt6h0qgy/raw/upload/v1732075833/olympiad-problems/IOL/by-year/2023/iol-2023-i1.pdf'
-  const solutionPdfUrl = 'https://res.cloudinary.com/dvt6h0qgy/raw/upload/v1732075834/olympiad-problems/IOL/by-year/2023/iol-2023-indiv-sol.en.pdf'
-
   try {
-    console.log('\n📄 Problem PDF URL:')
-    console.log(`   ${problemPdfUrl}`)
-    console.log('\n📄 Solution PDF URL:')
-    console.log(`   ${solutionPdfUrl}`)
-
-    console.log('\n🤖 Calling Gemini Flash with multimodal support...\n')
+    console.log('\n🤖 Testing with OpenRouter Auto (FREE model)...\n')
 
     const result = await evaluateSolution(
       problemContent,
       officialSolution,
       userSolution,
-      'google/gemini-flash-1.5', // Use Gemini Flash - much cheaper!
-      problemPdfUrl,
-      solutionPdfUrl
+      'openrouter/auto' // Use the free auto-routing model
     )
 
     console.log('\n✅ Evaluation Complete!\n')
@@ -58,7 +52,7 @@ with clear morphological markers for tense and plurality.
     console.log(`- Confidence: ${result.confidence}`)
     console.log(`- Model Used: ${result.modelUsed}`)
     console.log(`- Tokens Used: ${result.tokensUsed}`)
-    console.log(`- Cost: $${result.cost.toFixed(6)}`)
+    console.log(`- Cost: $${result.cost.toFixed(6)} (should be $0.00!)`)
 
     console.log('\n📝 Scores Breakdown:')
     console.log(`- Correctness: ${result.scores.correctness}/40`)
@@ -84,24 +78,18 @@ with clear morphological markers for tense and plurality.
     }
 
     console.log('\n' + '='.repeat(50))
-    console.log('🎉 Multimodal evaluation with PDFs is working!')
+    console.log('🎉 FREE model evaluation is working!')
+    console.log('💰 Cost savings: Using free models instead of GPT-4o saves $5-15 per 1M tokens!')
 
     return true
   } catch (error: any) {
     console.error('\n❌ Evaluation failed:', error.message)
-
-    if (error.message.includes('401')) {
-      console.log('\n⚠️  PDFs may still have access issues')
-    } else if (error.message.includes('model')) {
-      console.log('\n⚠️  Model configuration issue')
-    }
-
     return false
   }
 }
 
 // Run the test
-testMultimodalEvaluation()
+testSimpleEvaluation()
   .then((success) => {
     console.log(`\n${success ? '✅' : '❌'} Test ${success ? 'passed' : 'failed'}`)
     process.exit(success ? 0 : 1)
