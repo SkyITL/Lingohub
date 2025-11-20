@@ -10,6 +10,105 @@ import { checkRateLimit, logRateLimitAction, RATE_LIMITS } from '../utils/rateLi
 const router = express.Router()
 const prisma = new PrismaClient()
 
+// Async function to evaluate submission in background
+async function evaluateSubmissionAsync(
+  submissionId: string,
+  problem: any,
+  content: string,
+  userId: string
+) {
+  try {
+    console.log('🔵 [ASYNC EVAL] Starting evaluation for submission:', submissionId)
+
+    // Use text solution as fallback if no PDF, or empty string if only PDF
+    const officialSolutionText = problem.officialSolution || 'See PDF for official solution'
+
+    // Construct full URLs for PDFs
+    const baseUrl = process.env.BACKEND_URL || 'https://lingohub-backend.vercel.app'
+    const problemPdfUrl = problem.pdfUrl
+      ? (problem.pdfUrl.startsWith('http://') || problem.pdfUrl.startsWith('https://'))
+        ? problem.pdfUrl
+        : `${baseUrl}${problem.pdfUrl}`
+      : undefined
+    const solutionPdfUrl = problem.solutionUrl
+      ? (problem.solutionUrl.startsWith('http://') || problem.solutionUrl.startsWith('https://'))
+        ? problem.solutionUrl
+        : `${baseUrl}${problem.solutionUrl}`
+      : undefined
+
+    console.log('🔵 [ASYNC EVAL] URLs:')
+    console.log('  - Problem PDF:', problemPdfUrl || 'None')
+    console.log('  - Solution PDF:', solutionPdfUrl || 'None')
+
+    const evaluationResult = await evaluateSolution(
+      problem.content,
+      officialSolutionText,
+      content,
+      undefined, // model (use default - now OpenRouter Auto for FREE!)
+      problemPdfUrl,
+      solutionPdfUrl
+    )
+
+    // Log AI evaluation action for rate limiting
+    await logRateLimitAction(userId, 'llm_eval', false)
+
+    console.log('🔵 [ASYNC EVAL] Evaluation completed:', {
+      score: evaluationResult.totalScore,
+      confidence: evaluationResult.confidence,
+      cost: evaluationResult.cost
+    })
+
+    // Store evaluation results
+    await prisma.submission.update({
+      where: { id: submissionId },
+      data: {
+        status: 'evaluated',
+        llmScore: evaluationResult.totalScore,
+        llmFeedback: evaluationResult.feedback,
+        llmConfidence: evaluationResult.confidence,
+        llmDetails: evaluationResult as any, // Store full result
+        isPartialCredit: evaluationResult.totalScore >= 40 && evaluationResult.totalScore < 70
+      }
+    })
+
+    // Create detailed evaluation record
+    await prisma.submissionEvaluation.create({
+      data: {
+        submissionId: submissionId,
+        totalScore: evaluationResult.totalScore,
+        correctness: evaluationResult.scores.correctness,
+        reasoning: evaluationResult.scores.reasoning,
+        coverage: evaluationResult.scores.coverage,
+        clarity: evaluationResult.scores.clarity,
+        confidence: evaluationResult.confidence,
+        feedback: evaluationResult.feedback,
+        errors: evaluationResult.errors,
+        strengths: evaluationResult.strengths,
+        suggestions: evaluationResult.suggestions,
+        modelUsed: evaluationResult.modelUsed,
+        tokensUsed: evaluationResult.tokensUsed,
+        promptVersion: 'v1',
+        evaluationTime: 0, // Could track actual time if needed
+        cost: evaluationResult.cost
+      }
+    })
+
+    console.log('🔵 [ASYNC EVAL] Results saved to database')
+
+  } catch (error: any) {
+    console.error('❌ [ASYNC EVAL] Error:', error)
+
+    // Update submission with error status
+    await prisma.submission.update({
+      where: { id: submissionId },
+      data: {
+        status: 'error',
+        llmFeedback: 'AI evaluation failed. Your submission has been saved and may be reviewed manually.'
+      }
+    })
+  }
+}
+
 // Configure multer for file uploads (store in memory)
 const upload = multer({
   storage: multer.memoryStorage(),
@@ -284,6 +383,7 @@ router.post('/', authenticateToken, upload.array('files', 5), async (req: Reques
     let evaluationResult = null
     const hasOfficialSolution = problem.officialSolution || problem.solutionUrl
 
+    // Start async evaluation but don't wait for it
     if (hasOfficialSolution) {
       // Check rate limit for AI evaluation (separate from submission limit)
       const evalRateLimit = await checkRateLimit(req.user.id, RATE_LIMITS.LLM_EVAL)
@@ -301,89 +401,22 @@ router.post('/', authenticateToken, upload.array('files', 5), async (req: Reques
           }
         })
       } else {
-        try {
-          console.log('🔵 [SUBMISSION SUBMIT] Starting LLM evaluation...')
-          console.log('🔵 [SUBMISSION SUBMIT] Has text solution:', !!problem.officialSolution)
-          console.log('🔵 [SUBMISSION SUBMIT] Has PDF solution:', !!problem.solutionUrl)
+        // Start async evaluation - don't await it
+        console.log('🔵 [SUBMISSION SUBMIT] Starting async LLM evaluation...')
 
-          // Use text solution as fallback if no PDF, or empty string if only PDF
-          const officialSolutionText = problem.officialSolution || 'See PDF for official solution'
-
-          // Construct full URLs for PDFs (for future use when we have working multimodal)
-          const baseUrl = process.env.BACKEND_URL || 'https://lingohub-backend.vercel.app'
-          const problemPdfUrl = problem.pdfUrl
-            ? (problem.pdfUrl.startsWith('http://') || problem.pdfUrl.startsWith('https://'))
-              ? problem.pdfUrl
-              : `${baseUrl}${problem.pdfUrl}`
-            : undefined
-          const solutionPdfUrl = problem.solutionUrl
-            ? (problem.solutionUrl.startsWith('http://') || problem.solutionUrl.startsWith('https://'))
-              ? problem.solutionUrl
-              : `${baseUrl}${problem.solutionUrl}`
-            : undefined
-
-          console.log('🔵 [SUBMISSION SUBMIT] Problem PDF URL:', problemPdfUrl)
-          console.log('🔵 [SUBMISSION SUBMIT] Solution PDF URL:', solutionPdfUrl)
-          console.log('🔵 [SUBMISSION SUBMIT] URLs being sent to LLM evaluator:')
-          console.log('  - Problem PDF:', problemPdfUrl || 'None')
-          console.log('  - Solution PDF:', solutionPdfUrl || 'None')
-
-          evaluationResult = await evaluateSolution(
-            problem.content,
-            officialSolutionText,
-            content,
-            undefined, // model (use default - GPT-4o)
-            problemPdfUrl, // problem PDF (will be ignored for GPT-4o)
-            solutionPdfUrl // solution PDF (will be ignored for GPT-4o)
-          )
-
-          // Log AI evaluation action for rate limiting
-          await logRateLimitAction(req.user.id, 'llm_eval', false)
-
-        console.log('🔵 [SUBMISSION SUBMIT] LLM evaluation completed:', {
-          score: evaluationResult.totalScore,
-          confidence: evaluationResult.confidence,
-          cost: evaluationResult.cost
+        // Fire and forget - evaluation happens in background
+        evaluateSubmissionAsync(submission.id, problem, content, req.user.id).catch(error => {
+          console.error('❌ [SUBMISSION SUBMIT] Async evaluation error:', error)
         })
 
-        // Store evaluation results
+        // Mark submission as evaluating
         await prisma.submission.update({
           where: { id: submission.id },
           data: {
-            llmScore: evaluationResult.totalScore,
-            llmFeedback: evaluationResult.feedback,
-            llmConfidence: evaluationResult.confidence,
-            isPartialCredit: evaluationResult.totalScore >= 40 && evaluationResult.totalScore < 70
+            status: 'evaluating',
+            llmFeedback: 'AI evaluation in progress. This may take 10-30 seconds. Please refresh the page to see results.'
           }
         })
-
-        // Create detailed evaluation record
-        await prisma.submissionEvaluation.create({
-          data: {
-            submissionId: submission.id,
-            totalScore: evaluationResult.totalScore,
-            correctness: evaluationResult.scores.correctness,
-            reasoning: evaluationResult.scores.reasoning,
-            coverage: evaluationResult.scores.coverage,
-            clarity: evaluationResult.scores.clarity,
-            confidence: evaluationResult.confidence,
-            feedback: evaluationResult.feedback,
-            errors: evaluationResult.errors,
-            strengths: evaluationResult.strengths,
-            suggestions: evaluationResult.suggestions,
-            modelUsed: evaluationResult.modelUsed,
-            promptVersion: 'v1',
-            evaluationTime: 0, // Will be tracked later
-            cost: evaluationResult.cost
-          }
-        })
-
-          console.log('✅ [SUBMISSION SUBMIT] Evaluation stored')
-        } catch (evalError) {
-          console.error('🔴 [SUBMISSION SUBMIT] LLM evaluation failed:', evalError)
-          // Don't fail the submission if evaluation fails
-          // The submission is still saved, just without evaluation
-        }
       }
     } else {
       console.log('⚠️  [SUBMISSION SUBMIT] No official solution available, skipping LLM evaluation')
