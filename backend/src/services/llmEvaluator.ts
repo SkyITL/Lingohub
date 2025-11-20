@@ -158,16 +158,20 @@ async function callOpenRouter(
   // Build content array for multimodal input (text + PDFs)
   const contentParts: any[] = [{ type: 'text', text: prompt }]
 
-  // Add problem PDF if provided
-  if (problemPdfUrl) {
+  // Only add PDFs for models that support multimodal input (Gemini models)
+  // GPT-4o-mini doesn't support PDFs properly and returns 401 errors
+  const supportsMultimodal = model.includes('gemini')
+
+  // Add problem PDF if provided and model supports it
+  if (problemPdfUrl && supportsMultimodal) {
     contentParts.push({
       type: 'image_url',
       image_url: { url: problemPdfUrl }
     })
   }
 
-  // Add solution PDF if provided
-  if (solutionPdfUrl) {
+  // Add solution PDF if provided and model supports it
+  if (solutionPdfUrl && supportsMultimodal) {
     contentParts.push({
       type: 'image_url',
       image_url: { url: solutionPdfUrl }
