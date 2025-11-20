@@ -161,14 +161,12 @@ async function callOpenRouter(
   const contentParts: any[] = [{ type: 'text', text: prompt }]
 
   // Check if model supports multimodal input
-  // Note: GPT-4o technically supports multimodal but can't access Cloudinary URLs (401 errors)
-  // Only enable for models that can actually access the PDFs
+  // Re-enabled GPT-4o after making Cloudinary PDFs public
   const supportsMultimodal =
     model.includes('claude-3') ||
-    model.includes('gemini')
-  // Disabled for GPT-4o due to Cloudinary access issues:
-  // model.includes('gpt-4o') ||
-  // model.includes('gpt-4-vision')
+    model.includes('gemini') ||
+    model.includes('gpt-4o') ||
+    model.includes('gpt-4-vision')
 
   // Add problem PDF if provided and model supports it
   if (problemPdfUrl && supportsMultimodal) {

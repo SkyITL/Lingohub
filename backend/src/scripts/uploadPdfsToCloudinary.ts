@@ -40,6 +40,8 @@ async function uploadPdf(filePath: string, folder: string = 'olympiad-problems')
     const result = await cloudinary.uploader.upload(filePath, {
       folder: folder,
       resource_type: 'raw', // PDFs are raw files, not images
+      type: 'upload',
+      access_mode: 'public', // Make PDFs publicly accessible
       public_id: path.basename(filePath, '.pdf'),
       overwrite: false, // Don't overwrite if already exists
       use_filename: true,
