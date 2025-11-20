@@ -161,12 +161,14 @@ async function callOpenRouter(
   const contentParts: any[] = [{ type: 'text', text: prompt }]
 
   // Check if model supports multimodal input
-  // Claude 3.5, Claude 3 Haiku, GPT-4o, GPT-4 Vision, and Gemini models support images/PDFs
+  // Note: GPT-4o technically supports multimodal but can't access Cloudinary URLs (401 errors)
+  // Only enable for models that can actually access the PDFs
   const supportsMultimodal =
     model.includes('claude-3') ||
-    model.includes('gemini') ||
-    model.includes('gpt-4o') ||
-    model.includes('gpt-4-vision')
+    model.includes('gemini')
+  // Disabled for GPT-4o due to Cloudinary access issues:
+  // model.includes('gpt-4o') ||
+  // model.includes('gpt-4-vision')
 
   // Add problem PDF if provided and model supports it
   if (problemPdfUrl && supportsMultimodal) {

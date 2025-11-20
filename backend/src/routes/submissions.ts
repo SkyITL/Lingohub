@@ -309,31 +309,30 @@ router.post('/', authenticateToken, upload.array('files', 5), async (req: Reques
           // Use text solution as fallback if no PDF, or empty string if only PDF
           const officialSolutionText = problem.officialSolution || 'See PDF for official solution'
 
-          // Construct full URLs for PDFs (Gemini needs publicly accessible URLs)
-          // If URL is already absolute (starts with http/https), use as-is
-          // Otherwise, prepend backend URL for relative paths
+          // Construct full URLs for PDFs (for future use when we have working multimodal)
           const baseUrl = process.env.BACKEND_URL || 'https://lingohub-backend.vercel.app'
-          const problemPdfFullUrl = problem.pdfUrl
+          const problemPdfUrl = problem.pdfUrl
             ? (problem.pdfUrl.startsWith('http://') || problem.pdfUrl.startsWith('https://'))
               ? problem.pdfUrl
               : `${baseUrl}${problem.pdfUrl}`
             : undefined
-          const solutionPdfFullUrl = problem.solutionUrl
+          const solutionPdfUrl = problem.solutionUrl
             ? (problem.solutionUrl.startsWith('http://') || problem.solutionUrl.startsWith('https://'))
               ? problem.solutionUrl
               : `${baseUrl}${problem.solutionUrl}`
             : undefined
 
-          console.log('🔵 [SUBMISSION SUBMIT] Problem PDF URL:', problemPdfFullUrl)
-          console.log('🔵 [SUBMISSION SUBMIT] Solution PDF URL:', solutionPdfFullUrl)
+          console.log('🔵 [SUBMISSION SUBMIT] Problem PDF URL:', problemPdfUrl)
+          console.log('🔵 [SUBMISSION SUBMIT] Solution PDF URL:', solutionPdfUrl)
+          console.log('🔵 [SUBMISSION SUBMIT] Note: PDFs disabled for GPT-4o due to access issues')
 
           evaluationResult = await evaluateSolution(
             problem.content,
             officialSolutionText,
             content,
-            undefined, // model (use default)
-            problemPdfFullUrl, // problem PDF
-            solutionPdfFullUrl // solution PDF
+            undefined, // model (use default - GPT-4o)
+            problemPdfUrl, // problem PDF (will be ignored for GPT-4o)
+            solutionPdfUrl // solution PDF (will be ignored for GPT-4o)
           )
 
           // Log AI evaluation action for rate limiting
