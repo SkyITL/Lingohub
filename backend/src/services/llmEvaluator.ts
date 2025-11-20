@@ -170,17 +170,51 @@ async function callOpenRouter(
 
   // Add problem PDF if provided and model supports it
   if (problemPdfUrl && supportsMultimodal) {
+    console.log('[LLM Evaluator] Adding problem PDF to request:', problemPdfUrl)
     contentParts.push({
       type: 'image_url',
       image_url: { url: problemPdfUrl }
     })
+  } else if (problemPdfUrl) {
+    console.log('[LLM Evaluator] Skipping problem PDF (model does not support multimodal):', model)
   }
 
   // Add solution PDF if provided and model supports it
   if (solutionPdfUrl && supportsMultimodal) {
+    console.log('[LLM Evaluator] Adding solution PDF to request:', solutionPdfUrl)
     contentParts.push({
       type: 'image_url',
       image_url: { url: solutionPdfUrl }
+    })
+  } else if (solutionPdfUrl) {
+    console.log('[LLM Evaluator] Skipping solution PDF (model does not support multimodal):', model)
+  }
+
+  console.log('[LLM Evaluator] Using model:', model)
+  console.log('[LLM Evaluator] Content parts count:', contentParts.length)
+  console.log('[LLM Evaluator] Multimodal support:', supportsMultimodal)
+
+  const requestBody = {
+    model,
+    messages: [
+      {
+        role: 'user',
+        content: contentParts.length === 1 ? prompt : contentParts,
+      },
+    ],
+    temperature: 0.3, // Lower temperature for more consistent evaluations
+    max_tokens: 1000,
+  }
+
+  // Log the actual content being sent (but not the full prompt text to avoid clutter)
+  if (contentParts.length > 1) {
+    console.log('[LLM Evaluator] Sending multimodal request with:')
+    contentParts.forEach((part: any, index: number) => {
+      if (part.type === 'text') {
+        console.log(`  - Part ${index}: Text (${part.text.length} chars)`)
+      } else if (part.type === 'image_url') {
+        console.log(`  - Part ${index}: Image URL:`, part.image_url.url)
+      }
     })
   }
 
@@ -192,17 +226,7 @@ async function callOpenRouter(
       'HTTP-Referer': 'https://lingohub.vercel.app',
       'X-Title': 'LingoHub',
     },
-    body: JSON.stringify({
-      model,
-      messages: [
-        {
-          role: 'user',
-          content: contentParts.length === 1 ? prompt : contentParts,
-        },
-      ],
-      temperature: 0.3, // Lower temperature for more consistent evaluations
-      max_tokens: 1000,
-    }),
+    body: JSON.stringify(requestBody),
   })
 
   if (!response.ok) {

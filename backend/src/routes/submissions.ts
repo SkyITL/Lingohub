@@ -324,7 +324,9 @@ router.post('/', authenticateToken, upload.array('files', 5), async (req: Reques
 
           console.log('🔵 [SUBMISSION SUBMIT] Problem PDF URL:', problemPdfUrl)
           console.log('🔵 [SUBMISSION SUBMIT] Solution PDF URL:', solutionPdfUrl)
-          console.log('🔵 [SUBMISSION SUBMIT] Note: PDFs disabled for GPT-4o due to access issues')
+          console.log('🔵 [SUBMISSION SUBMIT] URLs being sent to LLM evaluator:')
+          console.log('  - Problem PDF:', problemPdfUrl || 'None')
+          console.log('  - Solution PDF:', solutionPdfUrl || 'None')
 
           evaluationResult = await evaluateSolution(
             problem.content,
