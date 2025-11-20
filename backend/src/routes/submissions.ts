@@ -66,7 +66,6 @@ async function evaluateSubmissionAsync(
         llmScore: evaluationResult.totalScore,
         llmFeedback: evaluationResult.feedback,
         llmConfidence: evaluationResult.confidence,
-        llmDetails: evaluationResult as any, // Store full result
         isPartialCredit: evaluationResult.totalScore >= 40 && evaluationResult.totalScore < 70
       }
     })
@@ -86,7 +85,6 @@ async function evaluateSubmissionAsync(
         strengths: evaluationResult.strengths,
         suggestions: evaluationResult.suggestions,
         modelUsed: evaluationResult.modelUsed,
-        tokensUsed: evaluationResult.tokensUsed,
         promptVersion: 'v1',
         evaluationTime: 0, // Could track actual time if needed
         cost: evaluationResult.cost
@@ -430,15 +428,17 @@ router.post('/', authenticateToken, upload.array('files', 5), async (req: Reques
 
     res.status(201).json({
       message: 'Submission submitted successfully',
+      submissionId: submission.id, // For redirect to submission page
       submission: {
         id: submission.id,
         content: submission.content,
         attachments: submission.attachments,
         createdAt: submission.createdAt,
+        status: 'evaluating', // Show current status
         user: submission.user,
-        llmScore: evaluationResult?.totalScore,
-        llmFeedback: evaluationResult?.feedback,
-        llmConfidence: evaluationResult?.confidence
+        llmScore: null,
+        llmFeedback: 'AI evaluation in progress. Please refresh the page to see results.',
+        llmConfidence: null
       },
       debug: {
         submissionsRemaining: updatedSubmissionLimit.remaining,

@@ -75,7 +75,7 @@ async function updateAccessControlByPrefix(prefix: string) {
 
       try {
         // Use update_resources to update multiple resources at once
-        const updateResult = await cloudinary.api.update_resources_access_mode_by_ids(
+        const updateResult = await (cloudinary.api as any).update_resources_access_mode_by_ids(
           batch,
           'public',
           {
@@ -180,7 +180,7 @@ async function tagAllPdfs(prefix: string, tag: string) {
       const batch = allResources.slice(i, i + batchSize)
 
       try {
-        await cloudinary.api.add_tag(tag, batch, {
+        await (cloudinary.api as any).add_tag(tag, batch, {
           resource_type: 'raw',
           type: 'upload'
         })

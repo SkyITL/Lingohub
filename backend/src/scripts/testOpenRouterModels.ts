@@ -55,7 +55,7 @@ async function testModel(modelName: string) {
       })
     })
 
-    const data = await response.json()
+    const data = await response.json() as any
 
     if (response.ok) {
       console.log(`✅ SUCCESS: ${modelName}`)
