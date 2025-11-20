@@ -26,9 +26,10 @@ export interface EvaluationResult {
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY || ''
 const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions'
 
-// Use Google Gemini Flash 1.5 - cost effective with multimodal support
-// Input: $0.075 per 1M tokens, Output: $0.30 per 1M tokens
-const DEFAULT_MODEL = 'google/gemini-flash-1.5'
+// Use OpenAI GPT-4o Mini as fallback - reliable and widely supported
+// Input: $0.15 per 1M tokens, Output: $0.60 per 1M tokens
+// Note: Switching from Gemini due to OpenRouter authentication issues
+const DEFAULT_MODEL = 'openai/gpt-4o-mini'
 
 interface LLMResponse {
   id: string
@@ -126,6 +127,7 @@ function calculateCost(
 ): number {
   // Pricing per 1M tokens (as of 2025)
   const pricing: Record<string, { input: number; output: number }> = {
+    'google/gemini-2.0-flash-exp:free': { input: 0, output: 0 }, // Free tier
     'google/gemini-flash-1.5': { input: 0.075, output: 0.3 },
     'google/gemini-2.0-flash-001': { input: 0.10, output: 0.40 },
     'google/gemini-2.5-flash': { input: 0.30, output: 2.50 },
@@ -133,7 +135,7 @@ function calculateCost(
     'openai/gpt-4o-mini': { input: 0.15, output: 0.6 },
   }
 
-  const modelPricing = pricing[model] || pricing['google/gemini-flash-1.5']
+  const modelPricing = pricing[model] || pricing['google/gemini-2.0-flash-001']
   const inputCost = (promptTokens / 1_000_000) * modelPricing.input
   const outputCost = (completionTokens / 1_000_000) * modelPricing.output
 
