@@ -26,10 +26,10 @@ export interface EvaluationResult {
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY || ''
 const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions'
 
-// Use OpenAI GPT-4o Mini as fallback - reliable and widely supported
-// Input: $0.15 per 1M tokens, Output: $0.60 per 1M tokens
-// Note: Switching from Gemini due to OpenRouter authentication issues
-const DEFAULT_MODEL = 'openai/gpt-4o-mini'
+// Use GPT-4o - strong multimodal support for linguistics with PDF handling
+// Input: $5.00 per 1M tokens, Output: $15.00 per 1M tokens
+// Supports images, PDFs, IPA charts, syntactic trees, and visual linguistics content
+const DEFAULT_MODEL = 'openai/gpt-4o'
 
 interface LLMResponse {
   id: string
@@ -131,8 +131,10 @@ function calculateCost(
     'google/gemini-flash-1.5': { input: 0.075, output: 0.3 },
     'google/gemini-2.0-flash-001': { input: 0.10, output: 0.40 },
     'google/gemini-2.5-flash': { input: 0.30, output: 2.50 },
+    'anthropic/claude-3.5-sonnet': { input: 3.00, output: 15.00 },
     'anthropic/claude-3-haiku': { input: 0.25, output: 1.25 },
     'openai/gpt-4o-mini': { input: 0.15, output: 0.6 },
+    'openai/gpt-4o': { input: 5.00, output: 15.00 },
   }
 
   const modelPricing = pricing[model] || pricing['google/gemini-2.0-flash-001']
@@ -158,9 +160,13 @@ async function callOpenRouter(
   // Build content array for multimodal input (text + PDFs)
   const contentParts: any[] = [{ type: 'text', text: prompt }]
 
-  // Only add PDFs for models that support multimodal input (Gemini models)
-  // GPT-4o-mini doesn't support PDFs properly and returns 401 errors
-  const supportsMultimodal = model.includes('gemini')
+  // Check if model supports multimodal input
+  // Claude 3.5, Claude 3 Haiku, GPT-4o, GPT-4 Vision, and Gemini models support images/PDFs
+  const supportsMultimodal =
+    model.includes('claude-3') ||
+    model.includes('gemini') ||
+    model.includes('gpt-4o') ||
+    model.includes('gpt-4-vision')
 
   // Add problem PDF if provided and model supports it
   if (problemPdfUrl && supportsMultimodal) {
