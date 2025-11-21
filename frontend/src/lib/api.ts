@@ -28,10 +28,10 @@ const getApiBaseUrl = () => {
 
 const API_BASE_URL = getApiBaseUrl()
 
-// Create axios instance
+// Create axios instance with longer timeout for submissions (AI evaluation can take time)
 export const api = axios.create({
   baseURL: API_BASE_URL,
-  timeout: 10000,
+  timeout: 30000, // Increased from 10s to 30s for submission evaluation
   headers: {
     'Content-Type': 'application/json'
   }
