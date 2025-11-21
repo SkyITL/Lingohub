@@ -173,12 +173,16 @@ async function callOpenRouter(
   const contentParts: any[] = [{ type: 'text', text: prompt }]
 
   // Check if model supports multimodal input
-  // Re-enabled GPT-4o after making Cloudinary PDFs public
+  // For openrouter/auto, we'll always try to send images - it will route to a multimodal model
+  // For other models, check if they have known multimodal support
   const supportsMultimodal =
+    model === 'openrouter/auto' || // Auto-routing will select a multimodal model
     model.includes('claude-3') ||
     model.includes('gemini') ||
     model.includes('gpt-4o') ||
-    model.includes('gpt-4-vision')
+    model.includes('gpt-4-vision') ||
+    model.includes('gpt-5') || // GPT-5 supports multimodal
+    model.includes('glm-4v') // GLM-4V supports multimodal
 
   // Add problem PDF if provided and model supports it
   if (problemPdfUrl && supportsMultimodal) {
