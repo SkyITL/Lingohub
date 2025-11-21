@@ -1,10 +1,10 @@
 /**
- * Test script for PDF extraction
+ * Test script for PDF transformation
  */
-import { extractPdfText, generateCloudinaryImageUrl } from '../services/pdfExtractor'
+import { transformPdfToImage } from '../services/pdfExtractor'
 
-async function testPdfExtraction() {
-  console.log('[Test] Starting PDF extraction test...')
+async function testPdfTransformation() {
+  console.log('[Test] Starting PDF to image transformation test...')
 
   // Test with real Cloudinary PDF URLs
   const pdfUrls = [
@@ -15,28 +15,19 @@ async function testPdfExtraction() {
   for (const testPdfUrl of pdfUrls) {
     console.log('\n' + '='.repeat(80))
     console.log('[Test] Testing PDF URL:', testPdfUrl)
-    console.log('[Test] Attempting to extract text...')
+    console.log('[Test] Transforming to PNG image...')
 
-    const text = await extractPdfText(testPdfUrl, 15000)
+    const imageUrl = transformPdfToImage(testPdfUrl)
 
-    if (text) {
-      console.log('[Test] ✅ PDF extraction successful!')
-      console.log('[Test] Extracted text length:', text.length, 'characters')
-      console.log('[Test] First 300 characters:')
-      console.log(text.substring(0, 300))
-      console.log('...')
+    if (imageUrl && imageUrl !== testPdfUrl) {
+      console.log('[Test] ✅ PDF transformation successful!')
+      console.log('[Test] Transformed Image URL:')
+      console.log(imageUrl)
     } else {
-      console.log('[Test] ❌ PDF extraction failed - returned null')
-      console.log('[Test] This might indicate:')
-      console.log('  - PDF URL is not accessible')
-      console.log('  - PDF parsing failed')
-      console.log('  - Timeout occurred')
-      console.log('[Test] Attempting with Cloudinary transformation as fallback...')
-
-      const transformedUrl = generateCloudinaryImageUrl(testPdfUrl)
-      console.log('[Test] Transformed URL:', transformedUrl)
+      console.log('[Test] ⚠️  Transformation returned original URL')
+      console.log('[Test] URL:', imageUrl)
     }
   }
 }
 
-testPdfExtraction().catch(console.error)
+testPdfTransformation().catch(console.error)
