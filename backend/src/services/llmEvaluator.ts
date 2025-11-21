@@ -3,6 +3,8 @@
  * Uses OpenRouter API to evaluate linguistics problem solutions
  */
 
+import { extractPdfText } from './pdfExtractor'
+
 export interface EvaluationScores {
   correctness: number // 0-40 points
   reasoning: number // 0-30 points
@@ -165,76 +167,49 @@ async function callOpenRouter(
   problemPdfUrl?: string,
   solutionPdfUrl?: string
 ): Promise<LLMResponse> {
+  // Extract text from PDFs and include in prompt
+  let enhancedPrompt = prompt
+
+  if (problemPdfUrl) {
+    console.log('[LLM Evaluator] Extracting text from problem PDF...')
+    const problemText = await extractPdfText(problemPdfUrl)
+    if (problemText) {
+      enhancedPrompt += `\n\n[PROBLEM PDF CONTENT]\n${problemText}`
+      console.log('[LLM Evaluator] Successfully included problem PDF text in prompt')
+    } else {
+      console.log('[LLM Evaluator] Failed to extract problem PDF text')
+    }
+  }
+
+  if (solutionPdfUrl) {
+    console.log('[LLM Evaluator] Extracting text from solution PDF...')
+    const solutionText = await extractPdfText(solutionPdfUrl)
+    if (solutionText) {
+      enhancedPrompt += `\n\n[OFFICIAL SOLUTION PDF CONTENT]\n${solutionText}`
+      console.log('[LLM Evaluator] Successfully included solution PDF text in prompt')
+    } else {
+      console.log('[LLM Evaluator] Failed to extract solution PDF text')
+    }
+  }
   if (!OPENROUTER_API_KEY) {
     throw new Error('OPENROUTER_API_KEY environment variable not set')
   }
 
-  // Build content array for multimodal input (text + PDFs)
-  const contentParts: any[] = [{ type: 'text', text: prompt }]
-
-  // Check if model supports multimodal input
-  // For openrouter/auto, we'll try to send images but gracefully fall back to text
-  // For other models, check if they have known multimodal support
-  const supportsMultimodal =
-    model === 'openrouter/auto' || // Auto-routing will select a multimodal model
-    model.includes('claude-3') ||
-    model.includes('gemini') ||
-    model.includes('gpt-4o') ||
-    model.includes('gpt-4-vision') ||
-    model.includes('gpt-5') || // GPT-5 supports multimodal
-    model.includes('glm-4v') // GLM-4V supports multimodal
-
-  // Add problem PDF if provided and model supports it
-  // Note: If PDF URL fails during API call, we'll fall back to text-only
-  if (problemPdfUrl && supportsMultimodal) {
-    console.log('[LLM Evaluator] Adding problem PDF to request:', problemPdfUrl)
-    contentParts.push({
-      type: 'image_url',
-      image_url: { url: problemPdfUrl }
-    })
-  } else if (problemPdfUrl) {
-    console.log('[LLM Evaluator] Skipping problem PDF (model does not support multimodal):', model)
-  }
-
-  // Add solution PDF if provided and model supports it
-  // Note: If PDF URL fails during API call, we'll fall back to text-only
-  if (solutionPdfUrl && supportsMultimodal) {
-    console.log('[LLM Evaluator] Adding solution PDF to request:', solutionPdfUrl)
-    contentParts.push({
-      type: 'image_url',
-      image_url: { url: solutionPdfUrl }
-    })
-  } else if (solutionPdfUrl) {
-    console.log('[LLM Evaluator] Skipping solution PDF (model does not support multimodal):', model)
-  }
-
   console.log('[LLM Evaluator] Using model:', model)
-  console.log('[LLM Evaluator] Content parts count:', contentParts.length)
-  console.log('[LLM Evaluator] Multimodal support:', supportsMultimodal)
+  console.log('[LLM Evaluator] Prompt length:', enhancedPrompt.length, 'chars')
 
   const requestBody = {
     model,
     messages: [
       {
         role: 'user',
-        content: contentParts.length === 1 ? prompt : contentParts,
+        content: enhancedPrompt,
       },
     ],
     temperature: 0.3, // Lower temperature for more consistent evaluations
     max_tokens: 1000,
   }
 
-  // Log the actual content being sent (but not the full prompt text to avoid clutter)
-  if (contentParts.length > 1) {
-    console.log('[LLM Evaluator] Sending multimodal request with:')
-    contentParts.forEach((part: any, index: number) => {
-      if (part.type === 'text') {
-        console.log(`  - Part ${index}: Text (${part.text.length} chars)`)
-      } else if (part.type === 'image_url') {
-        console.log(`  - Part ${index}: Image URL:`, part.image_url.url)
-      }
-    })
-  }
 
   const response = await fetch(OPENROUTER_API_URL, {
     method: 'POST',
@@ -249,49 +224,7 @@ async function callOpenRouter(
 
   if (!response.ok) {
     const error = await response.text()
-    const errorMessage = `OpenRouter API error: ${response.status} - ${error}`
-
-    // If the error is about downloading images/PDFs, fall back to text-only evaluation
-    if (
-      response.status === 400 &&
-      (error.includes('downloading') || error.includes('invalid_value') || error.includes('url'))
-    ) {
-      console.log('[LLM Evaluator] PDF download failed, retrying with text-only prompt')
-
-      // Retry with text-only content (no images)
-      const textOnlyBody = {
-        model,
-        messages: [
-          {
-            role: 'user',
-            content: prompt, // Just the text prompt, no images
-          },
-        ],
-        temperature: 0.3,
-        max_tokens: 1000,
-      }
-
-      const retryResponse = await fetch(OPENROUTER_API_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${OPENROUTER_API_KEY}`,
-          'HTTP-Referer': 'https://lingohub.vercel.app',
-          'X-Title': 'LingoHub',
-        },
-        body: JSON.stringify(textOnlyBody),
-      })
-
-      if (!retryResponse.ok) {
-        const retryError = await retryResponse.text()
-        throw new Error(`OpenRouter API error (retry): ${retryResponse.status} - ${retryError}`)
-      }
-
-      console.log('[LLM Evaluator] Text-only fallback succeeded')
-      return (await retryResponse.json()) as LLMResponse
-    }
-
-    throw new Error(errorMessage)
+    throw new Error(`OpenRouter API error: ${response.status} - ${error}`)
   }
 
   return (await response.json()) as LLMResponse
