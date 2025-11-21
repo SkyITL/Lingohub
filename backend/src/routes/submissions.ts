@@ -10,13 +10,29 @@ import { checkRateLimit, logRateLimitAction, RATE_LIMITS } from '../utils/rateLi
 const router = express.Router()
 const prisma = new PrismaClient()
 
-// Async function to evaluate submission in background
+// Async function to evaluate submission in background with retry logic
 async function evaluateSubmissionAsync(
   submissionId: string,
   problem: any,
   content: string,
-  userId: string
+  userId: string,
+  maxRetries: number = 3
 ) {
+  const retryWithDelay = async (fn: () => Promise<any>, retries: number): Promise<any> => {
+    try {
+      return await fn()
+    } catch (error: any) {
+      if (retries > 0 && error.code === 'P2024') {
+        // Connection pool timeout - retry with exponential backoff
+        const delay = (3 - retries + 1) * 1000
+        console.log(`⏳ [ASYNC EVAL] Connection pool timeout, retrying in ${delay}ms (${retries} retries left)`)
+        await new Promise(r => setTimeout(r, delay))
+        return retryWithDelay(fn, retries - 1)
+      }
+      throw error
+    }
+  }
+
   try {
     console.log('🔵 [ASYNC EVAL] Starting evaluation for submission:', submissionId)
 
@@ -49,8 +65,11 @@ async function evaluateSubmissionAsync(
       solutionPdfUrl
     )
 
-    // Log AI evaluation action for rate limiting
-    await logRateLimitAction(userId, 'llm_eval', false)
+    // Log AI evaluation action for rate limiting (with retry)
+    await retryWithDelay(
+      () => logRateLimitAction(userId, 'llm_eval', false),
+      maxRetries
+    )
 
     console.log('🔵 [ASYNC EVAL] Evaluation completed:', {
       score: evaluationResult.totalScore,
@@ -58,52 +77,75 @@ async function evaluateSubmissionAsync(
       cost: evaluationResult.cost
     })
 
-    // Store evaluation results
-    await prisma.submission.update({
-      where: { id: submissionId },
-      data: {
-        status: 'evaluated',
-        llmScore: evaluationResult.totalScore,
-        llmFeedback: evaluationResult.feedback,
-        llmConfidence: evaluationResult.confidence,
-        isPartialCredit: evaluationResult.totalScore >= 40 && evaluationResult.totalScore < 70
-      }
-    })
+    // Store evaluation results (with retry)
+    await retryWithDelay(
+      () => prisma.submission.update({
+        where: { id: submissionId },
+        data: {
+          status: 'evaluated',
+          llmScore: evaluationResult.totalScore,
+          llmFeedback: evaluationResult.feedback,
+          llmConfidence: evaluationResult.confidence,
+          isPartialCredit: evaluationResult.totalScore >= 40 && evaluationResult.totalScore < 70
+        }
+      }),
+      maxRetries
+    )
 
-    // Create detailed evaluation record
-    await prisma.submissionEvaluation.create({
-      data: {
-        submissionId: submissionId,
-        totalScore: evaluationResult.totalScore,
-        correctness: evaluationResult.scores.correctness,
-        reasoning: evaluationResult.scores.reasoning,
-        coverage: evaluationResult.scores.coverage,
-        clarity: evaluationResult.scores.clarity,
-        confidence: evaluationResult.confidence,
-        feedback: evaluationResult.feedback,
-        errors: evaluationResult.errors,
-        strengths: evaluationResult.strengths,
-        suggestions: evaluationResult.suggestions,
-        modelUsed: evaluationResult.modelUsed,
-        promptVersion: 'v1',
-        evaluationTime: 0, // Could track actual time if needed
-        cost: evaluationResult.cost
-      }
-    })
+    // Create detailed evaluation record (with retry)
+    await retryWithDelay(
+      () => prisma.submissionEvaluation.create({
+        data: {
+          submissionId: submissionId,
+          totalScore: evaluationResult.totalScore,
+          correctness: evaluationResult.scores.correctness,
+          reasoning: evaluationResult.scores.reasoning,
+          coverage: evaluationResult.scores.coverage,
+          clarity: evaluationResult.scores.clarity,
+          confidence: evaluationResult.confidence,
+          feedback: evaluationResult.feedback,
+          errors: evaluationResult.errors,
+          strengths: evaluationResult.strengths,
+          suggestions: evaluationResult.suggestions,
+          modelUsed: evaluationResult.modelUsed,
+          promptVersion: 'v1',
+          evaluationTime: 0,
+          cost: evaluationResult.cost
+        }
+      }),
+      maxRetries
+    )
 
     console.log('🔵 [ASYNC EVAL] Results saved to database')
 
   } catch (error: any) {
     console.error('❌ [ASYNC EVAL] Error:', error)
 
-    // Update submission with error status
-    await prisma.submission.update({
-      where: { id: submissionId },
-      data: {
-        status: 'error',
-        llmFeedback: 'AI evaluation failed. Your submission has been saved and may be reviewed manually.'
+    // Try to update submission with error status (with retry)
+    try {
+      const retryFn = async (retries: number): Promise<void> => {
+        try {
+          await prisma.submission.update({
+            where: { id: submissionId },
+            data: {
+              status: 'error',
+              llmFeedback: 'AI evaluation failed. Your submission has been saved and may be reviewed manually.'
+            }
+          })
+        } catch (updateError: any) {
+          if (retries > 0 && updateError.code === 'P2024') {
+            const delay = 1000
+            await new Promise(r => setTimeout(r, delay))
+            return retryFn(retries - 1)
+          }
+          throw updateError
+        }
       }
-    })
+
+      await retryFn(2)
+    } catch (finalError) {
+      console.error('❌ [ASYNC EVAL] Failed to update submission error status:', finalError)
+    }
   }
 }
 
