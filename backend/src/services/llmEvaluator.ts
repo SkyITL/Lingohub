@@ -96,6 +96,13 @@ Rate your confidence in this evaluation:
 3. **Minor errors tolerance**: Small notation differences or formatting issues should not significantly impact scores
 4. **When uncertain**: If you're unsure whether an answer is correct, mark confidence as "low" or "medium" rather than scoring harshly
 5. **Partial credit**: Award partial points for partially correct work - don't give 0 unless the answer is completely wrong
+6. **Scoring guide**:
+   - 0-20: Fundamentally misunderstands the problem
+   - 21-40: Shows some understanding but major errors
+   - 41-60: Reasonable attempt with some correct insights
+   - 61-75: Good solution with minor gaps
+   - 76-85: Very good solution, mostly complete and correct
+   - 86-100: Excellent solution, comprehensive and accurate
 
 # RESPONSE FORMAT
 Respond with a JSON object (no markdown, just pure JSON):
@@ -108,13 +115,15 @@ Respond with a JSON object (no markdown, just pure JSON):
     "clarity": <0-10>
   },
   "confidence": "<low|medium|high>",
-  "feedback": "<2-3 sentences of constructive feedback>",
+  "feedback": "<mandatory: provide at least 1 clear sentence explaining the score, highlighting what went right or wrong>",
   "errors": ["<specific error 1>", "<specific error 2>"],
   "strengths": ["<strength 1>", "<strength 2>"],
   "suggestions": ["<improvement 1>", "<improvement 2>"]
 }
 
-Be strict but fair. Award full points only for truly excellent work. Typical good solutions should score 70-85.`
+CRITICAL: Always provide feedback explaining your score. If score is low, explain why. If score is high, explain what was good.
+Be strict but fair. Award full points only for truly excellent work. Typical good solutions should score 70-85.
+ALWAYS include at least one sentence in the feedback field explaining your evaluation.`
 }
 
 /**
@@ -265,11 +274,27 @@ function parseLLMResponse(responseText: string, modelUsed: string, usage: any): 
 
     const cost = calculateCost(usage.prompt_tokens, usage.completion_tokens, modelUsed)
 
+    // Ensure feedback is never empty
+    let feedback = parsed.feedback || ''
+    if (!feedback || feedback.trim().length === 0) {
+      // Generate minimal feedback based on score if not provided
+      if (totalScore >= 80) {
+        feedback = 'Excellent work on this problem.'
+      } else if (totalScore >= 60) {
+        feedback = 'Good attempt with mostly correct insights.'
+      } else if (totalScore >= 40) {
+        feedback = 'Reasonable effort but needs improvement in accuracy.'
+      } else {
+        feedback = 'This solution needs significant revision to address the key concepts.'
+      }
+      console.log('[LLM Evaluator] Generated feedback due to empty response:', feedback)
+    }
+
     return {
       totalScore,
       scores,
       confidence,
-      feedback: parsed.feedback || 'No feedback provided',
+      feedback: feedback.trim(),
       errors: Array.isArray(parsed.errors) ? parsed.errors : [],
       strengths: Array.isArray(parsed.strengths) ? parsed.strengths : [],
       suggestions: Array.isArray(parsed.suggestions) ? parsed.suggestions : [],
