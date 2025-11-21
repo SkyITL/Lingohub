@@ -173,7 +173,7 @@ async function callOpenRouter(
   const contentParts: any[] = [{ type: 'text', text: prompt }]
 
   // Check if model supports multimodal input
-  // For openrouter/auto, we'll always try to send images - it will route to a multimodal model
+  // For openrouter/auto, we'll try to send images but gracefully fall back to text
   // For other models, check if they have known multimodal support
   const supportsMultimodal =
     model === 'openrouter/auto' || // Auto-routing will select a multimodal model
@@ -185,6 +185,7 @@ async function callOpenRouter(
     model.includes('glm-4v') // GLM-4V supports multimodal
 
   // Add problem PDF if provided and model supports it
+  // Note: If PDF URL fails during API call, we'll fall back to text-only
   if (problemPdfUrl && supportsMultimodal) {
     console.log('[LLM Evaluator] Adding problem PDF to request:', problemPdfUrl)
     contentParts.push({
@@ -196,6 +197,7 @@ async function callOpenRouter(
   }
 
   // Add solution PDF if provided and model supports it
+  // Note: If PDF URL fails during API call, we'll fall back to text-only
   if (solutionPdfUrl && supportsMultimodal) {
     console.log('[LLM Evaluator] Adding solution PDF to request:', solutionPdfUrl)
     contentParts.push({
@@ -247,7 +249,49 @@ async function callOpenRouter(
 
   if (!response.ok) {
     const error = await response.text()
-    throw new Error(`OpenRouter API error: ${response.status} - ${error}`)
+    const errorMessage = `OpenRouter API error: ${response.status} - ${error}`
+
+    // If the error is about downloading images/PDFs, fall back to text-only evaluation
+    if (
+      response.status === 400 &&
+      (error.includes('downloading') || error.includes('invalid_value') || error.includes('url'))
+    ) {
+      console.log('[LLM Evaluator] PDF download failed, retrying with text-only prompt')
+
+      // Retry with text-only content (no images)
+      const textOnlyBody = {
+        model,
+        messages: [
+          {
+            role: 'user',
+            content: prompt, // Just the text prompt, no images
+          },
+        ],
+        temperature: 0.3,
+        max_tokens: 1000,
+      }
+
+      const retryResponse = await fetch(OPENROUTER_API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${OPENROUTER_API_KEY}`,
+          'HTTP-Referer': 'https://lingohub.vercel.app',
+          'X-Title': 'LingoHub',
+        },
+        body: JSON.stringify(textOnlyBody),
+      })
+
+      if (!retryResponse.ok) {
+        const retryError = await retryResponse.text()
+        throw new Error(`OpenRouter API error (retry): ${retryResponse.status} - ${retryError}`)
+      }
+
+      console.log('[LLM Evaluator] Text-only fallback succeeded')
+      return (await retryResponse.json()) as LLMResponse
+    }
+
+    throw new Error(errorMessage)
   }
 
   return (await response.json()) as LLMResponse
