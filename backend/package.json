@@ -29,6 +29,7 @@
     "jsonwebtoken": "^9.0.2",
     "multer": "^2.0.2",
     "pdf-parse": "^2.4.5",
+    "pdfjs-dist": "^5.4.296",
     "zod": "^3.22.4"
   },
   "devDependencies": {

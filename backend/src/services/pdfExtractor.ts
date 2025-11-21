@@ -1,11 +1,13 @@
 /**
  * PDF Content Extractor Service
  * Downloads PDFs and extracts text for LLM evaluation
+ * Uses pdfjs-dist/legacy for Node.js
  */
 
 import * as https from 'https'
 import * as http from 'http'
-import * as pdfParse from 'pdf-parse'
+// Use legacy build for Node.js as recommended
+const pdfjsLib = require('pdfjs-dist/legacy/build/pdf.mjs')
 
 /**
  * Download PDF from URL and extract text
@@ -51,11 +53,20 @@ export async function extractPdfText(pdfUrl: string, timeoutMs: number = 10000):
           clearTimeout(timeout)
           try {
             const buffer = Buffer.concat(chunks)
-            const data = await pdfParse(buffer)
-            const text = data.text || ''
 
-            console.log('[PDF Extractor] Successfully extracted text from PDF:', pdfUrl, `(${text.length} chars from ${data.numpages} pages)`)
-            resolve(text)
+            // Use pdfjs-dist legacy to extract text
+            const pdf = await pdfjsLib.getDocument({ data: new Uint8Array(buffer) }).promise
+            let extractedText = ''
+
+            for (let i = 1; i <= pdf.numPages; i++) {
+              const page = await pdf.getPage(i)
+              const textContent = await page.getTextContent()
+              const pageText = textContent.items.map((item: any) => item.str).join(' ')
+              extractedText += pageText + '\n'
+            }
+
+            console.log('[PDF Extractor] Successfully extracted text from PDF:', pdfUrl, `(${extractedText.length} chars from ${pdf.numPages} pages)`)
+            resolve(extractedText)
           } catch (parseError: any) {
             console.log('[PDF Extractor] Failed to parse PDF:', pdfUrl, parseError.message)
             resolve(null)
