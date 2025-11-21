@@ -3,7 +3,7 @@
  * Uses OpenRouter API to evaluate linguistics problem solutions
  */
 
-import { extractPdfText } from './pdfExtractor'
+import { transformPdfToImage } from './pdfExtractor'
 
 export interface EvaluationScores {
   correctness: number // 0-40 points
@@ -167,49 +167,63 @@ async function callOpenRouter(
   problemPdfUrl?: string,
   solutionPdfUrl?: string
 ): Promise<LLMResponse> {
-  // Extract text from PDFs and include in prompt
-  let enhancedPrompt = prompt
+  // Transform PDFs to images for multimodal evaluation (preserves formatting, IPA symbols, tables)
+  const problemImageUrl = problemPdfUrl ? transformPdfToImage(problemPdfUrl) : undefined
+  const solutionImageUrl = solutionPdfUrl ? transformPdfToImage(solutionPdfUrl) : undefined
 
-  if (problemPdfUrl) {
-    console.log('[LLM Evaluator] Extracting text from problem PDF...')
-    const problemText = await extractPdfText(problemPdfUrl)
-    if (problemText) {
-      enhancedPrompt += `\n\n[PROBLEM PDF CONTENT]\n${problemText}`
-      console.log('[LLM Evaluator] Successfully included problem PDF text in prompt')
-    } else {
-      console.log('[LLM Evaluator] Failed to extract problem PDF text')
-    }
+  if (problemImageUrl) {
+    console.log('[LLM Evaluator] Transformed problem PDF to image:', problemImageUrl)
+  }
+  if (solutionImageUrl) {
+    console.log('[LLM Evaluator] Transformed solution PDF to image:', solutionImageUrl)
   }
 
-  if (solutionPdfUrl) {
-    console.log('[LLM Evaluator] Extracting text from solution PDF...')
-    const solutionText = await extractPdfText(solutionPdfUrl)
-    if (solutionText) {
-      enhancedPrompt += `\n\n[OFFICIAL SOLUTION PDF CONTENT]\n${solutionText}`
-      console.log('[LLM Evaluator] Successfully included solution PDF text in prompt')
-    } else {
-      console.log('[LLM Evaluator] Failed to extract solution PDF text')
-    }
-  }
   if (!OPENROUTER_API_KEY) {
     throw new Error('OPENROUTER_API_KEY environment variable not set')
   }
 
   console.log('[LLM Evaluator] Using model:', model)
-  console.log('[LLM Evaluator] Prompt length:', enhancedPrompt.length, 'chars')
+  console.log('[LLM Evaluator] Prompt length:', prompt.length, 'chars')
+
+  // Build multimodal content if images are available
+  const messageContent: any[] = [
+    {
+      type: 'text',
+      text: prompt,
+    },
+  ]
+
+  if (problemImageUrl) {
+    messageContent.push({
+      type: 'image',
+      source: {
+        type: 'url',
+        url: problemImageUrl,
+      },
+    })
+  }
+
+  if (solutionImageUrl) {
+    messageContent.push({
+      type: 'image',
+      source: {
+        type: 'url',
+        url: solutionImageUrl,
+      },
+    })
+  }
 
   const requestBody = {
     model,
     messages: [
       {
         role: 'user',
-        content: enhancedPrompt,
+        content: messageContent,
       },
     ],
     temperature: 0.3, // Lower temperature for more consistent evaluations
     max_tokens: 1000,
   }
-
 
   const response = await fetch(OPENROUTER_API_URL, {
     method: 'POST',
