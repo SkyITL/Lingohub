@@ -286,9 +286,9 @@ async function callOpenRouter(
   // Create abort controller with timeout
   const abortController = new AbortController()
   const startTime = Date.now()
-  // Vercel serverless timeout: 900 seconds (15 minutes) for Pro, use 480s (8 min) to be safe
-  // Multimodal requests with multiple images can be slow on OpenRouter
-  const timeoutMs = 480000 // 480 second timeout for multimodal image requests
+  // Vercel free plan max: 300 seconds. Use 280s to leave margin for response processing
+  // Qwen 2.5-VL typically responds in 377ms-2s, so 280s is plenty even for slow responses
+  const timeoutMs = 280000 // 280 second timeout for multimodal image requests
 
   console.log('[LLM Evaluator] Starting OpenRouter API call...')
   console.log('[LLM Evaluator] Timeout set to:', timeoutMs / 1000, 'seconds')
