@@ -48,11 +48,14 @@ export default function Header() {
               </div>
             ) : user ? (
               <>
-                <div className="hidden md:flex items-center space-x-2">
+                <button
+                  onClick={() => router.push('/profile')}
+                  className="hidden md:flex items-center space-x-2 hover:text-blue-600 transition-colors cursor-pointer"
+                >
                   <User className="h-4 w-4 text-gray-600" />
                   <span className="text-sm font-medium text-gray-900">{user.username}</span>
                   <span className="text-xs text-gray-500">({user.rating})</span>
-                </div>
+                </button>
                 <Button variant="outline" size="sm" onClick={() => router.push('/profile/saved')}>
                   <Bookmark className="h-4 w-4 mr-1" />
                   Saved

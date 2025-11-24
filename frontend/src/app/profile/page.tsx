@@ -2,379 +2,214 @@
 
 import { useState, useEffect } from 'react'
 import Header from "@/components/Header"
-import { Button } from "@/components/ui/button"
 import RatingProgressChart from "@/components/RatingProgressChart"
 import { useAuth } from "@/contexts/AuthContext"
-import { 
-  User, 
-  Award, 
-  BookOpen, 
-  Clock, 
-  TrendingUp, 
-  Star,
-  Calendar,
-  Target,
-  Trophy,
-  Medal,
-  CheckCircle,
-  XCircle,
-  BarChart3,
-  Settings,
-  Edit
+import { submissionsApi } from "@/lib/api"
+import { interpolateRatingColor, getRatingColor } from "@/utils/ratingColor"
+import {
+  TrendingUp,
+  TrendingDown,
+  ArrowUp,
+  ArrowDown,
+  Link as LinkIcon
 } from "lucide-react"
 
-const mockUser = {
-  username: "linguistics_ace",
-  fullName: "Alex Chen",
-  email: "alex.chen@example.com",
-  joinDate: "March 2023",
-  country: "United States",
-  school: "MIT",
-  rating: 1847,
-  rank: "#342",
-  totalProblems: 89,
-  solvedProblems: 67,
-  averageTime: "38 min",
-  currentStreak: 12,
-  longestStreak: 28,
-  achievements: [
-    { name: "First Solve", description: "Solved your first problem", icon: Trophy, earned: true },
-    { name: "Speed Demon", description: "Solved 5 problems under 15 minutes", icon: Clock, earned: true },
-    { name: "Morphology Master", description: "Solved 20 morphology problems", icon: BookOpen, earned: true },
-    { name: "Consistent", description: "30-day solving streak", icon: Calendar, earned: false },
-    { name: "Perfectionist", description: "100% accuracy on 10 consecutive problems", icon: Target, earned: false },
-    { name: "Community Helper", description: "Got 50 upvotes on solutions", icon: Star, earned: true },
-  ]
+interface RatingEntry {
+  id: string
+  userId: string
+  problemId: string
+  oldRating: number
+  newRating: number
+  change: number
+  problemRating: number
+  createdAt: string
+  problem: {
+    id: string
+    number: string
+    title: string
+    rating: number
+  }
 }
-
-const recentActivity = [
-  { id: 1, type: 'solved', problem: 'LH-045: Georgian Script', difficulty: 3, timeAgo: '2 hours ago', points: 180 },
-  { id: 2, type: 'attempted', problem: 'LH-023: Japanese Honorifics', difficulty: 4, timeAgo: '1 day ago', points: 0 },
-  { id: 3, type: 'solved', problem: 'LH-012: Swahili Noun Classes', difficulty: 2, timeAgo: '2 days ago', points: 120 },
-  { id: 4, type: 'discussion', problem: 'LH-001: Ubykh Verb Morphology', timeAgo: '3 days ago', action: 'Posted in discussion' },
-  { id: 5, type: 'solved', problem: 'LH-034: Mandarin Tones', difficulty: 3, timeAgo: '1 week ago', points: 160 },
-]
-
-const topicStats = [
-  { topic: 'Morphology', solved: 18, total: 25, percentage: 72 },
-  { topic: 'Phonology', solved: 15, total: 20, percentage: 75 },
-  { topic: 'Syntax', solved: 12, total: 18, percentage: 67 },
-  { topic: 'Writing Systems', solved: 10, total: 12, percentage: 83 },
-  { topic: 'Semantics', solved: 8, total: 14, percentage: 57 },
-  { topic: 'Pragmatics', solved: 4, total: 8, percentage: 50 },
-]
-
-const competitions = [
-  { name: 'IOL 2024', rank: '15th', score: '85/100', date: 'July 2024', status: 'completed' },
-  { name: 'NACLO 2024', rank: '8th', score: '92/100', date: 'March 2024', status: 'completed' },
-  { name: 'APLO 2023', rank: '23rd', score: '78/100', date: 'September 2023', status: 'completed' },
-]
 
 export default function ProfilePage() {
   const { user } = useAuth()
-  const [activeTab, setActiveTab] = useState<'overview' | 'progress' | 'achievements' | 'settings'>('overview')
+  const [ratingHistory, setRatingHistory] = useState<RatingEntry[]>([])
+  const [isLoading, setIsLoading] = useState(true)
 
-  const getActivityIcon = (type: string) => {
-    switch (type) {
-      case 'solved': return <CheckCircle className="h-4 w-4 text-green-500" />
-      case 'attempted': return <XCircle className="h-4 w-4 text-orange-500" />
-      case 'discussion': return <User className="h-4 w-4 text-blue-500" />
-      default: return <BookOpen className="h-4 w-4 text-gray-500" />
+  useEffect(() => {
+    if (!user?.id) return
+
+    loadRatingHistory()
+  }, [user?.id])
+
+  const loadRatingHistory = async () => {
+    if (!user?.id) return
+    try {
+      setIsLoading(true)
+      const response = await submissionsApi.getRatingHistory(user.id, 10)
+      setRatingHistory(response.data.ratingHistory)
+    } catch (err) {
+      console.error('Failed to load rating history:', err)
+    } finally {
+      setIsLoading(false)
     }
   }
 
-  const getTopicColor = (percentage: number) => {
-    if (percentage >= 80) return 'bg-green-500'
-    if (percentage >= 60) return 'bg-yellow-500'
-    return 'bg-red-500'
+  if (!user) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <Header />
+        <div className="flex items-center justify-center py-20">
+          <p className="text-gray-600">Please log in to view your profile</p>
+        </div>
+      </div>
+    )
   }
 
+  const ratingColor = interpolateRatingColor(user.rating)
+  const tier = getRatingColor(user.rating)
+
+  // Calculate stats
+  const wins = ratingHistory.filter(r => r.change > 0).length
+  const losses = ratingHistory.filter(r => r.change < 0).length
+  const totalChange = ratingHistory.reduce((sum, r) => sum + r.change, 0)
+
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
       <Header />
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Profile Header */}
-        <div className="bg-white rounded-lg shadow-sm border p-6 mb-8">
-          <div className="flex items-start justify-between">
-            <div className="flex items-center space-x-6">
-              <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
-                <span className="text-2xl font-bold text-white">
-                  {mockUser.fullName.split(' ').map(n => n[0]).join('')}
-                </span>
-              </div>
-              <div>
-                <h1 className="text-2xl font-bold text-gray-900">{mockUser.fullName}</h1>
-                <p className="text-gray-600">@{mockUser.username}</p>
-                <div className="flex items-center space-x-4 mt-2 text-sm text-gray-500">
-                  <span>{mockUser.school}</span>
-                  <span>•</span>
-                  <span>{mockUser.country}</span>
-                  <span>•</span>
-                  <span>Joined {mockUser.joinDate}</span>
-                </div>
-              </div>
-            </div>
-            <Button variant="outline">
-              <Edit className="h-4 w-4 mr-2" />
-              Edit Profile
-            </Button>
-          </div>
-        </div>
 
-        {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white rounded-lg shadow-sm border p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-gray-600">Rating</p>
-                <p className="text-2xl font-bold text-blue-600">{mockUser.rating}</p>
-                <p className="text-sm text-gray-500">Rank {mockUser.rank}</p>
-              </div>
-              <TrendingUp className="h-8 w-8 text-blue-600" />
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Rating Card */}
+        <div
+          className="rounded-lg shadow-lg p-8 mb-8 text-white"
+          style={{ background: `linear-gradient(135deg, ${ratingColor.hex} 0%, ${ratingColor.hex}dd 100%)` }}
+        >
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <h1 className="text-4xl font-bold mb-2">{user.username}</h1>
+              <p className="text-lg opacity-90">{tier.tier}</p>
+            </div>
+            <div className="text-right">
+              <div className="text-6xl font-bold">{user.rating}</div>
+              <p className="text-sm opacity-75 mt-2">Current Rating</p>
             </div>
           </div>
-          
-          <div className="bg-white rounded-lg shadow-sm border p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-gray-600">Problems Solved</p>
-                <p className="text-2xl font-bold text-green-600">{mockUser.solvedProblems}</p>
-                <p className="text-sm text-gray-500">of {mockUser.totalProblems} attempted</p>
-              </div>
-              <CheckCircle className="h-8 w-8 text-green-600" />
+
+          {/* Quick Stats */}
+          <div className="grid grid-cols-3 gap-4 mt-8 bg-white bg-opacity-10 rounded-lg p-4">
+            <div>
+              <p className="text-sm opacity-75 mb-1">Last 10 Changes</p>
+              <p className={`text-2xl font-bold ${totalChange >= 0 ? 'text-green-200' : 'text-red-200'}`}>
+                {totalChange >= 0 ? '+' : ''}{totalChange}
+              </p>
             </div>
-          </div>
-          
-          <div className="bg-white rounded-lg shadow-sm border p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-gray-600">Current Streak</p>
-                <p className="text-2xl font-bold text-orange-600">{mockUser.currentStreak}</p>
-                <p className="text-sm text-gray-500">Best: {mockUser.longestStreak} days</p>
-              </div>
-              <Calendar className="h-8 w-8 text-orange-600" />
+            <div>
+              <p className="text-sm opacity-75 mb-1">Wins</p>
+              <p className="text-2xl font-bold text-green-200">{wins}</p>
             </div>
-          </div>
-          
-          <div className="bg-white rounded-lg shadow-sm border p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-gray-600">Average Time</p>
-                <p className="text-2xl font-bold text-purple-600">{mockUser.averageTime}</p>
-                <p className="text-sm text-gray-500">per problem</p>
-              </div>
-              <Clock className="h-8 w-8 text-purple-600" />
+            <div>
+              <p className="text-sm opacity-75 mb-1">Losses</p>
+              <p className="text-2xl font-bold text-red-200">{losses}</p>
             </div>
           </div>
         </div>
 
-        {/* Tabs */}
-        <div className="bg-white rounded-lg shadow-sm border">
-          <div className="border-b">
-            <nav className="flex space-x-8 px-6">
-              {[
-                { key: 'overview', label: 'Overview' },
-                { key: 'progress', label: 'Progress' },
-                { key: 'achievements', label: 'Achievements' },
-                { key: 'settings', label: 'Settings' }
-              ].map((tab) => (
-                <button
-                  key={tab.key}
-                  onClick={() => setActiveTab(tab.key as any)}
-                  className={`py-4 px-1 border-b-2 font-medium text-sm ${
-                    activeTab === tab.key
-                      ? 'border-blue-500 text-blue-600'
-                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                  }`}
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </nav>
+        {/* Main Content */}
+        <div className="grid lg:grid-cols-3 gap-8">
+          {/* Rating Chart - Takes 2 columns */}
+          <div className="lg:col-span-2">
+            <RatingProgressChart userId={user.id} limit={15} />
           </div>
 
-          <div className="p-6">
-            {activeTab === 'overview' && (
-              <div className="grid lg:grid-cols-2 gap-8">
-                {/* Recent Activity */}
-                <div>
-                  <h3 className="text-lg font-semibold mb-4">Recent Activity</h3>
-                  <div className="space-y-4">
-                    {recentActivity.map((activity) => (
-                      <div key={activity.id} className="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg">
-                        {getActivityIcon(activity.type)}
-                        <div className="flex-1">
-                          <p className="font-medium text-gray-900">
-                            {activity.type === 'discussion' ? activity.action : 
-                             activity.type === 'solved' ? 'Solved' : 'Attempted'} {activity.problem}
-                          </p>
-                          <div className="flex items-center space-x-2 text-sm text-gray-600">
-                            {activity.difficulty && (
-                              <>
-                                <div className="flex items-center">
-                                  {Array.from({ length: activity.difficulty }, (_, i) => (
-                                    <Star key={i} className="h-3 w-3 text-yellow-400 fill-current" />
-                                  ))}
-                                </div>
-                                <span>•</span>
-                              </>
-                            )}
-                            <span>{activity.timeAgo}</span>
-                            {activity.points && (
-                              <>
-                                <span>•</span>
-                                <span className="text-green-600">+{activity.points} pts</span>
-                              </>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Competition Results */}
-                <div>
-                  <h3 className="text-lg font-semibold mb-4">Competition Results</h3>
-                  <div className="space-y-4">
-                    {competitions.map((comp, index) => (
-                      <div key={index} className="p-4 border rounded-lg">
-                        <div className="flex items-center justify-between mb-2">
-                          <h4 className="font-medium text-gray-900">{comp.name}</h4>
-                          <span className="text-sm text-gray-500">{comp.date}</span>
-                        </div>
-                        <div className="flex items-center space-x-4 text-sm">
-                          <div className="flex items-center space-x-1">
-                            <Trophy className="h-4 w-4 text-yellow-500" />
-                            <span>{comp.rank}</span>
-                          </div>
-                          <div className="flex items-center space-x-1">
-                            <BarChart3 className="h-4 w-4 text-blue-500" />
-                            <span>{comp.score}</span>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {activeTab === 'progress' && (
-              <div className="space-y-8">
-                {/* Rating Progress Chart */}
-                {user && (
-                  <RatingProgressChart userId={user.id} />
-                )}
-
-                {/* Topic Stats */}
-                <div>
-                  <h3 className="text-lg font-semibold mb-6">Progress by Topic</h3>
-                  <div className="grid md:grid-cols-2 gap-6">
-                    {topicStats.map((topic) => (
-                      <div key={topic.topic} className="p-6 border rounded-lg">
-                        <div className="flex items-center justify-between mb-3">
-                          <h4 className="font-medium text-gray-900">{topic.topic}</h4>
-                          <span className="text-sm text-gray-600">{topic.solved}/{topic.total}</span>
-                        </div>
-                        <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
-                          <div
-                            className={`h-2 rounded-full ${getTopicColor(topic.percentage)}`}
-                            style={{ width: `${topic.percentage}%` }}
-                          />
-                        </div>
-                        <p className="text-sm text-gray-600">{topic.percentage}% completed</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {activeTab === 'achievements' && (
-              <div>
-                <h3 className="text-lg font-semibold mb-6">Achievements</h3>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {mockUser.achievements.map((achievement) => (
-                    <div 
-                      key={achievement.name} 
-                      className={`p-6 rounded-lg border-2 ${
-                        achievement.earned 
-                          ? 'bg-yellow-50 border-yellow-200' 
-                          : 'bg-gray-50 border-gray-200 opacity-60'
-                      }`}
+          {/* Recent Problems - Right column */}
+          <div className="bg-white rounded-lg shadow-sm p-6">
+            <h2 className="text-lg font-semibold text-gray-900 mb-4">Recent Problems</h2>
+            {isLoading ? (
+              <div className="text-center py-8 text-gray-500">Loading...</div>
+            ) : ratingHistory.length === 0 ? (
+              <div className="text-center py-8 text-gray-500">No submissions yet</div>
+            ) : (
+              <div className="space-y-3 max-h-96 overflow-y-auto">
+                {ratingHistory.map((entry, idx) => {
+                  const changeColor = interpolateRatingColor(entry.newRating)
+                  return (
+                    <div
+                      key={entry.id}
+                      className="border-l-4 pl-4 py-2 rounded hover:bg-gray-50 transition-colors"
+                      style={{ borderColor: changeColor.hex }}
                     >
-                      <div className="flex items-center space-x-3 mb-3">
-                        <achievement.icon className={`h-8 w-8 ${
-                          achievement.earned ? 'text-yellow-600' : 'text-gray-400'
-                        }`} />
-                        <div>
-                          <h4 className="font-medium text-gray-900">{achievement.name}</h4>
-                          {achievement.earned && (
-                            <span className="text-xs text-green-600 font-medium">EARNED</span>
-                          )}
+                      <div className="flex items-start justify-between gap-2 mb-1">
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-medium text-gray-900 truncate">
+                            {entry.problem.number}
+                          </p>
+                          <p className="text-xs text-gray-600 truncate">
+                            {entry.problem.title}
+                          </p>
+                        </div>
+                        <div
+                          className="text-sm font-bold whitespace-nowrap flex-shrink-0"
+                          style={{ color: changeColor.hex }}
+                        >
+                          {entry.change > 0 ? '+' : ''}{entry.change}
                         </div>
                       </div>
-                      <p className="text-sm text-gray-600">{achievement.description}</p>
+                      <div className="flex items-center justify-between text-xs text-gray-500">
+                        <span>
+                          {entry.oldRating} → {entry.newRating}
+                        </span>
+                        <span>
+                          {new Date(entry.createdAt).toLocaleDateString(undefined, {
+                            month: 'short',
+                            day: 'numeric'
+                          })}
+                        </span>
+                      </div>
                     </div>
-                  ))}
-                </div>
+                  )
+                })}
               </div>
             )}
+          </div>
+        </div>
 
-            {activeTab === 'settings' && (
-              <div className="max-w-2xl">
-                <h3 className="text-lg font-semibold mb-6">Account Settings</h3>
-                <div className="space-y-6">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
-                    <input 
-                      type="text" 
-                      defaultValue={mockUser.fullName}
-                      className="w-full p-3 border rounded-lg"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Username</label>
-                    <input 
-                      type="text" 
-                      defaultValue={mockUser.username}
-                      className="w-full p-3 border rounded-lg"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                    <input 
-                      type="email" 
-                      defaultValue={mockUser.email}
-                      className="w-full p-3 border rounded-lg"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">School/University</label>
-                    <input 
-                      type="text" 
-                      defaultValue={mockUser.school}
-                      className="w-full p-3 border rounded-lg"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Country</label>
-                    <select className="w-full p-3 border rounded-lg">
-                      <option value="us">United States</option>
-                      <option value="uk">United Kingdom</option>
-                      <option value="ca">Canada</option>
-                      <option value="au">Australia</option>
-                    </select>
-                  </div>
-                  <div className="flex space-x-4">
-                    <Button>Save Changes</Button>
-                    <Button variant="outline">Cancel</Button>
-                  </div>
-                </div>
+        {/* Rating Tiers Reference */}
+        <div className="bg-white rounded-lg shadow-sm p-6 mt-8">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">Rating Tiers</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-8 gap-3">
+            {[
+              { min: 0, max: 800, name: 'Newbie', color: '#6B7280' },
+              { min: 800, max: 1200, name: 'Pupil', color: '#10B981' },
+              { min: 1200, max: 1400, name: 'Specialist', color: '#06B6D4' },
+              { min: 1400, max: 1600, name: 'Expert', color: '#2563EB' },
+              { min: 1600, max: 1900, name: 'CM', color: '#9333EA' },
+              { min: 1900, max: 2200, name: 'Master', color: '#F59E0B' },
+              { min: 2200, max: 2400, name: 'IM', color: '#EA580C' },
+              { min: 2400, max: 3500, name: 'GM', color: '#DC2626' },
+            ].map((tier, idx) => (
+              <div
+                key={idx}
+                className={`text-center p-3 rounded-lg border-2 transition-all ${
+                  user.rating >= tier.min && user.rating < tier.max
+                    ? 'border-current scale-105'
+                    : 'border-gray-200'
+                }`}
+                style={{
+                  backgroundColor: `${tier.color}15`,
+                  borderColor: user.rating >= tier.min && user.rating < tier.max ? tier.color : '#E5E7EB'
+                }}
+              >
+                <p
+                  className="text-xs font-bold mb-1"
+                  style={{
+                    color: tier.color
+                  }}
+                >
+                  {tier.name}
+                </p>
+                <p className="text-xs text-gray-600">{tier.min}-{tier.max}</p>
               </div>
-            )}
+            ))}
           </div>
         </div>
       </div>

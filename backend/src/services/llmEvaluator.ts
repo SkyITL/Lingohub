@@ -292,7 +292,7 @@ async function callOpenRouter(
         content: messageContent,
       },
     ],
-    temperature: 0.3, // Lower temperature for more consistent evaluations
+    temperature: 0, // Deterministic evaluation for consistent results
     max_tokens: 1000,
   }
 
