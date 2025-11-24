@@ -3,7 +3,7 @@
  * Uses OpenRouter API to evaluate linguistics problem solutions
  */
 
-import { transformPdfToImage } from './pdfExtractor'
+import { transformPdfToImage, fetchAndUploadPdfToCloudinary } from './pdfExtractor'
 
 export interface EvaluationScores {
   correctness: number // 0-40 points
@@ -169,10 +169,39 @@ async function callOpenRouter(
   solutionPdfUrl?: string,
   userAttachments?: any
 ): Promise<LLMResponse> {
-  // PDFs are not served via HTTP, so we can't send them to the LLM
-  // Instead, rely on the problem content text in the prompt
-  // User attachments (student work) are still sent as images
-  console.log('[LLM Evaluator] PDFs not served via HTTP - evaluating based on problem text and student attachments')
+  // Fetch PDFs from backend and upload to Cloudinary for multimodal evaluation
+  let problemImageUrl: string | undefined
+  let solutionImageUrl: string | undefined
+
+  if (problemPdfUrl && problemPdfUrl.startsWith('/')) {
+    // Relative path - fetch from backend and upload to Cloudinary
+    try {
+      console.log('[LLM Evaluator] Fetching problem PDF from backend...')
+      const cloudinaryUrl = await fetchAndUploadPdfToCloudinary(problemPdfUrl)
+      problemImageUrl = transformPdfToImage(cloudinaryUrl)
+      console.log('[LLM Evaluator] Problem PDF ready for LLM:', problemImageUrl)
+    } catch (error: any) {
+      console.warn('[LLM Evaluator] Failed to fetch problem PDF:', error.message)
+    }
+  } else if (problemPdfUrl) {
+    // Already a full URL
+    problemImageUrl = transformPdfToImage(problemPdfUrl)
+  }
+
+  if (solutionPdfUrl && solutionPdfUrl.startsWith('/')) {
+    // Relative path - fetch from backend and upload to Cloudinary
+    try {
+      console.log('[LLM Evaluator] Fetching solution PDF from backend...')
+      const cloudinaryUrl = await fetchAndUploadPdfToCloudinary(solutionPdfUrl)
+      solutionImageUrl = transformPdfToImage(cloudinaryUrl)
+      console.log('[LLM Evaluator] Solution PDF ready for LLM:', solutionImageUrl)
+    } catch (error: any) {
+      console.warn('[LLM Evaluator] Failed to fetch solution PDF:', error.message)
+    }
+  } else if (solutionPdfUrl) {
+    // Already a full URL
+    solutionImageUrl = transformPdfToImage(solutionPdfUrl)
+  }
 
   if (userAttachments && userAttachments.length > 0) {
     console.log('[LLM Evaluator] Including', userAttachments.length, 'user attachments')
@@ -194,6 +223,26 @@ async function callOpenRouter(
   ]
 
   console.log('[LLM Evaluator] Building multimodal content...')
+
+  if (problemImageUrl) {
+    console.log('[LLM Evaluator] Adding problem PDF as image')
+    messageContent.push({
+      type: 'image_url',
+      image_url: {
+        url: problemImageUrl,
+      },
+    })
+  }
+
+  if (solutionImageUrl) {
+    console.log('[LLM Evaluator] Adding solution PDF as image')
+    messageContent.push({
+      type: 'image_url',
+      image_url: {
+        url: solutionImageUrl,
+      },
+    })
+  }
 
   // Add user's uploaded attachments (images)
   if (userAttachments && Array.isArray(userAttachments)) {

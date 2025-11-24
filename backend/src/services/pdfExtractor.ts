@@ -4,8 +4,67 @@
  * For linguistics problems, visual representation preserves formatting, IPA symbols, tables
  */
 
+import { v2 as cloudinary } from 'cloudinary'
+import https from 'https'
+import { Readable } from 'stream'
+
 /**
- * Convert PDF to image using Cloudinary transformation
+ * Fetch a PDF from the backend and upload it to Cloudinary
+ * @param pdfPath - Backend path like /olympiad-problems/IOL/by-year/2025/iol-2025-i1.pdf
+ * @returns Cloudinary URL of the uploaded PDF
+ */
+export async function fetchAndUploadPdfToCloudinary(pdfPath: string): Promise<string> {
+  return new Promise((resolve, reject) => {
+    if (!pdfPath) {
+      reject(new Error('PDF path is required'))
+      return
+    }
+
+    const backendUrl = process.env.BACKEND_URL || 'https://lingohub-backend.vercel.app'
+    const fullUrl = `${backendUrl}${pdfPath}`
+
+    console.log('[PDF Fetcher] Fetching PDF from:', fullUrl)
+
+    https.get(fullUrl, (response) => {
+      if (response.statusCode !== 200) {
+        reject(new Error(`Failed to fetch PDF: ${response.statusCode}`))
+        return
+      }
+
+      // Extract filename from path for Cloudinary public_id
+      const filename = pdfPath.split('/').pop() || 'pdf'
+
+      // Upload the stream directly to Cloudinary
+      const uploadStream = cloudinary.uploader.upload_stream(
+        {
+          folder: 'lingohub-problem-pdfs',
+          resource_type: 'raw',
+          public_id: filename.replace('.pdf', ''),
+          type: 'authenticated',
+        },
+        (error, result) => {
+          if (error) {
+            console.error('[PDF Fetcher] Cloudinary upload error:', error)
+            reject(error)
+          } else if (result) {
+            console.log('[PDF Fetcher] ✅ PDF uploaded to Cloudinary:', result.secure_url)
+            resolve(result.secure_url)
+          } else {
+            reject(new Error('Upload failed: No result returned'))
+          }
+        }
+      )
+
+      response.pipe(uploadStream)
+    }).on('error', (error) => {
+      console.error('[PDF Fetcher] Fetch error:', error)
+      reject(error)
+    })
+  })
+}
+
+/**
+ * Convert PDF URL to image using Cloudinary transformation
  * Transforms PDF to PNG for LLM vision processing
  * @param pdfUrl - Cloudinary PDF URL
  * @returns Transformed image URL
