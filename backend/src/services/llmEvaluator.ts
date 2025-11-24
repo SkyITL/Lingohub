@@ -28,10 +28,10 @@ export interface EvaluationResult {
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY || ''
 const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions'
 
-// Use OpenRouter Auto - FREE! Automatically routes to the best available model
-// Input: $0 per 1M tokens, Output: $0 per 1M tokens
-// Intelligently selects the best model based on your request
-const DEFAULT_MODEL = 'openrouter/auto'
+// Use a vision model that supports multimodal input with images
+// Changed from 'openrouter/auto' which doesn't always select a vision model
+// Using Claude 3.5 Sonnet which has excellent vision capabilities
+const DEFAULT_MODEL = 'anthropic/claude-3.5-sonnet'
 
 interface LLMResponse {
   id: string
