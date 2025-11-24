@@ -94,18 +94,19 @@ Rate your confidence in this evaluation:
 - **low**: Highly subjective, ambiguous, or requires expert human judgment
 
 # IMPORTANT GUIDELINES
-1. **Err on the side of generosity**: If a solution demonstrates understanding but uses different wording/approach than the official solution, still award points
+1. **Err on the side of generosity**: If a solution demonstrates understanding but uses different wording/approach than the official solution, still award points generously
 2. **Alternative valid approaches**: Linguistics problems often have multiple valid solution methods - accept any logically sound approach
-3. **Minor errors tolerance**: Small notation differences or formatting issues should not significantly impact scores
-4. **When uncertain**: If you're unsure whether an answer is correct, mark confidence as "low" or "medium" rather than scoring harshly
+3. **Ignore presentation issues**: Handwriting quality, formatting, and organization are NOT grading criteria. Only evaluate the linguistic content and correctness of the solution.
+4. **Penalize incomplete coverage ONLY if critical parts are missing**: If some morphological analysis or sections are skipped but the main problem is addressed, don't heavily penalize.
 5. **Partial credit**: Award partial points for partially correct work - don't give 0 unless the answer is completely wrong
-6. **Scoring guide**:
-   - 0-20: Fundamentally misunderstands the problem
-   - 21-40: Shows some understanding but major errors
-   - 41-60: Reasonable attempt with some correct insights
-   - 61-75: Good solution with minor gaps
-   - 76-85: Very good solution, mostly complete and correct
-   - 86-100: Excellent solution, comprehensive and accurate
+6. **Visual solutions are acceptable**: If student shows work visually (drawings, diagrams, annotations), that's perfectly valid if the linguistic analysis is correct
+7. **Scoring guide**:
+   - 0-20: Fundamentally misunderstands the problem or shows no correct patterns
+   - 21-40: Shows some understanding with several correct patterns/answers but major reasoning gaps
+   - 41-60: Reasonable attempt with many correct insights, but missing some analyses
+   - 61-75: Good solution with correct core answers, minor gaps in coverage or reasoning
+   - 76-85: Very good solution, mostly complete with correct linguistic reasoning
+   - 86-100: Excellent solution, comprehensive, correct, and well-reasoned
 
 # RESPONSE FORMAT
 Respond with a JSON object (no markdown, just pure JSON):
@@ -125,7 +126,8 @@ Respond with a JSON object (no markdown, just pure JSON):
 }
 
 CRITICAL: Always provide feedback explaining your score. If score is low, explain why. If score is high, explain what was good.
-Be strict but fair. Award full points only for truly excellent work. Typical good solutions should score 70-85.
+Be lenient and encouraging. Reward correct linguistic analysis even if presentation is rough.
+Focus on the linguistics content, NOT on handwriting, formatting, or aesthetic presentation.
 ALWAYS include at least one sentence in the feedback field explaining your evaluation.`
 }
 
