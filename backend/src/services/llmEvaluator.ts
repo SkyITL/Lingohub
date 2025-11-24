@@ -169,16 +169,10 @@ async function callOpenRouter(
   solutionPdfUrl?: string,
   userAttachments?: any
 ): Promise<LLMResponse> {
-  // Transform PDFs to images for multimodal evaluation (preserves formatting, IPA symbols, tables)
-  const problemImageUrl = problemPdfUrl ? transformPdfToImage(problemPdfUrl) : undefined
-  const solutionImageUrl = solutionPdfUrl ? transformPdfToImage(solutionPdfUrl) : undefined
-
-  if (problemImageUrl) {
-    console.log('[LLM Evaluator] Transformed problem PDF to image:', problemImageUrl)
-  }
-  if (solutionImageUrl) {
-    console.log('[LLM Evaluator] Transformed solution PDF to image:', solutionImageUrl)
-  }
+  // PDFs are not served via HTTP, so we can't send them to the LLM
+  // Instead, rely on the problem content text in the prompt
+  // User attachments (student work) are still sent as images
+  console.log('[LLM Evaluator] PDFs not served via HTTP - evaluating based on problem text and student attachments')
 
   if (userAttachments && userAttachments.length > 0) {
     console.log('[LLM Evaluator] Including', userAttachments.length, 'user attachments')
@@ -200,26 +194,6 @@ async function callOpenRouter(
   ]
 
   console.log('[LLM Evaluator] Building multimodal content...')
-
-  if (problemImageUrl) {
-    console.log('[LLM Evaluator] Adding problem PDF image')
-    messageContent.push({
-      type: 'image_url',
-      image_url: {
-        url: problemImageUrl,
-      },
-    })
-  }
-
-  if (solutionImageUrl) {
-    console.log('[LLM Evaluator] Adding solution PDF image')
-    messageContent.push({
-      type: 'image_url',
-      image_url: {
-        url: solutionImageUrl,
-      },
-    })
-  }
 
   // Add user's uploaded attachments (images)
   if (userAttachments && Array.isArray(userAttachments)) {
