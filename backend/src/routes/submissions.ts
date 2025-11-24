@@ -175,23 +175,29 @@ async function evaluateSubmissionAsync(
         )
 
         // Create rating history record
-        await retryWithDelay(
-          () => prisma.ratingHistory.create({
-            data: {
-              userId,
-              problemId: problem.id,
-              oldRating: ratingChange.oldRating,
-              newRating: ratingChange.newRating,
-              change: ratingChange.change,
-              problemRating: problem.rating,
-              viewedSolution: false,
-              verified: evaluationResult.totalScore >= 70 // Auto-verify if correct
-            }
-          }),
-          maxRetries
-        )
-
-        console.log('🔵 [ASYNC EVAL] ✅ Rating updated:', ratingChange.change > 0 ? `+${ratingChange.change}` : ratingChange.change)
+        // Note: This table may not exist in production yet, so wrap in try-catch
+        try {
+          await retryWithDelay(
+            () => prisma.ratingHistory.create({
+              data: {
+                userId,
+                problemId: problem.id,
+                oldRating: ratingChange.oldRating,
+                newRating: ratingChange.newRating,
+                change: ratingChange.change,
+                problemRating: problem.rating,
+                viewedSolution: false,
+                verified: evaluationResult.totalScore >= 70 // Auto-verify if correct
+              }
+            }),
+            maxRetries
+          )
+          console.log('🔵 [ASYNC EVAL] ✅ Rating updated:', ratingChange.change > 0 ? `+${ratingChange.change}` : ratingChange.change)
+        } catch (historyError: any) {
+          console.warn('⚠️  [ASYNC EVAL] Could not create rating history record (table may not exist yet):')
+          console.warn('⚠️  [ASYNC EVAL] Error:', historyError.message)
+          console.log('🔵 [ASYNC EVAL] User rating updated in users table, rating history record skipped')
+        }
       }
     } catch (ratingError: any) {
       console.error('❌ [ASYNC EVAL] Error calculating/updating rating:', ratingError)
