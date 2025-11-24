@@ -323,11 +323,21 @@ async function callOpenRouter(
       throw new Error(`OpenRouter API error: ${response.status} - ${error}`)
     }
 
+    console.log('[LLM Evaluator] Parsing JSON response...')
     const result = (await response.json()) as LLMResponse
     const totalTime = Date.now() - startTime
-    console.log('[LLM Evaluator] Successfully parsed response after', totalTime, 'ms total')
+    console.log('[LLM Evaluator] ✅ Successfully parsed response after', totalTime, 'ms total')
+    console.log('[LLM Evaluator] Response structure:', {
+      hasChoices: !!result.choices,
+      choicesLength: result.choices?.length,
+      hasMessage: !!result.choices?.[0]?.message,
+      messageType: typeof result.choices?.[0]?.message,
+      contentLength: result.choices?.[0]?.message?.content?.length
+    })
     console.log('[LLM Evaluator] Model used:', result.model)
     console.log('[LLM Evaluator] Tokens used:', result.usage.total_tokens)
+    console.log('[LLM Evaluator] First 300 chars of response content:')
+    console.log(result.choices[0].message.content.substring(0, 300))
 
     return result
   } catch (fetchError: any) {
@@ -351,9 +361,20 @@ async function callOpenRouter(
  */
 function parseLLMResponse(responseText: string, modelUsed: string, usage: any): EvaluationResult {
   try {
+    console.log('[LLM Evaluator] Parsing LLM response text...')
+    console.log('[LLM Evaluator] Response text length:', responseText.length)
+    console.log('[LLM Evaluator] Response text preview:', responseText.substring(0, 200))
+
     // Remove markdown code blocks if present
     const cleanText = responseText.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim()
+    console.log('[LLM Evaluator] After cleaning:', cleanText.substring(0, 200))
+
     const parsed = JSON.parse(cleanText)
+    console.log('[LLM Evaluator] ✅ Successfully parsed JSON')
+    console.log('[LLM Evaluator] Parsed object keys:', Object.keys(parsed))
+    console.log('[LLM Evaluator] Scores:', parsed.scores)
+    console.log('[LLM Evaluator] Confidence:', parsed.confidence)
+    console.log('[LLM Evaluator] Feedback preview:', parsed.feedback?.substring(0, 100))
 
     // Validate scores
     const scores: EvaluationScores = {
@@ -449,9 +470,21 @@ export async function evaluateSolution(
       result.confidence = 'medium'
     }
 
+    console.log('='.repeat(80))
     console.log(
-      `[LLM Evaluator] Score: ${result.totalScore}/100, Confidence: ${result.confidence}, Cost: $${result.cost.toFixed(6)}`
+      `[LLM Evaluator] ✅ FINAL SCORE: ${result.totalScore}/100`
     )
+    console.log(
+      `[LLM Evaluator] Confidence: ${result.confidence}, Cost: $${result.cost.toFixed(6)}`
+    )
+    console.log('[LLM Evaluator] Breakdown:', {
+      correctness: result.scores.correctness,
+      reasoning: result.scores.reasoning,
+      coverage: result.scores.coverage,
+      clarity: result.scores.clarity
+    })
+    console.log('[LLM Evaluator] Feedback:', result.feedback)
+    console.log('='.repeat(80))
 
     return result
   } catch (error) {
