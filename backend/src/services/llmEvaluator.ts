@@ -318,6 +318,11 @@ async function callOpenRouter(
       }))
     })
 
+    // Log the complete request body for verification
+    console.log('[LLM Evaluator] ========== FULL REQUEST BODY ==========')
+    console.log(JSON.stringify(requestBody, null, 2))
+    console.log('[LLM Evaluator] ========== END REQUEST BODY ==========')
+
     const fetchStartTime = Date.now()
 
     const response = await fetch(OPENROUTER_API_URL, {
@@ -356,12 +361,22 @@ async function callOpenRouter(
       choicesLength: result.choices?.length,
       hasMessage: !!result.choices?.[0]?.message,
       messageType: typeof result.choices?.[0]?.message,
-      contentLength: result.choices?.[0]?.message?.content?.length
+      contentLength: result.choices?.[0]?.message?.content?.length,
+      finishReason: result.choices?.[0]?.finish_reason
     })
     console.log('[LLM Evaluator] Model used:', result.model)
-    console.log('[LLM Evaluator] Tokens used:', result.usage.total_tokens)
-    console.log('[LLM Evaluator] First 300 chars of response content:')
-    console.log(result.choices[0].message.content.substring(0, 300))
+    console.log('[LLM Evaluator] Tokens used:')
+    console.log({
+      prompt_tokens: result.usage.prompt_tokens,
+      completion_tokens: result.usage.completion_tokens,
+      total_tokens: result.usage.total_tokens
+    })
+
+    // Log the full response content for debugging
+    const responseContent = result.choices[0].message.content
+    console.log('[LLM Evaluator] ========== FULL LLM RESPONSE ==========')
+    console.log(responseContent)
+    console.log('[LLM Evaluator] ========== END RESPONSE ==========')
 
     return result
   } catch (fetchError: any) {
