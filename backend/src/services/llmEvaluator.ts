@@ -305,6 +305,23 @@ async function callOpenRouter(
   try {
     console.log('[LLM Evaluator] Sending request to OpenRouter API...')
     console.log('[LLM Evaluator] API URL:', OPENROUTER_API_URL)
+
+    // Debug: Log the actual request body structure
+    console.log('[LLM Evaluator] Request body structure:')
+    console.log({
+      model: requestBody.model,
+      messagesCount: requestBody.messages.length,
+      firstMessageRole: requestBody.messages[0].role,
+      firstMessageContentLength: requestBody.messages[0].content.length,
+      contentItems: requestBody.messages[0].content.map((item: any, idx: number) => ({
+        index: idx,
+        type: item.type,
+        hasSource: item.type === 'image' ? !!item.source : 'N/A',
+        sourceType: item.type === 'image' ? item.source?.type : 'N/A',
+        url: item.type === 'image' ? item.source?.url?.substring(0, 50) : 'N/A'
+      }))
+    })
+
     const fetchStartTime = Date.now()
 
     const response = await fetch(OPENROUTER_API_URL, {
