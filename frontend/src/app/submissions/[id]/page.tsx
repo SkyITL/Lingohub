@@ -48,6 +48,33 @@ export default function SubmissionDetailPage() {
 
   useEffect(() => {
     loadSubmission()
+
+    // Poll for updates every 3 seconds while evaluation is pending
+    let pollInterval: NodeJS.Timeout | null = null
+
+    const startPolling = async () => {
+      pollInterval = setInterval(async () => {
+        try {
+          const response = await submissionsApi.getById(submissionId)
+          const currentSubmission = response.data.submission
+          setSubmission(currentSubmission)
+
+          // Stop polling once evaluation is complete (score is no longer null)
+          if (currentSubmission.llmScore !== null) {
+            if (pollInterval) clearInterval(pollInterval)
+          }
+        } catch (error) {
+          // Keep polling even if there's an error
+          console.log('Polling submission update...')
+        }
+      }, 3000)
+    }
+
+    startPolling()
+
+    return () => {
+      if (pollInterval) clearInterval(pollInterval)
+    }
   }, [submissionId])
 
   const loadSubmission = async () => {
