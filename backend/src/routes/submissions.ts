@@ -95,28 +95,36 @@ async function evaluateSubmissionAsync(
     )
 
     // Create detailed evaluation record (with retry)
-    await retryWithDelay(
-      () => prisma.submissionEvaluation.create({
-        data: {
-          submissionId: submissionId,
-          totalScore: evaluationResult.totalScore,
-          correctness: evaluationResult.scores.correctness,
-          reasoning: evaluationResult.scores.reasoning,
-          coverage: evaluationResult.scores.coverage,
-          clarity: evaluationResult.scores.clarity,
-          confidence: evaluationResult.confidence,
-          feedback: evaluationResult.feedback,
-          errors: evaluationResult.errors,
-          strengths: evaluationResult.strengths,
-          suggestions: evaluationResult.suggestions,
-          modelUsed: evaluationResult.modelUsed,
-          promptVersion: 'v1',
-          evaluationTime: 0,
-          cost: evaluationResult.cost
-        }
-      }),
-      maxRetries
-    )
+    // Note: This table may not exist in production yet, so wrap in try-catch
+    try {
+      await retryWithDelay(
+        () => prisma.submissionEvaluation.create({
+          data: {
+            submissionId: submissionId,
+            totalScore: evaluationResult.totalScore,
+            correctness: evaluationResult.scores.correctness,
+            reasoning: evaluationResult.scores.reasoning,
+            coverage: evaluationResult.scores.coverage,
+            clarity: evaluationResult.scores.clarity,
+            confidence: evaluationResult.confidence,
+            feedback: evaluationResult.feedback,
+            errors: evaluationResult.errors,
+            strengths: evaluationResult.strengths,
+            suggestions: evaluationResult.suggestions,
+            modelUsed: evaluationResult.modelUsed,
+            promptVersion: 'v1',
+            evaluationTime: 0,
+            cost: evaluationResult.cost
+          }
+        }),
+        maxRetries
+      )
+      console.log('🔵 [ASYNC EVAL] Detailed evaluation record created')
+    } catch (evalTableError: any) {
+      console.warn('⚠️  [ASYNC EVAL] Could not create detailed evaluation record (table may not exist yet):')
+      console.warn('⚠️  [ASYNC EVAL] Error:', evalTableError.message)
+      console.log('🔵 [ASYNC EVAL] Score is saved in submission table, detailed record skipped')
+    }
 
     console.log('🔵 [ASYNC EVAL] Results saved to database')
 

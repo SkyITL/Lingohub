@@ -28,10 +28,10 @@ export interface EvaluationResult {
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY || ''
 const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions'
 
-// Use Claude 3 Haiku for reliable multimodal support
-// OpenRouter Auto sometimes routes to text-only models that can't see images
-// Haiku is cheap ($0.25/$1.25 per 1M) and handles images well
-const DEFAULT_MODEL = 'anthropic/claude-3-haiku'
+// Use OpenRouter Auto - FREE! Automatically routes to the best available model
+// Input: $0 per 1M tokens, Output: $0 per 1M tokens
+// Intelligently selects the best model based on your request
+const DEFAULT_MODEL = 'openrouter/auto'
 
 interface LLMResponse {
   id: string
@@ -264,6 +264,9 @@ async function callOpenRouter(
 
   console.log('[LLM Evaluator] Final content items:', messageContent.length, '(1 text + images)')
 
+  console.log('[LLM Evaluator] Building request body with', messageContent.length, 'content items')
+  console.log('[LLM Evaluator] Content item types:', messageContent.map((item: any) => item.type).join(', '))
+
   const requestBody = {
     model,
     messages: [
@@ -275,6 +278,12 @@ async function callOpenRouter(
     temperature: 0.3, // Lower temperature for more consistent evaluations
     max_tokens: 1000,
   }
+
+  console.log('[LLM Evaluator] Request body created')
+  console.log('[LLM Evaluator] Message content structure:', {
+    textItems: messageContent.filter((c: any) => c.type === 'text').length,
+    imageItems: messageContent.filter((c: any) => c.type === 'image').length,
+  })
 
   // Create abort controller with timeout
   const abortController = new AbortController()
