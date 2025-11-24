@@ -230,16 +230,30 @@ async function callOpenRouter(
       console.log(`[LLM Evaluator] Attachment ${i + 1}:`, {
         hasUrl: !!attachment.url,
         urlPrefix: attachment.url ? attachment.url.substring(0, 50) : 'N/A',
+        size: attachment.size ? (attachment.size / 1024).toFixed(1) + 'KB' : 'unknown',
         fullAttachment: JSON.stringify(attachment).substring(0, 200)
       })
 
       if (attachment.url) {
+        // Optimize image for faster LLM processing: compress and resize
+        // Add Cloudinary transformation to the URL to reduce file size
+        let optimizedUrl = attachment.url
+        if (attachment.url.includes('cloudinary.com')) {
+          // Insert Cloudinary transformation: compress to 60% quality, max width 800px
+          // Format: /image/upload/c_scale,w_800,q_60/...
+          optimizedUrl = attachment.url.replace(
+            '/image/upload/',
+            '/image/upload/c_scale,w_800,q_60/'
+          )
+          console.log(`[LLM Evaluator] Optimized attachment ${i + 1} for faster processing (width: 800px, quality: 60%)`)
+        }
+
         console.log(`[LLM Evaluator] Adding user attachment ${i + 1} to content`)
         messageContent.push({
           type: 'image',
           source: {
             type: 'url',
-            url: attachment.url,
+            url: optimizedUrl,
           },
         })
       }
@@ -279,6 +293,7 @@ async function callOpenRouter(
 
   try {
     console.log('[LLM Evaluator] Sending request to OpenRouter API...')
+    console.log('[LLM Evaluator] API URL:', OPENROUTER_API_URL)
     const fetchStartTime = Date.now()
 
     const response = await fetch(OPENROUTER_API_URL, {
@@ -295,8 +310,12 @@ async function callOpenRouter(
 
     const fetchEndTime = Date.now()
     const fetchDuration = fetchEndTime - fetchStartTime
-    console.log('[LLM Evaluator] Received response after', fetchDuration, 'ms')
+    console.log('[LLM Evaluator] ✅ Received response after', fetchDuration, 'ms')
     console.log('[LLM Evaluator] Response status:', response.status)
+
+    if (fetchDuration > 30000) {
+      console.warn('[LLM Evaluator] ⚠️  OpenRouter took', (fetchDuration / 1000).toFixed(1), 'seconds - this is slow!')
+    }
 
     if (!response.ok) {
       const error = await response.text()
