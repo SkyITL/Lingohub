@@ -293,9 +293,12 @@ async function callOpenRouter(
   console.log('[LLM Evaluator] Timeout set to:', timeoutMs / 1000, 'seconds')
   console.log('[LLM Evaluator] Request body has', messageContent.length, 'content items')
 
+  let timeoutFired = false
   const timeoutId = setTimeout(() => {
+    if (timeoutFired) return
+    timeoutFired = true
     const elapsed = Date.now() - startTime
-    console.log('[LLM Evaluator] Timeout triggered after', elapsed, 'ms')
+    console.log('[LLM Evaluator] ⏱️  TIMEOUT FIRED after', elapsed, 'ms')
     abortController.abort()
   }, timeoutMs)
 
@@ -324,6 +327,7 @@ async function callOpenRouter(
     console.log('[LLM Evaluator] ========== END REQUEST BODY ==========')
 
     const fetchStartTime = Date.now()
+    console.log('[LLM Evaluator] 🚀 Calling fetch() to OpenRouter API...')
 
     const response = await fetch(OPENROUTER_API_URL, {
       method: 'POST',
@@ -339,7 +343,8 @@ async function callOpenRouter(
 
     const fetchEndTime = Date.now()
     const fetchDuration = fetchEndTime - fetchStartTime
-    console.log('[LLM Evaluator] ✅ Received response after', fetchDuration, 'ms')
+    const elapsedTotal = fetchEndTime - startTime
+    console.log('[LLM Evaluator] ✅ Received response after', fetchDuration, 'ms (total elapsed:', elapsedTotal, 'ms)')
     console.log('[LLM Evaluator] Response status:', response.status)
 
     if (fetchDuration > 30000) {
