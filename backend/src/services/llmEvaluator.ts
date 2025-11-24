@@ -28,10 +28,10 @@ export interface EvaluationResult {
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY || ''
 const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions'
 
-// Use OpenRouter Auto - FREE! Automatically routes to the best available model
-// Input: $0 per 1M tokens, Output: $0 per 1M tokens
-// Intelligently selects the best model based on your request
-const DEFAULT_MODEL = 'openrouter/auto'
+// Use Claude 3 Haiku for reliable multimodal support
+// OpenRouter Auto sometimes routes to text-only models that can't see images
+// Haiku is cheap ($0.25/$1.25 per 1M) and handles images well
+const DEFAULT_MODEL = 'anthropic/claude-3-haiku'
 
 interface LLMResponse {
   id: string
