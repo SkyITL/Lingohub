@@ -6,9 +6,14 @@ import { Menu, User, LogOut, Bookmark } from "lucide-react"
 import { Button } from "./ui/button"
 import { useAuth } from "@/contexts/AuthContext"
 
-export default function Header() {
+interface HeaderProps {
+  overrideRating?: number
+}
+
+export default function Header({ overrideRating }: HeaderProps) {
   const router = useRouter()
   const { user, logout, isLoading } = useAuth()
+  const displayRating = overrideRating !== undefined ? overrideRating : user?.rating
 
   const handleAuthClick = (type: 'login' | 'register') => {
     router.push(`/auth/${type}`)
@@ -54,7 +59,7 @@ export default function Header() {
                 >
                   <User className="h-4 w-4 text-gray-700" />
                   <span className="text-sm font-medium text-gray-700">{user.username}</span>
-                  <span className="text-xs text-gray-600">({user.rating})</span>
+                  <span className="text-xs text-gray-600">({displayRating})</span>
                 </button>
                 <Button variant="outline" size="sm" onClick={() => router.push('/profile/saved')}>
                   <Bookmark className="h-4 w-4 mr-1" />

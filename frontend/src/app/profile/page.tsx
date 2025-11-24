@@ -122,7 +122,7 @@ export default function ProfilePage() {
 
   return (
     <div style={{ minHeight: '100vh', backgroundColor: 'white' }}>
-      <Header />
+      <Header overrideRating={currentRating} />
 
       <div style={{ maxWidth: '800px', margin: '0 auto', padding: '32px 16px' }}>
         {/* Rating Header */}
