@@ -184,8 +184,8 @@ function SimpleChart({ ratingHistory }: { ratingHistory: RatingEntry[] }) {
   const range = maxRating - minRating || 100
 
   // Create a simple bar chart using divs
-  const maxBarHeight = 120
-  const chartPadding = 20
+  const maxBarHeight = 150
+  const yAxisWidth = 40
 
   return (
     <div style={{
@@ -193,48 +193,61 @@ function SimpleChart({ ratingHistory }: { ratingHistory: RatingEntry[] }) {
       borderRadius: '4px',
       padding: '20px',
       backgroundColor: '#f9fafb',
-      overflowX: 'auto'
     }}>
       <div style={{
         display: 'flex',
-        alignItems: 'flex-end',
-        gap: '4px',
-        minWidth: ratings.length > 10 ? ratings.length * 16 : '100%',
-        height: '200px',
-        padding: '20px 0'
+        gap: '12px',
       }}>
-        {ratings.map((rating, idx) => {
-          const height = ((rating - minRating) / range) * maxBarHeight
-          const entry = ratingHistory[ratingHistory.length - 1 - idx]
-          const color = interpolateRatingColor(rating)
+        {/* Y-axis labels */}
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          width: yAxisWidth,
+          height: `${maxBarHeight + 20}px`,
+          fontSize: '12px',
+          color: '#666',
+          textAlign: 'right',
+          paddingTop: '0px',
+          paddingBottom: '0px'
+        }}>
+          <span>{Math.round(maxRating)}</span>
+          <span>{Math.round(minRating + range / 2)}</span>
+          <span>{Math.round(minRating)}</span>
+        </div>
 
-          return (
-            <div
-              key={idx}
-              style={{
-                width: '12px',
-                height: `${height}px`,
-                backgroundColor: color.hex,
-                borderRadius: '2px',
-                transition: 'all 0.2s',
-                cursor: 'pointer'
-              }}
-              title={`${rating} (${entry.problem.number})`}
-            />
-          )
-        })}
-      </div>
-      <div style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        paddingTop: '16px',
-        borderTop: '1px solid #e5e7eb',
-        fontSize: '12px',
-        color: '#666'
-      }}>
-        <span>{Math.round(minRating)}</span>
-        <span>{Math.round(minRating + range / 2)}</span>
-        <span>{Math.round(maxRating)}</span>
+        {/* Chart bars */}
+        <div style={{
+          display: 'flex',
+          alignItems: 'flex-end',
+          gap: '4px',
+          overflowX: 'auto',
+          minWidth: ratings.length > 10 ? ratings.length * 16 : '100%',
+          height: `${maxBarHeight}px`,
+          borderLeft: '1px solid #d1d5db',
+          paddingLeft: '12px'
+        }}>
+          {ratings.map((rating, idx) => {
+            const height = ((rating - minRating) / range) * maxBarHeight
+            const entry = ratingHistory[ratingHistory.length - 1 - idx]
+            const color = interpolateRatingColor(rating)
+
+            return (
+              <div
+                key={idx}
+                style={{
+                  width: '12px',
+                  height: `${height}px`,
+                  backgroundColor: color.hex,
+                  borderRadius: '2px',
+                  transition: 'all 0.2s',
+                  cursor: 'pointer'
+                }}
+                title={`${rating} (${entry.problem.number})`}
+              />
+            )
+          })}
+        </div>
       </div>
     </div>
   )

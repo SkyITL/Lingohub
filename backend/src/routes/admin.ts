@@ -513,4 +513,44 @@ router.delete('/problems/clean-excluded-tags', async (req: Request, res: Respons
   }
 })
 
+// Reset a user's rating and rating history
+router.post('/users/:userId/reset-rating', authenticateToken, async (req: Request, res: Response) => {
+  try {
+    if (!req.user) {
+      return res.status(401).json({ error: 'Authentication required' })
+    }
+
+    const { userId } = req.params
+
+    // Only allow users to reset their own rating or admins to reset others
+    if (req.user.id !== userId) {
+      return res.status(403).json({ error: 'Access denied' })
+    }
+
+    // Delete all rating history for this user
+    const deletedHistory = await prisma.ratingHistory.deleteMany({
+      where: { userId }
+    })
+
+    // Reset user rating to default
+    const updatedUser = await prisma.user.update({
+      where: { id: userId },
+      data: { rating: 1200 }
+    })
+
+    res.json({
+      message: 'Rating reset successfully',
+      deletedHistory: deletedHistory.count,
+      user: {
+        id: updatedUser.id,
+        username: updatedUser.username,
+        rating: updatedUser.rating
+      }
+    })
+  } catch (error) {
+    console.error('Reset rating error:', error)
+    res.status(500).json({ error: 'Internal server error' })
+  }
+})
+
 export default router
