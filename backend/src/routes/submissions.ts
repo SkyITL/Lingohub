@@ -80,57 +80,47 @@ async function evaluateSubmissionAsync(
       cost: evaluationResult.cost
     })
 
-    // Store evaluation results (with retry) - use new Prisma client for better connection handling
-    const prismaCopy = new PrismaClient()
-    try {
-      await retryWithDelay(
-        () => prismaCopy.submission.update({
-          where: { id: submissionId },
-          data: {
-            status: 'evaluated',
-            llmScore: evaluationResult.totalScore,
-            llmFeedback: evaluationResult.feedback,
-            llmConfidence: evaluationResult.confidence,
-            isPartialCredit: evaluationResult.totalScore >= 40 && evaluationResult.totalScore < 70
-          }
-        }),
-        maxRetries
-      )
-    } finally {
-      await prismaCopy.$disconnect()
-    }
+    // Store evaluation results (with retry)
+    await retryWithDelay(
+      () => prisma.submission.update({
+        where: { id: submissionId },
+        data: {
+          status: 'evaluated',
+          llmScore: evaluationResult.totalScore,
+          llmFeedback: evaluationResult.feedback,
+          llmConfidence: evaluationResult.confidence,
+          isPartialCredit: evaluationResult.totalScore >= 40 && evaluationResult.totalScore < 70
+        }
+      }),
+      maxRetries
+    )
 
     // Create detailed evaluation record (with retry)
     // Note: This table may not exist in production yet, so wrap in try-catch
     try {
-      const prismaCopy2 = new PrismaClient()
-      try {
-        await retryWithDelay(
-          () => prismaCopy2.submissionEvaluation.create({
-            data: {
-              submissionId: submissionId,
-              totalScore: evaluationResult.totalScore,
-              correctness: evaluationResult.scores.correctness,
-              reasoning: evaluationResult.scores.reasoning,
-              coverage: evaluationResult.scores.coverage,
-              clarity: evaluationResult.scores.clarity,
-              confidence: evaluationResult.confidence,
-              feedback: evaluationResult.feedback,
-              errors: evaluationResult.errors,
-              strengths: evaluationResult.strengths,
-              suggestions: evaluationResult.suggestions,
-              modelUsed: evaluationResult.modelUsed,
-              promptVersion: 'v1',
-              evaluationTime: 0,
-              cost: evaluationResult.cost
-            }
-          }),
-          maxRetries
-        )
-        console.log('🔵 [ASYNC EVAL] Detailed evaluation record created')
-      } finally {
-        await prismaCopy2.$disconnect()
-      }
+      await retryWithDelay(
+        () => prisma.submissionEvaluation.create({
+          data: {
+            submissionId: submissionId,
+            totalScore: evaluationResult.totalScore,
+            correctness: evaluationResult.scores.correctness,
+            reasoning: evaluationResult.scores.reasoning,
+            coverage: evaluationResult.scores.coverage,
+            clarity: evaluationResult.scores.clarity,
+            confidence: evaluationResult.confidence,
+            feedback: evaluationResult.feedback,
+            errors: evaluationResult.errors,
+            strengths: evaluationResult.strengths,
+            suggestions: evaluationResult.suggestions,
+            modelUsed: evaluationResult.modelUsed,
+            promptVersion: 'v1',
+            evaluationTime: 0,
+            cost: evaluationResult.cost
+          }
+        }),
+        maxRetries
+      )
+      console.log('🔵 [ASYNC EVAL] Detailed evaluation record created')
     } catch (evalTableError: any) {
       console.warn('⚠️  [ASYNC EVAL] Could not create detailed evaluation record (table may not exist yet):')
       console.warn('⚠️  [ASYNC EVAL] Error:', evalTableError.message)
@@ -141,69 +131,67 @@ async function evaluateSubmissionAsync(
 
     // Calculate and apply rating changes
     try {
-      const prismaCopy3 = new PrismaClient()
-      try {
-        const user = await prismaCopy3.user.findUnique({
+      const user = await retryWithDelay(
+        () => prisma.user.findUnique({
           where: { id: userId }
+        }),
+        maxRetries
+      )
+
+      if (!user) {
+        console.warn('⚠️  [ASYNC EVAL] User not found for rating update')
+      } else {
+        console.log('🔵 [ASYNC EVAL] Calculating rating change...')
+
+        // Determine actual performance based on score
+        // >= 70 = correct (1.0), 40-69 = partial (0.5), < 40 = incorrect (0.0)
+        const actualPerformance = evaluationResult.totalScore >= 70 ? 1.0 :
+                                 evaluationResult.totalScore >= 40 ? 0.5 : 0.0
+
+        const ratingChange = calculateRatingChange(
+          user.rating,
+          problem.rating,
+          false, // viewedSolution - set to false for now (would need to track this)
+          actualPerformance
+        )
+
+        console.log('🔵 [ASYNC EVAL] Rating change:', {
+          oldRating: ratingChange.oldRating,
+          newRating: ratingChange.newRating,
+          change: ratingChange.change,
+          expectedPerformance: ratingChange.expectedPerformance.toFixed(3),
+          actualPerformance
         })
 
-        if (!user) {
-          console.warn('⚠️  [ASYNC EVAL] User not found for rating update')
-        } else {
-          console.log('🔵 [ASYNC EVAL] Calculating rating change...')
+        // Update user rating
+        await retryWithDelay(
+          () => prisma.user.update({
+            where: { id: userId },
+            data: {
+              rating: ratingChange.newRating
+            }
+          }),
+          maxRetries
+        )
 
-          // Determine actual performance based on score
-          // >= 70 = correct (1.0), 40-69 = partial (0.5), < 40 = incorrect (0.0)
-          const actualPerformance = evaluationResult.totalScore >= 70 ? 1.0 :
-                                   evaluationResult.totalScore >= 40 ? 0.5 : 0.0
+        // Create rating history record
+        await retryWithDelay(
+          () => prisma.ratingHistory.create({
+            data: {
+              userId,
+              problemId: problem.id,
+              oldRating: ratingChange.oldRating,
+              newRating: ratingChange.newRating,
+              change: ratingChange.change,
+              problemRating: problem.rating,
+              viewedSolution: false,
+              verified: evaluationResult.totalScore >= 70 // Auto-verify if correct
+            }
+          }),
+          maxRetries
+        )
 
-          const ratingChange = calculateRatingChange(
-            user.rating,
-            problem.rating,
-            false, // viewedSolution - set to false for now (would need to track this)
-            actualPerformance
-          )
-
-          console.log('🔵 [ASYNC EVAL] Rating change:', {
-            oldRating: ratingChange.oldRating,
-            newRating: ratingChange.newRating,
-            change: ratingChange.change,
-            expectedPerformance: ratingChange.expectedPerformance.toFixed(3),
-            actualPerformance
-          })
-
-          // Update user rating
-          await retryWithDelay(
-            () => prismaCopy3.user.update({
-              where: { id: userId },
-              data: {
-                rating: ratingChange.newRating
-              }
-            }),
-            maxRetries
-          )
-
-          // Create rating history record
-          await retryWithDelay(
-            () => prismaCopy3.ratingHistory.create({
-              data: {
-                userId,
-                problemId: problem.id,
-                oldRating: ratingChange.oldRating,
-                newRating: ratingChange.newRating,
-                change: ratingChange.change,
-                problemRating: problem.rating,
-                viewedSolution: false,
-                verified: evaluationResult.totalScore >= 70 // Auto-verify if correct
-              }
-            }),
-            maxRetries
-          )
-
-          console.log('🔵 [ASYNC EVAL] ✅ Rating updated:', ratingChange.change > 0 ? `+${ratingChange.change}` : ratingChange.change)
-        }
-      } finally {
-        await prismaCopy3.$disconnect()
+        console.log('🔵 [ASYNC EVAL] ✅ Rating updated:', ratingChange.change > 0 ? `+${ratingChange.change}` : ratingChange.change)
       }
     } catch (ratingError: any) {
       console.error('❌ [ASYNC EVAL] Error calculating/updating rating:', ratingError)
@@ -215,31 +203,26 @@ async function evaluateSubmissionAsync(
 
     // Try to update submission with error status (with retry)
     try {
-      const prismaCopyError = new PrismaClient()
-      try {
-        const retryFn = async (retries: number): Promise<void> => {
-          try {
-            await prismaCopyError.submission.update({
-              where: { id: submissionId },
-              data: {
-                status: 'error',
-                llmFeedback: 'AI evaluation failed. Your submission has been saved and may be reviewed manually.'
-              }
-            })
-          } catch (updateError: any) {
-            if (retries > 0 && updateError.code === 'P2024') {
-              const delay = 1000
-              await new Promise(r => setTimeout(r, delay))
-              return retryFn(retries - 1)
+      const retryFn = async (retries: number): Promise<void> => {
+        try {
+          await prisma.submission.update({
+            where: { id: submissionId },
+            data: {
+              status: 'error',
+              llmFeedback: 'AI evaluation failed. Your submission has been saved and may be reviewed manually.'
             }
-            throw updateError
+          })
+        } catch (updateError: any) {
+          if (retries > 0 && updateError.code === 'P2024') {
+            const delay = 1000
+            await new Promise(r => setTimeout(r, delay))
+            return retryFn(retries - 1)
           }
+          throw updateError
         }
-
-        await retryFn(2)
-      } finally {
-        await prismaCopyError.$disconnect()
       }
+
+      await retryFn(2)
     } catch (finalError) {
       console.error('❌ [ASYNC EVAL] Failed to update submission error status:', finalError)
     }
