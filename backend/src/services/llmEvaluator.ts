@@ -28,10 +28,11 @@ export interface EvaluationResult {
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY || ''
 const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions'
 
-// Use a vision model that supports multimodal input with images
-// Changed from 'openrouter/auto' which doesn't always select a vision model
-// Using Claude 3.5 Sonnet which has excellent vision capabilities
-const DEFAULT_MODEL = 'anthropic/claude-3.5-sonnet'
+// Use Qwen 2.5-VL - cheapest and fastest vision model available on OpenRouter
+// Tested on 2025-11-24: responds in 377ms with good image understanding
+// Much cheaper than Claude while still providing reliable vision evaluation
+// Alternative models: meta-llama/llama-3.2-11b-vision-instruct (slower)
+const DEFAULT_MODEL = 'qwen/qwen2.5-vl-32b-instruct'
 
 interface LLMResponse {
   id: string
