@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import Header from "@/components/Header"
 import { useAuth } from "@/contexts/AuthContext"
-import { submissionsApi } from "@/lib/api"
+import { submissionsApi, usersApi } from "@/lib/api"
 import { interpolateRatingColor } from "@/utils/ratingColor"
 import Link from 'next/link'
 
@@ -39,16 +39,29 @@ export default function ProfilePage() {
     if (!user?.id) return
     try {
       setIsLoading(true)
-      const response = await submissionsApi.getRatingHistory(user.id, 50)
-      const history = response.data.ratingHistory
+
+      // Fetch current user profile to get latest rating from database
+      const profileResponse = await usersApi.getProfile(user.id)
+      const currentUserRating = profileResponse.data.user.rating
+
+      // Fetch rating history
+      const historyResponse = await submissionsApi.getRatingHistory(user.id, 50)
+      const history = historyResponse.data.ratingHistory
       setRatingHistory(history)
 
-      // Get the latest rating from history
+      // Get the latest rating from history, or use current profile rating
       if (history.length > 0) {
         setCurrentRating(history[0].newRating)
+      } else {
+        // Use rating from user profile if no history exists
+        setCurrentRating(currentUserRating)
       }
     } catch (err) {
       console.error('Failed to load rating history:', err)
+      // Fallback to current user rating from auth on error
+      if (user?.rating) {
+        setCurrentRating(user.rating)
+      }
     } finally {
       setIsLoading(false)
     }
