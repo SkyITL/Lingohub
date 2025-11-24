@@ -2,69 +2,164 @@
 
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
-import { cva, type VariantProps } from "class-variance-authority"
-import { cn } from "@/lib/utils"
-
-const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
-  {
-    variants: {
-      variant: {
-        default: "bg-blue-600 text-white hover:bg-blue-700",
-        destructive:
-          "bg-red-600 text-white hover:bg-red-700",
-        outline:
-          "border border-gray-300 bg-white hover:bg-gray-50 hover:text-gray-900 text-gray-900",
-        secondary:
-          "bg-gray-200 text-gray-900 hover:bg-gray-300",
-        ghost: "hover:bg-gray-100 hover:text-gray-900 text-gray-900",
-        link: "text-blue-600 underline-offset-4 hover:underline",
-      },
-      size: {
-        default: "h-10 px-4 py-2",
-        sm: "h-9 rounded-md px-3",
-        lg: "h-11 rounded-md px-8",
-        icon: "h-10 w-10",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-      size: "default",
-    },
-  }
-)
 
 export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   asChild?: boolean
+  variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link'
+  size?: 'default' | 'sm' | 'lg' | 'icon'
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, style, ...props }, ref) => {
+  ({ variant = 'default', size = 'default', asChild = false, className, style, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
-    
-    // Force text color based on variant - more comprehensive
-    let textColor = ""
-    let inlineColor = ""
-    
-    if (variant === "outline" || variant === "ghost" || variant === "secondary") {
-      textColor = "text-gray-900"
-      inlineColor = "#111827"
-    } else {
-      textColor = "text-white"
-      inlineColor = "#ffffff"
+
+    // Base styles
+    let baseStyle: React.CSSProperties = {
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      whiteSpace: 'nowrap',
+      borderRadius: '6px',
+      fontSize: '14px',
+      fontWeight: '500',
+      border: 'none',
+      cursor: 'pointer',
+      transition: 'all 0.2s',
+      outline: 'none',
     }
-    
+
+    // Variant styles
+    let variantStyle: React.CSSProperties = {}
+
+    switch (variant) {
+      case 'default':
+        variantStyle = {
+          backgroundColor: '#2563eb',
+          color: '#ffffff',
+        }
+        break
+      case 'destructive':
+        variantStyle = {
+          backgroundColor: '#dc2626',
+          color: '#ffffff',
+        }
+        break
+      case 'outline':
+        variantStyle = {
+          backgroundColor: '#ffffff',
+          color: '#111827',
+          border: '1px solid #d1d5db',
+        }
+        break
+      case 'secondary':
+        variantStyle = {
+          backgroundColor: '#e5e7eb',
+          color: '#111827',
+        }
+        break
+      case 'ghost':
+        variantStyle = {
+          backgroundColor: 'transparent',
+          color: '#111827',
+        }
+        break
+      case 'link':
+        variantStyle = {
+          backgroundColor: 'transparent',
+          color: '#2563eb',
+          textDecoration: 'underline',
+        }
+        break
+    }
+
+    // Size styles
+    let sizeStyle: React.CSSProperties = {}
+    switch (size) {
+      case 'sm':
+        sizeStyle = {
+          height: '36px',
+          paddingLeft: '12px',
+          paddingRight: '12px',
+        }
+        break
+      case 'lg':
+        sizeStyle = {
+          height: '44px',
+          paddingLeft: '32px',
+          paddingRight: '32px',
+        }
+        break
+      case 'icon':
+        sizeStyle = {
+          height: '40px',
+          width: '40px',
+          padding: '0',
+        }
+        break
+      default:
+        sizeStyle = {
+          height: '40px',
+          paddingLeft: '16px',
+          paddingRight: '16px',
+        }
+        break
+    }
+
+    // Hover states
+    const handleMouseEnter = (e: React.MouseEvent) => {
+      const element = e.currentTarget as HTMLButtonElement
+      switch (variant) {
+        case 'default':
+          element.style.backgroundColor = '#1d4ed8'
+          break
+        case 'destructive':
+          element.style.backgroundColor = '#b91c1c'
+          break
+        case 'outline':
+          element.style.backgroundColor = '#f3f4f6'
+          break
+        case 'secondary':
+          element.style.backgroundColor = '#d1d5db'
+          break
+        case 'ghost':
+          element.style.backgroundColor = '#f3f4f6'
+          break
+      }
+    }
+
+    const handleMouseLeave = (e: React.MouseEvent) => {
+      const element = e.currentTarget as HTMLButtonElement
+      switch (variant) {
+        case 'default':
+          element.style.backgroundColor = '#2563eb'
+          break
+        case 'destructive':
+          element.style.backgroundColor = '#dc2626'
+          break
+        case 'outline':
+          element.style.backgroundColor = '#ffffff'
+          break
+        case 'secondary':
+          element.style.backgroundColor = '#e5e7eb'
+          break
+        case 'ghost':
+          element.style.backgroundColor = 'transparent'
+          break
+      }
+    }
+
     return (
       <Comp
-        className={cn(buttonVariants({ variant, size }), textColor, className)}
-        style={{
-          color: inlineColor,
-          WebkitTextFillColor: inlineColor,
-          ...style
-        }}
         ref={ref}
+        style={{
+          ...baseStyle,
+          ...variantStyle,
+          ...sizeStyle,
+          ...style,
+        }}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         {...props}
       />
     )
@@ -72,4 +167,4 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 )
 Button.displayName = "Button"
 
-export { Button, buttonVariants }
+export { Button }
