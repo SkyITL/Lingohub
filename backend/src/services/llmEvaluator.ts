@@ -159,13 +159,14 @@ function calculateCost(
 }
 
 /**
- * Call OpenRouter API to evaluate solution (with optional PDF URLs)
+ * Call OpenRouter API to evaluate solution (with optional PDF URLs and user attachments)
  */
 async function callOpenRouter(
   prompt: string,
   model: string,
   problemPdfUrl?: string,
-  solutionPdfUrl?: string
+  solutionPdfUrl?: string,
+  userAttachments?: any
 ): Promise<LLMResponse> {
   // Transform PDFs to images for multimodal evaluation (preserves formatting, IPA symbols, tables)
   const problemImageUrl = problemPdfUrl ? transformPdfToImage(problemPdfUrl) : undefined
@@ -178,6 +179,10 @@ async function callOpenRouter(
     console.log('[LLM Evaluator] Transformed solution PDF to image:', solutionImageUrl)
   }
 
+  if (userAttachments && userAttachments.length > 0) {
+    console.log('[LLM Evaluator] Including', userAttachments.length, 'user attachments')
+  }
+
   if (!OPENROUTER_API_KEY) {
     throw new Error('OPENROUTER_API_KEY environment variable not set')
   }
@@ -185,7 +190,7 @@ async function callOpenRouter(
   console.log('[LLM Evaluator] Using model:', model)
   console.log('[LLM Evaluator] Prompt length:', prompt.length, 'chars')
 
-  // Build multimodal content if images are available
+  // Build multimodal content with text, PDFs, and user attachments
   const messageContent: any[] = [
     {
       type: 'text',
@@ -211,6 +216,21 @@ async function callOpenRouter(
         url: solutionImageUrl,
       },
     })
+  }
+
+  // Add user's uploaded attachments (images)
+  if (userAttachments && Array.isArray(userAttachments)) {
+    for (const attachment of userAttachments) {
+      if (attachment.url) {
+        messageContent.push({
+          type: 'image',
+          source: {
+            type: 'url',
+            url: attachment.url,
+          },
+        })
+      }
+    }
   }
 
   const requestBody = {
@@ -317,7 +337,7 @@ function parseLLMResponse(responseText: string, modelUsed: string, usage: any): 
 
 /**
  * Evaluate a user's solution using LLM
- * Can accept either text solutions or PDF URLs for multimodal evaluation
+ * Can accept text solutions, PDF URLs, and user attachments for multimodal evaluation
  */
 export async function evaluateSolution(
   problemContent: string,
@@ -325,7 +345,8 @@ export async function evaluateSolution(
   userSolution: string,
   model: string = DEFAULT_MODEL,
   problemPdfUrl?: string,
-  solutionPdfUrl?: string
+  solutionPdfUrl?: string,
+  userAttachments?: any
 ): Promise<EvaluationResult> {
   try {
     // Build prompt
@@ -337,8 +358,8 @@ export async function evaluateSolution(
       solutionPdfUrl
     )
 
-    // Call LLM with PDF URLs if provided
-    const response = await callOpenRouter(prompt, model, problemPdfUrl, solutionPdfUrl)
+    // Call LLM with PDF URLs and user attachments if provided
+    const response = await callOpenRouter(prompt, model, problemPdfUrl, solutionPdfUrl, userAttachments)
 
     // Parse and validate response
     const result = parseLLMResponse(

@@ -16,6 +16,7 @@ async function evaluateSubmissionAsync(
   problem: any,
   content: string,
   userId: string,
+  attachments?: any,
   maxRetries: number = 3
 ) {
   const retryWithDelay = async (fn: () => Promise<any>, retries: number): Promise<any> => {
@@ -62,7 +63,8 @@ async function evaluateSubmissionAsync(
       content,
       undefined, // model (use default - now OpenRouter Auto for FREE!)
       problemPdfUrl,
-      solutionPdfUrl
+      solutionPdfUrl,
+      attachments // Include user's uploaded attachments
     )
 
     // Log AI evaluation action for rate limiting (with retry)
@@ -445,7 +447,7 @@ router.post('/', authenticateToken, upload.array('files', 5), async (req: Reques
         console.log('🔵 [SUBMISSION SUBMIT] Starting async LLM evaluation...')
 
         // Fire and forget - evaluation happens in background
-        evaluateSubmissionAsync(submission.id, problem, content, req.user.id).catch(error => {
+        evaluateSubmissionAsync(submission.id, problem, content, req.user.id, attachments).catch(error => {
           console.error('❌ [SUBMISSION SUBMIT] Async evaluation error:', error)
         })
 
