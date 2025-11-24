@@ -21,6 +21,11 @@
     "node_modules",
     "dist",
     "src/scripts/seed-mock-data.ts",
-    "src/scripts/simple-seed.ts"
+    "src/scripts/simple-seed.ts",
+    "src/scripts/testMultimodal.ts",
+    "src/scripts/testMultimodalWithClaude.ts",
+    "src/scripts/testCheapestVisionModels.ts",
+    "src/scripts/testLlamaVision.ts",
+    "src/scripts/testPdfExtraction.ts"
   ]
 }
