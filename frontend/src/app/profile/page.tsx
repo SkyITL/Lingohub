@@ -2,17 +2,10 @@
 
 import { useState, useEffect } from 'react'
 import Header from "@/components/Header"
-import RatingProgressChart from "@/components/RatingProgressChart"
 import { useAuth } from "@/contexts/AuthContext"
 import { submissionsApi } from "@/lib/api"
-import { interpolateRatingColor, getRatingColor } from "@/utils/ratingColor"
-import {
-  TrendingUp,
-  TrendingDown,
-  ArrowUp,
-  ArrowDown,
-  Link as LinkIcon
-} from "lucide-react"
+import { interpolateRatingColor } from "@/utils/ratingColor"
+import Link from 'next/link'
 
 interface RatingEntry {
   id: string
@@ -38,7 +31,6 @@ export default function ProfilePage() {
 
   useEffect(() => {
     if (!user?.id) return
-
     loadRatingHistory()
   }, [user?.id])
 
@@ -46,7 +38,7 @@ export default function ProfilePage() {
     if (!user?.id) return
     try {
       setIsLoading(true)
-      const response = await submissionsApi.getRatingHistory(user.id, 10)
+      const response = await submissionsApi.getRatingHistory(user.id, 50)
       setRatingHistory(response.data.ratingHistory)
     } catch (err) {
       console.error('Failed to load rating history:', err)
@@ -57,7 +49,7 @@ export default function ProfilePage() {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-white">
         <Header />
         <div className="flex items-center justify-center py-20">
           <p className="text-gray-600">Please log in to view your profile</p>
@@ -67,152 +59,185 @@ export default function ProfilePage() {
   }
 
   const ratingColor = interpolateRatingColor(user.rating)
-  const tier = getRatingColor(user.rating)
-
-  // Calculate stats
-  const wins = ratingHistory.filter(r => r.change > 0).length
-  const losses = ratingHistory.filter(r => r.change < 0).length
-  const totalChange = ratingHistory.reduce((sum, r) => sum + r.change, 0)
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
+    <div className="min-h-screen bg-white">
       <Header />
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Rating Card */}
-        <div
-          className="rounded-lg shadow-lg p-8 mb-8 text-white"
-          style={{ background: `linear-gradient(135deg, ${ratingColor.hex} 0%, ${ratingColor.hex}dd 100%)` }}
-        >
-          <div className="flex items-center justify-between mb-6">
-            <div>
-              <h1 className="text-4xl font-bold mb-2">{user.username}</h1>
-              <p className="text-lg opacity-90">{tier.tier}</p>
-            </div>
-            <div className="text-right">
-              <div className="text-6xl font-bold">{user.rating}</div>
-              <p className="text-sm opacity-75 mt-2">Current Rating</p>
-            </div>
-          </div>
-
-          {/* Quick Stats */}
-          <div className="grid grid-cols-3 gap-4 mt-8 bg-white bg-opacity-10 rounded-lg p-4">
-            <div>
-              <p className="text-sm opacity-75 mb-1">Last 10 Changes</p>
-              <p className={`text-2xl font-bold ${totalChange >= 0 ? 'text-green-200' : 'text-red-200'}`}>
-                {totalChange >= 0 ? '+' : ''}{totalChange}
-              </p>
-            </div>
-            <div>
-              <p className="text-sm opacity-75 mb-1">Wins</p>
-              <p className="text-2xl font-bold text-green-200">{wins}</p>
-            </div>
-            <div>
-              <p className="text-sm opacity-75 mb-1">Losses</p>
-              <p className="text-2xl font-bold text-red-200">{losses}</p>
-            </div>
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Rating Header */}
+        <div className="mb-8">
+          <div
+            className="inline-block px-6 py-3 rounded text-white font-bold text-2xl"
+            style={{ backgroundColor: ratingColor.hex }}
+          >
+            {user.username} • {user.rating}
           </div>
         </div>
 
-        {/* Main Content */}
-        <div className="grid lg:grid-cols-3 gap-8">
-          {/* Rating Chart - Takes 2 columns */}
-          <div className="lg:col-span-2">
-            <RatingProgressChart userId={user.id} limit={15} />
-          </div>
+        {/* Rating Progress Chart */}
+        <div className="mb-12">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">Rating Change</h2>
+          <RatingChart ratingHistory={ratingHistory} />
+        </div>
 
-          {/* Recent Problems - Right column */}
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Recent Problems</h2>
-            {isLoading ? (
-              <div className="text-center py-8 text-gray-500">Loading...</div>
-            ) : ratingHistory.length === 0 ? (
-              <div className="text-center py-8 text-gray-500">No submissions yet</div>
-            ) : (
-              <div className="space-y-3 max-h-96 overflow-y-auto">
-                {ratingHistory.map((entry, idx) => {
+        {/* Recent Problems */}
+        <div>
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">Recent Problems</h2>
+          {isLoading ? (
+            <p className="text-gray-500">Loading...</p>
+          ) : ratingHistory.length === 0 ? (
+            <p className="text-gray-500">No submissions yet</p>
+          ) : (
+            <table className="w-full text-sm">
+              <tbody>
+                {ratingHistory.map((entry) => {
                   const changeColor = interpolateRatingColor(entry.newRating)
                   return (
-                    <div
-                      key={entry.id}
-                      className="border-l-4 pl-4 py-2 rounded hover:bg-gray-50 transition-colors"
-                      style={{ borderColor: changeColor.hex }}
-                    >
-                      <div className="flex items-start justify-between gap-2 mb-1">
-                        <div className="flex-1 min-w-0">
-                          <p className="text-sm font-medium text-gray-900 truncate">
-                            {entry.problem.number}
-                          </p>
-                          <p className="text-xs text-gray-600 truncate">
-                            {entry.problem.title}
-                          </p>
-                        </div>
-                        <div
-                          className="text-sm font-bold whitespace-nowrap flex-shrink-0"
-                          style={{ color: changeColor.hex }}
+                    <tr key={entry.id} className="border-b hover:bg-gray-50">
+                      <td className="py-2 pr-4">
+                        <Link
+                          href={`/problems/${entry.problem.number}`}
+                          className="text-blue-600 hover:underline"
                         >
-                          {entry.change > 0 ? '+' : ''}{entry.change}
-                        </div>
-                      </div>
-                      <div className="flex items-center justify-between text-xs text-gray-500">
-                        <span>
-                          {entry.oldRating} → {entry.newRating}
-                        </span>
-                        <span>
-                          {new Date(entry.createdAt).toLocaleDateString(undefined, {
-                            month: 'short',
-                            day: 'numeric'
-                          })}
-                        </span>
-                      </div>
-                    </div>
+                          {entry.problem.number}
+                        </Link>
+                      </td>
+                      <td className="py-2 px-4 flex-1">
+                        <Link
+                          href={`/problems/${entry.problem.number}`}
+                          className="text-blue-600 hover:underline truncate"
+                        >
+                          {entry.problem.title}
+                        </Link>
+                      </td>
+                      <td className="py-2 px-4 text-right text-gray-600">
+                        {entry.oldRating} → {entry.newRating}
+                      </td>
+                      <td
+                        className="py-2 pl-4 text-right font-semibold"
+                        style={{ color: changeColor.hex }}
+                      >
+                        {entry.change > 0 ? '+' : ''}{entry.change}
+                      </td>
+                    </tr>
                   )
                 })}
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Rating Tiers Reference */}
-        <div className="bg-white rounded-lg shadow-sm p-6 mt-8">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Rating Tiers</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-8 gap-3">
-            {[
-              { min: 0, max: 800, name: 'Newbie', color: '#6B7280' },
-              { min: 800, max: 1200, name: 'Pupil', color: '#10B981' },
-              { min: 1200, max: 1400, name: 'Specialist', color: '#06B6D4' },
-              { min: 1400, max: 1600, name: 'Expert', color: '#2563EB' },
-              { min: 1600, max: 1900, name: 'CM', color: '#9333EA' },
-              { min: 1900, max: 2200, name: 'Master', color: '#F59E0B' },
-              { min: 2200, max: 2400, name: 'IM', color: '#EA580C' },
-              { min: 2400, max: 3500, name: 'GM', color: '#DC2626' },
-            ].map((tier, idx) => (
-              <div
-                key={idx}
-                className={`text-center p-3 rounded-lg border-2 transition-all ${
-                  user.rating >= tier.min && user.rating < tier.max
-                    ? 'border-current scale-105'
-                    : 'border-gray-200'
-                }`}
-                style={{
-                  backgroundColor: `${tier.color}15`,
-                  borderColor: user.rating >= tier.min && user.rating < tier.max ? tier.color : '#E5E7EB'
-                }}
-              >
-                <p
-                  className="text-xs font-bold mb-1"
-                  style={{
-                    color: tier.color
-                  }}
-                >
-                  {tier.name}
-                </p>
-                <p className="text-xs text-gray-600">{tier.min}-{tier.max}</p>
-              </div>
-            ))}
-          </div>
+              </tbody>
+            </table>
+          )}
         </div>
       </div>
+    </div>
+  )
+}
+
+function RatingChart({ ratingHistory }: { ratingHistory: RatingEntry[] }) {
+  if (ratingHistory.length === 0) {
+    return <p className="text-gray-500">No data</p>
+  }
+
+  // Calculate min/max for scaling
+  const ratings = ratingHistory.map(r => r.newRating).reverse()
+  const minRating = Math.min(...ratings)
+  const maxRating = Math.max(...ratings)
+  const range = maxRating - minRating || 100
+
+  // SVG dimensions
+  const width = 800
+  const height = 150
+  const padding = { top: 10, right: 20, bottom: 30, left: 30 }
+  const chartWidth = width - padding.left - padding.right
+  const chartHeight = height - padding.top - padding.bottom
+
+  // Calculate points
+  const points = ratings.map((rating, index) => ({
+    x: padding.left + (index / (ratings.length - 1 || 1)) * chartWidth,
+    y: padding.top + (1 - (rating - minRating) / range) * chartHeight,
+    rating
+  }))
+
+  // Create SVG path
+  const pathData = points.length > 0
+    ? `M ${points.map(p => `${p.x},${p.y}`).join(' L ')}`
+    : ''
+
+  return (
+    <div className="border rounded overflow-x-auto bg-gray-50 p-4">
+      <svg width={width} height={height} style={{ minWidth: '100%' }}>
+        {/* Grid lines */}
+        {[0, 0.5, 1].map((frac, i) => (
+          <line
+            key={`grid-${i}`}
+            x1={padding.left}
+            y1={padding.top + frac * chartHeight}
+            x2={width - padding.right}
+            y2={padding.top + frac * chartHeight}
+            stroke="#e5e7eb"
+            strokeDasharray="2,2"
+          />
+        ))}
+
+        {/* Axes */}
+        <line
+          x1={padding.left}
+          y1={padding.top}
+          x2={padding.left}
+          y2={height - padding.bottom}
+          stroke="#d1d5db"
+        />
+        <line
+          x1={padding.left}
+          y1={height - padding.bottom}
+          x2={width - padding.right}
+          y2={height - padding.bottom}
+          stroke="#d1d5db"
+        />
+
+        {/* Y-axis labels */}
+        {[0, 0.5, 1].map((frac, i) => {
+          const rating = Math.round(minRating + frac * range)
+          return (
+            <text
+              key={`y-${i}`}
+              x={padding.left - 10}
+              y={padding.top + frac * chartHeight + 4}
+              fontSize="12"
+              textAnchor="end"
+              fill="#6b7280"
+            >
+              {rating}
+            </text>
+          )
+        })}
+
+        {/* Line chart */}
+        {pathData && (
+          <path
+            d={pathData}
+            fill="none"
+            stroke="#3b82f6"
+            strokeWidth="2"
+          />
+        )}
+
+        {/* Data points with color gradient */}
+        {points.map((point, i) => {
+          const entry = ratingHistory[ratingHistory.length - 1 - i]
+          const pointColor = interpolateRatingColor(point.rating)
+          return (
+            <circle
+              key={`point-${i}`}
+              cx={point.x}
+              cy={point.y}
+              r="3"
+              fill={pointColor.hex}
+              stroke="white"
+              strokeWidth="1"
+            />
+          )
+        })}
+      </svg>
     </div>
   )
 }

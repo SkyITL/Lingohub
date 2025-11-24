@@ -393,9 +393,14 @@ export default function ProblemPageClient({ initialProblem }: ProblemPageClientP
         setIsEditingUserSolution(false)
         setSubmitSuccess(false)
 
-        // Redirect to submissions page to see result
+        // Redirect to submission detail page to see evaluation result
         if (!isEditingUserSolution) {
-          router.push('/submissions')
+          const submissionId = newSub?.id || response.data.submission?.id
+          if (submissionId) {
+            router.push(`/submissions/${submissionId}`)
+          } else {
+            router.push('/submissions')
+          }
         }
       }, 2000)
     } catch (error: any) {
