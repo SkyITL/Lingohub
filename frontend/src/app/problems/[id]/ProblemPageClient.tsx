@@ -345,6 +345,8 @@ export default function ProblemPageClient({ initialProblem }: ProblemPageClientP
       setSubmitError('')
       setDebugInfo(null)
 
+      let submissionId: string | undefined = undefined
+
       if (userSolution && isEditingUserSolution) {
         // Edit existing submission
         const response = await submissionsApi.edit(
@@ -353,6 +355,7 @@ export default function ProblemPageClient({ initialProblem }: ProblemPageClientP
           selectedImages.length > 0 ? selectedImages : undefined
         )
         const updatedSub = response.data.submission
+        submissionId = updatedSub.id
         console.log('Submission updated successfully:', updatedSub)
         setSubmitSuccess(true)
         setDebugInfo(response.data.debug)
@@ -364,6 +367,7 @@ export default function ProblemPageClient({ initialProblem }: ProblemPageClientP
           selectedImages.length > 0 ? selectedImages : undefined
         )
         const newSub = response.data.submission
+        submissionId = newSub.id
         const debug = response.data.debug
         console.log('Submission submitted successfully:', newSub)
         console.log('Debug info:', debug)
@@ -394,13 +398,10 @@ export default function ProblemPageClient({ initialProblem }: ProblemPageClientP
         setSubmitSuccess(false)
 
         // Redirect to submission detail page to see evaluation result
-        if (!isEditingUserSolution) {
-          const submissionId = newSub?.id || response.data.submission?.id
-          if (submissionId) {
-            router.push(`/submissions/${submissionId}`)
-          } else {
-            router.push('/submissions')
-          }
+        if (submissionId) {
+          router.push(`/submissions/${submissionId}`)
+        } else {
+          router.push('/submissions')
         }
       }, 2000)
     } catch (error: any) {
