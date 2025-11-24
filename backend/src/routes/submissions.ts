@@ -6,6 +6,7 @@ import { authenticateToken, optionalAuth } from '../middleware/auth'
 import { uploadMultipleFiles, FileAttachment } from '../services/fileUpload'
 import { evaluateSolution } from '../services/llmEvaluator'
 import { checkRateLimit, logRateLimitAction, RATE_LIMITS } from '../utils/rateLimit'
+import { calculateRatingChange } from '../utils/rating'
 
 const router = express.Router()
 const prisma = new PrismaClient()
@@ -127,6 +128,72 @@ async function evaluateSubmissionAsync(
     }
 
     console.log('🔵 [ASYNC EVAL] Results saved to database')
+
+    // Calculate and apply rating changes
+    try {
+      const user = await prisma.user.findUnique({
+        where: { id: userId }
+      })
+
+      if (!user) {
+        console.warn('⚠️  [ASYNC EVAL] User not found for rating update')
+      } else {
+        console.log('🔵 [ASYNC EVAL] Calculating rating change...')
+
+        // Determine actual performance based on score
+        // >= 70 = correct (1.0), 40-69 = partial (0.5), < 40 = incorrect (0.0)
+        const actualPerformance = evaluationResult.totalScore >= 70 ? 1.0 :
+                                 evaluationResult.totalScore >= 40 ? 0.5 : 0.0
+
+        const ratingChange = calculateRatingChange(
+          user.rating,
+          problem.rating,
+          false, // viewedSolution - set to false for now (would need to track this)
+          actualPerformance
+        )
+
+        console.log('🔵 [ASYNC EVAL] Rating change:', {
+          oldRating: ratingChange.oldRating,
+          newRating: ratingChange.newRating,
+          change: ratingChange.change,
+          expectedPerformance: ratingChange.expectedPerformance.toFixed(3),
+          actualPerformance
+        })
+
+        // Update user rating
+        await retryWithDelay(
+          () => prisma.user.update({
+            where: { id: userId },
+            data: {
+              rating: ratingChange.newRating
+            }
+          }),
+          maxRetries
+        )
+
+        // Create rating history record
+        await retryWithDelay(
+          () => prisma.ratingHistory.create({
+            data: {
+              userId,
+              problemId: problem.id,
+              oldRating: ratingChange.oldRating,
+              newRating: ratingChange.newRating,
+              change: ratingChange.change,
+              problemRating: problem.rating,
+              viewedSolution: false,
+              verified: evaluationResult.totalScore >= 70 // Auto-verify if correct
+            }
+          }),
+          maxRetries
+        )
+
+        console.log('🔵 [ASYNC EVAL] ✅ Rating updated:', ratingChange.change > 0 ? `+${ratingChange.change}` : ratingChange.change)
+      }
+    } catch (ratingError: any) {
+      console.error('❌ [ASYNC EVAL] Error calculating/updating rating:', ratingError)
+      // Don't fail the whole evaluation if rating update fails
+    }
 
   } catch (error: any) {
     console.error('❌ [ASYNC EVAL] Error:', error)
@@ -721,6 +788,113 @@ router.delete('/:id', authenticateToken, async (req: Request, res: Response) => 
     res.json({ message: 'Submission deleted successfully' })
   } catch (error) {
     console.error('Submission delete error:', error)
+    res.status(500).json({ error: 'Internal server error' })
+  }
+})
+
+// Get rating history for a user
+router.get('/user/:userId/rating-history', optionalAuth, async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.params
+    const limit = Math.min(parseInt(req.query.limit as string) || 20, 100)
+    const offset = parseInt(req.query.offset as string) || 0
+
+    // Check if user is requesting their own data or if they have permission
+    if (req.user && userId !== req.user.id) {
+      // For now, allow viewing other users' rating history (public)
+    }
+
+    const ratingHistory = await prisma.ratingHistory.findMany({
+      where: { userId },
+      include: {
+        problem: {
+          select: {
+            id: true,
+            number: true,
+            title: true,
+            rating: true
+          }
+        }
+      },
+      orderBy: {
+        createdAt: 'desc'
+      },
+      take: limit,
+      skip: offset
+    })
+
+    res.json({
+      ratingHistory,
+      limit,
+      offset,
+      count: ratingHistory.length
+    })
+  } catch (error) {
+    console.error('Rating history fetch error:', error)
+    res.status(500).json({ error: 'Internal server error' })
+  }
+})
+
+// Flag a submission for human review
+router.post('/:id/flag', authenticateToken, async (req: Request, res: Response) => {
+  try {
+    if (!req.user) {
+      return res.status(401).json({ error: 'Authentication required' })
+    }
+
+    const { id } = req.params
+    const { reason, details } = req.body
+
+    if (!reason) {
+      return res.status(400).json({ error: 'Reason is required' })
+    }
+
+    // Validate reason
+    const validReasons = ['plagiarism', 'incorrect', 'spam']
+    if (!validReasons.includes(reason)) {
+      return res.status(400).json({ error: 'Invalid reason. Must be one of: plagiarism, incorrect, spam' })
+    }
+
+    // Check if submission exists
+    const submission = await prisma.submission.findUnique({
+      where: { id }
+    })
+
+    if (!submission) {
+      return res.status(404).json({ error: 'Submission not found' })
+    }
+
+    // Create flag record
+    const flag = await prisma.submissionFlag.create({
+      data: {
+        submissionId: id,
+        reporterId: req.user.id,
+        flaggedUserId: submission.userId,
+        reason,
+        details: details || undefined,
+        status: 'pending'
+      }
+    })
+
+    // Increment flag count on submission
+    await prisma.submission.update({
+      where: { id },
+      data: {
+        flagCount: { increment: 1 }
+      }
+    })
+
+    res.status(201).json({
+      message: 'Submission flagged successfully for review',
+      flag: {
+        id: flag.id,
+        reason: flag.reason,
+        status: flag.status,
+        createdAt: flag.createdAt
+      }
+    })
+  } catch (error) {
+    console.error('Submission flag error:', error)
     res.status(500).json({ error: 'Internal server error' })
   }
 })

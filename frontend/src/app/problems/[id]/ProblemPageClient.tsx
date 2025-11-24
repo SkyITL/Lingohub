@@ -289,23 +289,30 @@ export default function ProblemPageClient({ initialProblem }: ProblemPageClientP
       newImages.push(processedFile)
 
       // Create preview (for images only, PDFs show icon)
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        newPreviews.push(reader.result as string)
-        if (newPreviews.length === newImages.length) {
-          setImagePreviews([...imagePreviews, ...newPreviews])
-        }
-      }
       if (isPDF) {
         // For PDFs, store a placeholder
         newPreviews.push('PDF_PLACEHOLDER')
-        if (newPreviews.length === newImages.length) {
-          setImagePreviews([...imagePreviews, ...newPreviews])
-        }
-      } else {
-        reader.readAsDataURL(processedFile)
       }
     }
+
+    // Build previews with proper async handling
+    const previewPromises = newImages.map((file, idx) => {
+      const isPDF = file.type === 'application/pdf'
+      if (isPDF) {
+        return Promise.resolve('PDF_PLACEHOLDER')
+      }
+      return new Promise<string>((resolve) => {
+        const reader = new FileReader()
+        reader.onload = () => {
+          resolve(reader.result as string)
+        }
+        reader.readAsDataURL(file)
+      })
+    })
+
+    Promise.all(previewPromises).then((previews) => {
+      setImagePreviews([...imagePreviews, ...previews])
+    })
 
     setSelectedImages([...selectedImages, ...newImages])
   }

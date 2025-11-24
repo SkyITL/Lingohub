@@ -173,6 +173,14 @@ export const submissionsApi = {
 
   delete: (submissionId: string) =>
     api.delete(`/submissions/${submissionId}`),
+
+  flag: (submissionId: string, reason: string, details?: string) =>
+    api.post(`/submissions/${submissionId}/flag`, { reason, details }),
+
+  getRatingHistory: (userId: string, limit?: number, offset?: number) =>
+    api.get(`/submissions/user/${userId}/rating-history`, {
+      params: { limit, offset }
+    }),
 }
 
 // Solutions API (public write-ups/题解)

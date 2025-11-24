@@ -16,7 +16,8 @@ import {
   FileText,
   ThumbsUp,
   ThumbsDown,
-  Info
+  Info,
+  Flag
 } from "lucide-react"
 import Link from 'next/link'
 
@@ -43,6 +44,11 @@ export default function SubmissionDetailPage() {
   const [submission, setSubmission] = useState<SubmissionDetail | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [showFlagModal, setShowFlagModal] = useState(false)
+  const [flagReason, setFlagReason] = useState<string>('')
+  const [flagDetails, setFlagDetails] = useState<string>('')
+  const [flagging, setFlagging] = useState(false)
+  const [flagMessage, setFlagMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null)
 
   const submissionId = params.id as string
 
@@ -98,6 +104,29 @@ export default function SubmissionDetailPage() {
       }
     } finally {
       setIsLoading(false)
+    }
+  }
+
+  const handleFlagSubmission = async () => {
+    if (!flagReason) {
+      setFlagMessage({ type: 'error', text: 'Please select a reason' })
+      return
+    }
+
+    try {
+      setFlagging(true)
+      await submissionsApi.flag(submissionId, flagReason, flagDetails)
+      setFlagMessage({ type: 'success', text: 'Submission flagged successfully. Thank you for helping keep the community safe!' })
+      setShowFlagModal(false)
+      setFlagReason('')
+      setFlagDetails('')
+      // Clear message after 3 seconds
+      setTimeout(() => setFlagMessage(null), 3000)
+    } catch (error: any) {
+      console.error('Failed to flag submission:', error)
+      setFlagMessage({ type: 'error', text: error.response?.data?.error || 'Failed to flag submission' })
+    } finally {
+      setFlagging(false)
     }
   }
 
@@ -206,7 +235,20 @@ export default function SubmissionDetailPage() {
                 {submission.problemNumber}: {submission.problemTitle}
               </Link>
             </div>
-            {getStatusBadge(submission.llmScore)}
+            <div className="flex items-center gap-3">
+              {getStatusBadge(submission.llmScore)}
+              {submission.userId !== user?.id && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setShowFlagModal(true)}
+                  className="text-orange-600 border-orange-200 hover:bg-orange-50"
+                >
+                  <Flag className="h-4 w-4 mr-2" />
+                  Flag
+                </Button>
+              )}
+            </div>
           </div>
 
           <div className="flex items-center gap-6 text-sm text-gray-600">
@@ -298,6 +340,93 @@ export default function SubmissionDetailPage() {
                   Your submission is being evaluated by our AI system. This usually takes a few moments.
                   Refresh the page to check for updates.
                 </p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Flag Message */}
+        {flagMessage && (
+          <div className={`mt-6 p-4 rounded-lg ${
+            flagMessage.type === 'success'
+              ? 'bg-green-50 border border-green-200 text-green-700'
+              : 'bg-red-50 border border-red-200 text-red-700'
+          }`}>
+            {flagMessage.text}
+          </div>
+        )}
+
+        {/* Flag Modal */}
+        {showFlagModal && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-lg shadow-xl max-w-md w-full p-6">
+              <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                <Flag className="h-5 w-5 text-orange-600" />
+                Flag Submission for Review
+              </h2>
+
+              <p className="text-gray-600 mb-6">
+                Help us maintain community standards by flagging submissions that violate our guidelines.
+              </p>
+
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-gray-900 mb-3">
+                  Reason for flagging:
+                </label>
+                <div className="space-y-2">
+                  {[
+                    { value: 'incorrect', label: 'Incorrect evaluation - I believe the AI got it wrong' },
+                    { value: 'plagiarism', label: 'Plagiarism - This may be copied work' },
+                    { value: 'spam', label: 'Spam - Not a genuine submission' }
+                  ].map((option) => (
+                    <label key={option.value} className="flex items-center gap-3 p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50">
+                      <input
+                        type="radio"
+                        name="flag-reason"
+                        value={option.value}
+                        checked={flagReason === option.value}
+                        onChange={(e) => setFlagReason(e.target.value)}
+                        className="w-4 h-4"
+                      />
+                      <span className="text-gray-700">{option.label}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-gray-900 mb-2">
+                  Additional details (optional):
+                </label>
+                <textarea
+                  value={flagDetails}
+                  onChange={(e) => setFlagDetails(e.target.value)}
+                  placeholder="Explain why you're flagging this submission..."
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent resize-none"
+                  rows={3}
+                />
+              </div>
+
+              <div className="flex gap-3">
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    setShowFlagModal(false)
+                    setFlagReason('')
+                    setFlagDetails('')
+                  }}
+                  disabled={flagging}
+                  className="flex-1"
+                >
+                  Cancel
+                </Button>
+                <Button
+                  onClick={handleFlagSubmission}
+                  disabled={flagging || !flagReason}
+                  className="flex-1 bg-orange-600 hover:bg-orange-700 text-white"
+                >
+                  {flagging ? 'Flagging...' : 'Flag Submission'}
+                </Button>
               </div>
             </div>
           </div>

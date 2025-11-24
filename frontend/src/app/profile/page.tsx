@@ -1,8 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Header from "@/components/Header"
 import { Button } from "@/components/ui/button"
+import RatingProgressChart from "@/components/RatingProgressChart"
+import { useAuth } from "@/contexts/AuthContext"
 import { 
   User, 
   Award, 
@@ -69,6 +71,7 @@ const competitions = [
 ]
 
 export default function ProfilePage() {
+  const { user } = useAuth()
   const [activeTab, setActiveTab] = useState<'overview' | 'progress' | 'achievements' | 'settings'>('overview')
 
   const getActivityIcon = (type: string) => {
@@ -259,24 +262,32 @@ export default function ProfilePage() {
             )}
 
             {activeTab === 'progress' && (
-              <div>
-                <h3 className="text-lg font-semibold mb-6">Progress by Topic</h3>
-                <div className="grid md:grid-cols-2 gap-6">
-                  {topicStats.map((topic) => (
-                    <div key={topic.topic} className="p-6 border rounded-lg">
-                      <div className="flex items-center justify-between mb-3">
-                        <h4 className="font-medium text-gray-900">{topic.topic}</h4>
-                        <span className="text-sm text-gray-600">{topic.solved}/{topic.total}</span>
+              <div className="space-y-8">
+                {/* Rating Progress Chart */}
+                {user && (
+                  <RatingProgressChart userId={user.id} />
+                )}
+
+                {/* Topic Stats */}
+                <div>
+                  <h3 className="text-lg font-semibold mb-6">Progress by Topic</h3>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    {topicStats.map((topic) => (
+                      <div key={topic.topic} className="p-6 border rounded-lg">
+                        <div className="flex items-center justify-between mb-3">
+                          <h4 className="font-medium text-gray-900">{topic.topic}</h4>
+                          <span className="text-sm text-gray-600">{topic.solved}/{topic.total}</span>
+                        </div>
+                        <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
+                          <div
+                            className={`h-2 rounded-full ${getTopicColor(topic.percentage)}`}
+                            style={{ width: `${topic.percentage}%` }}
+                          />
+                        </div>
+                        <p className="text-sm text-gray-600">{topic.percentage}% completed</p>
                       </div>
-                      <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
-                        <div 
-                          className={`h-2 rounded-full ${getTopicColor(topic.percentage)}`}
-                          style={{ width: `${topic.percentage}%` }}
-                        />
-                      </div>
-                      <p className="text-sm text-gray-600">{topic.percentage}% completed</p>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
             )}
