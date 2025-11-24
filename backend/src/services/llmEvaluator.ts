@@ -198,7 +198,10 @@ async function callOpenRouter(
     },
   ]
 
+  console.log('[LLM Evaluator] Building multimodal content...')
+
   if (problemImageUrl) {
+    console.log('[LLM Evaluator] Adding problem PDF image')
     messageContent.push({
       type: 'image',
       source: {
@@ -209,6 +212,7 @@ async function callOpenRouter(
   }
 
   if (solutionImageUrl) {
+    console.log('[LLM Evaluator] Adding solution PDF image')
     messageContent.push({
       type: 'image',
       source: {
@@ -220,8 +224,17 @@ async function callOpenRouter(
 
   // Add user's uploaded attachments (images)
   if (userAttachments && Array.isArray(userAttachments)) {
-    for (const attachment of userAttachments) {
+    console.log('[LLM Evaluator] Processing', userAttachments.length, 'user attachments')
+    for (let i = 0; i < userAttachments.length; i++) {
+      const attachment = userAttachments[i]
+      console.log(`[LLM Evaluator] Attachment ${i + 1}:`, {
+        hasUrl: !!attachment.url,
+        urlPrefix: attachment.url ? attachment.url.substring(0, 50) : 'N/A',
+        fullAttachment: JSON.stringify(attachment).substring(0, 200)
+      })
+
       if (attachment.url) {
+        console.log(`[LLM Evaluator] Adding user attachment ${i + 1} to content`)
         messageContent.push({
           type: 'image',
           source: {
@@ -231,7 +244,11 @@ async function callOpenRouter(
         })
       }
     }
+  } else {
+    console.log('[LLM Evaluator] No user attachments provided')
   }
+
+  console.log('[LLM Evaluator] Final content items:', messageContent.length, '(1 text + images)')
 
   const requestBody = {
     model,
@@ -247,11 +264,23 @@ async function callOpenRouter(
 
   // Create abort controller with timeout
   const abortController = new AbortController()
+  const startTime = Date.now()
+  const timeoutMs = 120000 // 120 second timeout for multimodal requests with images
+
+  console.log('[LLM Evaluator] Starting OpenRouter API call...')
+  console.log('[LLM Evaluator] Timeout set to:', timeoutMs, 'ms')
+  console.log('[LLM Evaluator] Request body has', messageContent.length, 'content items')
+
   const timeoutId = setTimeout(() => {
+    const elapsed = Date.now() - startTime
+    console.log('[LLM Evaluator] Timeout triggered after', elapsed, 'ms')
     abortController.abort()
-  }, 55000) // 55 second timeout for OpenRouter API call (Vercel serverless max is 60s)
+  }, timeoutMs)
 
   try {
+    console.log('[LLM Evaluator] Sending request to OpenRouter API...')
+    const fetchStartTime = Date.now()
+
     const response = await fetch(OPENROUTER_API_URL, {
       method: 'POST',
       headers: {
@@ -264,12 +293,35 @@ async function callOpenRouter(
       signal: abortController.signal,
     })
 
+    const fetchEndTime = Date.now()
+    const fetchDuration = fetchEndTime - fetchStartTime
+    console.log('[LLM Evaluator] Received response after', fetchDuration, 'ms')
+    console.log('[LLM Evaluator] Response status:', response.status)
+
     if (!response.ok) {
       const error = await response.text()
+      console.error('[LLM Evaluator] API error response:', error.substring(0, 500))
       throw new Error(`OpenRouter API error: ${response.status} - ${error}`)
     }
 
-    return (await response.json()) as LLMResponse
+    const result = (await response.json()) as LLMResponse
+    const totalTime = Date.now() - startTime
+    console.log('[LLM Evaluator] Successfully parsed response after', totalTime, 'ms total')
+    console.log('[LLM Evaluator] Model used:', result.model)
+    console.log('[LLM Evaluator] Tokens used:', result.usage.total_tokens)
+
+    return result
+  } catch (fetchError: any) {
+    const totalTime = Date.now() - startTime
+    console.error('[LLM Evaluator] Fetch error after', totalTime, 'ms:')
+    console.error('[LLM Evaluator] Error type:', fetchError.name)
+    console.error('[LLM Evaluator] Error message:', fetchError.message)
+
+    if (fetchError.name === 'AbortError') {
+      console.error('[LLM Evaluator] Request was aborted (timeout exceeded)')
+    }
+
+    throw fetchError
   } finally {
     clearTimeout(timeoutId)
   }
