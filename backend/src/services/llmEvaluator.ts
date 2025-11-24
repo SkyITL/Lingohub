@@ -203,9 +203,8 @@ async function callOpenRouter(
   if (problemImageUrl) {
     console.log('[LLM Evaluator] Adding problem PDF image')
     messageContent.push({
-      type: 'image',
-      source: {
-        type: 'url',
+      type: 'image_url',
+      image_url: {
         url: problemImageUrl,
       },
     })
@@ -214,9 +213,8 @@ async function callOpenRouter(
   if (solutionImageUrl) {
     console.log('[LLM Evaluator] Adding solution PDF image')
     messageContent.push({
-      type: 'image',
-      source: {
-        type: 'url',
+      type: 'image_url',
+      image_url: {
         url: solutionImageUrl,
       },
     })
@@ -250,9 +248,8 @@ async function callOpenRouter(
 
         console.log(`[LLM Evaluator] Adding user attachment ${i + 1} to content`)
         messageContent.push({
-          type: 'image',
-          source: {
-            type: 'url',
+          type: 'image_url',
+          image_url: {
             url: optimizedUrl,
           },
         })
@@ -316,9 +313,8 @@ async function callOpenRouter(
       contentItems: requestBody.messages[0].content.map((item: any, idx: number) => ({
         index: idx,
         type: item.type,
-        hasSource: item.type === 'image' ? !!item.source : 'N/A',
-        sourceType: item.type === 'image' ? item.source?.type : 'N/A',
-        url: item.type === 'image' ? item.source?.url?.substring(0, 50) : 'N/A'
+        hasImageUrl: item.type === 'image_url' ? !!item.image_url : 'N/A',
+        url: item.type === 'image_url' ? item.image_url?.url?.substring(0, 80) : 'N/A'
       }))
     })
 
