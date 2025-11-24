@@ -15,7 +15,7 @@ export function transformPdfToImage(pdfUrl: string): string {
     return ''
   }
 
-  // Check if it's already a Cloudinary-hosted URL (skip transformation)
+  // Check if it's already a Cloudinary-hosted URL (already transformed, skip)
   if (pdfUrl.includes('res.cloudinary.com') && pdfUrl.includes('/fetch/')) {
     return pdfUrl // Already transformed, return as-is
   }
@@ -26,11 +26,25 @@ export function transformPdfToImage(pdfUrl: string): string {
     // PNG format preserves formatting, tables, IPA symbols, and other complex linguistic notation better than JPG
     // Higher resolution (1200x900) for better LLM vision processing
 
-    // For Cloudinary /fetch/ endpoint, the URL should NOT be URL-encoded
-    // Just pass it directly as the last parameter
-    const imageUrl = `https://res.cloudinary.com/dvt6h0qgy/fetch/c_scale,h_1200,w_900,f_png,pg_1/${pdfUrl}`
+    let imageUrl: string
 
-    console.log('[PDF Transformer] Generated Cloudinary PNG transformation URL')
+    if (pdfUrl.includes('res.cloudinary.com')) {
+      // If it's already a Cloudinary URL (e.g., /raw/upload/...), use image transformation endpoint
+      // Replace /raw/upload/ with /image/upload/ to apply transformations directly
+      // This avoids double-nesting URLs which causes 404 errors
+      const transformedUrl = pdfUrl.replace(
+        '/raw/upload/',
+        '/image/upload/c_scale,h_1200,w_900,f_png,pg_1/'
+      )
+      imageUrl = transformedUrl
+      console.log('[PDF Transformer] Cloudinary internal URL transformed (raw → image with transformations)')
+    } else {
+      // External URL - use /fetch/ endpoint to fetch and transform
+      // For /fetch/ endpoint, the URL should NOT be URL-encoded
+      imageUrl = `https://res.cloudinary.com/dvt6h0qgy/fetch/c_scale,h_1200,w_900,f_png,pg_1/${pdfUrl}`
+      console.log('[PDF Transformer] External URL transformation using /fetch/')
+    }
+
     console.log('[PDF Transformer] Source URL:', pdfUrl.substring(0, 80))
     console.log('[PDF Transformer] Transformed URL:', imageUrl.substring(0, 100))
     return imageUrl
