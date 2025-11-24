@@ -433,6 +433,11 @@ router.post('/', authenticateToken, upload.array('files', 5), async (req: Reques
     let evaluationResult = null
     const hasOfficialSolution = problem.officialSolution || problem.solutionUrl
 
+    console.log('🔵 [SUBMISSION SUBMIT] Solution check:')
+    console.log('  - problem.officialSolution:', problem.officialSolution ? 'YES' : 'NO')
+    console.log('  - problem.solutionUrl:', problem.solutionUrl || 'NONE')
+    console.log('  - hasOfficialSolution:', hasOfficialSolution)
+
     // Start async evaluation but don't wait for it
     if (hasOfficialSolution) {
       // Check rate limit for AI evaluation (separate from submission limit)
