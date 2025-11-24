@@ -225,23 +225,34 @@ async function callOpenRouter(
     max_tokens: 1000,
   }
 
-  const response = await fetch(OPENROUTER_API_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${OPENROUTER_API_KEY}`,
-      'HTTP-Referer': 'https://lingohub.vercel.app',
-      'X-Title': 'LingoHub',
-    },
-    body: JSON.stringify(requestBody),
-  })
+  // Create abort controller with timeout
+  const abortController = new AbortController()
+  const timeoutId = setTimeout(() => {
+    abortController.abort()
+  }, 55000) // 55 second timeout for OpenRouter API call (Vercel serverless max is 60s)
 
-  if (!response.ok) {
-    const error = await response.text()
-    throw new Error(`OpenRouter API error: ${response.status} - ${error}`)
+  try {
+    const response = await fetch(OPENROUTER_API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${OPENROUTER_API_KEY}`,
+        'HTTP-Referer': 'https://lingohub.vercel.app',
+        'X-Title': 'LingoHub',
+      },
+      body: JSON.stringify(requestBody),
+      signal: abortController.signal,
+    })
+
+    if (!response.ok) {
+      const error = await response.text()
+      throw new Error(`OpenRouter API error: ${response.status} - ${error}`)
+    }
+
+    return (await response.json()) as LLMResponse
+  } finally {
+    clearTimeout(timeoutId)
   }
-
-  return (await response.json()) as LLMResponse
 }
 
 /**
