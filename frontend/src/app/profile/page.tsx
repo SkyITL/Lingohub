@@ -6,6 +6,7 @@ import { useAuth } from "@/contexts/AuthContext"
 import { submissionsApi, usersApi } from "@/lib/api"
 import { interpolateRatingColor } from "@/utils/ratingColor"
 import Link from 'next/link'
+import axios from 'axios'
 
 interface RatingEntry {
   id: string
@@ -25,10 +26,12 @@ interface RatingEntry {
 }
 
 export default function ProfilePage() {
-  const { user } = useAuth()
+  const { user, token } = useAuth()
   const [ratingHistory, setRatingHistory] = useState<RatingEntry[]>([])
   const [currentRating, setCurrentRating] = useState(user?.rating || 1200)
   const [isLoading, setIsLoading] = useState(true)
+  const [isResetting, setIsResetting] = useState(false)
+  const [resetMessage, setResetMessage] = useState('')
 
   useEffect(() => {
     if (!user?.id) return
@@ -67,6 +70,43 @@ export default function ProfilePage() {
     }
   }
 
+  const handleResetRating = async () => {
+    if (!user?.id || !token) return
+    if (!confirm('Are you sure you want to reset your rating and rating history? This cannot be undone.')) {
+      return
+    }
+
+    try {
+      setIsResetting(true)
+      setResetMessage('')
+
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://lingohub-backend.vercel.app/api'
+      const response = await axios.post(
+        `${apiUrl}/admin/users/${user.id}/reset-rating`,
+        {},
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        }
+      )
+
+      setResetMessage('Rating reset successfully!')
+      setCurrentRating(1200)
+      setRatingHistory([])
+
+      // Reload after 2 seconds
+      setTimeout(() => {
+        loadRatingHistory()
+      }, 2000)
+    } catch (error: any) {
+      console.error('Failed to reset rating:', error)
+      setResetMessage(`Error: ${error.response?.data?.error || error.message}`)
+    } finally {
+      setIsResetting(false)
+    }
+  }
+
   if (!user) {
     return (
       <div style={{ minHeight: '100vh', backgroundColor: 'white' }}>
@@ -87,19 +127,43 @@ export default function ProfilePage() {
       <div style={{ maxWidth: '800px', margin: '0 auto', padding: '32px 16px' }}>
         {/* Rating Header */}
         <div style={{ marginBottom: '32px' }}>
-          <div
-            style={{
-              display: 'inline-block',
-              padding: '16px 24px',
-              borderRadius: '4px',
-              backgroundColor: ratingColor.hex,
-              color: 'white',
-              fontSize: '20px',
-              fontWeight: 'bold'
-            }}
-          >
-            {user.username} • {currentRating}
+          <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+            <div
+              style={{
+                display: 'inline-block',
+                padding: '16px 24px',
+                borderRadius: '4px',
+                backgroundColor: ratingColor.hex,
+                color: 'white',
+                fontSize: '20px',
+                fontWeight: 'bold'
+              }}
+            >
+              {user.username} • {currentRating}
+            </div>
+            <button
+              onClick={handleResetRating}
+              disabled={isResetting}
+              style={{
+                padding: '8px 16px',
+                backgroundColor: '#e5e7eb',
+                color: '#666',
+                border: 'none',
+                borderRadius: '4px',
+                fontSize: '14px',
+                cursor: isResetting ? 'not-allowed' : 'pointer',
+                opacity: isResetting ? 0.6 : 1,
+                fontWeight: '500'
+              }}
+            >
+              {isResetting ? 'Resetting...' : 'Reset Rating'}
+            </button>
           </div>
+          {resetMessage && (
+            <p style={{ marginTop: '12px', fontSize: '14px', color: resetMessage.startsWith('Error') ? '#dc2626' : '#059669' }}>
+              {resetMessage}
+            </p>
+          )}
         </div>
 
         {/* Rating Change Chart */}
