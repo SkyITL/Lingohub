@@ -3,7 +3,7 @@
  * Uses OpenRouter API to evaluate linguistics problem solutions
  */
 
-import { transformPdfToImage, fetchAndUploadPdfToCloudinary } from './pdfExtractor'
+import { transformCloudinaryPdfToImage, fetchAndUploadPdfToCloudinary } from './pdfExtractor'
 
 export interface EvaluationScores {
   correctness: number // 0-40 points
@@ -178,14 +178,11 @@ async function callOpenRouter(
     try {
       console.log('[LLM Evaluator] Fetching problem PDF from backend...')
       const cloudinaryUrl = await fetchAndUploadPdfToCloudinary(problemPdfUrl)
-      problemImageUrl = transformPdfToImage(cloudinaryUrl)
+      problemImageUrl = transformCloudinaryPdfToImage(cloudinaryUrl)
       console.log('[LLM Evaluator] Problem PDF ready for LLM:', problemImageUrl)
     } catch (error: any) {
       console.warn('[LLM Evaluator] Failed to fetch problem PDF:', error.message)
     }
-  } else if (problemPdfUrl) {
-    // Already a full URL
-    problemImageUrl = transformPdfToImage(problemPdfUrl)
   }
 
   if (solutionPdfUrl && solutionPdfUrl.startsWith('/')) {
@@ -193,14 +190,11 @@ async function callOpenRouter(
     try {
       console.log('[LLM Evaluator] Fetching solution PDF from backend...')
       const cloudinaryUrl = await fetchAndUploadPdfToCloudinary(solutionPdfUrl)
-      solutionImageUrl = transformPdfToImage(cloudinaryUrl)
+      solutionImageUrl = transformCloudinaryPdfToImage(cloudinaryUrl)
       console.log('[LLM Evaluator] Solution PDF ready for LLM:', solutionImageUrl)
     } catch (error: any) {
       console.warn('[LLM Evaluator] Failed to fetch solution PDF:', error.message)
     }
-  } else if (solutionPdfUrl) {
-    // Already a full URL
-    solutionImageUrl = transformPdfToImage(solutionPdfUrl)
   }
 
   if (userAttachments && userAttachments.length > 0) {

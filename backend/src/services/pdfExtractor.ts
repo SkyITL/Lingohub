@@ -64,52 +64,38 @@ export async function fetchAndUploadPdfToCloudinary(pdfPath: string): Promise<st
 }
 
 /**
- * Convert PDF URL to image using Cloudinary transformation
+ * Convert Cloudinary PDF URL to image using Cloudinary transformation
  * Transforms PDF to PNG for LLM vision processing
- * @param pdfUrl - Cloudinary PDF URL
- * @returns Transformed image URL
+ * @param cloudinaryPdfUrl - Cloudinary PDF URL like https://res.cloudinary.com/.../raw/upload/...pdf
+ * @returns Transformed image URL with PNG conversion
  */
-export function transformPdfToImage(pdfUrl: string): string {
-  if (!pdfUrl) {
+export function transformCloudinaryPdfToImage(cloudinaryPdfUrl: string): string {
+  if (!cloudinaryPdfUrl) {
     return ''
   }
 
-  // Check if it's already a Cloudinary-hosted URL (already transformed, skip)
-  if (pdfUrl.includes('res.cloudinary.com') && pdfUrl.includes('/fetch/')) {
-    return pdfUrl // Already transformed, return as-is
-  }
-
   try {
-    // Cloudinary PDF to image transformation:
-    // /fetch/c_scale,h_1200,w_900,f_png,pg_1/ converts first page to PNG at specified dimensions
-    // PNG format preserves formatting, tables, IPA symbols, and other complex linguistic notation better than JPG
-    // Higher resolution (1200x900) for better LLM vision processing
+    // For Cloudinary PDFs stored in /raw/upload/, add transformation parameters
+    // Replace /raw/upload/ with /raw/upload/c_scale,h_1200,w_900,f_png,pg_1/
+    // This tells Cloudinary to: scale to 1200x900, convert first page to PNG format
 
-    let imageUrl: string
-
-    if (pdfUrl.includes('res.cloudinary.com')) {
-      // If it's already a Cloudinary URL (e.g., /raw/upload/...), use image transformation endpoint
-      // Replace /raw/upload/ with /image/upload/ to apply transformations directly
-      // This avoids double-nesting URLs which causes 404 errors
-      const transformedUrl = pdfUrl.replace(
-        '/raw/upload/',
-        '/image/upload/c_scale,h_1200,w_900,f_png,pg_1/'
-      )
-      imageUrl = transformedUrl
-      console.log('[PDF Transformer] Cloudinary internal URL transformed (raw → image with transformations)')
-    } else {
-      // External URL - use /fetch/ endpoint to fetch and transform
-      // For /fetch/ endpoint, the URL should NOT be URL-encoded
-      imageUrl = `https://res.cloudinary.com/dvt6h0qgy/fetch/c_scale,h_1200,w_900,f_png,pg_1/${pdfUrl}`
-      console.log('[PDF Transformer] External URL transformation using /fetch/')
+    if (!cloudinaryPdfUrl.includes('/raw/upload/')) {
+      // Already transformed or not a raw Cloudinary file
+      return cloudinaryPdfUrl
     }
 
-    console.log('[PDF Transformer] Source URL:', pdfUrl.substring(0, 80))
-    console.log('[PDF Transformer] Transformed URL:', imageUrl.substring(0, 100))
-    return imageUrl
+    const transformedUrl = cloudinaryPdfUrl.replace(
+      '/raw/upload/',
+      '/raw/upload/c_scale,h_1200,w_900,f_png,pg_1/'
+    )
+
+    console.log('[PDF Transformer] Transformed Cloudinary PDF to image')
+    console.log('[PDF Transformer] Source:', cloudinaryPdfUrl.substring(0, 80))
+    console.log('[PDF Transformer] Transformed:', transformedUrl.substring(0, 100))
+    return transformedUrl
   } catch (error: any) {
     console.log('[PDF Transformer] Failed to transform URL:', error.message)
-    return pdfUrl
+    return cloudinaryPdfUrl
   }
 }
 
