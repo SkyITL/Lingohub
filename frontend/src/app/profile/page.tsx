@@ -180,56 +180,28 @@ export default function ProfilePage() {
           )}
         </div>
 
-        {/* Recent Problems */}
+        {/* Completed Problems */}
         <div>
           <h2 style={{ fontSize: '18px', fontWeight: '600', color: '#111', marginBottom: '16px' }}>
-            Recent Problems
+            All Completed
           </h2>
           {isLoading ? (
             <p style={{ color: '#999' }}>Loading...</p>
           ) : ratingHistory.length === 0 ? (
             <p style={{ color: '#999' }}>No submissions yet</p>
           ) : (
-            <table style={{ width: '100%', fontSize: '14px', borderCollapse: 'collapse' }}>
-              <tbody>
-                {ratingHistory.map((entry) => {
-                  const changeColor = interpolateRatingColor(entry.newRating)
-                  return (
-                    <tr key={entry.id} style={{ borderBottom: '1px solid #e5e7eb' }}>
-                      <td style={{ padding: '12px 8px 12px 0' }}>
-                        <Link
-                          href={`/problems/${entry.problem.number}`}
-                          style={{ color: '#2563eb', textDecoration: 'none' }}
-                        >
-                          {entry.problem.number}
-                        </Link>
-                      </td>
-                      <td style={{ padding: '12px 12px', maxWidth: '300px' }}>
-                        <Link
-                          href={`/problems/${entry.problem.number}`}
-                          style={{ color: '#2563eb', textDecoration: 'none', display: 'block', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
-                        >
-                          {entry.problem.title}
-                        </Link>
-                      </td>
-                      <td style={{ padding: '12px 12px', textAlign: 'right', color: '#666' }}>
-                        {entry.oldRating} → {entry.newRating}
-                      </td>
-                      <td
-                        style={{
-                          padding: '12px 0',
-                          textAlign: 'right',
-                          fontWeight: '600',
-                          color: changeColor.hex
-                        }}
-                      >
-                        {entry.change > 0 ? '+' : ''}{entry.change}
-                      </td>
-                    </tr>
-                  )
-                })}
-              </tbody>
-            </table>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '12px' }}>
+              {ratingHistory.map((entry) => (
+                <div key={entry.id}>
+                  <Link
+                    href={`/problems/${entry.problem.number}`}
+                    style={{ color: '#2563eb', textDecoration: 'none', fontSize: '14px' }}
+                  >
+                    {entry.problem.number}
+                  </Link>
+                </div>
+              ))}
+            </div>
           )}
         </div>
       </div>
