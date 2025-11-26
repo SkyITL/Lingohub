@@ -57,23 +57,20 @@ export default function ProfilePage() {
       const profileResponse = await usersApi.getProfile(user.id)
       const currentUserRating = profileResponse.data.user.rating
 
-      // Cache the rating on the user's computer
-      localStorage.setItem(`lingohub_rating_${user.id}`, currentUserRating.toString())
-
       // Fetch rating history
       const historyResponse = await submissionsApi.getRatingHistory(user.id, 50)
       const history = historyResponse.data.ratingHistory
-      setRatingHistory(history)
 
       // Get the latest rating from history, or use current profile rating
+      let ratingToUse = currentUserRating
       if (history.length > 0) {
-        setCurrentRating(history[0].newRating)
-        // Cache the latest rating
-        localStorage.setItem(`lingohub_rating_${user.id}`, history[0].newRating.toString())
-      } else {
-        // Use rating from user profile if no history exists
-        setCurrentRating(currentUserRating)
+        ratingToUse = history[0].newRating
       }
+
+      // Update state and cache
+      setCurrentRating(ratingToUse)
+      localStorage.setItem(`lingohub_rating_${user.id}`, ratingToUse.toString())
+      setRatingHistory(history)
     } catch (err) {
       console.error('Failed to load rating history:', err)
       // Try to use cached rating on error

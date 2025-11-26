@@ -99,6 +99,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setUser(data.user)
       localStorage.setItem('lingohub_token', data.token)
       localStorage.setItem('lingohub_user', JSON.stringify(data.user))
+      // Cache the user's rating for immediate use in header
+      localStorage.setItem(`lingohub_rating_${data.user.id}`, data.user.rating.toString())
 
       logger.success('Login successful', {
         username: data.user.username,
@@ -145,6 +147,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setUser(data.user)
       localStorage.setItem('lingohub_token', data.token)
       localStorage.setItem('lingohub_user', JSON.stringify(data.user))
+      // Cache the user's rating for immediate use in header
+      localStorage.setItem(`lingohub_rating_${data.user.id}`, data.user.rating.toString())
 
       logger.success('Registration successful', {
         username: data.user.username,
@@ -166,6 +170,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       username: user?.username,
       userId: user?.id
     })
+
+    // Clear rating cache for this user
+    if (user?.id) {
+      localStorage.removeItem(`lingohub_rating_${user.id}`)
+    }
 
     setToken(null)
     setUser(null)
