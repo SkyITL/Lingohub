@@ -5,6 +5,7 @@ import Link from "next/link"
 import { Menu, User, LogOut, Bookmark } from "lucide-react"
 import { Button } from "./ui/button"
 import { useAuth } from "@/contexts/AuthContext"
+import './header.css'
 
 interface HeaderProps {
   overrideRating?: number
@@ -55,64 +56,22 @@ export default function Header({ overrideRating }: HeaderProps) {
               <>
                 <button
                   onClick={() => router.push('/profile')}
-                  className="header-button border"
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '8px',
-                    opacity: 1,
-                    cursor: 'pointer',
-                    background: 'none',
-                    border: 'none',
-                    padding: 0
-                  }}
-                  onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.8')}
-                  onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
+                  className="header-profile-button"
                 >
                   <User style={{ width: '16px', height: '16px', color: '#666' }} />
-                  <span style={{ fontSize: '14px', fontWeight: '500', color: '#666' }}>{user.username}</span>
-                  <span style={{ fontSize: '12px', color: '#999' }}>({displayRating})</span>
+                  <span>{user.username}</span>
+                  <span>({displayRating})</span>
                 </button>
                 <button
                   onClick={() => router.push('/profile/saved')}
-                  className="header-button border"
-                  style={{
-                    padding: '6px 12px',
-                    border: '1px solid #d1d5db',
-                    backgroundColor: '#ffffff',
-                    borderRadius: '4px',
-                    fontSize: '13px',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '4px',
-                    color: '#666',
-                    fontWeight: '500'
-                  }}
-                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#f3f4f6')}
-                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#ffffff')}
+                  className="header-secondary-button"
                 >
                   <Bookmark style={{ width: '14px', height: '14px' }} />
                   Saved
                 </button>
                 <button
                   onClick={handleLogout}
-                  className="header-button border"
-                  style={{
-                    padding: '6px 12px',
-                    border: '1px solid #d1d5db',
-                    backgroundColor: '#ffffff',
-                    borderRadius: '4px',
-                    fontSize: '13px',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '4px',
-                    color: '#666',
-                    fontWeight: '500'
-                  }}
-                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#f3f4f6')}
-                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#ffffff')}
+                  className="header-secondary-button"
                 >
                   <LogOut style={{ width: '14px', height: '14px' }} />
                   Logout
@@ -122,55 +81,20 @@ export default function Header({ overrideRating }: HeaderProps) {
               <>
                 <button
                   onClick={() => handleAuthClick('login')}
-                  className="header-button border"
-                  style={{
-                    padding: '6px 12px',
-                    border: '1px solid #d1d5db',
-                    backgroundColor: '#ffffff',
-                    borderRadius: '4px',
-                    fontSize: '13px',
-                    cursor: 'pointer',
-                    color: '#666',
-                    fontWeight: '500'
-                  }}
-                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#f3f4f6')}
-                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#ffffff')}
+                  className="header-secondary-button"
                 >
                   Login
                 </button>
                 <button
                   onClick={() => handleAuthClick('register')}
-                  className="header-button border"
-                  style={{
-                    padding: '6px 12px',
-                    border: 'none',
-                    backgroundColor: '#2563eb',
-                    color: '#ffffff',
-                    borderRadius: '4px',
-                    fontSize: '13px',
-                    cursor: 'pointer',
-                    fontWeight: '500'
-                  }}
-                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#1d4ed8')}
-                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#2563eb')}
+                  className="header-primary-button"
                 >
                   Register
                 </button>
               </>
             )}
             <button
-              style={{
-                display: 'none',
-                width: '40px',
-                height: '40px',
-                backgroundColor: 'transparent',
-                border: 'none',
-                cursor: 'pointer',
-                padding: 0,
-                '@media (max-width: 768px)': {
-                  display: 'flex'
-                }
-              }}
+              className="header-menu-button"
             >
               <Menu style={{ width: '20px', height: '20px' }} />
             </button>
