@@ -55,6 +55,7 @@ export default function Header({ overrideRating }: HeaderProps) {
               <>
                 <button
                   onClick={() => router.push('/profile')}
+                  className="outline"
                   style={{
                     display: 'flex',
                     alignItems: 'center',
@@ -74,6 +75,7 @@ export default function Header({ overrideRating }: HeaderProps) {
                 </button>
                 <button
                   onClick={() => router.push('/profile/saved')}
+                  className="outline"
                   style={{
                     padding: '6px 12px',
                     border: '1px solid #d1d5db',
@@ -95,6 +97,7 @@ export default function Header({ overrideRating }: HeaderProps) {
                 </button>
                 <button
                   onClick={handleLogout}
+                  className="outline"
                   style={{
                     padding: '6px 12px',
                     border: '1px solid #d1d5db',
@@ -119,6 +122,7 @@ export default function Header({ overrideRating }: HeaderProps) {
               <>
                 <button
                   onClick={() => handleAuthClick('login')}
+                  className="outline"
                   style={{
                     padding: '6px 12px',
                     border: '1px solid #d1d5db',
@@ -136,6 +140,7 @@ export default function Header({ overrideRating }: HeaderProps) {
                 </button>
                 <button
                   onClick={() => handleAuthClick('register')}
+                  className="ghost"
                   style={{
                     padding: '6px 12px',
                     border: 'none',
