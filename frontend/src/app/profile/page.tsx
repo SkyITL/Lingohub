@@ -116,6 +116,18 @@ export default function ProfilePage() {
     }
   }
 
+  if (!user && isLoading) {
+    // Still waiting for auth to load
+    return (
+      <div style={{ minHeight: '100vh', backgroundColor: 'white' }}>
+        <Header />
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '80px' }}>
+          <p style={{ color: '#666' }}>Loading profile...</p>
+        </div>
+      </div>
+    )
+  }
+
   if (!user) {
     return (
       <div style={{ minHeight: '100vh', backgroundColor: 'white' }}>

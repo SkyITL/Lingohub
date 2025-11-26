@@ -5,6 +5,7 @@ import { useAuth } from '@/contexts/AuthContext'
 import { useRatingCache } from '@/hooks/useRatingCache'
 import { submissionsApi } from '@/lib/api'
 import Header from "@/components/Header"
+import RatedUsername from "@/components/RatedUsername"
 import { Button } from "@/components/ui/button"
 import {
   Award,
@@ -25,6 +26,7 @@ interface Submission {
   problemTitle: string
   userId: string
   username: string
+  rating?: number
   llmScore: number | null
   llmConfidence: string | null
   status: string
@@ -213,8 +215,12 @@ export default function SubmissionsPage() {
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center gap-2">
                           <User className="h-4 w-4 text-gray-400" />
-                          <span className="text-sm text-gray-900">
-                            {submission.isOwnSubmission ? 'You' : submission.username}
+                          <span className="text-sm font-medium">
+                            {submission.isOwnSubmission ? (
+                              <RatedUsername username="You" rating={cachedRating} />
+                            ) : (
+                              <RatedUsername username={submission.username} rating={submission.rating} />
+                            )}
                           </span>
                         </div>
                       </td>
