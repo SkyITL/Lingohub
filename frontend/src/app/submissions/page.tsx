@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useAuth } from '@/contexts/AuthContext'
+import { useRatingCache } from '@/hooks/useRatingCache'
 import { submissionsApi } from '@/lib/api'
 import Header from "@/components/Header"
 import { Button } from "@/components/ui/button"
@@ -33,6 +34,7 @@ interface Submission {
 
 export default function SubmissionsPage() {
   const { user } = useAuth()
+  const { cachedRating } = useRatingCache()
   const [submissions, setSubmissions] = useState<Submission[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [filter, setFilter] = useState<'all' | 'mine'>('all')

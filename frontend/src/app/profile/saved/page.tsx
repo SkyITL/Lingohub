@@ -7,6 +7,7 @@ import ProblemCard from "@/components/ProblemCard"
 import { Button } from "@/components/ui/button"
 import { Bookmark, BookmarkX, Filter } from "lucide-react"
 import { useAuth } from "@/contexts/AuthContext"
+import { useRatingCache } from "@/hooks/useRatingCache"
 
 // Mock problem data - in real app this would come from API
 const mockProblemsData = [
@@ -75,6 +76,7 @@ const mockProblemsData = [
 export default function SavedProblemsPage() {
   const router = useRouter()
   const { user, isLoading } = useAuth()
+  const { cachedRating } = useRatingCache()
   const [savedProblemIds, setSavedProblemIds] = useState<string[]>([])
   const [savedProblems, setSavedProblems] = useState<any[]>([])
 
@@ -88,7 +90,7 @@ export default function SavedProblemsPage() {
     // Load saved problems from localStorage
     const saved = JSON.parse(localStorage.getItem('savedProblems') || '[]')
     setSavedProblemIds(saved)
-    
+
     // Filter mock data to show only saved problems
     const saved_problems = mockProblemsData.filter(problem => saved.includes(problem.id))
     setSavedProblems(saved_problems)
@@ -98,7 +100,7 @@ export default function SavedProblemsPage() {
     const updatedSaved = savedProblemIds.filter(id => id !== problemId)
     setSavedProblemIds(updatedSaved)
     localStorage.setItem('savedProblems', JSON.stringify(updatedSaved))
-    
+
     // Update displayed problems
     const updatedProblems = savedProblems.filter(problem => problem.id !== problemId)
     setSavedProblems(updatedProblems)
@@ -110,7 +112,8 @@ export default function SavedProblemsPage() {
     localStorage.removeItem('savedProblems')
   }
 
-  if (isLoading) {
+  // Use cached rating when available, don't wait for isLoading
+  if (!user && isLoading) {
     return (
       <div className="min-h-screen bg-gray-50">
         <Header />

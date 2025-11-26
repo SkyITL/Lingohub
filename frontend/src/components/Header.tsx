@@ -6,6 +6,7 @@ import { Menu, User, LogOut, Bookmark } from "lucide-react"
 import { Button } from "./ui/button"
 import { useAuth } from "@/contexts/AuthContext"
 import { useRatingCache } from "@/hooks/useRatingCache"
+import { interpolateRatingColor } from "@/utils/ratingColor"
 import './header.css'
 
 interface HeaderProps {
@@ -19,6 +20,7 @@ export default function Header({ overrideRating }: HeaderProps) {
 
   // Priority: overrideRating (from profile page) > cachedRating > user.rating
   const displayRating = overrideRating !== undefined ? overrideRating : (cachedRating || user?.rating)
+  const ratingColor = displayRating ? interpolateRatingColor(displayRating) : { hex: '#666' }
 
   const handleAuthClick = (type: 'login' | 'register') => {
     router.push(`/auth/${type}`)
@@ -62,9 +64,9 @@ export default function Header({ overrideRating }: HeaderProps) {
                   onClick={() => router.push('/profile')}
                   className="header-profile-button"
                 >
-                  <User style={{ width: '16px', height: '16px', color: '#666' }} />
-                  <span>{user.username}</span>
-                  <span>({displayRating})</span>
+                  <User style={{ width: '16px', height: '16px', color: ratingColor.hex }} />
+                  <span style={{ color: ratingColor.hex }}>{user.username}</span>
+                  <span style={{ color: ratingColor.hex }}>({displayRating})</span>
                 </button>
                 <button
                   onClick={() => router.push('/profile/saved')}
