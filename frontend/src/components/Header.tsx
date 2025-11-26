@@ -55,34 +55,120 @@ export default function Header({ overrideRating }: HeaderProps) {
               <>
                 <button
                   onClick={() => router.push('/profile')}
-                  className="hidden md:flex items-center space-x-2 hover:opacity-80 transition-opacity cursor-pointer"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    opacity: 1,
+                    cursor: 'pointer',
+                    background: 'none',
+                    border: 'none',
+                    padding: 0
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.8')}
+                  onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
                 >
-                  <User className="h-4 w-4 text-gray-700" />
-                  <span className="text-sm font-medium text-gray-700">{user.username}</span>
-                  <span className="text-xs text-gray-600">({displayRating})</span>
+                  <User style={{ width: '16px', height: '16px', color: '#666' }} />
+                  <span style={{ fontSize: '14px', fontWeight: '500', color: '#666' }}>{user.username}</span>
+                  <span style={{ fontSize: '12px', color: '#999' }}>({displayRating})</span>
                 </button>
-                <Button variant="outline" size="sm" onClick={() => router.push('/profile/saved')}>
-                  <Bookmark className="h-4 w-4 mr-1" />
+                <button
+                  onClick={() => router.push('/profile/saved')}
+                  style={{
+                    padding: '6px 12px',
+                    border: '1px solid #d1d5db',
+                    backgroundColor: '#ffffff',
+                    borderRadius: '4px',
+                    fontSize: '13px',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '4px',
+                    color: '#666',
+                    fontWeight: '500'
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#f3f4f6')}
+                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#ffffff')}
+                >
+                  <Bookmark style={{ width: '14px', height: '14px' }} />
                   Saved
-                </Button>
-                <Button variant="outline" size="sm" onClick={handleLogout}>
-                  <LogOut className="h-4 w-4 mr-1" />
+                </button>
+                <button
+                  onClick={handleLogout}
+                  style={{
+                    padding: '6px 12px',
+                    border: '1px solid #d1d5db',
+                    backgroundColor: '#ffffff',
+                    borderRadius: '4px',
+                    fontSize: '13px',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '4px',
+                    color: '#666',
+                    fontWeight: '500'
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#f3f4f6')}
+                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#ffffff')}
+                >
+                  <LogOut style={{ width: '14px', height: '14px' }} />
                   Logout
-                </Button>
+                </button>
               </>
             ) : (
               <>
-                <Button variant="outline" size="sm" onClick={() => handleAuthClick('login')}>
+                <button
+                  onClick={() => handleAuthClick('login')}
+                  style={{
+                    padding: '6px 12px',
+                    border: '1px solid #d1d5db',
+                    backgroundColor: '#ffffff',
+                    borderRadius: '4px',
+                    fontSize: '13px',
+                    cursor: 'pointer',
+                    color: '#666',
+                    fontWeight: '500'
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#f3f4f6')}
+                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#ffffff')}
+                >
                   Login
-                </Button>
-                <Button size="sm" onClick={() => handleAuthClick('register')}>
+                </button>
+                <button
+                  onClick={() => handleAuthClick('register')}
+                  style={{
+                    padding: '6px 12px',
+                    border: 'none',
+                    backgroundColor: '#2563eb',
+                    color: '#ffffff',
+                    borderRadius: '4px',
+                    fontSize: '13px',
+                    cursor: 'pointer',
+                    fontWeight: '500'
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#1d4ed8')}
+                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#2563eb')}
+                >
                   Register
-                </Button>
+                </button>
               </>
             )}
-            <Button variant="ghost" size="icon" className="md:hidden">
-              <Menu className="h-5 w-5" />
-            </Button>
+            <button
+              style={{
+                display: 'none',
+                width: '40px',
+                height: '40px',
+                backgroundColor: 'transparent',
+                border: 'none',
+                cursor: 'pointer',
+                padding: 0,
+                '@media (max-width: 768px)': {
+                  display: 'flex'
+                }
+              }}
+            >
+              <Menu style={{ width: '20px', height: '20px' }} />
+            </button>
           </div>
         </div>
       </div>
