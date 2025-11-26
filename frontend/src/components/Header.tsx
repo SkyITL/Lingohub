@@ -55,7 +55,7 @@ export default function Header({ overrideRating }: HeaderProps) {
               <>
                 <button
                   onClick={() => router.push('/profile')}
-                  className="header-button"
+                  className="header-button border"
                   style={{
                     display: 'flex',
                     alignItems: 'center',
@@ -75,7 +75,7 @@ export default function Header({ overrideRating }: HeaderProps) {
                 </button>
                 <button
                   onClick={() => router.push('/profile/saved')}
-                  className="header-button"
+                  className="header-button border"
                   style={{
                     padding: '6px 12px',
                     border: '1px solid #d1d5db',
@@ -97,7 +97,7 @@ export default function Header({ overrideRating }: HeaderProps) {
                 </button>
                 <button
                   onClick={handleLogout}
-                  className="header-button"
+                  className="header-button border"
                   style={{
                     padding: '6px 12px',
                     border: '1px solid #d1d5db',
@@ -122,7 +122,7 @@ export default function Header({ overrideRating }: HeaderProps) {
               <>
                 <button
                   onClick={() => handleAuthClick('login')}
-                  className="header-button"
+                  className="header-button border"
                   style={{
                     padding: '6px 12px',
                     border: '1px solid #d1d5db',
@@ -140,7 +140,7 @@ export default function Header({ overrideRating }: HeaderProps) {
                 </button>
                 <button
                   onClick={() => handleAuthClick('register')}
-                  className="header-button"
+                  className="header-button border"
                   style={{
                     padding: '6px 12px',
                     border: 'none',
