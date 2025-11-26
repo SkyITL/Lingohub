@@ -5,6 +5,7 @@ import Link from "next/link"
 import { Menu, User, LogOut, Bookmark } from "lucide-react"
 import { Button } from "./ui/button"
 import { useAuth } from "@/contexts/AuthContext"
+import { useRatingCache } from "@/hooks/useRatingCache"
 import './header.css'
 
 interface HeaderProps {
@@ -14,7 +15,10 @@ interface HeaderProps {
 export default function Header({ overrideRating }: HeaderProps) {
   const router = useRouter()
   const { user, logout, isLoading } = useAuth()
-  const displayRating = overrideRating !== undefined ? overrideRating : user?.rating
+  const { cachedRating } = useRatingCache()
+
+  // Priority: overrideRating (from profile page) > cachedRating > user.rating
+  const displayRating = overrideRating !== undefined ? overrideRating : (cachedRating || user?.rating)
 
   const handleAuthClick = (type: 'login' | 'register') => {
     router.push(`/auth/${type}`)

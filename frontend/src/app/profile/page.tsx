@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Header from "@/components/Header"
 import { useAuth } from "@/contexts/AuthContext"
+import { useRatingCache } from "@/hooks/useRatingCache"
 import { submissionsApi, usersApi } from "@/lib/api"
 import { interpolateRatingColor } from "@/utils/ratingColor"
 import Link from 'next/link'
@@ -27,18 +28,9 @@ interface RatingEntry {
 
 export default function ProfilePage() {
   const { user, token } = useAuth()
+  const { cachedRating, updateRatingCache } = useRatingCache()
   const [ratingHistory, setRatingHistory] = useState<RatingEntry[]>([])
-
-  // Initialize with cached rating if available, otherwise use auth rating
-  const getCachedOrAuthRating = (): number => {
-    if (user?.id) {
-      const cached = localStorage.getItem(`lingohub_rating_${user.id}`)
-      if (cached) return parseInt(cached)
-    }
-    return user?.rating || 1200
-  }
-
-  const [currentRating, setCurrentRating] = useState(getCachedOrAuthRating())
+  const [currentRating, setCurrentRating] = useState(cachedRating || user?.rating || 1200)
   const [isLoading, setIsLoading] = useState(true)
   const [isResetting, setIsResetting] = useState(false)
   const [resetMessage, setResetMessage] = useState('')
@@ -67,16 +59,15 @@ export default function ProfilePage() {
         ratingToUse = history[0].newRating
       }
 
-      // Update state and cache
+      // Update state and cache (this will trigger Header to re-render via useRatingCache hook)
       setCurrentRating(ratingToUse)
-      localStorage.setItem(`lingohub_rating_${user.id}`, ratingToUse.toString())
+      updateRatingCache(ratingToUse)
       setRatingHistory(history)
     } catch (err) {
       console.error('Failed to load rating history:', err)
       // Try to use cached rating on error
-      const cachedRating = localStorage.getItem(`lingohub_rating_${user.id}`)
       if (cachedRating) {
-        setCurrentRating(parseInt(cachedRating))
+        setCurrentRating(cachedRating)
       } else if (user?.rating) {
         setCurrentRating(user.rating)
       }
@@ -110,10 +101,8 @@ export default function ProfilePage() {
       setCurrentRating(1200)
       setRatingHistory([])
 
-      // Clear cached rating
-      localStorage.removeItem(`lingohub_rating_${user.id}`)
-      // Cache the reset rating
-      localStorage.setItem(`lingohub_rating_${user.id}`, '1200')
+      // Update cache with reset rating
+      updateRatingCache(1200)
 
       // Reload after 2 seconds
       setTimeout(() => {
