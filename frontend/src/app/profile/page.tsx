@@ -55,6 +55,14 @@ export default function ProfilePage() {
   useEffect(() => {
     if (!user?.id) return
     loadRatingHistory()
+
+    // Poll for rating updates every 5 seconds (in case evaluation just completed)
+    const interval = setInterval(() => {
+      console.log('📊 [PROFILE] Polling for rating updates...')
+      loadRatingHistory()
+    }, 5000)
+
+    return () => clearInterval(interval)
   }, [user?.id])
 
   const loadRatingHistory = async () => {
