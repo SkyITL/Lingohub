@@ -92,9 +92,19 @@ api.interceptors.response.use(
       // Token expired or invalid
       if (typeof window !== 'undefined') {
         logger.warn('Authentication failed, clearing tokens and redirecting to login')
+        // Clear all auth and cache data
         localStorage.removeItem('lingohub_token')
         localStorage.removeItem('lingohub_user')
-        // Redirect to login or show login modal
+
+        // Clear rating cache for all users
+        const keys = Object.keys(localStorage)
+        keys.forEach(key => {
+          if (key.startsWith('lingohub_rating_')) {
+            localStorage.removeItem(key)
+          }
+        })
+
+        // Redirect to login
         window.location.href = '/auth/login'
       }
     }

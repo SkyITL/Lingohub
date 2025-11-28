@@ -22,10 +22,10 @@ export default function RatedUsername({
   const color = rating ? interpolateRatingColor(rating) : { hex: '#666' }
 
   return (
-    <span style={{ color: color.hex }} className={className}>
+    <span style={{ color: color.hex, fontWeight: 600 }} className={className}>
       {username}
       {showRating && rating && (
-        <span style={{ marginLeft: '4px', fontSize: '0.85em', color: color.hex }}>
+        <span style={{ marginLeft: '4px', fontSize: '0.85em', color: color.hex, fontWeight: 600 }}>
           ({rating})
         </span>
       )}

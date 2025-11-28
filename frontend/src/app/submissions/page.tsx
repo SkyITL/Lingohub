@@ -5,6 +5,7 @@ import { useAuth } from '@/contexts/AuthContext'
 import { useRatingCache } from '@/hooks/useRatingCache'
 import { submissionsApi } from '@/lib/api'
 import Header from "@/components/Header"
+import ProtectedRoute from "@/components/ProtectedRoute"
 import RatedUsername from "@/components/RatedUsername"
 import { Button } from "@/components/ui/button"
 import {
@@ -123,10 +124,11 @@ export default function SubmissionsPage() {
     : submissions
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Header />
+    <ProtectedRoute>
+      <div className="min-h-screen bg-gray-50">
+        <Header />
 
-      <main className="container mx-auto px-4 py-8 max-w-7xl">
+        <main className="container mx-auto px-4 py-8 max-w-7xl">
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Submissions</h1>
@@ -272,6 +274,7 @@ export default function SubmissionsPage() {
           </div>
         )}
       </main>
-    </div>
+      </div>
+    </ProtectedRoute>
   )
 }

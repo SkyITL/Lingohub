@@ -5,6 +5,7 @@ import { useParams, useRouter } from 'next/navigation'
 import { submissionsApi } from '@/lib/api'
 import { useAuth } from '@/contexts/AuthContext'
 import Header from "@/components/Header"
+import ProtectedRoute from "@/components/ProtectedRoute"
 import { Button } from "@/components/ui/button"
 import {
   Award,
@@ -207,10 +208,11 @@ export default function SubmissionDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Header />
+    <ProtectedRoute>
+      <div className="min-h-screen bg-gray-50">
+        <Header />
 
-      <main className="container mx-auto px-4 py-8 max-w-5xl">
+        <main className="container mx-auto px-4 py-8 max-w-5xl">
         {/* Back Button */}
         <div className="mb-6">
           <Link href="/submissions">
@@ -432,6 +434,7 @@ export default function SubmissionDetailPage() {
           </div>
         )}
       </main>
-    </div>
+      </div>
+    </ProtectedRoute>
   )
 }

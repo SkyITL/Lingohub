@@ -65,8 +65,8 @@ export default function Header({ overrideRating }: HeaderProps) {
                   className="header-profile-button"
                 >
                   <User style={{ width: '16px', height: '16px', color: ratingColor.hex }} />
-                  <span style={{ color: ratingColor.hex }}>{user.username}</span>
-                  <span style={{ color: ratingColor.hex }}>({displayRating})</span>
+                  <span style={{ color: ratingColor.hex, fontWeight: 600 }}>{user.username}</span>
+                  <span style={{ color: ratingColor.hex, fontWeight: 600 }}>({displayRating})</span>
                 </button>
                 <button
                   onClick={() => router.push('/profile/saved')}
