@@ -51,16 +51,31 @@ export default function ProfilePage() {
   const [isLoading, setIsLoading] = useState(true)
   const [isResetting, setIsResetting] = useState(false)
   const [resetMessage, setResetMessage] = useState('')
+  const [lastFetchTime, setLastFetchTime] = useState<number>(0)
 
   useEffect(() => {
     if (!user?.id) return
     loadRatingHistory()
 
-    // Poll for rating updates every 5 seconds (in case evaluation just completed)
-    const interval = setInterval(() => {
-      console.log('📊 [PROFILE] Polling for rating updates...')
-      loadRatingHistory()
-    }, 5000)
+    // Poll for rating updates, but with smart backoff:
+    // - Poll every 3 seconds for first 30 seconds (evaluation likely in progress)
+    // - Then every 10 seconds after that (evaluation likely done, just catching updates)
+    let interval: NodeJS.Timeout
+    let pollCount = 0
+
+    const startPolling = () => {
+      interval = setInterval(() => {
+        pollCount++
+        const shouldPoll = pollCount <= 10 ? true : pollCount % 4 === 0 // Every 3s for 30s, then every ~12s
+
+        if (shouldPoll) {
+          console.log('📊 [PROFILE] Polling for rating updates... (poll #', pollCount, ')')
+          loadRatingHistory()
+        }
+      }, 3000)
+    }
+
+    startPolling()
 
     return () => clearInterval(interval)
   }, [user?.id])
