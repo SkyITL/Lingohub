@@ -65,15 +65,20 @@ export default function ProfilePage() {
       // Fetch current user profile to get latest rating from database
       const profileResponse = await usersApi.getProfile(user.id)
       const currentUserRating = profileResponse.data.user.rating
+      console.log('📊 [PROFILE] Current user rating from DB:', currentUserRating)
 
       // Fetch rating history
       const historyResponse = await submissionsApi.getRatingHistory(user.id, 50)
       const history = historyResponse.data.ratingHistory
+      console.log('📊 [PROFILE] Rating history entries:', history.length)
 
       // Fetch user progress to show all completed problems
       const progressResponse = await usersApi.getProgress(user.id)
-      const allProgress = progressResponse.data.userProgress || []
+      console.log('📊 [PROFILE] Progress response:', progressResponse.data)
+      const allProgress = progressResponse.data.progress || []
+      console.log('📊 [PROFILE] Total progress records:', allProgress.length)
       const solved = allProgress.filter((p: UserProgress) => p.status === 'solved')
+      console.log('📊 [PROFILE] Solved problems:', solved.length, solved.map((p: UserProgress) => p.problem?.number))
       setCompletedProblems(solved)
 
       // Get the latest rating from history, or use current profile rating
