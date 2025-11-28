@@ -26,10 +26,27 @@ interface RatingEntry {
   }
 }
 
+interface UserProgress {
+  userId: string
+  problemId: string
+  status: string
+  viewedSolution: boolean
+  ratingGained: boolean
+  startedAt?: string
+  lastAttempt: string
+  updatedAt: string
+  problem: {
+    id: string
+    number: string
+    title: string
+  }
+}
+
 export default function ProfilePage() {
   const { user, token } = useAuth()
   const { cachedRating, updateRatingCache } = useRatingCache()
   const [ratingHistory, setRatingHistory] = useState<RatingEntry[]>([])
+  const [completedProblems, setCompletedProblems] = useState<UserProgress[]>([])
   const [currentRating, setCurrentRating] = useState(cachedRating || user?.rating || 1200)
   const [isLoading, setIsLoading] = useState(true)
   const [isResetting, setIsResetting] = useState(false)
@@ -52,6 +69,12 @@ export default function ProfilePage() {
       // Fetch rating history
       const historyResponse = await submissionsApi.getRatingHistory(user.id, 50)
       const history = historyResponse.data.ratingHistory
+
+      // Fetch user progress to show all completed problems
+      const progressResponse = await usersApi.getProgress(user.id)
+      const allProgress = progressResponse.data.userProgress || []
+      const solved = allProgress.filter((p: UserProgress) => p.status === 'solved')
+      setCompletedProblems(solved)
 
       // Get the latest rating from history, or use current profile rating
       let ratingToUse = currentUserRating
@@ -100,6 +123,7 @@ export default function ProfilePage() {
       setResetMessage('Rating reset successfully!')
       setCurrentRating(1200)
       setRatingHistory([])
+      setCompletedProblems([])
 
       // Update cache with reset rating
       updateRatingCache(1200)
@@ -208,12 +232,12 @@ export default function ProfilePage() {
           </h2>
           {isLoading ? (
             <p style={{ color: '#999' }}>Loading...</p>
-          ) : ratingHistory.length === 0 ? (
-            <p style={{ color: '#999' }}>No submissions yet</p>
+          ) : completedProblems.length === 0 ? (
+            <p style={{ color: '#999' }}>No completed problems yet</p>
           ) : (
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '12px' }}>
-              {ratingHistory.map((entry) => (
-                <div key={entry.id}>
+              {completedProblems.map((entry) => (
+                <div key={entry.problemId}>
                   <Link
                     href={`/problems/${entry.problem.number}`}
                     style={{ color: '#2563eb', textDecoration: 'none', fontSize: '14px' }}
