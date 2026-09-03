@@ -82,7 +82,7 @@ After four nodes are explored, the call to action changes from “Preview the so
 
 - Focused ESLint check on the new route, component, data file, and edited header: passed.
 - Repository-wide TypeScript check: reached the new files without reporting errors there, but the repository currently has pre-existing errors in `next.config.ts`, the home/problem pages, and submission/problem components.
-- Production build: began compilation but could not download the existing `next/font` Google font assets because network access is unavailable in the execution environment.
+- Production build: the exact pushed Next.js 15.4.6 dependency set compiled and statically generated `/roadmap`. After the first Vercel attempt failed, the existing build-time Google `next/font` dependency was removed so deployment no longer depends on downloading Geist during compilation.
 - Local browser run: the sandbox does not permit binding the Next development server to port 3000, so visual browser inspection was not available in this session.
 
 ## Deliberate prototype boundaries
