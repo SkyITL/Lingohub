@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { Menu, User, LogOut, Bookmark } from "lucide-react"
-import { Button } from "./ui/button"
 import { useAuth } from "@/contexts/AuthContext"
 import { useRatingCache } from "@/hooks/useRatingCache"
 import { interpolateRatingColor } from "@/utils/ratingColor"
@@ -43,6 +42,9 @@ export default function Header({ overrideRating }: HeaderProps) {
             <nav className="hidden md:flex space-x-6">
               <Link href="/problems" className="text-gray-700 hover:text-blue-600 font-medium">
                 Problems
+              </Link>
+              <Link href="/roadmap" className="text-gray-700 hover:text-blue-600 font-medium">
+                Roadmap
               </Link>
               <Link href="/submissions" className="text-gray-700 hover:text-blue-600 font-medium">
                 Submissions
