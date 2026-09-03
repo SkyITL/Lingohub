@@ -18,8 +18,11 @@ import {
 } from "lucide-react";
 import Header from "@/components/Header";
 import {
+  roadmapMacroEdges,
+  roadmapMacroNodes,
   roadmapRoutes,
   roadmapStats,
+  type RoadmapMacroNode,
   type RoadmapNode,
 } from "@/data/roadmap";
 import styles from "./roadmap.module.css";
@@ -71,11 +74,40 @@ const rampStages = [
   },
 ];
 
+const macroPhases = [
+  { x: 112, title: "Enter" },
+  { x: 320, title: "Analyze" },
+  { x: 535, title: "Language systems" },
+  { x: 770, title: "Meaning & variation" },
+  { x: 1005, title: "Minds, tools & speakers" },
+  { x: 1248, title: "Synthesize" },
+];
+
 function edgePath(from: RoadmapNode, to: RoadmapNode) {
   const startX = from.x + 108;
   const endX = to.x - 108;
   const bend = Math.max(48, (endX - startX) * 0.48);
   return `M ${startX} ${from.y} C ${startX + bend} ${from.y}, ${endX - bend} ${to.y}, ${endX} ${to.y}`;
+}
+
+function macroEdgePath(from: RoadmapMacroNode, to: RoadmapMacroNode) {
+  const startX = from.x + 89;
+  const endX = to.x - 89;
+
+  if (to.x - from.x > 700) {
+    return `M ${startX} ${from.y} C ${startX + 190} 570, ${endX - 190} 570, ${endX} ${to.y}`;
+  }
+
+  const bend = Math.max(12, (endX - startX) * 0.5);
+  return `M ${startX} ${from.y} C ${startX + bend} ${from.y}, ${endX - bend} ${to.y}, ${endX} ${to.y}`;
+}
+
+function connectedSlugs(slug: string) {
+  return roadmapMacroEdges.flatMap((edge) => {
+    if (edge.from === slug) return [edge.to];
+    if (edge.to === slug) return [edge.from];
+    return [];
+  });
 }
 
 export default function RoadmapExperience() {
@@ -97,12 +129,16 @@ export default function RoadmapExperience() {
     visited.includes(`${route.slug}:${node.id}`),
   ).length;
   const readingReady = progress >= route.reading.readyAfter;
+  const connectedRoutes = connectedSlugs(route.slug)
+    .map((slug) => roadmapRoutes.find((item) => item.slug === slug))
+    .filter((item) => item !== undefined);
+  const connectedRouteSlugs = new Set(connectedRoutes.map((item) => item.slug));
 
   const filteredRoutes = useMemo(() => {
     const normalized = query.trim().toLowerCase();
     if (!normalized) return roadmapRoutes;
     return roadmapRoutes.filter((item) =>
-      [item.question, item.academicAreas, item.teaser]
+      [item.sectionTitle, item.question, item.academicAreas, item.teaser]
         .join(" ")
         .toLowerCase()
         .includes(normalized),
@@ -287,14 +323,154 @@ export default function RoadmapExperience() {
         <section className={styles.atlasSection} ref={atlasRef}>
           <div className={styles.atlasIntro}>
             <div>
-              <span className={styles.eyebrowDark}>Choose a doorway</span>
-              <h2>The field, arranged as questions you can enter.</h2>
+              <span className={styles.eyebrowDark}>The whole field</span>
+              <h2>Fourteen sections. One connected map.</h2>
             </div>
-            <div className={styles.atlasStats} aria-label="Roadmap scope">
-              <div><strong>{roadmapStats.routes}</strong><span>question routes</span></div>
-              <div><strong>{roadmapStats.concepts}</strong><span>prototype concepts</span></div>
-              <div><strong>{roadmapStats.academicAreas}</strong><span>academic areas</span></div>
+            <div>
+              <p className={styles.atlasSummary}>
+                Section 01 gives every learner the same entrance. From there,
+                the map branches through language systems and reconnects across
+                meaning, variation, minds, computation, and fieldwork.
+              </p>
+              <div className={styles.atlasStats} aria-label="Roadmap scope">
+                <div><strong>{roadmapStats.routes}</strong><span>connected sections</span></div>
+                <div><strong>{roadmapStats.concepts}</strong><span>prototype concepts</span></div>
+                <div><strong>{roadmapStats.academicAreas}</strong><span>academic areas</span></div>
+              </div>
             </div>
+          </div>
+
+          <div className={styles.macroMap}>
+            <div className={styles.macroMapHeader}>
+              <div>
+                <span>Macro-scale roadmap</span>
+                <h3>Begin at 01, then follow a connection—or choose your own.</h3>
+              </div>
+              <div className={styles.macroLegend} aria-label="Map relationship legend">
+                <span><i className={styles.macroMainKey} /> Main route</span>
+                <span><i className={styles.macroCrossKey} /> Cross-connection</span>
+              </div>
+            </div>
+
+            <div className={styles.macroCanvas}>
+              <svg
+                className={styles.macroGraph}
+                viewBox="0 0 1360 590"
+                role="img"
+                aria-label="Fourteen interconnected linguistics roadmap sections, beginning with Section 01 Introduction"
+              >
+                <defs>
+                  <marker
+                    id="macro-arrow"
+                    viewBox="0 0 10 10"
+                    refX="8"
+                    refY="5"
+                    markerWidth="6"
+                    markerHeight="6"
+                    orient="auto-start-reverse"
+                  >
+                    <path d="M 0 0 L 10 5 L 0 10 z" />
+                  </marker>
+                </defs>
+
+                {macroPhases.map((phase) => (
+                  <text
+                    className={styles.macroPhaseLabel}
+                    key={phase.title}
+                    x={phase.x}
+                    y="24"
+                    textAnchor="middle"
+                  >
+                    {phase.title}
+                  </text>
+                ))}
+
+                {roadmapMacroEdges.map((edge) => {
+                  const from = roadmapMacroNodes.find((node) => node.slug === edge.from);
+                  const to = roadmapMacroNodes.find((node) => node.slug === edge.to);
+                  if (!from || !to) return null;
+                  const isActive = edge.from === route.slug || edge.to === route.slug;
+                  return (
+                    <path
+                      className={`${styles.macroEdge} ${
+                        edge.kind === "cross" ? styles.macroEdgeCross : ""
+                      } ${isActive ? styles.macroEdgeActive : ""}`}
+                      d={macroEdgePath(from, to)}
+                      key={`${edge.from}-${edge.to}`}
+                      markerEnd="url(#macro-arrow)"
+                    />
+                  );
+                })}
+
+                {roadmapMacroNodes.map((macroNode) => {
+                  const item = roadmapRoutes.find((candidate) => candidate.slug === macroNode.slug);
+                  if (!item) return null;
+                  const isSelected = item.slug === route.slug;
+                  const isConnected = connectedRouteSlugs.has(item.slug);
+                  return (
+                    <foreignObject
+                      key={item.slug}
+                      x={macroNode.x - 89}
+                      y={macroNode.y - 43}
+                      width="178"
+                      height="86"
+                    >
+                      <button
+                        type="button"
+                        data-tone={item.tone}
+                        onClick={() => chooseRoute(item.slug, true)}
+                        className={`${styles.macroNode} ${
+                          isSelected ? styles.macroNodeSelected : ""
+                        } ${isConnected ? styles.macroNodeConnected : ""} ${
+                          item.number === "01" ? styles.macroNodeIntroduction : ""
+                        }`}
+                        aria-pressed={isSelected}
+                        aria-label={`Open Section ${item.number}, ${item.sectionTitle}: ${item.question}`}
+                      >
+                        <span>Section {item.number}</span>
+                        <strong>{item.sectionTitle}</strong>
+                        <small>{item.number === "01" ? "Start here" : "Open submap"}</small>
+                      </button>
+                    </foreignObject>
+                  );
+                })}
+              </svg>
+
+              <div className={styles.macroMobileList}>
+                {roadmapMacroNodes.map((macroNode) => {
+                  const item = roadmapRoutes.find((candidate) => candidate.slug === macroNode.slug);
+                  if (!item) return null;
+                  const neighbors = connectedSlugs(item.slug)
+                    .map((slug) => roadmapRoutes.find((candidate) => candidate.slug === slug)?.number)
+                    .filter(Boolean)
+                    .join(", ");
+                  return (
+                    <button
+                      key={item.slug}
+                      type="button"
+                      onClick={() => chooseRoute(item.slug, true)}
+                      className={item.slug === route.slug ? styles.macroMobileSelected : ""}
+                    >
+                      <span>{item.number}</span>
+                      <div>
+                        <strong>{item.sectionTitle}</strong>
+                        <small>{item.question}</small>
+                        <em>Connects with {neighbors}</em>
+                      </div>
+                      <ArrowRight size={16} />
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
+          <div className={styles.routeIndexHeading}>
+            <div>
+              <span className={styles.eyebrowDark}>Section index</span>
+              <h3>Open any submap directly.</h3>
+            </div>
+            <p>Connections recommend useful crossings; they never create prerequisites or locked doors.</p>
           </div>
 
           <label className={styles.searchBox}>
@@ -318,7 +494,11 @@ export default function RoadmapExperience() {
                   item.slug === route.slug ? styles.routeCardSelected : ""
                 }`}
               >
-                <span className={styles.routeNumber}>{item.number}</span>
+                <span className={styles.routeNumber}>
+                  Section {item.number}
+                  {item.number === "01" && <em>Introduction · Start here</em>}
+                </span>
+                <span className={styles.routeSectionTitle}>{item.sectionTitle}</span>
                 <span className={styles.routeQuestion}>{item.question}</span>
                 <span className={styles.routeAreas}>{item.academicAreas}</span>
                 <span className={styles.routeTeaser}>{item.teaser}</span>
@@ -344,10 +524,25 @@ export default function RoadmapExperience() {
         >
           <div className={styles.mapHeader}>
             <div className={styles.mapTitleBlock}>
-              <span className={styles.routeKicker}>Submap {route.number}</span>
-              <h2>{route.question}</h2>
-              <p>{route.hook}</p>
+              <span className={styles.routeKicker}>Section {route.number} of 14</span>
+              <h2>{route.sectionTitle}</h2>
+              <p className={styles.mapQuestion}>{route.question}</p>
+              <p className={styles.mapHook}>{route.hook}</p>
               <div className={styles.academicAreas}>{route.academicAreas}</div>
+              <div className={styles.connectedSections}>
+                <span>Connected sections</span>
+                <div>
+                  {connectedRoutes.map((item) => (
+                    <button
+                      key={item.slug}
+                      type="button"
+                      onClick={() => chooseRoute(item.slug)}
+                    >
+                      {item.number} · {item.sectionTitle}
+                    </button>
+                  ))}
+                </div>
+              </div>
             </div>
             <div className={styles.routePickerWrap}>
               <label htmlFor="route-picker">Switch question</label>
@@ -358,7 +553,7 @@ export default function RoadmapExperience() {
               >
                 {roadmapRoutes.map((item) => (
                   <option key={item.slug} value={item.slug}>
-                    {item.number} — {item.question}
+                    {item.number} · {item.sectionTitle} — {item.question}
                   </option>
                 ))}
               </select>
@@ -473,7 +668,7 @@ export default function RoadmapExperience() {
 
             <aside className={styles.conceptPanel} aria-live="polite">
               <div className={styles.panelTopline}>
-                <span>Concept {String(route.nodes.indexOf(selectedNode) + 1).padStart(2, "0")}</span>
+                <span>Section {route.number} · Concept {String(route.nodes.indexOf(selectedNode) + 1).padStart(2, "0")}</span>
                 <span>{visited.includes(`${route.slug}:${selectedNode.id}`) ? "Explored" : "Open"}</span>
               </div>
               <h3>{selectedNode.question}</h3>

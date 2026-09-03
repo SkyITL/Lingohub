@@ -454,6 +454,13 @@
   align-items: center;
 }
 
+.atlasSummary {
+  margin: 0 0 22px;
+  color: #5c6861 !important;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
 .atlasStats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -483,6 +490,221 @@
   font-size: 10px;
   line-height: 1.35;
   text-transform: uppercase;
+}
+
+.macroMap {
+  margin-bottom: 86px;
+  overflow: hidden;
+  border: 1px solid #c9c3b7;
+  border-radius: 7px;
+  background: #f8f5ee;
+  box-shadow: 0 18px 46px rgba(38, 44, 39, 0.06);
+}
+
+.macroMapHeader {
+  display: flex;
+  min-height: 92px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 20px 24px;
+  border-bottom: 1px solid #d7d1c5;
+  background: rgba(255, 253, 248, 0.9);
+}
+
+.macroMapHeader > div:first-child > span,
+.routeIndexHeading > div > span {
+  color: #8f6d2d;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 9px;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.macroMapHeader h3 {
+  margin: 6px 0 0;
+  color: #19271f;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 21px;
+  font-weight: 500;
+}
+
+.macroLegend {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 17px;
+}
+
+.macroLegend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #6e7772;
+  font-size: 9px;
+  font-weight: 650;
+  text-transform: uppercase;
+}
+
+.macroLegend i {
+  display: inline-block;
+  width: 23px;
+  border-top: 2px solid #8b928d;
+}
+
+.macroLegend .macroCrossKey {
+  border-top-style: dashed;
+  border-top-color: #b0aaa0;
+}
+
+.macroCanvas {
+  background:
+    linear-gradient(90deg, rgba(39, 61, 50, 0.035) 1px, transparent 1px) 0 0 / 20% 100%,
+    radial-gradient(circle at 1px 1px, #dbd6cc 0.8px, transparent 0) 0 0 / 22px 22px,
+    #f7f4ed;
+}
+
+.macroGraph {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 540px;
+}
+
+.macroGraph marker path {
+  fill: #9ba29e;
+}
+
+.macroPhaseLabel {
+  fill: #7b817d;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.macroEdge {
+  fill: none;
+  opacity: 0.42;
+  stroke: #77837d;
+  stroke-width: 1.35;
+  vector-effect: non-scaling-stroke;
+  transition: opacity 160ms ease, stroke 160ms ease, stroke-width 160ms ease;
+}
+
+.macroEdgeCross {
+  opacity: 0.28;
+  stroke: #9a948a;
+  stroke-dasharray: 5 5;
+}
+
+.macroEdgeActive {
+  opacity: 1;
+  stroke: #a77727;
+  stroke-width: 2.25;
+}
+
+.macroNode {
+  position: relative;
+  display: flex;
+  width: calc(100% - 8px);
+  height: calc(100% - 8px);
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin: 4px;
+  padding: 10px 13px;
+  overflow: hidden;
+  border: 1px solid #bbb7ad;
+  border-radius: 7px;
+  background: #fffefa;
+  box-shadow: 0 5px 13px rgba(45, 50, 46, 0.08);
+  color: #18261f;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
+}
+
+.macroNode:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  box-shadow: 0 10px 19px rgba(35, 42, 37, 0.14);
+}
+
+.macroNode > span {
+  color: var(--accent);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+}
+
+.macroNode strong {
+  display: block;
+  margin-top: 4px;
+  color: #1d2b24;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.macroNode small {
+  margin-top: 4px;
+  color: #7a817d;
+  font-size: 8px;
+}
+
+.macroNodeConnected:not(.macroNodeSelected) {
+  border-color: color-mix(in srgb, var(--accent) 58%, #bbb7ad);
+}
+
+.macroNodeSelected {
+  transform: translateY(-2px);
+  border: 2px solid var(--accent);
+  background: var(--accent-light);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.78), 0 10px 21px rgba(35, 42, 37, 0.15);
+}
+
+.macroNodeIntroduction::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 26px;
+  height: 26px;
+  background: var(--accent);
+  clip-path: polygon(100% 0, 100% 100%, 0 0);
+  content: "";
+}
+
+.macroMobileList {
+  display: none;
+}
+
+.routeIndexHeading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 42px;
+  margin-bottom: 35px;
+}
+
+.routeIndexHeading h3 {
+  margin: 7px 0 0;
+  color: #19271f;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 31px;
+  font-weight: 500;
+}
+
+.routeIndexHeading > p {
+  max-width: 470px;
+  margin: 0;
+  color: #68726c !important;
+  font-size: 12px;
+  line-height: 1.6;
 }
 
 .searchBox {
@@ -517,6 +739,7 @@
 }
 
 .routeCard,
+.macroNode,
 .mapWorkspace[data-tone="ochre"] {
   --accent: #a97928;
   --accent-light: #f5e7c8;
@@ -524,6 +747,7 @@
 }
 
 .routeCard[data-tone="coral"],
+.macroNode[data-tone="coral"],
 .mapWorkspace[data-tone="coral"] {
   --accent: #b65f47;
   --accent-light: #f4ded5;
@@ -531,6 +755,7 @@
 }
 
 .routeCard[data-tone="teal"],
+.macroNode[data-tone="teal"],
 .mapWorkspace[data-tone="teal"] {
   --accent: #3c8174;
   --accent-light: #dcece7;
@@ -538,6 +763,7 @@
 }
 
 .routeCard[data-tone="blue"],
+.macroNode[data-tone="blue"],
 .mapWorkspace[data-tone="blue"] {
   --accent: #426f8e;
   --accent-light: #dce8ee;
@@ -545,6 +771,7 @@
 }
 
 .routeCard[data-tone="violet"],
+.macroNode[data-tone="violet"],
 .mapWorkspace[data-tone="violet"] {
   --accent: #705f91;
   --accent-light: #e7e1f0;
@@ -552,6 +779,7 @@
 }
 
 .routeCard[data-tone="green"],
+.macroNode[data-tone="green"],
 .mapWorkspace[data-tone="green"] {
   --accent: #5b7d51;
   --accent-light: #e2ebdd;
@@ -561,7 +789,7 @@
 .routeCard {
   position: relative;
   display: flex;
-  min-height: 275px;
+  min-height: 300px;
   flex-direction: column;
   align-items: flex-start;
   padding: 22px 22px 20px;
@@ -603,15 +831,40 @@
 }
 
 .routeNumber {
-  margin-bottom: 28px;
+  display: flex;
+  min-height: 20px;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 12px;
   color: var(--accent);
   font-family: var(--font-geist-mono), monospace;
   font-size: 11px;
   font-weight: 700;
 }
 
+.routeNumber em {
+  padding: 4px 6px;
+  border-radius: 99px;
+  background: var(--accent-light);
+  color: var(--accent-ink);
+  font-size: 8px;
+  font-style: normal;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.routeSectionTitle {
+  color: var(--accent-ink);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+}
+
 .routeQuestion {
   max-width: 300px;
+  margin-top: 13px;
   color: #18241e;
   font-family: Georgia, "Times New Roman", serif;
   font-size: 23px;
@@ -693,6 +946,20 @@
   line-height: 1.65;
 }
 
+.mapHeader .mapQuestion {
+  margin: 0 0 9px;
+  color: #304a3e !important;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.mapHeader .mapHook {
+  color: #68736d !important;
+  font-size: 13px;
+}
+
 .academicAreas {
   display: inline-flex;
   margin-top: 14px;
@@ -703,6 +970,43 @@
   font-family: var(--font-geist-mono), monospace;
   font-size: 10px;
   font-weight: 650;
+}
+
+.connectedSections {
+  display: grid;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.connectedSections > span {
+  color: #7b817d;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 8px;
+  font-weight: 750;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.connectedSections > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.connectedSections button {
+  padding: 6px 8px;
+  border: 1px solid #c9c3b8;
+  border-radius: 99px;
+  background: #fffdf8;
+  color: #4f5e57;
+  cursor: pointer;
+  font-size: 9px;
+  transition: border-color 150ms ease, background 150ms ease;
+}
+
+.connectedSections button:hover {
+  border-color: #997329;
+  background: #f6eddc;
 }
 
 .routePickerWrap {
@@ -1280,6 +1584,72 @@
     max-width: 520px;
   }
 
+  .macroMapHeader,
+  .routeIndexHeading {
+    display: grid;
+    align-items: start;
+  }
+
+  .macroGraph {
+    display: none;
+  }
+
+  .macroMobileList {
+    display: grid;
+  }
+
+  .macroMobileList button {
+    display: grid;
+    grid-template-columns: 34px minmax(0, 1fr) auto;
+    gap: 12px;
+    align-items: center;
+    padding: 15px 17px;
+    border: 0;
+    border-bottom: 1px solid #d8d2c7;
+    background: rgba(255, 253, 248, 0.9);
+    color: #1b2922;
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .macroMobileList button:last-child {
+    border-bottom: 0;
+  }
+
+  .macroMobileList button > span {
+    color: #9a742e;
+    font-family: var(--font-geist-mono), monospace;
+    font-size: 11px;
+    font-weight: 800;
+  }
+
+  .macroMobileList button > div {
+    display: grid;
+    gap: 3px;
+  }
+
+  .macroMobileList strong {
+    color: #1b2922;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 16px;
+  }
+
+  .macroMobileList small {
+    color: #68726c;
+    font-size: 10px;
+    line-height: 1.35;
+  }
+
+  .macroMobileList em {
+    color: #97712a;
+    font-size: 9px;
+    font-style: normal;
+  }
+
+  .macroMobileSelected {
+    background: #f5ead4 !important;
+  }
+
   .mapHeader {
     display: grid;
   }
@@ -1429,6 +1799,22 @@
     grid-template-columns: 1fr;
   }
 
+  .macroMap {
+    margin-bottom: 65px;
+  }
+
+  .macroMapHeader {
+    padding: 18px;
+  }
+
+  .macroLegend {
+    flex-wrap: wrap;
+  }
+
+  .routeIndexHeading {
+    gap: 14px;
+  }
+
   .routeCard {
     min-height: 245px;
   }
@@ -1483,6 +1869,8 @@
   .reveal,
   .choiceButton,
   .routeCard,
+  .macroEdge,
+  .macroNode,
   .mapNode {
     animation: none;
     transition: none;
@@ -1491,6 +1879,8 @@
   .choiceButton:hover,
   .routeCard:hover,
   .routeCardSelected,
+  .macroNode:hover,
+  .macroNodeSelected,
   .mapNode:hover {
     transform: none;
   }

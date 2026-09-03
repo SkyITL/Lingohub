@@ -29,7 +29,6 @@ The academic vocabulary is delayed only until it has a visible referent. It is n
 ## 2. First encounter: translation is not replacement
 
 The roadmap opens with a prediction rather than a definition.
-up
 ```text
 One English word. Two ordinary Chinese translations.
 
@@ -84,9 +83,11 @@ The learning interface should not end a friendly explanation and then send the l
 
 Every recommended source must say why the learner is ready for it, not merely display a link.
 
-## 4. The opening route in full
+## 4. Section 01 · Introduction in full
 
-Visible route title: **Why can one word need two translations?**
+Section title: **Introduction**
+
+Visible route question: **Why can one word need two translations?**
 Academic subtitle: **Lexical semantics · Pragmatics · Translation**
 
 | Step | Beginner-facing question | Academic destination | Evidence or task | Reading bridge |
@@ -98,36 +99,37 @@ Academic subtitle: **Lexical semantics · Pragmatics · Translation**
 | 5 | What should a translation preserve? | Translation equivalence | Translate 您 and 你 while recording lost social information | Evaluate semantic, pragmatic, and stylistic correspondence separately |
 | 6 | Is this pattern bigger than two languages? | Semantic typology | Compare one kinship contrast across three languages | Read typological claims with attention to coding and evidence |
 
-This route can lead directly into four neighboring submaps:
+This route can lead directly into three neighboring sections:
 
 ```text
-translation is not replacement
-├── meaning and context
-├── structured lexical domains
-├── language diversity and typology
-└── decoding an unfamiliar language
+01 · Introduction: translation is not replacement
+├── 02 · Decode from Evidence
+├── 07 · Meaning in Context
+└── 08 · Lexical Worlds
 ```
 
 ## 5. Learner-facing atlas
 
-The atlas is comprehensive through coverage, not through an intimidating opening taxonomy. Each question reveals its academic fields as a subtitle.
+The atlas is comprehensive through coverage, not through an intimidating opening taxonomy. It first presents these sections as one macro-scale network. Each node gives a stable section title; each searchable card adds the beginner-facing question and academic subtitle.
 
-| No. | Doorway question | Immediate hook | Academic core | Destination |
-|---:|---|---|---|---|
-| 00 | Why can one word need two translations? | brother → 哥哥 / 弟弟 | Lexicalization, semantic fields, context, equivalence, semantic typology | Introductory semantics and lexical typology |
-| 01 | How can I decode a language I have never learned? | Six unknown forms and translations | Alignment, controlled contrast, segmentation, hypothesis testing, counterevidence, glossing | Data-based linguistic analysis |
-| 02 | How can one word contain a whole sentence? | One word translates as a whole event | Morphemes, roots, affixes, morphotactics, inflection, derivation, agreement, case, polysynthesis | Morphology and interlinear texts |
-| 03 | How do languages show who did what? | Actor recoverable without familiar word order | Semantic roles, constituent order, constituency, case, agreement, null arguments, alignment | Syntax and morphosyntax |
-| 04 | Why do languages hear and organize sounds differently? | A contrast for one listener is “the same” for another | Articulatory phonetics, phonemes, allophones, processes, prosody, IPA | Introductory phonetics and phonology |
-| 05 | How can marks carry language? | A bird sign may have several jobs | Glottography, sign values, inventories, mixed scripts, decipherment, parallel texts | Writing systems and historical decipherment |
-| 06 | Why can two correct translations still feel different? | “It’s cold” as report or request | Ambiguity, implicature, deixis, presupposition, discourse, common ground | Semantics, pragmatics, and discourse |
-| 07 | How do languages count, map space, and describe family? | A number reveals a base; a direction needs a coastline | Numerals, kinship, frames of reference, color, tense/aspect, classifiers | Lexical and semantic typology |
-| 08 | Why are languages different, related, and changing? | Similar words may be relatives, loans, or coincidence | Typology, universals, genealogy, sound change, contact, reconstruction | Historical and comparative linguistics |
-| 09 | Why do we speak differently with different people? | One speaker changes on entering a different room | Register, dialect, code-switching, ideology, variation, policy, vitality | Sociolinguistics and multilingualism |
-| 10 | How do children and brains learn language? | A child produces an untaught error | Acquisition, statistical learning, processing, production, bilingualism, neurolinguistics | Psycholinguistic research |
-| 11 | How can a computer work with language? | A system must decide what counts as a unit | Tokenization, corpora, distributional semantics, parsing, multimodality, evaluation, bias | Computational linguistics and NLP |
-| 12 | How can linguists learn from speakers responsibly? | A recording without consent or context fails | Elicitation, metadata, sampling, annotation, consent, access, collaboration | Field methods and documentation |
-| 13 | Can I solve a puzzle in a language I have never seen? | The problem promises sufficient evidence | Self-contained reasoning, normalization, contrast, falsification, interfaces, proof-like solutions | Official olympiad problems |
+| No. | Section title | Doorway question | Immediate hook | Academic core | Destination |
+|---:|---|---|---|---|---|
+| 01 | Introduction | Why can one word need two translations? | brother → 哥哥 / 弟弟 | Lexicalization, semantic fields, context, equivalence, semantic typology | Introductory semantics and lexical typology |
+| 02 | Decode from Evidence | How can I decode a language I have never learned? | Six unknown forms and translations | Alignment, controlled contrast, segmentation, hypothesis testing, counterevidence, glossing | Data-based linguistic analysis |
+| 03 | Word Structure | How can one word contain a whole sentence? | One word translates as a whole event | Morphemes, roots, affixes, morphotactics, inflection, derivation, agreement, case, polysynthesis | Morphology and interlinear texts |
+| 04 | Sentence Structure | How do languages show who did what? | Actor recoverable without familiar word order | Semantic roles, constituent order, constituency, case, agreement, null arguments, alignment | Syntax and morphosyntax |
+| 05 | Sound Systems | Why do languages hear and organize sounds differently? | A contrast for one listener is “the same” for another | Articulatory phonetics, phonemes, allophones, processes, prosody, IPA | Introductory phonetics and phonology |
+| 06 | Writing Systems | How can marks carry language? | A bird sign may have several jobs | Glottography, sign values, inventories, mixed scripts, decipherment, parallel texts | Writing systems and historical decipherment |
+| 07 | Meaning in Context | Why can two correct translations still feel different? | “It’s cold” as report or request | Ambiguity, implicature, deixis, presupposition, discourse, common ground | Semantics, pragmatics, and discourse |
+| 08 | Lexical Worlds | How do languages count, map space, and describe family? | A number reveals a base; a direction needs a coastline | Numerals, kinship, frames of reference, color, tense/aspect, classifiers | Lexical and semantic typology |
+| 09 | Diversity & Change | Why are languages different, related, and changing? | Similar words may be relatives, loans, or coincidence | Typology, universals, genealogy, sound change, contact, reconstruction | Historical and comparative linguistics |
+| 10 | Language & Society | Why do we speak differently with different people? | One speaker changes on entering a different room | Register, dialect, code-switching, ideology, variation, policy, vitality | Sociolinguistics and multilingualism |
+| 11 | Language & Mind | How do children and brains learn language? | A child produces an untaught error | Acquisition, statistical learning, processing, production, bilingualism, neurolinguistics | Psycholinguistic research |
+| 12 | Language & Computation | How can a computer work with language? | A system must decide what counts as a unit | Tokenization, corpora, distributional semantics, parsing, multimodality, evaluation, bias | Computational linguistics and NLP |
+| 13 | Fieldwork & Ethics | How can linguists learn from speakers responsibly? | A recording without consent or context fails | Elicitation, metadata, sampling, annotation, consent, access, collaboration | Field methods and documentation |
+| 14 | Synthesis | Can I solve a puzzle in a language I have never seen? | The problem promises sufficient evidence | Self-contained reasoning, normalization, contrast, falsification, interfaces, proof-like solutions | Official olympiad problems |
+
+At the macro scale, Section 01 branches rather than becoming a single compulsory sequence. The structural, interpretive, social, cognitive, computational, and fieldwork branches repeatedly reconnect; Section 14 makes that synthesis explicit. These are explanatory relationships, not enrollment gates.
 
 ## 6. Academic coverage underneath the questions
 

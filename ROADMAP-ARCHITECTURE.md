@@ -174,12 +174,17 @@ A submap is a **guided lens over shared concepts**, not an academic department a
 
 ### 6.1 Atlas overview `/roadmap`
 
-- Question-based submap cards, not lists of field names.
-- Each card begins with one concrete example.
-- Selecting a card previews its first discovery and highlights connected routes.
+- The fourteen large sections appear first as one interconnected macro graph, not fourteen unrelated cards.
+- **Section 01 · Introduction** is the shared entrance and is visually marked “Start here.”
+- Every macro node displays its section number and stable section title; selecting it opens that section's divisible six-node submap.
+- Solid edges show dominant learning routes and dashed edges show productive cross-connections. They recommend relationships without enforcing completion order.
+- A searchable question-card index remains beneath the graph so learners may enter by an everyday question or academic term.
+- Each card begins with one concrete example and repeats the same section number and title used by the macro node and submap heading.
+- Selecting a section highlights its immediate macro relationships. Inside the submap, textual “Connected sections” controls preserve those same crossings.
 - Academic field labels appear as smaller subtitles, for example:
 
 ```text
+Section 03 · Word Structure
 How can one word contain a whole sentence?
 Morphology · Lexicon · Morphosyntax
 ```
@@ -234,29 +239,32 @@ The roadmap contains reusable submaps. One concept may belong to several submaps
 
 ```mermaid
 flowchart LR
-    Hook[One word, two translations] --> Decode[Decode an unknown language]
-    Hook --> Meaning[Meaning and context]
-    Decode --> Words[Words contain pieces]
-    Decode --> Sentences[Who did what]
-    Decode --> Sounds[Sounds form systems]
-    Decode --> Writing[Marks carry language]
-    Meaning --> Worlds[Numbers, space, family]
-    Words --> Diversity[Difference, relation, change]
-    Sentences --> Diversity
-    Sounds --> Diversity
-    Meaning --> People[Language among people]
-    Meaning --> Mind[Language in minds]
-    Words --> Computers[Language and computation]
-    Sentences --> Computers
-    People --> Fieldwork[Learning from speakers]
-    Decode --> Olympiad[Olympiad challenge]
-    Words --> Olympiad
-    Sentences --> Olympiad
-    Sounds --> Olympiad
-    Writing --> Olympiad
+    Intro[01 · Introduction] --> Decode[02 · Decode from Evidence]
+    Intro --> Meaning[07 · Meaning in Context]
+    Intro --> Worlds[08 · Lexical Worlds]
+    Decode --> Words[03 · Word Structure]
+    Decode --> Sentences[04 · Sentence Structure]
+    Decode --> Sounds[05 · Sound Systems]
+    Decode --> Writing[06 · Writing Systems]
+    Words --> Diversity[09 · Diversity & Change]
+    Sentences --> Meaning
+    Sounds --> Mind[11 · Language & Mind]
+    Writing --> Diversity
+    Meaning --> Society[10 · Language & Society]
+    Worlds --> Diversity
+    Diversity --> Fieldwork[13 · Fieldwork & Ethics]
+    Society --> Fieldwork
+    Mind --> Computation[12 · Language & Computation]
+    Computation --> Synthesis[14 · Synthesis]
+    Fieldwork --> Synthesis
+    Words -.-> Computation
+    Sentences -.-> Computation
+    Sounds -.-> Diversity
+    Meaning -.-> Mind
+    Decode -.-> Synthesis
 ```
 
-Submap relationships summarize dominant routes; they do not force completion order.
+Solid relationships summarize dominant routes; dashed relationships expose cross-field transfer. Neither type forces completion order.
 
 ## 8. Technology decision
 

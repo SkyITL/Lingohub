@@ -26,6 +26,7 @@ export type RoadmapEdge = {
 export type RoadmapRoute = {
   slug: string;
   number: string;
+  sectionTitle: string;
   question: string;
   academicAreas: string;
   teaser: string;
@@ -81,7 +82,8 @@ function createRoute(
 export const roadmapRoutes: RoadmapRoute[] = [
   createRoute({
     slug: "translation",
-    number: "00",
+    number: "01",
+    sectionTitle: "Introduction",
     question: "Why can one word need two translations?",
     academicAreas: "Lexical semantics · Pragmatics · Translation",
     teaser:
@@ -179,7 +181,8 @@ export const roadmapRoutes: RoadmapRoute[] = [
   }),
   createRoute({
     slug: "decoding",
-    number: "01",
+    number: "02",
+    sectionTitle: "Decode from Evidence",
     question: "How can I decode a language I have never learned?",
     academicAreas: "Linguistic analysis · Data methods",
     teaser:
@@ -260,7 +263,8 @@ export const roadmapRoutes: RoadmapRoute[] = [
   }),
   createRoute({
     slug: "words",
-    number: "02",
+    number: "03",
+    sectionTitle: "Word Structure",
     question: "How can one word contain a whole sentence?",
     academicAreas: "Morphology · Lexicon · Morphosyntax",
     teaser: "Take words apart, then discover how languages package events and participants differently.",
@@ -332,7 +336,8 @@ export const roadmapRoutes: RoadmapRoute[] = [
   }),
   createRoute({
     slug: "sentences",
-    number: "03",
+    number: "04",
+    sectionTitle: "Sentence Structure",
     question: "How do languages show who did what?",
     academicAreas: "Syntax · Case · Alignment",
     teaser: "Follow participants through word order, endings, agreement, omission, and structural grouping.",
@@ -404,7 +409,8 @@ export const roadmapRoutes: RoadmapRoute[] = [
   }),
   createRoute({
     slug: "sounds",
-    number: "04",
+    number: "05",
+    sectionTitle: "Sound Systems",
     question: "Why do languages hear and organize sounds differently?",
     academicAreas: "Phonetics · Phonology · Prosody",
     teaser: "Move from the physical gesture of a sound to the contrasts and patterns a language builds from it.",
@@ -476,7 +482,8 @@ export const roadmapRoutes: RoadmapRoute[] = [
   }),
   createRoute({
     slug: "writing",
-    number: "05",
+    number: "06",
+    sectionTitle: "Writing Systems",
     question: "How can marks carry language?",
     academicAreas: "Writing systems · Decipherment",
     teaser: "Ask what signs represent before assuming they are pictures, letters, or direct containers of meaning.",
@@ -548,7 +555,8 @@ export const roadmapRoutes: RoadmapRoute[] = [
   }),
   createRoute({
     slug: "interpretation",
-    number: "06",
+    number: "07",
+    sectionTitle: "Meaning in Context",
     question: "Why can two correct translations still feel different?",
     academicAreas: "Semantics · Pragmatics · Discourse",
     teaser: "Trace what words encode, what contexts supply, and what speakers invite listeners to infer.",
@@ -620,7 +628,8 @@ export const roadmapRoutes: RoadmapRoute[] = [
   }),
   createRoute({
     slug: "worlds-in-words",
-    number: "07",
+    number: "08",
+    sectionTitle: "Lexical Worlds",
     question: "How do languages count, map space, and describe family?",
     academicAreas: "Lexicon · Cognition · Semantic typology",
     teaser: "Compare the conceptual systems hidden inside ordinary words without mistaking difference for deficiency.",
@@ -692,7 +701,8 @@ export const roadmapRoutes: RoadmapRoute[] = [
   }),
   createRoute({
     slug: "diversity-change",
-    number: "08",
+    number: "09",
+    sectionTitle: "Diversity & Change",
     question: "Why are languages different, related, and changing?",
     academicAreas: "Typology · Historical linguistics · Contact",
     teaser: "Compare structures fairly, trace regular change, and separate inheritance from borrowing.",
@@ -764,7 +774,8 @@ export const roadmapRoutes: RoadmapRoute[] = [
   }),
   createRoute({
     slug: "society",
-    number: "09",
+    number: "10",
+    sectionTitle: "Language & Society",
     question: "Why do we speak differently with different people?",
     academicAreas: "Sociolinguistics · Multilingualism · Policy",
     teaser: "Treat variation as patterned social information, not noise or failed grammar.",
@@ -836,7 +847,8 @@ export const roadmapRoutes: RoadmapRoute[] = [
   }),
   createRoute({
     slug: "mind",
-    number: "10",
+    number: "11",
+    sectionTitle: "Language & Mind",
     question: "How do children and brains learn language?",
     academicAreas: "Acquisition · Psycholinguistics · Neurolinguistics",
     teaser: "Follow language from patterned input to prediction, production, memory, and neural evidence.",
@@ -908,7 +920,8 @@ export const roadmapRoutes: RoadmapRoute[] = [
   }),
   createRoute({
     slug: "computation",
-    number: "11",
+    number: "12",
+    sectionTitle: "Language & Computation",
     question: "How can a computer work with language?",
     academicAreas: "Corpus linguistics · NLP · Formal models",
     teaser: "Turn language into representations a machine can process—then ask what each representation leaves out.",
@@ -980,7 +993,8 @@ export const roadmapRoutes: RoadmapRoute[] = [
   }),
   createRoute({
     slug: "fieldwork",
-    number: "12",
+    number: "13",
+    sectionTitle: "Fieldwork & Ethics",
     question: "How can linguists learn from speakers responsibly?",
     academicAreas: "Field methods · Documentation · Ethics",
     teaser: "Build evidence with speakers and communities while treating consent, variation, and return as part of the method.",
@@ -1052,7 +1066,8 @@ export const roadmapRoutes: RoadmapRoute[] = [
   }),
   createRoute({
     slug: "olympiad",
-    number: "13",
+    number: "14",
+    sectionTitle: "Synthesis",
     question: "Can I solve a puzzle in a language I have never seen?",
     academicAreas: "Olympiad synthesis · Proof · Strategy",
     teaser: "Combine structural knowledge with disciplined evidence and write a solution another person can verify.",
@@ -1122,6 +1137,63 @@ export const roadmapRoutes: RoadmapRoute[] = [
       },
     ],
   }),
+];
+
+export type RoadmapMacroNode = {
+  slug: string;
+  x: number;
+  y: number;
+};
+
+export type RoadmapMacroEdge = {
+  from: string;
+  to: string;
+  kind: "main" | "cross";
+};
+
+// Editorial positions make the large-scale curriculum legible before a learner
+// enters any one submap. Edges are suggested relationships, never hard locks.
+export const roadmapMacroNodes: RoadmapMacroNode[] = [
+  { slug: "translation", x: 112, y: 290 },
+  { slug: "decoding", x: 320, y: 290 },
+  { slug: "words", x: 535, y: 95 },
+  { slug: "sentences", x: 535, y: 225 },
+  { slug: "sounds", x: 535, y: 355 },
+  { slug: "writing", x: 535, y: 485 },
+  { slug: "interpretation", x: 770, y: 95 },
+  { slug: "worlds-in-words", x: 770, y: 225 },
+  { slug: "diversity-change", x: 770, y: 355 },
+  { slug: "society", x: 770, y: 485 },
+  { slug: "mind", x: 1005, y: 120 },
+  { slug: "computation", x: 1005, y: 290 },
+  { slug: "fieldwork", x: 1005, y: 460 },
+  { slug: "olympiad", x: 1248, y: 290 },
+];
+
+export const roadmapMacroEdges: RoadmapMacroEdge[] = [
+  { from: "translation", to: "decoding", kind: "main" },
+  { from: "translation", to: "interpretation", kind: "main" },
+  { from: "translation", to: "worlds-in-words", kind: "main" },
+  { from: "decoding", to: "words", kind: "main" },
+  { from: "decoding", to: "sentences", kind: "main" },
+  { from: "decoding", to: "sounds", kind: "main" },
+  { from: "decoding", to: "writing", kind: "main" },
+  { from: "words", to: "diversity-change", kind: "main" },
+  { from: "sentences", to: "interpretation", kind: "main" },
+  { from: "sounds", to: "mind", kind: "main" },
+  { from: "writing", to: "diversity-change", kind: "main" },
+  { from: "interpretation", to: "society", kind: "main" },
+  { from: "worlds-in-words", to: "diversity-change", kind: "main" },
+  { from: "diversity-change", to: "fieldwork", kind: "main" },
+  { from: "society", to: "fieldwork", kind: "main" },
+  { from: "mind", to: "computation", kind: "main" },
+  { from: "computation", to: "olympiad", kind: "main" },
+  { from: "fieldwork", to: "olympiad", kind: "main" },
+  { from: "words", to: "computation", kind: "cross" },
+  { from: "sentences", to: "computation", kind: "cross" },
+  { from: "sounds", to: "diversity-change", kind: "cross" },
+  { from: "interpretation", to: "mind", kind: "cross" },
+  { from: "decoding", to: "olympiad", kind: "cross" },
 ];
 
 export const roadmapStats = {

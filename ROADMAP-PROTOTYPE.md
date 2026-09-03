@@ -1,6 +1,7 @@
 # LingoHub Interactive Roadmap Prototype
 
 Date: 2026-09-02
+Updated: 2026-09-03
 Route: `/roadmap`
 
 ## Outcome
@@ -33,11 +34,13 @@ Notice → Compare → Name → Formalize → Read → Solve
 
 The sequence is not a list of difficulty levels. It specifies the intellectual work the interface must support at each transition.
 
-### 3. Comprehensive question atlas
+### 3. Interconnected fourteen-section atlas
 
-Fourteen searchable routes cover translation, analytical method, morphology, syntax, sounds, writing, meaning and context, lexical systems, typology and history, society, mind, computation, fieldwork, and olympiad synthesis.
+Fourteen searchable sections cover translation, analytical method, morphology, syntax, sounds, writing, meaning and context, lexical systems, typology and history, society, mind, computation, fieldwork, and olympiad synthesis.
 
-Learner-facing cards use questions. Academic field names remain visible as subtitles.
+The sections first appear as a clickable macro-scale graph. **Section 01 · Introduction** is visibly marked as the shared entrance; solid and dashed edges distinguish dominant routes from cross-field connections. Every macro node, searchable card, route picker, and submap header uses the same section number and title.
+
+Learner-facing cards still use ordinary questions, while academic field names remain visible as subtitles. On narrow screens, the graph becomes a semantic list that states each section's connections in text.
 
 ### 4. Divisible interactive submaps
 
@@ -50,6 +53,7 @@ Every route opens an independent six-node submap. The prototype supports:
 - route-specific color and content;
 - a semantic list in place of the graph on smaller screens;
 - explored-state and route-progress indicators.
+- textual links to the selected submap's connected sections.
 
 ### 5. Academic detail panel
 
@@ -80,7 +84,7 @@ After four nodes are explored, the call to action changes from “Preview the so
 
 ## Verification
 
-- Focused ESLint check on the new route, component, data file, and edited header: passed.
+- Focused ESLint check on the roadmap component and data model after the macro-map update: passed.
 - Repository-wide TypeScript check: reached the new files without reporting errors there, but the repository currently has pre-existing errors in `next.config.ts`, the home/problem pages, and submission/problem components.
 - Production build: the project was moved from the Vercel-blocked Next.js 15.4.6 release to the patched 15.5.24 Maintenance LTS release. The lockfile passes an offline `npm ci --dry-run`, and the production build compiles successfully and statically generates `/roadmap`. The earlier build-time Google `next/font` dependency also remains removed, so deployment does not depend on downloading Geist during compilation.
 - Local browser run: the sandbox does not permit binding the Next development server to port 3000, so visual browser inspection was not available in this session.
@@ -96,7 +100,7 @@ After four nodes are explored, the call to action changes from “Preview the so
 
 ## Recommended next build slice
 
-Build the complete version of route 00 before expanding every route equally:
+Build the complete version of **Section 01 · Introduction** before expanding every route equally:
 
 1. turn all six translation nodes into working micro-interactions;
 2. write the Layer B core lessons;
